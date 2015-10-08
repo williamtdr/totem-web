@@ -38,7 +38,7 @@ function switchTab(destination) {
             refreshRoomList();
             bgshader.animate({
                 opacity: 0.7
-            }, 1000);
+            }, 500);
             $('.site_navigation').css("background-color", "rgba(0,0,0,0.3)");
             $("#nav_rooms").addClass("active");
             $("#room_list").removeAttr("hidden");
@@ -46,7 +46,7 @@ function switchTab(destination) {
         case "now_playing":
             bgshader.animate({
                 opacity: 0.7
-            }, 1000);
+            }, 500);
             $('.site_navigation').css("background-color", "rgba(0,0,0,0.3)");
             $("#nav_room").addClass("active");
             $("#now_playing").removeAttr("hidden");
@@ -54,7 +54,7 @@ function switchTab(destination) {
         case "my_music":
             bgshader.animate({
                 opacity: 1
-            }, 1000);
+            }, 500);
             $("#nav_music").addClass("active");
             $("#my_music").removeAttr("hidden");
             $('.site_navigation').css("background-color", "rgba(0,0,0,1)");
