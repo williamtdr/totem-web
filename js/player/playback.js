@@ -430,7 +430,7 @@ function finishInit() {
             break;
             case "chat":
                 chatmessage = data.message;
-                chatclass = " "
+                chatclass = " ";
                 if(data.message.toLowerCase().indexOf("@" + display_name) > -1) {
                     var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3'); audio.play();
                     var chatmessage = data.message.replace("@" + display_name, "<b>@" + display_name + "</b>");
@@ -449,8 +449,8 @@ function finishInit() {
                     });
                 }
                  if (chatmessage.indexOf("*") > -1) {
-                    var asterisktally = 0
-                    var msplit = chatmessage.split("")
+                    var asterisktally = 0;
+                    var msplit = chatmessage.split("");
                     var msplitl = msplit.length;
                     for (var i = 0; i < msplitl; i++) {
                         if (msplit[i] == "*") {
@@ -464,57 +464,57 @@ function finishInit() {
                         }
                     }
                     if (asterisktally == 1) {
-                        chatmessage = cmp
+                        chatmessage = cmp;
                     }
                 }
                 if (chatmessage.indexOf("_") > -1) {
-                    var uscoretally = 0
-                    var msplit = chatmessage.split("")
+                    var uscoretally = 0;
+                    var msplit = chatmessage.split("");
                     var msplitl = msplit.length;
                     for (var i = 0; i < msplitl; i++) {
                         if (msplit[i] == "_") {
                             if (uscoretally == 0) {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "<i>"); uscoretally = 1
+                                chatmessage = chatmessage.replace("_", "<i>"); uscoretally = 1;
                             } else {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "</i>"); uscoretally = 0
+                                chatmessage = chatmessage.replace("_", "</i>"); uscoretally = 0;
                             }
                         }
                     }
                     if (uscoretally == 1) {
-                        chatmessage = cmp
+                        chatmessage = cmp;
                     }
                 }
                 if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1 || chatmessage.indexOf("www.") > -1 ) {
-			        var msplit = chatmessage.split(" ")
+			        var msplit = chatmessage.split(" ");
                     var msplitl = msplit.length;
                         for (var i = 0; i < msplitl; i++) {
                         if (msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
-                            var mlink = msplit[i]
+                            var mlink = msplit[i];
                             if (mlink.indexOf("<i>") > -1) {
                                 mlink = mlink.replace(/<i>/g, "_");
                                 mlink = mlink.replace(/<\/i>/g, "_");
                             }
                         }
                         if  (msplit[i].startsWith("www.")) {
-                            var mlink = msplit[i]
-                            var mlink = "http://" + mlink
+                            var mlink = msplit[i];
+                            var mlink = "http://" + mlink;
                             if (mlink.indexOf("<i>") > -1) {
                                 mlink = mlink.replace(/<i>/g, "_");
                                 mlink = mlink.replace(/<\/i>/g, "_");
                             }
                         }
-                        mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>"
+                        mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
                         chatmessage = chatmessage.replace(msplit[i], mlink)
                         }
                 }
                 var senderclass = "";
                 if(data.sender.toLowerCase().toString() == "dcv" || data.sender.toLowerCase().toString() == "williamtdr") {
-                    var senderclass = senderclass + " chat-dev "
+                    var senderclass = senderclass + " chat-dev ";
                 }
                 if(data.sender.toLowerCase() == display_name) {
-                    var senderclass = senderclass + " chat-you "
+                    var senderclass = senderclass + " chat-you ";
                 }
                 $("#chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
                 $("#chat-text").scrollTop($("#chat-text")[0].scrollHeight);

@@ -382,6 +382,17 @@ h3 {
     font-size: 1.5em;
 }
 
+#new-messages-indicator {
+    position: absolute;
+    height: 30px;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    background-color: #00619a;
+}
+
 #in-room {
     text-align: right;
 }
