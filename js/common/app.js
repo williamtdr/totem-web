@@ -1,5 +1,5 @@
 function switchRoom(destination) {
-    history.pushState({}, destination + " &middot; Totem", "/room/" + destination);
+    window.location.hash = destination;
     server.send(JSON.stringify({
         event: "login",
         key: authkey,

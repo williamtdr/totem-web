@@ -13,7 +13,7 @@ last_room = "";
 last_author = "";
 ctime = 0;
 duration = 60;
-room = window.location.hash;
+room = window.location.hash.replace("#", "");
 force_room = false;
 mode = 0;
 nothing_playing = true;
@@ -292,7 +292,7 @@ function vote(type) {
 }
 
 function finishInit() {
-    server = new WebSocket('ws://totem.fm:10000/', 'echo-protocol');
+    server = new WebSocket('ws://server.totem.fm:10000/', 'echo-protocol');
 
     server.onclose = function() {
         $("#disconnected").removeAttr("hidden");
@@ -326,7 +326,14 @@ function finishInit() {
             }));
 
             $("#now_playing").removeAttr("hidden");
+            $(".active").removeClass("active");
+            $("#nav_room").addClass("active");
             $("#room_list").attr("hidden", "hidden");
+            $("#now_playing_content").removeAttr("hidden");
+            $("#now_playing_placeholder").attr("hidden", "hidden");
+            $("#background_shader").animate({
+                opacity: 0.7
+            }, 1000);
         }
     }
 
