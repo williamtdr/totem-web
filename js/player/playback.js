@@ -436,9 +436,11 @@ function finishInit() {
             break;
             case "chat":
                 chatmessage = data.message;
+                chatclass = " "
                 if(data.message.toLowerCase().indexOf("@" + display_name) > -1) {
                     var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3'); audio.play();
-                    var chatmessage = data.message.replace("@" + display_name, "<b>@" + display_name + "</b>")
+                    var chatmessage = data.message.replace("@" + display_name, "<b>@" + display_name + "</b>");
+                    var chatclass = " chat-tag ";
                     noty({
                         text: data.sender + ": " + chatmessage,
                         theme: 'relax',
@@ -497,7 +499,7 @@ function finishInit() {
                 if(data.sender.toLowerCase() == display_name) {
                     var senderclass = senderclass + " chat-you "
                 }
-                $("#chat-text").append('<span class="chat-message-wrapper"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+                $("#chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
                 $("#chat-text").scrollTop($("#chat-text")[0].scrollHeight);
         }
     };
