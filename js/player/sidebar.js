@@ -48,32 +48,6 @@ function sidebarInit() {
 
 }
 
-function updateMyQueue() {
-    if(in_queue) {
-        $(".queue-list-content").empty();
-        $.each(my_queue, function(index, value) {
-            if(value.id == player.getVideoData().video_id) {
-                my_queue.splice(index, 1);
-            }
-        });
-
-        if(my_queue.length == 0) {
-            in_queue = false;
-            $("#in-room").removeAttr("hidden");
-            $("#queue-container").attr("hidden", "hidden");
-        } else {
-            $.each(my_queue, function(index, value) {
-                $(".queue-list-content").append('<li class="list-group-item playlist" onclick="loadVideo(\'' + value.id + '\', \'' + value.title + '\', \'' + value.artist + '\')"><div class="queue-item-metadata-container"><span class="playlist-item-title">' + value.artist + '</span><span class="playlist-item-artist-container">by <span class="playlist-item-artist">' + value.artist + '</span></span></div></li>');
-            });
-            if(nothing_playing) {
-                $(".queue-status").removeAttr("hidden");
-            } else {
-                $(".queue-status").attr("hidden", "hidden");
-            }
-        }
-    }
-}
-
 function loadPlaylistItems(playlistId) {
     $(".sidebar-playlist-list").attr("hidden", "hidden");
     $(".sidebar-playlist-items").removeAttr("hidden");

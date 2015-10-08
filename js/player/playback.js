@@ -131,8 +131,6 @@ function onPlayerStateChange(event) {
             nothing_playing = true;
         }
     }
-
-    updateMyQueue();
 }
 
 function addToQueueById(id, title, artist) {
@@ -153,15 +151,6 @@ function addToQueueById(id, title, artist) {
         },
         "key": authkey
     }));
-
-    updateMyQueue();
-    /*
-    if(nothing_playing) {
-        $(".queue-status").removeAttr("hidden");
-    } else {
-        $(".queue-status").attr("hidden", "hidden");
-    }
-    */
 }
 
 function addCurrentSongToQueue() {
@@ -183,15 +172,7 @@ function addCurrentSongToQueue() {
         "key": authkey
     }));
 
-    updateMyQueue();
     switchMode(0);
-    /*
-    if(nothing_playing) {
-        $(".queue-status").removeAttr("hidden");
-    } else {
-        $(".queue-status").attr("hidden", "hidden");
-    }
-    */
 
     switchTab('now_playing');
 
@@ -393,7 +374,6 @@ function finishInit() {
                 });
             break;
             case "song_change":
-                updateMyQueue();
                 $(".activated").removeAttr("activated");
                 $(".history-content").append('<li class="list-group-item playlist" onclick="loadVideo(\'' + data.song.url_fragment + '\', \'' + data.song.name.replace("'", "&quot;") + '\', \'' + data.song.artist.replace("'", "&quot;") + '\')"><img class="playlist-item-thumbnail" src="' + data.song.picture_url + '"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + data.song.name + '</span><span class="playlist-item-artist-container">by <span class="playlist-item-artist">' + data.song.artist.replace("'", "&quot;") + '</span></span></div></li>');
                 if(mode == 0) {
