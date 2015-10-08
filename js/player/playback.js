@@ -292,6 +292,7 @@ function finishInit() {
     });
 
     if(force_room) {
+        window.location.hash = room;
         server.onopen = function() {
             server.send(JSON.stringify({
                 event: "login",
