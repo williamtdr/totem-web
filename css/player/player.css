@@ -618,7 +618,7 @@ h1, h2, h3 {
     color: #16A085;
     position: absolute;
     top: 35px;
-    padding-left: 100px;
+    left: 250px;
 }
 
 .playlist-item-preview > .fa {
