@@ -497,7 +497,7 @@ function finishInit() {
                 if(data.sender.toLowerCase() == display_name) {
                     var senderclass = senderclass + " chat-you "
                 }
-                $("#chat-text").append('<span class="chat-message-wrapper"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + linkify(chatmessage, { callback: function( text, href ) { return href ? '<a target="_blank" href="' + href + '" title="' + href + '">' + text + '</a>' : text;}}) + '</span></span>');
+                $("#chat-text").append('<span class="chat-message-wrapper"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
                 $("#chat-text").scrollTop($("#chat-text")[0].scrollHeight);
         }
     };
