@@ -55,7 +55,7 @@ function switchTab(destination) {
 }
 
 $(document).ready(function() {
-    if(window.location.pathname.replace("/room/", "") !== "/") {
+    if(window.location.hash !== "" && window.location.hash.length > 0) {
         force_room = true;
         $(".active").removeClass("active");
         $("#nav_room").addClass("active");
@@ -110,7 +110,7 @@ changebtn.click(function() {
 });
 
 function sessionComplete() {
-    if(authUrl != undefined) {
+    if(!display_name) {
         $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
     } else {
         $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
