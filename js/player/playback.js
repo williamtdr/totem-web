@@ -476,6 +476,7 @@ function finishInit() {
                         }
                         if  (msplit[i].startsWith("www.")) {
                             var mlink = msplit[i];
+                            console.log(mlink)
                             var mlink = "http://" + mlink;
                             if (mlink.indexOf("<i>") > -1) {
                                 mlink = mlink.replace(/<i>/g, "_");
