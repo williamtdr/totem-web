@@ -444,18 +444,23 @@ function finishInit() {
                         timeout: 5000
                     });
                 }
-                if (chatmessage.indexOf("*") > -1) {
+                 if (chatmessage.indexOf("*") > -1) {
                     var asterisktally = 0
                     var msplit = chatmessage.split("")
                     var msplitl = msplit.length;
                     for (var i = 0; i < msplitl; i++) {
                         if (msplit[i] == "*") {
                             if (asterisktally == 0) {
-                                chatmessage = chatmessage.replace("*", "<b>"); asterisktally = 1
+                                cmp = chatmessage;
+                                chatmessage = chatmessage.replace("*", "<b>"); asterisktally = 1;
                             } else {
-                                chatmessage = chatmessage.replace("*", "</b>"); asterisktally = 0
+                                cmp = chatmessage;
+                                chatmessage = chatmessage.replace("*", "</b>"); asterisktally = 0;
                             }
                         }
+                    }
+                    if (asterisktally == 1) {
+                        chatmessage = cmp
                     }
                 }
                 if (chatmessage.indexOf("_") > -1) {
@@ -465,11 +470,16 @@ function finishInit() {
                     for (var i = 0; i < msplitl; i++) {
                         if (msplit[i] == "_") {
                             if (uscoretally == 0) {
+                                cmp = chatmessage;
                                 chatmessage = chatmessage.replace("_", "<i>"); uscoretally = 1
                             } else {
+                                cmp = chatmessage;
                                 chatmessage = chatmessage.replace("_", "</i>"); uscoretally = 0
                             }
                         }
+                    }
+                    if (uscoretally == 1) {
+                        chatmessage = cmp
                     }
                 }
                 var senderclass = "";
