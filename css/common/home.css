@@ -82,16 +82,16 @@ div[role="navigation"] {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.login-menu {
+#login-menu {
     float: right;
 }
 
-.login-menu > a {
+#login-menu > a {
     color: #27AE60;
     transition: .25s;
 }
 
-.login-menu > a:hover {
+#login-menu > a:hover {
     color: #1ABC9C;
     text-decoration: none;
 }

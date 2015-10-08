@@ -108,3 +108,11 @@ changebtn.click(function() {
         }
     });
 });
+
+function sessionComplete() {
+    if(authUrl != undefined) {
+        $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
+    } else {
+        $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
+    }
+}
