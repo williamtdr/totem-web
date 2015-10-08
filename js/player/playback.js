@@ -492,6 +492,29 @@ function finishInit() {
                         chatmessage = cmp
                     }
                 }
+                if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1 || chatmessage.indexOf("www.") > -1 ) {
+			        var msplit = chatmessage.split(" ")
+                    var msplitl = msplit.length;
+                        for (var i = 0; i < msplitl; i++) {
+                        if (msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
+                            var mlink = msplit[i]
+                            if (mlink.indexOf("<i>") > -1) {
+                                mlink = mlink.replace(/<i>/g, "_");
+                                mlink = mlink.replace(/<\/i>/g, "_");
+                            }
+                        }
+                        if  (msplit[i].startsWith("www.")) {
+                            var mlink = msplit[i]
+                            var mlink = "http://" + mlink
+                            if (mlink.indexOf("<i>") > -1) {
+                                mlink = mlink.replace(/<i>/g, "_");
+                                mlink = mlink.replace(/<\/i>/g, "_");
+                            }
+                        }
+                        mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>"
+                        chatmessage = chatmessage.replace(msplit[i], mlink)
+                        }
+                }
                 var senderclass = "";
                 if(data.sender.toLowerCase().toString() == "dcv" || data.sender.toLowerCase().toString() == "williamtdr") {
                     var senderclass = senderclass + " chat-dev "
