@@ -73,7 +73,6 @@ function switchMode(new_mode) {
         setSongInfo(last_title, last_artist);
         loadVideoById(last_url_fragment, Math.floor(Date.now() / 1000) - started_at);
         $("#manual").attr("hidden", "hidden");
-        $("#queue-container").attr("hidden", "hidden");
         $("#score_wrapper").removeAttr("hidden");
         $("#in-room").removeAttr("hidden");
     }
@@ -135,9 +134,8 @@ function onPlayerStateChange(event) {
 
 function addToQueueById(id, title, artist) {
     in_queue = true;
-    $("#in-room").attr("hidden", "hidden");
     $("#manual").attr("hidden", "hidden");
-    $("#queue-container").removeAttr("hidden");
+    $("#in-room").removeAttr("hidden");
     my_queue.push({
         id: id,
         title: title,
@@ -158,9 +156,6 @@ function addToQueueById(id, title, artist) {
 function addCurrentSongToQueue() {
     switchMode(0);
     in_queue = true;
-    $("#in-room").attr("hidden", "hidden");
-    $("#manual").attr("hidden", "hidden");
-    $("#queue-container").removeAttr("hidden");
     my_queue.push({
         id: player.getVideoData().video_id,
         title: player.getVideoData().title,
