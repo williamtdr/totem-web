@@ -85,9 +85,7 @@ function loadVideo(id, title, artist) {
     loadVideoById(id, 0);
     $("#main_content").removeAttr("hidden");
     $("#no_video").attr("hidden", "hidden");
-    $("#my_music").attr("hidden", "hidden");
-    $("#room_list").attr("hidden", "hidden");
-    $("#now_playing").removeAttr("hidden");
+    switchTab('now_playing');
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
 
