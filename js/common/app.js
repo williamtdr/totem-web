@@ -23,6 +23,10 @@ function showCreateForm() {
     $("#create_room").removeAttr("hidden");
 }
 
+function logout() {
+    window.location.href="http://api.totem.fm/user/logout.php";
+}
+
 function switchTab(destination) {
     $(".active").removeClass("active");
     $("#room_list").attr("hidden", "hidden");
