@@ -151,6 +151,8 @@ function addToQueueById(id, title, artist) {
         },
         "key": authkey
     }));
+
+    switchTab('now_playing');
 }
 
 function addCurrentSongToQueue() {
