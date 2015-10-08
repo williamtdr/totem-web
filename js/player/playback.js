@@ -154,7 +154,9 @@ function addToQueueById(id, title, artist) {
 }
 
 function addCurrentSongToQueue() {
-    switchMode(0);
+    mode = 0;
+    $("#in-room").removeAttr("hidden");
+    $("#manual").attr("hidden", "hidden");
     in_queue = true;
     my_queue.push({
         id: player.getVideoData().video_id,
