@@ -1,6 +1,3 @@
-$('#changeUsernameModal').modal({
-    keyboard: false
-});
 uchange = $("#username-change");
 changebtn = $("#save-username");
 uchange.focus();

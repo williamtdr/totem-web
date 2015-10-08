@@ -16,6 +16,27 @@
 <div id="background_layer"></div>
 <div id="background_shader"></div>
 <div class="room-list-spinner"></div>
+<div class="modal fade" id="changeUsernameModal" tabindex="-1" role="dialog" aria-labelledby="changeUsernameModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="changeUsernameModalLabel">Welcome!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Thanks for joining the party. Pick a username:</p>
+				<input type="text" class="form-control" id="username-change">
+				<div class="errors">
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save-username">Save</button>
+				<span class="change-username-spinner"></span>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="site_navigation">
 	<div class="logo">totem</div>
 	<div role="navigation">
