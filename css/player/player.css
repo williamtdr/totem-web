@@ -53,10 +53,12 @@ h3 {
 }
 
 .score-positive-wrapper {
+    cursor: pointer;
     color: #27AE60;
 }
 
 .score-negative-wrapper {
+    cursor: pointer;
     color: #C0392B;
 }
 
