@@ -77,9 +77,7 @@ function updateMyQueue() {
 function loadPlaylistItems(playlistId) {
     $("#background_shader").animate({
         opacity: 1
-    }, 1000, function() {
-        // Animation complete.
-    });
+    }, 1000);
     $(".sidebar-playlist-list").attr("hidden", "hidden");
     $(".sidebar-playlist-items").removeAttr("hidden");
     $(".playlist-list-content").empty();
@@ -182,9 +180,7 @@ function search(text) {
     $(".sidebar-playlist-items").removeAttr("hidden");
     $("#background_shader").animate({
         opacity: 1
-    }, 1000, function() {
-        // Animation complete.
-    });
+    }, 1000);
     $(".playlist-list-content").empty();
     $(".playlist-list-content").append('<li class="list-group-item playlist">Loading... </li>');
     $.ajax({

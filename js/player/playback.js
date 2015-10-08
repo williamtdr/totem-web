@@ -93,9 +93,7 @@ function loadVideo(id, title, artist) {
     $("#now_playing_placeholder").attr("hidden", "hidden");
     $("#background_shader").animate({
         opacity: 0.7
-    }, 1000, function() {
-        // Animation complete.
-    });
+    }, 1000);
 
     advanceBackgroundImage();
 }
@@ -298,8 +296,11 @@ function finishInit() {
 
     server.onclose = function() {
         $("#disconnected").removeAttr("hidden");
-        $("#background_shader").css("z-index", "150");
-        $("#background_shader").css("background", 'radial-gradient(transparent, black), rgba(0, 0, 0, 0.6) no-repeat 100% center fixed');
+        var bgshader = $("#background_shader");
+        bgshader.css("z-index", "8000");
+        bgshader.animate({
+            opacity: 1
+        }, 500);
         setInterval(function() {
             disconnect_timer--;
             $("#disconnected-countdown").html(disconnect_timer);

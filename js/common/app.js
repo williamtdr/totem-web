@@ -13,9 +13,7 @@ function switchRoom(destination) {
     $("#now_playing_placeholder").attr("hidden", "hidden");
     $("#background_shader").animate({
         opacity: 0.7
-    }, 1000, function() {
-        // Animation complete.
-    });
+    }, 1000);
 }
 
 function showRoomList() {
@@ -31,9 +29,7 @@ function showCreateForm() {
 function switchTab(destination) {
     $("#background_shader").animate({
         opacity: 0.7
-    }, 1000, function() {
-        // Animation complete.
-    });
+    }, 1000);
     $(".active").removeClass("active");
     $("#room_list").attr("hidden", "hidden");
     $("#now_playing").attr("hidden", "hidden");

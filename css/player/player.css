@@ -581,7 +581,7 @@ h1, h2, h3 {
 }
 
 #disconnected {
-    z-index: 200;
+    z-index: 10000;
 }
 
 .playlist-item-preview {
