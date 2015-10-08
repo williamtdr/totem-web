@@ -3,14 +3,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Totem</title>
-	<link href="http://totem.fm/css/common/background.css" rel="stylesheet">
-	<link href="http://totem.fm/css/vendor/bootstrap.min.css" rel="stylesheet">
-	<link href="http://totem.fm/css/vendor/font-awesome.min.css" rel="stylesheet">
-	<link href="http://totem.fm/css/vendor/animsition.min.css" rel="stylesheet">
-	<link href="http://totem.fm/css/vendor/flat-ui.min.css" rel="stylesheet">
-	<link href="http://totem.fm/css/vendor/bootstrap-modal.css" rel="stylesheet">
-	<link href="http://totem.fm/css/player/player.css" rel="stylesheet">
-	<link href="http://totem.fm/css/common/home.css" rel="stylesheet">
+	<link href="css/common/background.css" rel="stylesheet">
+	<link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+	<link href="css/vendor/font-awesome.min.css" rel="stylesheet">
+	<link href="css/vendor/animsition.min.css" rel="stylesheet">
+	<link href="css/vendor/flat-ui.min.css" rel="stylesheet">
+	<link href="css/vendor/bootstrap-modal.css" rel="stylesheet">
+	<link href="css/player/player.css" rel="stylesheet">
+	<link href="css/common/home.css" rel="stylesheet">
 </head>
 <body>
 <div id="background_layer"></div>
@@ -23,13 +23,7 @@
 		<span class="navigation_option" id="nav_music" onclick="switchTab('my_music')">My Music</span>
 	</div>
 	<div class="login-menu">
-		<?php
-		if(isset($authUrl)) {
-			echo "<a href=\"".$authUrl."\">Log In<span id=\"login-full\"> with Google</span></a>";
-		} else {
-			echo "<a href=\"/logout\"><span id=\"login-full\">Hi, </span>".$user->display_name."</a>";
-		}
-		?>
+
 	</div>
 </div>
 <div id="disconnected" class="animsition" hidden="hidden">
@@ -41,22 +35,13 @@
 	</div>
 </div>
 <div id="my_music" class="animsition container" hidden="hidden">
-	<div class="sidebar-playlist-list<?php if(isset($authUrl)) echo ' sidebar-no-login'?>">
-		<?php
-		if(isset($authUrl)) {
-			echo "<a href=\"".$authUrl."\">Log in</a> to see your playlists";
-		} else {
-			echo "<ul class=\"list-group sidebar-playlist\">";
-			echo "    <li class=\"list-group-item\" onclick=\"showSearch()\">Search YouTube</li>";
-			foreach($playlists as $title => $link) echo "    <li class=\"list-group-item\" onclick=\"loadPlaylistItems('".$link."')\">".$title."</li>";
-			echo "</ul>";
-		}
-		?>
+	<div class="sidebar-playlist-list">
+
 	</div>
 	<div class="sidebar-playlist-items" hidden="hidden">
-                    <span class="playlist-list-return" onclick="returnToPlaylistList()">
-                        &laquo; Playlists
-                    </span>
+		<span class="playlist-list-return" onclick="returnToPlaylistList()">
+			&laquo; Playlists
+		</span>
 		<ul class="list-group sidebar-playlist playlist-list-content">
 			<li class="list-group-item playlist">
 				Loading...
@@ -64,21 +49,18 @@
 		</ul>
 	</div>
 	<div class="sidebar-search animisition" hidden="hidden">
-                <span class="playlist-list-return" onclick="returnToPlaylistList()">
-                    &laquo; Search
-                </span>
+		<span class="playlist-list-return" onclick="returnToPlaylistList()">
+			&laquo; Search
+		</span>
 		<div id="search-textbox" class="input-group">
 			<input type="text" class="form-control" id="search_text" placeholder="Search Youtube">
-                    <span class="input-group-btn" style="font-size: 1.4em">
-                       <button class="btn btn-primary" type="button" id="search_send">Search</button>
-                      </span>
+			<span class="input-group-btn" style="font-size: 1.4em">
+				<button class="btn btn-primary" type="button" id="search_send">Search</button>
+			</span>
 		</div>
 	</div>
 </div>
 <div id="room_list" class="animsition container" hidden="hidden">
-	<?php
-	if($user->can_change_username) require("content/changeUsername.php");
-	?>
 	<div class="row">
 		<div class="col-sm-4">
 			<div class="panel panel-default panel-dark">
@@ -99,43 +81,25 @@
 			</div>
 		</div>
 		<div id="room_list_content">
-			<?php
-			foreach($dbmanager->getRooms(true) as $room) {
-				if($room->song) {
-					echo '<div class="col-sm-4">
+			<div class="col-sm-4">
 				<div class="panel panel-default">
 					<div class="panel-body room-card">
 					<span class="room-header">
-						<span class="room-name">'.$room->display_name.'</span><span class="room-users-wrapper"><span class="room-users">'.$room->user_counter.'</span><i class="fa fa-users"></i></span>
+						<span class="room-name">Radiant Community</span><span class="room-users-wrapper"><span class="room-users">0</span><i class="fa fa-users"></i></span>
 					</span>
-						<img src="'.str_replace("default", "hqdefault", $room->song->picture_url).'">
+						<img src="http://img.youtube.com/vi/rI-t2M0t63s/0.jpg">
 					</div>
 					<div class="panel-footer">
 					<span class="song-name">
-						'.$room->song->name.'
+						Song Name
 					</span>
 					<span class="song-artist">
-						'.$room->song->artist.'
+						Song Artist
 					</span>
-						<button class="btn btn-info footer_option" onclick="switchRoom(\''.$room->id.'\')">Join</button>
+						<button class="btn btn-info footer_option" onclick="switchRoom('radiant-community')">Join</button>
 					</div>
 				</div>
-			</div>'."\n";
-				} else {
-					echo '<div class="col-sm-4 room-card">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<span class="room-name">'.$room->display_name.'</span><span class="room-users-wrapper"><span class="room-users">'.$room->user_counter.'</span><i class="fa fa-users"></i></span>
-						<br><span class="no-song">No song playing</span>
-					</div>
-					<div class="panel-footer">
-						<button class="btn btn-info footer_option" onclick="switchRoom(\''.$room->id.'\')">join</button>
-					     </div>
-				</div>
-			</div>'."\n";
-				}
-			}
-			?>
+			</div>
 		</div>
 	</div>
 </div>
@@ -159,13 +123,9 @@
 					<span class="current-dj-caption">Current DJ: </span>
 					<span id="current-dj"></span>
 				</div>
-				<?php
-				if($is_owner) {
-					echo '<div id="skip_song">
+				<div id="skip_song" hidden="hidden">
 					<i class="fa fa-chevron-right"></i> Force Skip
-				</div>';
-				}
-				?>
+				</div>
 			</div>
 			<div id="time_elapsed">
 				<div></div>
@@ -220,17 +180,7 @@
 
 			</div>
 			<div id="chat-textbox" class="input-group">
-				<?php
-				if(isset($authUrl)) {
-					echo '<div class="chatbox-placeholder"><a href="' . $authUrl . '">Log in</a> to chat</div>';
-				} else {
-					foreach(array(
-					        '<input type="text" class="form-control" placeholder="Say something nice" id="chat_message">',
-					        '<span class="input-group-btn">',
-					        '    <button class="btn btn-primary" type="button" id="chat_send">Send</button>',
-					        '</span>') as $line) echo $line."\n";
-				}
-				?>
+
 			</div>
 		</div>
 	</div>
@@ -239,35 +189,23 @@
 	</div>
 </div>
 <div id="create_room" class="animsition" hidden="hidden">
-	<?php
-	/*if(isset($create_error_message)) {
-		echo '<div class="container"><div class="alert alert-warning" role="alert">'.$create_error_message.'</div></div>';
-	}*/
-	?>
 	<div class="container create-form">
 		Room creation is currently disabled.<br><br>
 		<a onclick="showRoomList()">&laquo; Back</a>
-		<?php
-		/*if(!$user) {
-			require("content/create/not_logged_in.php");
-		} else {
-			require("content/create/form.php");
-		}*/
-		?>
 	</div>
 </div>
-<script src="http://totem.fm/js/vendor/jquery.js"></script>
-<script src="http://totem.fm/js/vendor/jquery.animsition.min.js"></script>
-<script src="http://totem.fm/js/common/transition.js"></script>
-<script src="http://totem.fm/js/common/background.js"></script>
-<script src="http://totem.fm/js/player/playback.js"></script>
-<script src="http://totem.fm/js/player/sidebar.js"></script>
-<script src="http://totem.fm/js/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
-<script src="http://totem.fm/js/common/spin.js"></script>
-<script src="http://totem.fm/js/vendor/bootstrap-modalmanager.js"></script>
-<script src="http://totem.fm/js/vendor/bootstrap-modal.js"></script>
-<script src="http://totem.fm/js/vendor/ba-linkify.min.js"></script>
-<script src="http://totem.fm/api/start_session.php"></script>
-<script src="http://totem.fm/js/common/app.js"></script>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/jquery.animsition.min.js"></script>
+<script src="js/common/transition.js"></script>
+<script src="js/common/background.js"></script>
+<script src="js/player/playback.js"></script>
+<script src="js/player/sidebar.js"></script>
+<script src="js/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
+<script src="js/common/spin.js"></script>
+<script src="js/vendor/bootstrap-modalmanager.js"></script>
+<script src="js/vendor/bootstrap-modal.js"></script>
+<script src="js/vendor/ba-linkify.min.js"></script>
+<script src="http://api.totem.fm/api/start_session.php"></script>
+<script src="js/common/app.js"></script>
 </body>
 </html>
