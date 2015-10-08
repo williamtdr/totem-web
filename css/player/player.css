@@ -284,15 +284,25 @@ h3 {
     width: 298px;
 }
 
+#chat_message {
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#chat_send {
+    background-color: transparent;
+    border: none;
+}
+
 #chat-text {
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 5px;
-    height: 100%;
+    height: calc(100% - 60px);
     overflow-y: scroll;
     font-size: 0.8em;
     overflow-x: hidden;
-    padding-bottom: 60px;
 }
 
 .chat-message-sender {
