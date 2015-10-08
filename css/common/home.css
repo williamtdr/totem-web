@@ -99,6 +99,7 @@ div[role="navigation"] {
 #room_list {
     z-index: 200;
     padding-top: 90px;
+    color: #ffffff;
 }
 
 .room-users-wrapper {

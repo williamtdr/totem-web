@@ -40,6 +40,7 @@ function switchTab(destination) {
     $("#my_music").attr("hidden", "hidden");
     switch(destination) {
         case "rooms":
+            refreshRoomList();
             $("#nav_rooms").addClass("active");
             $("#room_list").removeAttr("hidden");
         break;
@@ -109,10 +110,36 @@ changebtn.click(function() {
     });
 });
 
+function refreshRoomList() {
+    content = $("#room_list_content");
+    content.empty();
+    content.append('<b>Loading...</b>');
+    $.ajax({
+        url: "http://api.totem.fm/room/list.php",
+        jsonp: "callback",
+        dataType: "jsonp",
+        success: function(response) {
+            content.empty();
+            $.each(response, function(index, room) {
+                if(room.song) {
+                    $("#room_list_content").append('<div class="col-sm-4 room-card"><div class="panel panel-default"><div class="panel-body"><span class="room-name">' + room.display_name + '</span><span class="room-users-wrapper"><span class="room-users">' + room.user_counter + '</span><i class="fa fa-users"></i></span><img src="' + room.song.picture_url.replace("default", "hqdefualt") + '"></div><div class="panel-footer"><span class="song-name">' + room.song.name + '</span><span class="song-artist">' + room.song.artist + '</span><button class="btn btn-info footer_option" onclick="switchRoom(\'' + room.id + '\')">join</button></div></div></div>');
+                } else {
+                    $("#room_list_content").append('<div class="col-sm-4 room-card"><div class="panel panel-default"><div class="panel-body"><span class="room-name">' + room.display_name + '</span><span class="room-users-wrapper"><span class="room-users">' + room.user_counter + '</span><i class="fa fa-users"></i></span><br><span class="no-song">No song playing</span></div><div class="panel-footer"><button class="btn btn-info footer_option" onclick="switchRoom(\'' + room.id + '\')">join</button></div></div></div>');
+                }
+            });
+        },
+        error: function(error) {
+            $("#room_list_content").append('<b>Failed to load the room list. <a onclick="refreshRoomList()">Refresh?</a></b>');
+        }
+    });
+}
+
 function sessionComplete() {
     if(!display_name) {
         $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
     } else {
         $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
     }
+
+    if(!force_room) refreshRoomList();
 }
