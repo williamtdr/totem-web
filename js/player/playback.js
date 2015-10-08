@@ -91,9 +91,6 @@ function loadVideo(id, title, artist) {
     $("#now_playing").removeAttr("hidden");
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
-    $("#background_shader").animate({
-        opacity: 0.7
-    }, 1000);
 
     advanceBackgroundImage();
 }
@@ -331,9 +328,6 @@ function finishInit() {
             $("#room_list").attr("hidden", "hidden");
             $("#now_playing_content").removeAttr("hidden");
             $("#now_playing_placeholder").attr("hidden", "hidden");
-            $("#background_shader").animate({
-                opacity: 0.7
-            }, 1000);
         }
     }
 

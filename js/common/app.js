@@ -11,9 +11,6 @@ function switchRoom(destination) {
     $("#room_list").attr("hidden", "hidden");
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
-    $("#background_shader").animate({
-        opacity: 0.7
-    }, 1000);
 }
 
 function showRoomList() {
@@ -27,24 +24,31 @@ function showCreateForm() {
 }
 
 function switchTab(destination) {
-    $("#background_shader").animate({
-        opacity: 0.7
-    }, 1000);
     $(".active").removeClass("active");
     $("#room_list").attr("hidden", "hidden");
     $("#now_playing").attr("hidden", "hidden");
     $("#my_music").attr("hidden", "hidden");
+    var bgshader = $("#background_shader");
     switch(destination) {
         case "rooms":
             refreshRoomList();
+            bgshader.animate({
+                opacity: 0.7
+            }, 1000);
             $("#nav_rooms").addClass("active");
             $("#room_list").removeAttr("hidden");
         break;
         case "now_playing":
+            bgshader.animate({
+                opacity: 0.7
+            }, 1000);
             $("#nav_room").addClass("active");
             $("#now_playing").removeAttr("hidden");
         break;
         case "my_music":
+            bgshader.animate({
+                opacity: 1
+            }, 1000);
             $("#nav_music").addClass("active");
             $("#my_music").removeAttr("hidden");
         break;
