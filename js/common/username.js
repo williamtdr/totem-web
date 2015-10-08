@@ -12,7 +12,7 @@ uchange.keyup(function(event){
 changebtn.click(function() {
     spin('change-username-spinner');
     $.ajax({
-        url: "http://totem.fm/api/changeUsername.php",
+        url: "http://api.totem.fm/user/changeUsername.php",
         jsonp: "callback",
         dataType: "jsonp",
         data: {

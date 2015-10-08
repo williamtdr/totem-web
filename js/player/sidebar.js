@@ -83,7 +83,7 @@ function loadPlaylistItems(playlistId) {
     $(".playlist-list-content").empty();
     $(".playlist-list-content").append('<li class="list-group-item playlist">Loading... </li>');
     $.ajax({
-        url: "http://totem.fm/api/getYoutubePlaylistItems.php",
+        url: "http://api.totem.fm/youtube/getPlaylistItems.php",
         jsonp: "callback",
         dataType: "jsonp",
         data: {
@@ -184,7 +184,7 @@ function search(text) {
     $(".playlist-list-content").empty();
     $(".playlist-list-content").append('<li class="list-group-item playlist">Loading... </li>');
     $.ajax({
-        url: "http://totem.fm/api/getYoutubeSearchResults.php",
+        url: "http://api.totem.fm/youtube/getSearchResults.php",
         jsonp: "callback",
         dataType: "jsonp",
         data: {

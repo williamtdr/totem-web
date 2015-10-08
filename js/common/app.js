@@ -75,7 +75,7 @@ uchange.keyup(function(event){
 changebtn.click(function() {
     spin('change-username-spinner');
     $.ajax({
-        url: "http://totem.fm/api/changeUsername.php",
+        url: "http://api.totem.fm/user/changeUsername.php",
         jsonp: "callback",
         dataType: "jsonp",
         data: {
@@ -130,13 +130,41 @@ function refreshRoomList() {
     });
 }
 
+function loadYoutubePlaylists() {
+    $(".sidebar-playlist-list").empty();
+    $(".sidebar-playlist-list").append('<b>Loading...</b>');
+    $.ajax({
+        url: "http://api.totem.fm/youtube/getPlaylists.php",
+        jsonp: "callback",
+        dataType: "jsonp",
+        success: function(response) {
+            $(".sidebar-playlist-list").empty();
+            $(".sidebar-playlist-list").append('<ul class="list-group sidebar-playlist"><li class="list-group-item" onclick="showSearch()">Search YouTube</li>');
+            if(response.success) {
+                $.each(response.data, function(name, id) {
+                    $(".sidebar-playlist-list ul").append("<li class=\"list-group-item\" onclick=\"loadPlaylistItems('" + id + "')\">" + name + "</li>");
+                });
+            } else {
+                $(".sidebar-playlist-list ul").append("There was a problem retrieving your Youtube playlists. Check to make sure that a Youtube channel exists for your account and you are logged in.");
+            }
+            content.append('</ul>');
+        },
+        error: function(error) {
+            $("#room_list_content").append('<b>There was a problem retrieving your youtube playlists. <a onclick="loadYoutubePlaylists()">Refresh?</a></b>');
+        }
+    });
+}
+
 function sessionComplete() {
     if(!display_name) {
         $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
         $("#chat-textbox").append('<div class="chatbox-placeholder"><a href="' + authUrl + '">Log in</a> to chat</div>');
+        $(".sidebar-playlist-list").addClass("sidebar-no-login");
+        $(".sidebar-playlist-list").append("<a href=\"" + authUrl + "\">Log in</a> to see your playlists");
     } else {
         $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
         $("#chat-textbox").append('<input type="text" class="form-control" placeholder="Say something nice" id="chat_message"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="chat_send">Send</button></span>');
+        loadYoutubePlaylists();
     }
 
     if(!force_room) {
