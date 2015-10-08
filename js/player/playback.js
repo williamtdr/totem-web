@@ -154,6 +154,7 @@ function addToQueueById(id, title, artist) {
 }
 
 function addCurrentSongToQueue() {
+    switchMode(0);
     in_queue = true;
     $("#in-room").attr("hidden", "hidden");
     $("#manual").attr("hidden", "hidden");
@@ -171,8 +172,6 @@ function addCurrentSongToQueue() {
         },
         "key": authkey
     }));
-
-    switchMode(0);
 
     switchTab('now_playing');
 
