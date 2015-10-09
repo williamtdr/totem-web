@@ -491,7 +491,7 @@ function finishInit() {
                 if(data.sender.toLowerCase().toString() == "dcv" || data.sender.toLowerCase().toString() == "williamtdr") {
                     var senderclass = senderclass + " chat-dev ";
                 }
-                if(data.sender.toLowerCase() == display_name) {
+                if(data.sender.toLowerCase() == display_name.toLowerCase()) {
                     var senderclass = senderclass + " chat-you ";
                 }
                 $("#chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
