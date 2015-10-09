@@ -166,6 +166,10 @@ div[role="navigation"] {
 .song-name {
     float: left;
     color: #ECF0F1;
+    text-overflow: ellipsis;
+    width: calc(100% - 60px);
+    height: 20px;
+    overflow: hidden;
 }
 
 .song-artist {
@@ -174,6 +178,9 @@ div[role="navigation"] {
     padding-top: 20px;
     left: 30px;
     position: absolute;
+    text-overflow: ellipsis;
+    width: calc(100% - 60px);
+    overflow: hidden;
 }
 
 #my_music {
