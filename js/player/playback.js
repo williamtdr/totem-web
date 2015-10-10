@@ -463,7 +463,7 @@ function finishInit() {
                         chatmessage = cmp;
                     }
                 }
-                if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1 || chatmessage.indexOf("www.") > -1 ) {
+                if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
 		    var msplit = chatmessage.split(" ");
                     var msplitl = msplit.length;
                         for (var i = 0; i < msplitl; i++) {
@@ -476,17 +476,6 @@ function finishInit() {
                                 mlink = mlink.replace(/<\/i>/g, "_");
                             }
                        	mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
-                       	chatmessage = chatmessage.replace(omlink, mlink)
-                        }
-                        if  (msplit[i].startsWith("www.")) {
-                            var mlink = msplit[i];
-                            var omlink = msplit[i]
-                            var mlink = "http://" + mlink;
-                            if (mlink.indexOf("<i>") > -1) {
-                                mlink = mlink.replace(/<i>/g, "_");
-                                mlink = mlink.replace(/<\/i>/g, "_");
-                            }
-                        mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
                        	chatmessage = chatmessage.replace(omlink, mlink)
                         }
                         }
