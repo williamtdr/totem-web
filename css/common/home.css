@@ -167,7 +167,7 @@ div[role="navigation"] {
     float: left;
     color: #ECF0F1;
     text-overflow: ellipsis;
-    width: calc(100% - 60px);
+    width: calc(100% - 120px);
     height: 20px;
     overflow: hidden;
 }
@@ -179,7 +179,7 @@ div[role="navigation"] {
     left: 30px;
     position: absolute;
     text-overflow: ellipsis;
-    width: calc(100% - 60px);
+    width: calc(100% - 120px);
     overflow: hidden;
 }
 
