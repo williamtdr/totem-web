@@ -8,35 +8,61 @@
     body {
         margin: 0 auto;
         font-family: 'Raleway', sans-serif;
+		background: #000000;
+		text-align: center;
+		color: #ECF0F1;
+		margin-top: 50px;
+		line-height: 1.5;
     }
-    .ow {
-        color: #ECF0F1;
-    }
+
+	a {
+		color: #00bdef;
+		text-decoration: none;
+	}
+
+	#main_content {
+		z-index: 800;
+	}
+
+	#background_layer {
+		z-index: -1;
+		opacity: 0.3;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
 </style>
-</head>
 <body>
-    <center>
-        <h1 class="ow">404</h1>
-        <p class="ow">
-            this page isn't on the <b>totem.fm</b> domain
-            <br>
-            we will be directing you back to the homepage in <b><span id="time">10</span></b> seconds
-        </p>
-    </center>
+	<div id="main_content">
+		<h1>404</h1>
+		<p>
+			This page isn't on the <b>totem.fm</b> domain.
+			<br>
+			Click <a href="http://totem.fm">here</a> to go back to the homepage or wait <b><span id="time">10</span></b> seconds.
+		</p>
+	</div>
+	<div id="background_layer"></div>
 </body>
 <script>
-    var time = 10
-    var timer = document.getElementById("time")
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	document.getElementById("background_layer").setAttribute('style', 'background: url("http://d35y9swri9q567.cloudfront.net/background/' + getRandomInt(1, 572) + '.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;');
+    var time = 10;
+    var timer = document.getElementById("time");
     function countDown() {
         setTimeout(function(){ 
-            time = time -1 
-            if (time == 0) {
-                location.href = "http://totem.fm"
+            time = time -1;
+            if(time == 0) {
+                location.href = "http://totem.fm";
             }
-            timer.innerHTML = time
-            countDown()
+            timer.innerHTML = time;
+            countDown();
         }, 1000);
     }
-    countDown()
+    countDown();
 </script>
 </html>
