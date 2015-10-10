@@ -154,6 +154,7 @@ function addToQueueById(id, title, artist) {
 function addCurrentSongToQueue() {
     mode = 0;
     $("#in-room").removeAttr("hidden");
+    $("#score_wrapper").removeAttr("hidden");
     $("#manual").attr("hidden", "hidden");
     in_queue = true;
     my_queue.push({
