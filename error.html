@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Error</title>
+    <title>404</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
+</head>
 <style>
     body {
-        width: 35em;
         margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
+        font-family: 'Raleway', sans-serif;
+    }
+    .ow {
+        color: #ECF0F1;
     }
 </style>
 </head>
 <body>
-<h1>An error occurred.</h1>
-<p>Sorry, the page you are looking for is currently unavailable.<br/>
-Please try again later.</p>
-<p>If you are the system administrator of this resource then you should check
-the <a href="http://nginx.org/r/error_log">error log</a> for details.</p>
-<p><em>Faithfully yours, nginx.</em></p>
+    <center>
+        <h1 class="ow">404</h1>
+    </center>
+    <p class="ow">
+        This page isn't on the <b>totem.fm</b> domain!
+        <br>
+        We'll be directing you back to the homepage in <span id="time">10</span> seconds
+    </p>
 </body>
+<script>
+    var time = 10
+    var timer = document.getElementById("time")
+    function countDown() {
+        setTimeout(function(){ 
+            time = time -1 
+            if (time == 0) {
+                location.href = "http://totem.fm"
+            }
+            timer.innerHTML = time
+            countDown()
+        }, 1000);
+    }
+    countDown()
+</script>
 </html>
