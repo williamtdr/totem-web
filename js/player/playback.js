@@ -481,11 +481,15 @@ function finishInit() {
                         }
                         }
                 }
+                var sender = data.sender.toLowerCase().toString()
                 var senderclass = ""
-                if(data.sender.toLowerCase().toString() == "dcv" || data.sender.toLowerCase().toString() == "williamtdr") {
+                if(sender == "dcv" || sender == "williamtdr") {
                     var senderclass = senderclass + " chat-dev ";
                 }
-                if(data.sender.toLowerCase() == display_name.toLowerCase()) {
+                if (sender == "encadyma" || sender == "tugaaa" || sender == "xbytes" || sender == "felicity" || sender == "koolkidkenny" || sender == "not_trevor" || sender == "pogodaanton" || sender == "vitals") {
+                   var senderclass = senderclass + " chat-beta ";	
+                }
+                if(sender == display_name.toLowerCase()) {
                     var senderclass = senderclass + " chat-you ";
                 }
                 $("#chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
