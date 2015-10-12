@@ -486,7 +486,7 @@ function finishInit() {
                 if(sender == "dcv" || sender == "williamtdr") {
                     var senderclass = senderclass + " chat-dev ";
                 }
-                if (sender == "encadyma" || sender == "tugaaa" || sender == "xbytes" || sender == "felicity" || sender == "koolkidkenny" || sender == "not_trevor" || sender == "pogodaanton" || sender == "vitals") {
+                if (sender == "encadyma" || sender == "tugaaa" || sender == "xbytes" || sender == "felicity" || sender == "koolkidkenny" || sender == "not trevor" || sender == "pogodaanton" || sender == "vitals") {
                    var senderclass = senderclass + " chat-beta ";	
                 }
                 if(sender == display_name.toLowerCase()) {
