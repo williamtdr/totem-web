@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>To Do</title>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
+  </head>
+  <style>
+  body {
+    margin: 0 auto;
+    font-family: 'Raleway', sans-serif;
+		background: #000000;
+		text-align: center;
+		color: #ECF0F1;
+		margin-top: 50px;
+		line-height: 1.5;
+  }
+	  
+	 a {
+		color: #00bdef;
+		text-decoration: none;
+	 }
+	  
+	 #main_content {
+		z-index: 800;
+	 }
+	
+	 #background_layer {
+		z-index: -1;
+		opacity: 0.3;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	 }
+</style>
+  <body>
+    <div id="maincontent">
+    <h1>Totem Features & Fix List</h1>
+    <h4>Have any suggestions or bugs? Submit them <a href='http://bit.ly/totemfmsb'>here</a>.
+
+      <b>Frontend (UI)</b>
+
+        1. User list on a per-room basis - eta: 20m
+
+        2. Queue list, including an "up next" - eta: 20m
+
+        3. Responsive site design for mobile - eta: 1h
+
+      4. More intuitive music selection UI - eta: 2h
+
+        a. Preview is on the right, with add to queue option from there. Switching tabs switches back to live content. Make the distinction between room and your music more significant and understandable.
+
+        b. Ability to load more playlist items as necessary, refresh options where appropriate
+
+        c. Ability to queue from an entire playlist
+
+        d. Ability to change a title of a song/artist if the system doesn't detect it right or the video title sucks
+
+      5. Room settings window - eta: 30m
+
+        a. Room title & description
+
+        b. Room admin list (autocompleted, easy to modify)
+
+        c. Room password
+
+        d. Autoskip/blacklist that video title cannot contain
+
+      6. Fix room creation - eta: 20m
+
+      7. Button to add currently playing video to Liked Videos playlists - eta: 20m
+
+      8. Emoji selector - eta: 20m
+
+      9. Username selector (while mentioning)
+
+
+    <b>Server<b>
+
+      1. Properly escape < and > - eta: 3m
+
+      2. Prevent empty messages - eta: 3m
+
+      3. Rate limiting system - eta: 10m
+
+      4. Fix bugs when skipping songs, redo queue backend - eta: 10m
+
+      5. Fix multi-room user management: Ghosting in rooms. easy and clean ability to switch - eta: 15m
+
+      6. Send chat backlog to client on connection - eta: 10m
+
+      7. Send information to client as to whether they are allowed to have admin privileges on rooms, redo database structure to allow for more free defining of this, make way for room admins - eta: 20m
+
+      8. Prevent adding a song that's already in the queue - eta: 10m
+
+      9. Detecting private, deleted and region-restricted videos and taking action where needed - eta: 10m
+
+
+    <b>APIs & Integration</b>
+
+      1. Google session length - eta: ?
+
+      2. Soundcloud integration - eta: 3h
+
+      3. Case-insensitive registration - eta: 10m
+
+      4. Return to room on google login - eta: 20m
+    </div>
+  </body>
+  <script>
+	  function getRandomInt(min, max) {
+		  return Math.floor(Math.random() * (max - min + 1)) + min;
+	  }
+	
+	document.getElementById("background_layer").setAttribute('style', 'background: url("http://d35y9swri9q567.cloudfront.net/background/' + getRandomInt(1, 572) + '.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;');
+  </script>
+</html>
+
