@@ -26,7 +26,7 @@ h3 {
     z-index: 100;
 }
 
-#score_wrapper > div {
+.score_wrapper > div {
     display: inline-block;
     margin-right: 20px;
     font-family: "Lato", sans-serif;
@@ -39,17 +39,35 @@ h3 {
     user-select: none;
 }
 
-#score_wrapper {
+.score_wrapper_top {
     margin-bottom: 10px;
 }
 
-#video_options > div {
+.score_wrapper_bottom {
+    float: right;
+}
+
+#toggles {
+    margin-top: 5px;
+}
+
+.score_wrapper_bottom > div {
+    margin-right: 0 !important;
+    margin-left: 20px;
+}
+
+#video_options > #toggles > div {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 #video_options {
     margin-top: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .score-positive-wrapper {
@@ -351,6 +369,7 @@ h3 {
     margin-left: 300px;
     margin-right: 300px;
     padding-top: 30px;
+    transition: .25s;
 }
 
 .song-title-container {
@@ -534,6 +553,7 @@ h3 {
 h1, h2, h3 {
     margin-top: 20px;
     margin-bottom: 20px;
+    transition: .25s;
 }
 
 @media(max-width: 1700px) {
@@ -792,4 +812,20 @@ h1, h2, h3 {
 .roomlist-prename {
     color: #808080;
     margin-right: 2px;
+}
+
+.fullscreen > .song-title-container > h1 {
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.fullscreen > .song-title-container > h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.fullscreen.player-container {
+    margin-left: 10px;
+    padding-top: 70px !important;
 }

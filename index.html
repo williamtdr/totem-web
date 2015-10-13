@@ -144,14 +144,14 @@
 				<h1 class="title_display"></h1>
 				<h3 class="artist_display"></h3>
 			</div>
-			<div id="score_wrapper">
+			<div class="score_wrapper score_wrapper_top">
 				<div class="score-positive-wrapper" onclick="vote(1)">
 					<i class="fa fa-chevron-up"></i>
-					<div id="score-positive" class="score"></div>
+					<div class="score-positive score"></div>
 				</div>
 				<div class="score-negative-wrapper" onclick="vote(-1)">
 					<i class="fa fa-chevron-down"></i>
-					<div id="score-negative" class="score"></div>
+					<div class="score-negative score"></div>
 				</div>
 				<div class="current-dj-wrapper" hidden="hidden">
 					<span class="current-dj-caption">Current DJ: </span>
@@ -165,13 +165,28 @@
 			<br>
 			<div id="player" class="youtube-player"></div>
 			<div id="video_options">
-				<div id="video-toggle" onclick="togglePlayerVisibility()">
-					<i class="fa fa-eye"></i>
+				<div class="score_wrapper score_wrapper_bottom">
+					<div class="score-positive-wrapper" onclick="vote(1)">
+						<i class="fa fa-chevron-up"></i>
+						<div class="score-positive score"></div>
+					</div>
+					<div class="score-negative-wrapper" onclick="vote(-1)">
+						<i class="fa fa-chevron-down"></i>
+						<div class="score-negative score"></div>
+					</div>
 				</div>
-				<div id="volume-toggle" style="margin-right: 10px">
-					<i class="fa fa-volume-down"></i>
+				<div id="toggles">
+					<div id="video-toggle" onclick="togglePlayerVisibility()">
+						<i class="fa fa-eye"></i>
+					</div>
+					<div id="fullscreen-toggle">
+						<i class="fa fa-expand"></i>
+					</div>
+					<div id="volume-toggle" style="margin-right: 10px">
+						<i class="fa fa-volume-down"></i>
+					</div>
+					<input type="range" value="50" min="0" max="100" id="volume-slider">
 				</div>
-				<input type="range" value="50" min="0" max="100" id="volume-slider">
 			</div>
 		</div>
 		<div id="no_video" hidden="hidden">

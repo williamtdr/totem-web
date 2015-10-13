@@ -29,6 +29,7 @@ last_url_fragment = "";
 started_at = 0;
 my_queue = [];
 in_queue = false;
+fullscreen = false;
 
 function togglePlayerVisibility() {
     if(player_is_visible) {
@@ -246,8 +247,8 @@ function setSongInfo(title, artist) {
 }
 
 function setScore(positive, negative) {
-    $("#score-positive").html(positive);
-    $("#score-negative").html(negative);
+    $(".score-positive").html(positive);
+    $(".score-negative").html(negative);
 }
 
 function vote(type) {

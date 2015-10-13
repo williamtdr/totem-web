@@ -60,6 +60,48 @@ function sidebarInit() {
                 $("#roomlist-row").append('<li><span class="roomlist-prename">&gt;</span><span>listd[i]</span></li>');
         }
     });
+
+    if(window.localStorage.getItem("is_fullscreen") !== undefined) {
+        if(window.localStorage.getItem("is_fullscreen") == "true") setFullscreen(true);
+    } else {
+        window.localStorage.setItem("is_fullscreen", false);
+    }
+
+    $(window).resize(function () {
+        if(window.innerWidth <= 768) {
+            setFullscreen(true);
+            $("#fullscreen-toggle").attr("hidden", "hidden");
+        } else {
+            $("#fullscreen-toggle").removeAttr("hidden");
+        }
+    });
+
+    $("#fullscreen-toggle").click(function() {
+        if(fullscreen) {
+            setFullscreen(false);
+        } else {
+            setFullscreen(true);
+        }
+    });
+}
+
+function setFullscreen(is_fullscreen) {
+    if(is_fullscreen) {
+        var arrow_gui = $(".fa-expand");
+        arrow_gui.addClass("fa-compress");
+        arrow_gui.removeClass("fa-expand");
+        window.localStorage.setItem("is_fullscreen", true);
+        $("#main_content").addClass("fullscreen");
+        $(".player-container").addClass("fullscreen");
+    } else {
+        var arrow_gui = $(".fa-compress");
+        arrow_gui.addClass("fa-expand");
+        arrow_gui.removeClass("fa-compress");
+        window.localStorage.setItem("is_fullscreen", false);
+        $("#main_content").removeClass("fullscreen");
+        $(".player-container").removeClass("fullscreen");
+    }
+    fullscreen = is_fullscreen;
 }
 
 function loadPlaylistItems(playlistId) {
