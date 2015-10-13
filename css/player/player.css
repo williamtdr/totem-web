@@ -687,6 +687,16 @@ h1, h2, h3 {
     width: 100%;
 }
 
+#beta_footer {
+    margin-top: 20px;
+}
+
+#beta_footer > i {
+    font-size: 0.8em;
+    vertical-align: 10%;
+    margin-left: 3px;
+}
+
 #beta_launch {
     margin-top: 10px;
 }
