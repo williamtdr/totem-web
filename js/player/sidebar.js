@@ -46,6 +46,20 @@ function sidebarInit() {
         addCurrentSongToQueue();
     });
 
+    $("#room-users, .subcaption-users").click(function() {
+        $("#chat").fadeToggle("fast");
+        $("#roomlist").fadeToggle("fast");
+        $("#roomlist-row").empty().append('<li class="roomlist-title"><span>Listeners</span></li>');
+
+        for(var listd in user_list) {
+            if(listd[i].toLowerCase() == display_name)
+                $("#roomlist-row").append('<li><span class="roomlist-prename">&gt;</span><span class="chat-you">listd[i]</span></li>');
+            if(listd[i].toLowerCase().toString() == "dcv" || data.sender.toLowerCase().toString() == "williamtdr")
+                $("#roomlist-row").append('<li><span class="roomlist-prename">&gt;</span><span class="chat-dev">listd[i]</span></li>');
+            else
+                $("#roomlist-row").append('<li><span class="roomlist-prename">&gt;</span><span>listd[i]</span></li>');
+        }
+    });
 }
 
 function loadPlaylistItems(playlistId) {

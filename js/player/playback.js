@@ -18,6 +18,7 @@ force_room = false;
 mode = 0;
 nothing_playing = true;
 my_vote = 0;
+user_list = [];
 
 songHistory = [];
 disconnect_timer = 3;
@@ -370,6 +371,9 @@ function finishInit() {
                     },
                     timeout: 5000
                 });
+            break;
+            case "user_list_change":
+                user_list = data;
             break;
             case "song_change":
                 $(".activated").removeAttr("activated");
