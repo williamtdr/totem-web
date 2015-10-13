@@ -62,14 +62,105 @@ function switchTab(destination) {
     }
 }
 
+function tryPassword(password, display_errors) {
+    $.ajax({
+        url: "http://api.totem.fm/app/authorize.php",
+        jsonp: "callback",
+        dataType: "jsonp",
+        data: {
+            password: password
+        },
+        success: function(response) {
+            if(response.success) {
+                $("#landing_page").attr("hidden", "hidden");
+                var sn = $(".site_navigation");
+                sn.removeAttr("hidden");
+                sn.css("top", "-60px");
+                sn.animate({
+                    "top": 0
+                }, 500);
+                if(window.location.hash !== "" && window.location.hash.length > 0) {
+                    force_room = true;
+                    $(".active").removeClass("active");
+                    $("#nav_room").addClass("active");
+                } else {
+                    $("#room_list").removeAttr("hidden");
+                }
+                window.localStorage.setItem("beta_password", $("#beta_code").val());
+            } else {
+                if(display_errors) {
+                    var af = $("#auth_failed");
+                    af.removeAttr("hidden");
+                    af.css("opacity", 0);
+                    af.animate({
+                        opacity: 1
+                    }, 200);
+                } else {
+                    $("#landing_page").removeAttr("hidden");
+                }
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function submitEmail(email) {
+    $.ajax({
+        url: "http://api.totem.fm/app/subscribe.php",
+        jsonp: "callback",
+        dataType: "jsonp",
+        data: {
+            email: email
+        },
+        success: function(response) {
+            $("#email_group").empty();
+            $("#email_group").append('<span style="color: #2ECC71"><b>Thanks!</b></span>');
+        },
+        error: function(error) {
+            $("#email_group").empty();
+            $("#email_group").append('<span style="color: #E74C3C"><b>Subscription failed.</b></span>');
+        }
+    });
+}
+
 $(document).ready(function() {
-    if(window.location.hash !== "" && window.location.hash.length > 0) {
-        force_room = true;
-        $(".active").removeClass("active");
-        $("#nav_room").addClass("active");
+    if(window.localStorage.getItem("beta_password") != undefined) {
+        var password = window.localStorage.getItem("beta_password");
+        tryPassword(password, false);
     } else {
-        $("#room_list").removeAttr("hidden");
+        $("#landing_page").removeAttr("hidden");
     }
+    var email = $("#email");
+    email.keyup(function(event){
+        if(event.keyCode == 13){
+            $("#email_submit").click();
+        }
+    });
+    $("#email_submit").click(function() {
+        submitEmail($("#email").val());
+    });
+    $("#beta_launch_header").click(function() {
+        $("#beta_launch_header").attr("hidden", "hidden");
+        $("#email_group").animate({
+            opacity: 0
+        }, 200);
+        $("#beta_launch_content").animate({
+            opacity: 1
+        }, 200);
+        var code = $("#beta_code");
+        code.focus();
+        code.keyup(function(event){
+            if(event.keyCode == 13){
+                $("#beta_submit").click();
+            }
+        });
+    });
+
+    $("#beta_submit").click(function() {
+        tryPassword($("#beta_code").val(), true);
+    });
 });
 
 uchange = $("#username-change");

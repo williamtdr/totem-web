@@ -37,7 +37,34 @@
 		</div>
 	</div>
 </div>
-<div class="site_navigation">
+<div id="landing_page" class="animsition" hidden="hidden">
+	<img id="landing_screenshot" src="screenshot.png">
+	<span id="landing_title">Totem</span>
+	<div id="landing_footer">
+		<b>Totem is a site that lets you share and discover music with awesome people from around the world.</b>
+
+		<span id="call_to_action_header">We're currently in a closed beta, but you can sign up for updates here:</span>
+		<div class="input-group" id="email_group">
+			<input type="email" class="form-control" placeholder="you@example.com" id="email">
+		<span class="input-group-btn">
+			<button class="btn btn-default action_btn" type="button" id="email_submit">Go!</button>
+		</span>
+		</div>
+		<div id="beta_launch">
+			<a id="beta_launch_header">
+				I have a beta code, let me in!
+			</a>
+			<span id="auth_failed" hidden="hidden">Incorrect beta code.</span>
+			<div id="beta_launch_content" style="opacity: 0" class="input-group">
+				<input type="text" class="form-control" placeholder="Code" id="beta_code">
+				<span class="input-group-btn">
+					<button class="btn btn-default action_btn" type="button" id="beta_submit">Login</button>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="site_navigation" hidden="hidden">
 	<div class="logo">totem</div>
 	<div role="navigation">
 		<span class="navigation_option active" id="nav_rooms" onclick="switchTab('rooms')">Rooms</span>

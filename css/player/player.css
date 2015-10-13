@@ -655,3 +655,89 @@ h1, h2, h3 {
 #skip_song > .fa {
     font-size: 0.8em;
 }
+
+#landing_page {
+    z-index: 20000;
+    color: white;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#landing_title {
+    font-size: 2em;
+    color: #ECF0F1;
+    display: block;
+    margin-bottom: 30px;
+}
+
+#landing_footer {
+    max-width: 400px;
+}
+
+#landing_screenshot {
+    float: right;
+    width: 400px;
+    margin: 30px;
+}
+
+#email_group {
+    margin-top: 20px;
+    max-width: 300px;
+    width: 100%;
+}
+
+#beta_launch {
+    margin-top: 10px;
+}
+
+#beta_launch_header {
+    color: #BDC3C7;
+    transition: .25s;
+}
+
+#beta_launch_header:hover {
+    color: #ECF0F1;
+}
+
+.action_btn {
+    background-color: #3498DB !important;
+}
+
+.action_btn:hover {
+    background-color: #2980B9 !important;
+}
+
+#beta_launch_content {
+    max-width: 200px;
+}
+
+#auth_failed {
+    line-height: 3;
+    color: #E74C3C;
+}
+
+@media(max-width: 768px) {
+    #landing_screenshot {
+        width: 300px;
+    }
+}
+
+@media(max-width: 500px) {
+    #landing_page {
+        padding: 10px;
+    }
+
+    #landing_screenshot {
+        width: 95%;
+        position: absolute;
+        top: 80px;
+        margin: 0;
+    }
+
+    #landing_footer {
+        position: absolute;
+        top: 400px;
+        max-width: 100%;
+    }
+}
