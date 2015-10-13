@@ -86,7 +86,7 @@ function tryPassword(password, display_errors) {
                 } else {
                     $("#room_list").removeAttr("hidden");
                 }
-                window.localStorage.setItem("beta_password", $("#beta_code").val());
+                if($("#beta_code").val().length > 3) window.localStorage.setItem("beta_password", $("#beta_code").val());
             } else {
                 if(display_errors) {
                     var af = $("#auth_failed");
