@@ -755,7 +755,7 @@ h1, h2, h3 {
 /* User List */
 #roomlist {
     display:none;
-    background-color: rgba(34, 47, 63, 0.60);
+    background-color: rgba(26, 205, 175, 0.4);
     color: white;
     width: 300px;
     position: absolute;
@@ -770,9 +770,9 @@ h1, h2, h3 {
     content: "";
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 25px solid rgba(34, 47, 63, 0.6);
+    border-bottom: 15px solid rgba(26, 205, 175, 0.4);
     position: absolute;
-    top: -24px;
+    top: -15px;
     right: 120px;
 }
 
