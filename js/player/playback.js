@@ -294,7 +294,7 @@ function finishInit() {
         }));
     });
 
-    if(force_room) {
+    if(force_room || (window.location.hash !== "" && window.location.hash.length > 0)) {
         window.location.hash = room;
         server.onopen = function() {
             server.send(JSON.stringify({
