@@ -266,7 +266,7 @@ function sessionComplete() {
         $(".sidebar-playlist-list").append("<a href=\"" + authUrl + "\">Log in</a> to see your playlists");
     } else {
         $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
-        $(".chat-textbox").append('<input type="text" class="form-control" placeholder="Say something nice" id="chat_message"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="chat_send">Send</button></span>');
+        $(".chat-textbox").append('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
         loadYoutubePlaylists();
     }
 

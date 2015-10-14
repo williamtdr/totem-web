@@ -315,8 +315,8 @@ h3 {
 }
 
 .chat_send {
-    background-color: transparent;
-    border: none;
+    background-color: transparent !important;
+    border: none !important;
 }
 
 .chat-text {
