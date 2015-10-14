@@ -68,14 +68,7 @@ function sidebarInit() {
     }
 
     $(window).resize(function () {
-        if(window.innerWidth <= 1333) {
-            setFullscreen(true);
-            $("#fullscreen-toggle").hide();
-        } else {
-            $("#fullscreen-toggle").show();
-        }
-
-        autosizePlayer();
+        resize();
     });
 
     $("#fullscreen-toggle").click(function() {
@@ -85,6 +78,19 @@ function sidebarInit() {
             setFullscreen(true);
         }
     });
+
+    resize();
+}
+
+function resize() {
+    if(window.innerWidth <= 1333) {
+        setFullscreen(true);
+        $("#fullscreen-toggle").hide();
+    } else {
+        $("#fullscreen-toggle").show();
+    }
+
+    autosizePlayer();
 }
 
 function autosizePlayer() {
