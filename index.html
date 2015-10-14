@@ -70,9 +70,9 @@
 <div class="site_navigation" hidden="hidden">
 	<div class="logo">totem</div>
 	<div role="navigation">
-		<span class="navigation_option active nav_rooms" onclick="switchTab('rooms')">Rooms</span>
-		<span class="navigation_option nav_room" onclick="switchTab('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
-		<span class="navigation_option nav_music" onclick="switchTab('my_music')">My Music</span>
+		<span class="navigation_option active nav_rooms pointer" onclick="switchTab('rooms')">Rooms</span>
+		<span class="navigation_option nav_room pointer" onclick="switchTab('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
+		<span class="navigation_option nav_music pointer" onclick="switchTab('my_music')">My Music</span>
 		<div id="login-menu">
 
 		</div>
@@ -137,13 +137,13 @@
 					<span class="room-list-intro">
 						<b>Share your music</b>. Or just hang out! Totem lets you find great music through awesome communities.
 					</span>
-					<a class="room-option room-option-green" onclick="showCreateForm()">
+					<a class="room-option room-option-green pointer" onclick="showCreateForm()">
 						<i class="fa fa-plus"></i>Create Room
 					</a>
-					<span class="room-option room-option-orange" onclick="refreshRoomList()">
+					<span class="room-option room-option-orange pointer" onclick="refreshRoomList()">
 						<i class="fa fa-refresh"></i>Refresh List
 					</span>
-					<span class="room-option room-option-blue">
+					<span class="room-option room-option-blue pointer">
 						<i class="fa fa-expand"></i>Show All Rooms
 					</span>
 				</div>
