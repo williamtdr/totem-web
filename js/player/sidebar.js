@@ -83,7 +83,7 @@ function sidebarInit() {
 }
 
 function resize() {
-    if(window.innerWidth <= 1333) {
+    if(window.innerWidth <= 1400) {
         setFullscreen(true);
         $("#fullscreen-toggle").hide();
     } else {
