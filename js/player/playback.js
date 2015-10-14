@@ -490,8 +490,8 @@ function finishInit() {
                 if(sender == display_name.toLowerCase()) {
                     var senderclass = senderclass + " chat-you ";
                 }
-                $("#chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
-                $("#chat-text").scrollTop($("#chat-text")[0].scrollHeight);
+                $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+                $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
         }
     };
 

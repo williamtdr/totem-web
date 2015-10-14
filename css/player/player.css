@@ -294,7 +294,7 @@ h3 {
 
 }
 
-#chat {
+.chat {
     background-color: rgba(34, 47, 63, 0.60);
     color: white;
     width: 300px;
@@ -304,22 +304,22 @@ h3 {
     min-height: 300px;
 }
 
-#chat-textbox {
+.chat-textbox {
     width: 298px;
 }
 
-#chat_message {
+.chat_message {
     border: 0;
     background-color: transparent;
     color: #ffffff;
 }
 
-#chat_send {
+.chat_send {
     background-color: transparent;
     border: none;
 }
 
-#chat-text {
+.chat-text {
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 5px;
@@ -334,17 +334,17 @@ h3 {
     margin-right: 2px;
 }
 
-#chat-textbox {
+.chat-textbox {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-#chat-textbox > input {
+.chat-textbox > input {
     float: left;
     left: 10px;
 }
 
-#chat-textbox > button {
+.chat-textbox > button {
     float: right;
     right: 10px;
 }

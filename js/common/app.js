@@ -261,12 +261,12 @@ function loadYoutubePlaylists() {
 function sessionComplete() {
     if(!display_name) {
         $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
-        $("#chat-textbox").append('<div class="chatbox-placeholder"><a href="' + authUrl + '">Log in</a> to chat</div>');
+        $(".chat-textbox").append('<div class="chatbox-placeholder"><a href="' + authUrl + '">Log in</a> to chat</div>');
         $(".sidebar-playlist-list").addClass("sidebar-no-login");
         $(".sidebar-playlist-list").append("<a href=\"" + authUrl + "\">Log in</a> to see your playlists");
     } else {
         $("#login-menu").append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
-        $("#chat-textbox").append('<input type="text" class="form-control" placeholder="Say something nice" id="chat_message"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="chat_send">Send</button></span>');
+        $(".chat-textbox").append('<input type="text" class="form-control" placeholder="Say something nice" id="chat_message"><span class="input-group-btn"><button class="btn btn-primary" type="button" id="chat_send">Send</button></span>');
         loadYoutubePlaylists();
     }
 

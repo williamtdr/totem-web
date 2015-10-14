@@ -1,17 +1,17 @@
 function sidebarInit() {
-    $("#chat_message").keyup(function(event){
+    $(".chat_message").keyup(function(event){
         if(event.keyCode == 13){
-            $("#chat_send").click();
+            $(".chat_send").click();
         }
     });
 
-    $("#chat_send").click(function() {
+    $(".chat_send").click(function() {
         server.send(JSON.stringify({
             event: "chat",
-            data: $("#chat_message").val(),
+            data: $(".chat_message").val(),
             key: authkey
         }));
-        $("#chat_message").val("");
+        $(".chat_message").val("");
     });
 
     $("#search_text").keyup(function(event){
@@ -47,7 +47,7 @@ function sidebarInit() {
     });
 
     $("#room-users, .subcaption-users").click(function() {
-        $("#chat").fadeToggle("fast");
+        $(".chat").fadeToggle("fast");
         $("#roomlist").fadeToggle("fast");
         $("#roomlist-row").empty().append('<li class="roomlist-title"><span>Listeners</span></li>');
 
