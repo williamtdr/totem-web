@@ -40,7 +40,7 @@ function switchTab(destination) {
                 opacity: 0.7
             }, 500);
             $('.site_navigation').css("background-color", "rgba(0,0,0,0.3)");
-            $("#nav_rooms").addClass("active");
+            $(".nav_rooms").addClass("active");
             $("#room_list").removeAttr("hidden");
         break;
         case "now_playing":
@@ -48,14 +48,14 @@ function switchTab(destination) {
                 opacity: 0.7
             }, 500);
             $('.site_navigation').css("background-color", "rgba(0,0,0,0.3)");
-            $("#nav_room").addClass("active");
+            $(".nav_room").addClass("active");
             $("#now_playing").removeAttr("hidden");
         break;
         case "my_music":
             bgshader.animate({
                 opacity: 1
             }, 500);
-            $("#nav_music").addClass("active");
+            $(".nav_music").addClass("active");
             $("#my_music").removeAttr("hidden");
             $('.site_navigation').css("background-color", "rgba(0,0,0,1)");
         break;

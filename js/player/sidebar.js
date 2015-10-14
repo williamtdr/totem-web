@@ -95,12 +95,34 @@ function resize() {
 
 function autosizePlayer() {
     var player_el = $("#player");
-    if(fullscreen) {
-        player_el.css("height", ((window.innerWidth - 400) / 1.77) + "px");
-        player_el.css("width", window.innerWidth - 400 + "px");
+
+    if(window.innerWidth <= 800) {
+        $("#mobile_navigation_emblems").removeAttr("hidden");
+        $("div[role=\"navigation\"]").attr("hidden", "hidden");
+        player_el.css("width", window.innerWidth - 20 + "px");
+        player_el.css("height", ((window.innerWidth - 20) / 1.77) + "px");
+        player_el.css("margin-left", "0");
+        $("#time_elapsed").css("margin-left", "0");
+        $("#sidebar").attr("hidden", "hidden");
+        $("#no_video").removeClass("fullscreen");
+        $("#no_video").css("margin-left", "5px");
+        $(".big-header").css("margin-top", "0");
     } else {
-        player_el.css("width", "640px");
-        player_el.css("height", "390px");
+        $("#mobile_navigation_emblems").attr("hidden", "hidden");
+        $("div[role=\"navigation\"]").removeAttr("hidden");
+        player_el.css("margin-left", "10px");
+        player_el.css("padding-left", "10px");
+        $("#time_elapsed").css("margin-left", "10px");
+        $("#sidebar").removeAttr("hidden");
+        $("#no_video").css("margin-left", "5px");
+        $(".big-header").css("margin-top", "30px");
+        if(fullscreen) {
+            player_el.css("height", ((window.innerWidth - 400) / 1.77) + "px");
+            player_el.css("width", window.innerWidth - 400 + "px");
+        } else {
+            player_el.css("width", "640px");
+            player_el.css("height", "390px");
+        }
     }
 
     $("#main_content").css("width", player_el.width());

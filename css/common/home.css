@@ -60,10 +60,17 @@ div[role="navigation"] {
     float: left;
 }
 
-.active {
-    color: #ECF0F1;
-    border-bottom: 2px solid #BDC3C7;
+.active > i {
+    color: #ECF0F1 !important;
 }
+
+.active {
+    color: #ECF0F1 !important;
+}
+
+.navigation_option.active {
+     border-bottom: 2px solid #BDC3C7;
+ }
 
 .btn-info {
     color: #fff;
@@ -83,7 +90,9 @@ div[role="navigation"] {
 }
 
 #login-menu {
-    float: right;
+    right: 30px;
+    position: absolute;
+    top: 13px;
 }
 
 #login-menu > a {

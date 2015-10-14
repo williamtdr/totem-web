@@ -481,8 +481,8 @@ h3 {
 .small-header {
     color: #BDC3C7;
     font-size: 1.5em;
-    max-width: 700px;
-    width: 50%;
+    max-width: 400px;
+    padding-right: 30px;
 }
 
 #queue-container {
@@ -506,6 +506,19 @@ h3 {
 .current-dj-wrapper {
     color: #808080;
     font-size: 0.8em;
+}
+
+#mobile_navigation_emblems > div {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#mobile_navigation_emblems > div > i {
+    color: #BDC3C7;
+}
+
+.nav-active > i {
+    color: white !important;
 }
 
 .current-dj {
@@ -849,4 +862,14 @@ h1, h2, h3 {
 #player {
     margin-top: 5px;
     margin-left: 10px;
+}
+
+@media(max-width: 460px) {
+    .current-dj {
+        display: none;
+    }
+
+    .score-negative-wrapper {
+        padding-right: 15px;
+    }
 }
