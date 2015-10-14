@@ -81,8 +81,12 @@ function tryPassword(password, display_errors) {
                 }, 500);
                 if(window.location.hash !== "" && window.location.hash.length > 0) {
                     force_room = true;
+                    $("#now_playing").removeAttr("hidden");
                     $(".active").removeClass("active");
                     $("#nav_room").addClass("active");
+                    $("#room_list").attr("hidden", "hidden");
+                    $("#now_playing_content").removeAttr("hidden");
+                    $("#now_playing_placeholder").attr("hidden", "hidden");
                 } else {
                     $("#room_list").removeAttr("hidden");
                 }

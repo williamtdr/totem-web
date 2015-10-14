@@ -302,13 +302,6 @@ function finishInit() {
                 key: authkey,
                 room: room
             }));
-
-            $("#now_playing").removeAttr("hidden");
-            $(".active").removeClass("active");
-            $("#nav_room").addClass("active");
-            $("#room_list").attr("hidden", "hidden");
-            $("#now_playing_content").removeAttr("hidden");
-            $("#now_playing_placeholder").attr("hidden", "hidden");
         }
     }
 
