@@ -99,7 +99,11 @@ function autosizePlayer() {
     if(window.innerWidth <= 800) {
         $("#mobile_navigation_emblems").removeAttr("hidden");
         $("div[role=\"navigation\"]").attr("hidden", "hidden");
-        player_el.css("width", window.innerWidth - 20 + "px");
+        if(window.innerWidth > 768) {
+            player_el.css("width", window.innerWidth - 80 + "px");
+        } else {
+            player_el.css("width", window.innerWidth - 30 + "px");
+        }
         player_el.css("height", ((window.innerWidth - 20) / 1.77) + "px");
         $("#time_elapsed").css("margin-left", "0");
         $("#sidebar").attr("hidden", "hidden");
