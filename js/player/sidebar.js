@@ -142,6 +142,7 @@ function setFullscreen(is_fullscreen) {
         $("#no_video").addClass("fullscreen");
         $(".score_wrapper_top").attr("hidden", "hidden");
         $(".score_wrapper_bottom").removeAttr("hidden");
+        $("#room-description-wrapper").hide();
     } else {
         var arrow_gui = $(".fa-compress");
         arrow_gui.addClass("fa-expand");
@@ -152,6 +153,7 @@ function setFullscreen(is_fullscreen) {
         $(".score_wrapper_top").removeAttr("hidden");
         $("#no_video").removeClass("fullscreen");
         $(".score_wrapper_bottom").attr("hidden", "hidden");
+        $("#room-description-wrapper").show();
     }
     fullscreen = is_fullscreen;
     autosizePlayer();

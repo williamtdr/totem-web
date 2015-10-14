@@ -298,8 +298,6 @@ h3 {
     background-color: rgba(34, 47, 63, 0.60);
     color: white;
     width: 300px;
-    position: absolute;
-    right: 0;
     height: calc(100% - 270px);
     max-height: 800px;
     top: 250px;
@@ -381,8 +379,6 @@ h3 {
 }
 
 #room-info {
-    position: absolute;
-    right: 0;
     top: 65px;
     color: white;
 }
@@ -420,6 +416,7 @@ h3 {
 
 #in-room {
     text-align: right;
+    margin-bottom: 20px;
 }
 
 .subcaption {
@@ -537,10 +534,7 @@ h3 {
 
 #sidebar {
     float: right;
-    position: absolute;
-    right: 50px;
     width: 300px;
-    top: 0;
     height: 100%;
 }
 
