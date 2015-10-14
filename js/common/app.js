@@ -7,7 +7,7 @@ function switchRoom(destination) {
     }));
     $("#now_playing").removeAttr("hidden");
     $(".active").removeClass("active");
-    $("#nav_room").addClass("active");
+    $(".nav_room").addClass("active");
     $("#room_list").attr("hidden", "hidden");
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
@@ -83,7 +83,7 @@ function tryPassword(password, display_errors) {
                     force_room = true;
                     $("#now_playing").removeAttr("hidden");
                     $(".active").removeClass("active");
-                    $("#nav_room").addClass("active");
+                    $(".nav_room").addClass("active");
                     $("#room_list").attr("hidden", "hidden");
                     $("#now_playing_content").removeAttr("hidden");
                     $("#now_playing_placeholder").attr("hidden", "hidden");
