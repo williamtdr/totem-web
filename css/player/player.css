@@ -126,8 +126,8 @@ h3 {
     font-size: 1.5em;
 }
 
-#no_video.fullscreen {
-    padding-left: 30px;
+#no_video {
+    position: absolute;
 }
 
 .top {
@@ -305,8 +305,6 @@ h3 {
 }
 
 #chat-textbox {
-    bottom: 5px;
-    position: absolute;
     width: 298px;
 }
 
@@ -325,7 +323,7 @@ h3 {
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 5px;
-    height: calc(100% - 60px);
+    height: calc(100% - 45px);
     overflow-y: scroll;
     font-size: 0.8em;
     overflow-x: hidden;
@@ -478,7 +476,7 @@ h3 {
 .small-header {
     color: #BDC3C7;
     font-size: 1.5em;
-    max-width: 400px;
+    max-width: 500px;
     padding-right: 30px;
 }
 
