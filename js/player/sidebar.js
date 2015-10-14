@@ -101,24 +101,27 @@ function autosizePlayer() {
         $("div[role=\"navigation\"]").attr("hidden", "hidden");
         player_el.css("width", window.innerWidth - 20 + "px");
         player_el.css("height", ((window.innerWidth - 20) / 1.77) + "px");
-        player_el.css("margin-left", "0");
         $("#time_elapsed").css("margin-left", "0");
         $("#sidebar").attr("hidden", "hidden");
         $("#no_video").removeClass("fullscreen");
+        $("#toggles").css("padding-left", "10px");
         $("#no_video").css("margin-left", "5px");
         $(".big-header").css("margin-top", "0");
     } else {
         $("#mobile_navigation_emblems").attr("hidden", "hidden");
         $("div[role=\"navigation\"]").removeAttr("hidden");
-        player_el.css("margin-left", "10px");
-        player_el.css("padding-left", "10px");
-        $("#time_elapsed").css("margin-left", "10px");
+        $("#time_elapsed").css("margin-left", "0");
+        $("#toggles").css("padding-left", "0");
         $("#sidebar").removeAttr("hidden");
         $("#no_video").css("margin-left", "5px");
         $(".big-header").css("margin-top", "30px");
         if(fullscreen) {
-            player_el.css("height", ((window.innerWidth - 400) / 1.77) + "px");
-            player_el.css("width", window.innerWidth - 400 + "px");
+            player_el.css("height", Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) + "px");
+            if(Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) == (window.innerHeight - 250)) {
+                player_el.css("width", ((window.innerHeight - 250) * 1.77) + "px");
+            } else {
+                player_el.css("width", window.innerWidth - 400 + "px");
+            }
         } else {
             player_el.css("width", "640px");
             player_el.css("height", "390px");
