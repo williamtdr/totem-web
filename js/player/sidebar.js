@@ -94,13 +94,16 @@ function resize() {
 }
 
 function autosizePlayer() {
+    var player_el = $("#player");
     if(fullscreen) {
-        $("#player").css("height", ((window.innerWidth - 400) / 1.77) + "px");
-        $("#player").css("width", window.innerWidth - 400 + "px");
+        player_el.css("height", ((window.innerWidth - 400) / 1.77) + "px");
+        player_el.css("width", window.innerWidth - 400 + "px");
     } else {
-        $("#player").css("width", "640px");
-        $("#player").css("height", "390px");
+        player_el.css("width", "640px");
+        player_el.css("height", "390px");
     }
+
+    $("#main_content").css("width", player_el.width());
 }
 
 function setFullscreen(is_fullscreen) {
