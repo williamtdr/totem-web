@@ -298,7 +298,7 @@ h3 {
     background-color: rgba(34, 47, 63, 0.60);
     color: white;
     width: 300px;
-    height: calc(100% - 270px);
+    height: calc(100% - 320px);
     max-height: 800px;
     top: 250px;
     min-height: 300px;

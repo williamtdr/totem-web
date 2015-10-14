@@ -96,15 +96,21 @@ function resize() {
 function autosizePlayer() {
     var player_el = $("#player");
 
-    if(window.innerWidth <= 800) {
+    if(window.innerWidth <= 500) {
+        $("#now_playing_content").removeClass("container");
+    } else {
+        $("#now_playing_content").addClass("container");
+    }
+
+    if(window.innerWidth <= 768) {
         $("#mobile_navigation_emblems").removeAttr("hidden");
         $("div[role=\"navigation\"]").attr("hidden", "hidden");
         if(window.innerWidth > 768) {
-            player_el.css("width", window.innerWidth - 80 + "px");
+            player_el.css("width", $("#now_playing_content").width() - 50 + "px");
         } else {
-            player_el.css("width", window.innerWidth - 30 + "px");
+            player_el.css("width", $("#now_playing_content").width() + "px");
         }
-        player_el.css("height", ((window.innerWidth - 20) / 1.77) + "px");
+        player_el.css("height", ($("#now_playing_content").width() / 1.77) + "px");
         $("#time_elapsed").css("margin-left", "0");
         $("#sidebar").attr("hidden", "hidden");
         $("#no_video").removeClass("fullscreen");
@@ -120,11 +126,11 @@ function autosizePlayer() {
         $("#no_video").css("margin-left", "5px");
         $(".big-header").css("margin-top", "30px");
         if(fullscreen) {
-            player_el.css("height", Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) + "px");
-            if(Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) == (window.innerHeight - 250)) {
-                player_el.css("width", ((window.innerHeight - 320) * 1.77) + "px");
+            player_el.css("height", Math.min((($("#now_playing_content").width() - 400) / 1.77), ($("#now_playing_content").height() - 250)) + "px");
+            if(Math.min((($("#now_playing_content").width() - 400) / 1.77), ($("#now_playing_content").height() - 250)) == ($("#now_playing_content").height() - 250)) {
+                player_el.css("width", (($("#now_playing_content").height() - 320) * 1.77) + "px");
             } else {
-                player_el.css("width", window.innerWidth - 400 + "px");
+                player_el.css("width", $("#now_playing_content").width() - 400 + "px");
             }
         } else {
             player_el.css("width", "640px");
