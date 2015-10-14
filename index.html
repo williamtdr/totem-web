@@ -155,7 +155,7 @@
 				</div>
 				<div class="current-dj-wrapper" hidden="hidden">
 					<span class="current-dj-caption">Current DJ: </span>
-					<span id="current-dj"></span>
+					<span class="current-dj"></span>
 				</div>
 			</div>
 			<div id="time_elapsed">
@@ -166,6 +166,7 @@
 			<div id="player" class="youtube-player"></div>
 			<div id="video_options">
 				<div class="score_wrapper score_wrapper_bottom">
+					<span class="current-dj dj_display_bottom"></span>
 					<div class="score-positive-wrapper" onclick="vote(1)">
 						<i class="fa fa-chevron-up"></i>
 						<div class="score-positive score"></div>
@@ -193,9 +194,10 @@
 			<span class="big-header">Awkward silence...</span>
 			<div class="small-header">No song is in the queue to play. You can add one from your collection using the sidebar to the right.</div>
 		</div>
-		<div id="room-info">
-			<div id="in-room">
-				<span id="room-title" class="room-title"></span>
+		<div id="sidebar">
+			<div id="room-info">
+				<div id="in-room">
+					<span id="room-title" class="room-title"></span>
 				<span id="room-description-wrapper">
 					<span id="room-description">
 
@@ -208,23 +210,24 @@
 					<span id="room-queue" class="focused"></span>
 					<span class="subcaption subcaption-queue">in queue</span>
 				</span>
+				</div>
+				<div id="manual" hidden="hidden">
+					<span id="playlist-title"></span>
+					<span id="add-to-queue" class="manual-option"><a href="#"><i class="fa fa-plus"></i> add song to queue</a></span>
+					<span id="manual-notice" class="manual-option"><a href="#" onclick="switchMode(0)"><i class="fa fa-chevron-left"></i> back to <span class="room-title"></span></a></span>
+				</div>
 			</div>
-			<div id="manual" hidden="hidden">
-				<span id="playlist-title"></span>
-				<span id="add-to-queue" class="manual-option"><a href="#"><i class="fa fa-plus"></i> add song to queue</a></span>
-				<span id="manual-notice" class="manual-option"><a href="#" onclick="switchMode(0)"><i class="fa fa-chevron-left"></i> back to <span class="room-title"></span></a></span>
-			</div>
-		</div>
-		<div id="roomlist">
-
-		</div>
-		<div id="chat">
-			<div id="chat-text">
+			<div id="roomlist">
 
 			</div>
-			<div id="new-messages-indicator" hidden="hidden">new messages below</div>
-			<div id="chat-textbox" class="input-group">
+			<div id="chat">
+				<div id="chat-text">
 
+				</div>
+				<div id="new-messages-indicator" hidden="hidden">new messages below</div>
+				<div id="chat-textbox" class="input-group">
+
+				</div>
 			</div>
 		</div>
 	</div>

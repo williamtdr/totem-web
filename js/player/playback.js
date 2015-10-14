@@ -338,7 +338,7 @@ function finishInit() {
                     setSongInfo(data.song.name, data.song.artist);
                     setScore(data.score.positive, data.score.negative);
                     $("#current-dj-wrapper").removeAttr("hidden");
-                    $("#current-dj").html(data.current_dj);
+                    $(".current-dj").html(data.current_dj);
 
                     last_title = data.song.name;
                     last_artist = data.song.artist;
@@ -398,7 +398,7 @@ function finishInit() {
                     });
 
                     $("#current-dj-wrapper").removeAttr("hidden");
-                    $("#current-dj").html(data.dj);
+                    $(".current-dj").html(data.dj);
                     $("#main_content").removeAttr("hidden");
                     $("#no_video").attr("hidden", "hidden");
                     last_title = data.song.name;

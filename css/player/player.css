@@ -49,6 +49,7 @@ h3 {
 
 #toggles {
     margin-top: 5px;
+    padding-left: 10px;
 }
 
 .score_wrapper_bottom > div {
@@ -62,7 +63,7 @@ h3 {
 }
 
 #video_options {
-    margin-top: 10px;
+    margin-top: 15px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -125,6 +126,10 @@ h3 {
     font-size: 1.5em;
 }
 
+#no_video.fullscreen {
+    padding-left: 30px;
+}
+
 .top {
     z-index: 10;
 }
@@ -174,6 +179,7 @@ h3 {
 
 #main_content {
     float: left;
+    transition: .25s;
 }
 
 .video-option {
@@ -291,10 +297,10 @@ h3 {
     color: white;
     width: 300px;
     position: absolute;
-    right: 50px;
-    height: 60%;
+    right: 0;
+    height: calc(100% - 270px);
     max-height: 800px;
-    top: 240px;
+    top: 250px;
     min-height: 300px;
 }
 
@@ -378,7 +384,7 @@ h3 {
 
 #room-info {
     position: absolute;
-    right: 50px;
+    right: 0;
     top: 65px;
     color: white;
 }
@@ -504,10 +510,27 @@ h3 {
     font-size: 0.8em;
 }
 
-#current-dj {
+.current-dj {
     color: white;
     font-size: 1.2em;
     margin-left: 5px;
+}
+
+.dj_display_bottom {
+    float: right;
+    font-size: 0.8em;
+    margin-left: 20px;
+    padding-top: 2px;
+    margin-right: 3px;
+}
+
+#sidebar {
+    float: right;
+    position: absolute;
+    right: 50px;
+    width: 300px;
+    top: 0;
+    height: 100%;
 }
 
 /* Let's get this party started */
@@ -569,22 +592,8 @@ h1, h2, h3 {
         margin-right: 20px;
     }
 
-    #room-info {
-        right: 10px;
-    }
-
-    #chat {
-        right: 10px;
-    }
-}
-
-@media(min-height: 768px) {
-    #room-info {
-        top: 75px;
-    }
-
-    #chat {
-        top: 250px;
+    #sidebar {
+        right: 30px;
     }
 }
 
@@ -779,7 +788,7 @@ h1, h2, h3 {
     color: white;
     width: 300px;
     position: absolute;
-    right: 50px;
+    right: 0;
     height: 60%;
     max-height: 800px;
     top: 249px;
@@ -814,6 +823,10 @@ h1, h2, h3 {
     margin-right: 2px;
 }
 
+.fullscreen > .song-title-container {
+    padding-left: 10px;
+}
+
 .fullscreen > .song-title-container > h1 {
     font-size: 30px;
     margin-top: 0;
@@ -825,7 +838,17 @@ h1, h2, h3 {
     margin-bottom: 15px;
 }
 
+.fullscreen > #time_elapsed {
+    margin-left: 10px;
+}
+
 .fullscreen.player-container {
     margin-left: 10px;
     padding-top: 70px !important;
+    margin-right: 0 !important;
+}
+
+#player {
+    margin-top: 5px;
+    margin-left: 10px;
 }

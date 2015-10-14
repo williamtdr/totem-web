@@ -68,12 +68,14 @@ function sidebarInit() {
     }
 
     $(window).resize(function () {
-        if(window.innerWidth <= 768) {
+        if(window.innerWidth <= 1333) {
             setFullscreen(true);
-            $("#fullscreen-toggle").attr("hidden", "hidden");
+            $("#fullscreen-toggle").hide();
         } else {
-            $("#fullscreen-toggle").removeAttr("hidden");
+            $("#fullscreen-toggle").show();
         }
+
+        autosizePlayer();
     });
 
     $("#fullscreen-toggle").click(function() {
@@ -85,6 +87,16 @@ function sidebarInit() {
     });
 }
 
+function autosizePlayer() {
+    if(fullscreen) {
+        $("#player").css("height", ((window.innerWidth - 400) / 1.77) + "px");
+        $("#player").css("width", window.innerWidth - 400 + "px");
+    } else {
+        $("#player").css("width", "640px");
+        $("#player").css("height", "390px");
+    }
+}
+
 function setFullscreen(is_fullscreen) {
     if(is_fullscreen) {
         var arrow_gui = $(".fa-expand");
@@ -93,6 +105,9 @@ function setFullscreen(is_fullscreen) {
         window.localStorage.setItem("is_fullscreen", true);
         $("#main_content").addClass("fullscreen");
         $(".player-container").addClass("fullscreen");
+        $("#no_video").addClass("fullscreen");
+        $(".score_wrapper_top").attr("hidden", "hidden");
+        $(".score_wrapper_bottom").removeAttr("hidden");
     } else {
         var arrow_gui = $(".fa-compress");
         arrow_gui.addClass("fa-expand");
@@ -100,8 +115,12 @@ function setFullscreen(is_fullscreen) {
         window.localStorage.setItem("is_fullscreen", false);
         $("#main_content").removeClass("fullscreen");
         $(".player-container").removeClass("fullscreen");
+        $(".score_wrapper_top").removeAttr("hidden");
+        $("#no_video").removeClass("fullscreen");
+        $(".score_wrapper_bottom").attr("hidden", "hidden");
     }
     fullscreen = is_fullscreen;
+    autosizePlayer();
 }
 
 function loadPlaylistItems(playlistId) {
@@ -178,12 +197,6 @@ function returnToPlaylistList() {
     $(".sidebar-playlist-list").removeAttr("hidden");
     $(".sidebar-playlist-items").attr("hidden", "hidden");
     $(".sidebar-search").attr("hidden", "hidden");
-    $(".sidebar").animate({
-        width: "300px"
-    }, 250);
-    $(".emblem-history").animate({
-        "margin-left": "50px"
-    }, 250);
 }
 
 function showSearch() {
@@ -197,12 +210,6 @@ function showSearch() {
 }
 
 function search(text) {
-    $(".sidebar").animate({
-        width: "420px"
-    }, 250);
-    $(".emblem-history").animate({
-        "margin-left": "100px"
-    }, 250);
     $(".sidebar-search").attr("hidden", "hidden");
     $(".sidebar-playlist-items").removeAttr("hidden");
     $(".playlist-list-content").empty();
