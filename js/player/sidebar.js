@@ -118,7 +118,7 @@ function autosizePlayer() {
         if(fullscreen) {
             player_el.css("height", Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) + "px");
             if(Math.min(((window.innerWidth - 400) / 1.77), (window.innerHeight - 250)) == (window.innerHeight - 250)) {
-                player_el.css("width", ((window.innerHeight - 250) * 1.77) + "px");
+                player_el.css("width", ((window.innerHeight - 320) * 1.77) + "px");
             } else {
                 player_el.css("width", window.innerWidth - 400 + "px");
             }
@@ -196,9 +196,6 @@ var muted = false;
 var volumeBeforeMute = 50;
 
 function switchSidebar(destination) {
-    $(".sidebar").animate({
-        width: "300px"
-    }, 250);
     if(sidebar_state == destination) return;
 
     $(".sidebar-chat").attr("hidden", "hidden");
