@@ -6,11 +6,16 @@ function sidebarInit() {
     });
 
     $(".chat_send").click(function() {
-        server.send(JSON.stringify({
-            event: "chat",
-            data: $(".chat_message").val(),
-            key: authkey
-        }));
+        $(".chat_message").each(function(index, e) {
+            var message = $(e).val();
+            if(message.length > 0) {
+                server.send(JSON.stringify({
+                    event: "chat",
+                    data: message,
+                    key: authkey
+                }));
+            }
+        });
         $(".chat_message").val("");
     });
 
