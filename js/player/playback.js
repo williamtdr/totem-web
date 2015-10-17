@@ -424,6 +424,9 @@ function finishInit() {
                         timeout: 5000
                     });
                 }
+                 if (chatmessage.match("[ ]*")) {
+                    console.log("only spaces")
+                 }
                  if (chatmessage.indexOf("*") > -1) {
                     var asterisktally = 0;
                     var msplit = chatmessage.split("");
@@ -490,8 +493,11 @@ function finishInit() {
                 if(sender == display_name.toLowerCase()) {
                     var senderclass = senderclass + " chat-you ";
                 }
+                chatmessage = chatmessage.trim()
+                if (chatmessage.length == 0) { } else {
                 $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
                 $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
+                }
         }
     };
 
