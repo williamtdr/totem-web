@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>404</title>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
+	<title>404</title>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
 </head>
 <style>
-    body {
-        margin: 0 auto;
-        font-family: 'Raleway', sans-serif;
+	body {
+		margin: 0 auto;
+		font-family: 'Raleway', sans-serif;
 		background: #000000;
 		text-align: center;
 		color: #ECF0F1;
 		margin-top: 50px;
 		line-height: 1.5;
-    }
+	}
 
 	a {
 		color: #00bdef;
@@ -35,15 +35,17 @@
 	}
 </style>
 <body>
-	<div id="main_content">
-		<h1>404</h1>
-		<p>
-			This page isn't on the <b>totem.fm</b> domain.
-			<br>
-			Click <a href="http://totem.fm">here</a> to go back to the homepage or wait <b><span id="time">10</span></b> seconds.
-		</p>
-	</div>
-	<div id="background_layer"></div>
+<div id="main_content">
+	<h1>404</h1>
+
+	<p>
+		This page isn't on the <b>totem.fm</b> domain.
+		<br>
+		Click <a href="http://totem.fm">here</a> to go back to the homepage or wait <b><span id="time">10</span></b>
+		seconds.
+	</p>
+</div>
+<div id="background_layer"></div>
 </body>
 <script>
 	function getRandomInt(min, max) {
@@ -51,18 +53,18 @@
 	}
 
 	document.getElementById("background_layer").setAttribute('style', 'background: url("http://d35y9swri9q567.cloudfront.net/background/' + getRandomInt(1, 572) + '.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;');
-    var time = 10;
-    var timer = document.getElementById("time");
-    function countDown() {
-        setTimeout(function(){ 
-            time = time -1;
-            if(time == 0) {
-                location.href = "http://totem.fm";
-            }
-            timer.innerHTML = time;
-            countDown();
-        }, 1000);
-    }
-    countDown();
+	var time = 10;
+	var timer = document.getElementById("time");
+	function countDown() {
+		setTimeout(function () {
+			time = time - 1;
+			if (time == 0) {
+				location.href = "http://totem.fm";
+			}
+			timer.innerHTML = time;
+			countDown();
+		}, 1000);
+	}
+	countDown();
 </script>
 </html>

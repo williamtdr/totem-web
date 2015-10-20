@@ -41,10 +41,10 @@
                 var resizeTimeout,
                     that = this;
 
-                $(window).on('resize.modal', function(){
+                $(window).on('resize.modal', function () {
                     resizeTimeout && clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(function(){
-                        for (var i = 0; i < that.stack.length; i++){
+                    resizeTimeout = setTimeout(function () {
+                        for (var i = 0; i < that.stack.length; i++) {
                             that.stack[i].isShown && that.stack[i].layout();
                         }
                     }, 10);
@@ -53,7 +53,7 @@
         },
 
         createModal: function (element, options) {
-            $(element).modal($.extend({ manager: this }, options));
+            $(element).modal($.extend({manager: this}, options));
         },
 
         appendModal: function (modal) {
@@ -63,7 +63,7 @@
 
             modal.$element.on('show.modalmanager', targetIsSelf(function (e) {
 
-                var showModal = function(){
+                var showModal = function () {
                     modal.isShown = true;
 
                     var transition = $.support.transition && modal.$element.hasClass('fade');
@@ -114,13 +114,17 @@
                 // handle the case when a modal may have been removed from the dom before this callback executes
                 if (!modal.$element.parent().length) {
                     that.destroyModal(modal);
-                } else if (modal.$backdrop){
+                } else if (modal.$backdrop) {
                     var transition = $.support.transition && modal.$element.hasClass('fade');
 
                     // trigger a relayout due to firebox's buggy transition end event
-                    if (transition) { modal.$element[0].offsetWidth; }
+                    if (transition) {
+                        modal.$element[0].offsetWidth;
+                    }
                     $.support.transition && modal.$element.hasClass('fade') ?
-                        modal.$backdrop.one($.support.transition.end, function () { modal.destroy(); }) :
+                        modal.$backdrop.one($.support.transition.end, function () {
+                            modal.destroy();
+                        }) :
                         modal.destroy();
                 } else {
                     modal.destroy();
@@ -135,7 +139,7 @@
 
         getOpenModals: function () {
             var openModals = [];
-            for (var i = 0; i < this.stack.length; i++){
+            for (var i = 0; i < this.stack.length; i++) {
                 if (this.stack[i].isShown) openModals.push(this.stack[i]);
             }
 
@@ -149,7 +153,7 @@
         setFocus: function () {
             var topModal;
 
-            for (var i = 0; i < this.stack.length; i++){
+            for (var i = 0; i < this.stack.length; i++) {
                 if (this.stack[i].isShown) topModal = this.stack[i];
             }
 
@@ -167,7 +171,7 @@
 
             this.$element.toggleClass('modal-open', hasOpenModal);
 
-            if (!hasOpenModal){
+            if (!hasOpenModal) {
                 this.$element.removeClass('page-overflow');
             }
 
@@ -181,7 +185,7 @@
         },
 
         getIndexOfModal: function (modal) {
-            for (var i = 0; i < this.stack.length; i++){
+            for (var i = 0; i < this.stack.length; i++) {
                 if (modal === this.stack[i]) return i;
             }
         },
@@ -189,7 +193,7 @@
         replace: function (callback) {
             var topModal;
 
-            for (var i = 0; i < this.stack.length; i++){
+            for (var i = 0; i < this.stack.length; i++) {
                 if (this.stack[i].isShown) topModal = this.stack[i];
             }
 
@@ -198,7 +202,7 @@
                 topModal.$backdrop = null;
 
                 callback && topModal.$element.one('hidden',
-                    targetIsSelf( $.proxy(callback, this) ));
+                    targetIsSelf($.proxy(callback, this)));
 
                 topModal.hide();
             } else if (callback) {
@@ -264,7 +268,7 @@
 
                 modal.$backdrop = this.createBackdrop(animate, modal.options.backdropTemplate);
 
-                modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getOpenModals().length ));
+                modal.$backdrop.css('z-index', getzIndex('backdrop', this.getOpenModals().length));
 
                 if (doAnimate) modal.$backdrop[0].offsetWidth; // force reflow
 
@@ -283,8 +287,10 @@
 
                 var that = this;
 
-                $.support.transition && modal.$element.hasClass('fade')?
-                    modal.$backdrop.one($.support.transition.end, function () { that.removeBackdrop(modal) }) :
+                $.support.transition && modal.$element.hasClass('fade') ?
+                    modal.$backdrop.one($.support.transition.end, function () {
+                        that.removeBackdrop(modal)
+                    }) :
                     that.removeBackdrop(modal);
 
             } else if (callback) {
@@ -292,7 +298,7 @@
             }
         },
 
-        removeSpinner: function(){
+        removeSpinner: function () {
             this.$spinner && this.$spinner.remove();
             this.$spinner = null;
             this.isLoading = false;
@@ -305,7 +311,8 @@
         },
 
         loading: function (callback) {
-            callback = callback || function () { };
+            callback = callback || function () {
+            };
 
             this.$element
                 .toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
@@ -343,7 +350,9 @@
 
                 var that = this;
                 $.support.transition ?
-                    this.$backdropHandle.one($.support.transition.end, function () { that.removeLoading() }) :
+                    this.$backdropHandle.one($.support.transition.end, function () {
+                        that.removeLoading()
+                    }) :
                     that.removeLoading();
 
             } else if (callback) {
@@ -362,7 +371,7 @@
 
         return function (type, pos) {
 
-            if (typeof zIndexFactor === 'undefined'){
+            if (typeof zIndexFactor === 'undefined') {
                 var $baseModal = $('<div class="modal hide" />').appendTo('body'),
                     $baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body');
 
@@ -383,9 +392,9 @@
     // make sure the event target is the modal itself in order to prevent
     // other components such as tabsfrom triggering the modal manager.
     // if Boostsrap namespaced events, this would not be needed.
-    function targetIsSelf(callback){
+    function targetIsSelf(callback) {
         return function (e) {
-            if (e && this === e.target){
+            if (e && this === e.target) {
                 return callback.apply(this, arguments);
             }
         }

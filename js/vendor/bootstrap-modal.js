@@ -109,12 +109,12 @@
             var prop = this.options.height ? 'height' : 'max-height',
                 value = this.options.height || this.options.maxHeight;
 
-            if (this.options.width){
+            if (this.options.width) {
                 this.$element.css('width', this.options.width);
 
                 var that = this;
                 this.$element.css('margin-left', function () {
-                    if (/%/ig.test(that.options.width)){
+                    if (/%/ig.test(that.options.width)) {
                         return -(parseInt(that.options.width) / 2) + '%';
                     } else {
                         return -($(this).width() / 2) + 'px';
@@ -129,7 +129,7 @@
                 .css('overflow', '')
                 .css(prop, '');
 
-            if (value){
+            if (value) {
                 this.$element.find('.modal-body')
                     .css('overflow', 'auto')
                     .css(prop, value);
@@ -153,24 +153,26 @@
 
             if (this.isShown && this.options.consumeTab) {
                 this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function (e) {
-                    if (e.keyCode && e.keyCode == 9){
+                    if (e.keyCode && e.keyCode == 9) {
                         var elements = [],
                             tabindex = Number($(this).data('tabindex'));
 
                         that.$element.find('[data-tabindex]:enabled:visible:not([readonly])').each(function (ev) {
                             elements.push(Number($(this).data('tabindex')));
                         });
-                        elements.sort(function(a,b){return a-b});
+                        elements.sort(function (a, b) {
+                            return a - b
+                        });
 
                         var arrayPos = $.inArray(tabindex, elements);
-                        if (!e.shiftKey){
-                            arrayPos < elements.length-1 ?
-                                that.$element.find('[data-tabindex='+elements[arrayPos+1]+']').focus() :
-                                that.$element.find('[data-tabindex='+elements[0]+']').focus();
+                        if (!e.shiftKey) {
+                            arrayPos < elements.length - 1 ?
+                                that.$element.find('[data-tabindex=' + elements[arrayPos + 1] + ']').focus() :
+                                that.$element.find('[data-tabindex=' + elements[0] + ']').focus();
                         } else {
                             arrayPos == 0 ?
-                                that.$element.find('[data-tabindex='+elements[elements.length-1]+']').focus() :
-                                that.$element.find('[data-tabindex='+elements[arrayPos-1]+']').focus();
+                                that.$element.find('[data-tabindex=' + elements[elements.length - 1] + ']').focus() :
+                                that.$element.find('[data-tabindex=' + elements[arrayPos - 1] + ']').focus();
                         }
 
                         e.preventDefault();
@@ -211,7 +213,7 @@
             var prop = this.options.height ? 'height' : 'max-height';
             var value = this.options.height || this.options.maxHeight;
 
-            if (value){
+            if (value) {
                 this.$element.find('.modal-body')
                     .css('overflow', '')
                     .css(prop, '');
@@ -229,7 +231,8 @@
         },
 
         loading: function (callback) {
-            callback = callback || function () {};
+            callback = callback || function () {
+            };
 
             var animate = this.$element.hasClass('fade') ? 'fade' : '';
 
@@ -254,8 +257,10 @@
                 this.$loading.removeClass('in');
 
                 var that = this;
-                $.support.transition && this.$element.hasClass('fade')?
-                    this.$loading.one($.support.transition.end, function () { that.removeLoading() }) :
+                $.support.transition && this.$element.hasClass('fade') ?
+                    this.$loading.one($.support.transition.end, function () {
+                        that.removeLoading()
+                    }) :
                     that.removeLoading();
 
             } else if (callback) {
@@ -271,10 +276,10 @@
             $focusElem.focus();
         },
 
-        attention: function (){
+        attention: function () {
             // NOTE: transitionEnd with keyframes causes odd behaviour
 
-            if (this.options.attentionAnimation){
+            if (this.options.attentionAnimation) {
                 this.$element
                     .removeClass('animated')
                     .removeClass(this.options.attentionAnimation);
@@ -360,11 +365,11 @@
      * ============== */
 
     $(function () {
-        $(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+        $(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
             var $this = $(this),
                 href = $this.attr('href'),
                 $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7
-                option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
+                option = $target.data('modal') ? 'toggle' : $.extend({remote: !/#/.test(href) && href}, $target.data(), $this.data());
 
             e.preventDefault();
             $target

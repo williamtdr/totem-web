@@ -228,8 +228,7 @@ h3 {
     color: #f5f5f5;
 }
 
-
-.sidebar-playlist> li {
+.sidebar-playlist > li {
     background: transparent;
     text-align: left;
     border: 0;
@@ -542,7 +541,7 @@ h3 {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
@@ -552,8 +551,9 @@ h3 {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: rgba(25, 48, 65, 0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(25, 38, 55, 0.4);
 }
@@ -581,14 +581,14 @@ h1, h2, h3 {
     transition: .25s;
 }
 
-@media(max-width: 1700px) {
+@media (max-width: 1700px) {
     .player-container {
         margin-left: 100px;
         margin-right: 100px;
     }
 }
 
-@media(max-width: 1250px) {
+@media (max-width: 1250px) {
     .player-container {
         margin-left: 20px;
         margin-right: 20px;
@@ -610,6 +610,7 @@ h1, h2, h3 {
 .chat-you {
     color: #F1C40F;
 }
+
 .chat-beta {
     color: #1ABC9C !important;
 }
@@ -758,13 +759,13 @@ h1, h2, h3 {
     color: #E74C3C;
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     #landing_screenshot {
         width: 300px;
     }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
     #landing_page {
         padding: 10px;
     }
@@ -785,7 +786,7 @@ h1, h2, h3 {
 
 /* User List */
 #roomlist {
-    display:none;
+    display: none;
     background-color: rgba(26, 205, 175, 0.4);
     color: white;
     width: 300px;
@@ -854,7 +855,7 @@ h1, h2, h3 {
     margin-top: 5px;
 }
 
-@media(max-width: 460px) {
+@media (max-width: 460px) {
     .current-dj {
         display: none;
     }

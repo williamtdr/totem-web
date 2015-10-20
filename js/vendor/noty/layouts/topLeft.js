@@ -1,39 +1,39 @@
 $.noty.layouts.topLeft = {
-    name     : 'topLeft',
-    options  : { // overrides options
+    name: 'topLeft',
+    options: { // overrides options
 
     },
     container: {
-        object  : '<ul id="noty_topLeft_layout_container" />',
+        object: '<ul id="noty_topLeft_layout_container" />',
         selector: 'ul#noty_topLeft_layout_container',
-        style   : function() {
+        style: function () {
             $(this).css({
-                top          : 20,
-                left         : 20,
-                position     : 'fixed',
-                width        : '310px',
-                height       : 'auto',
-                margin       : 0,
-                padding      : 0,
+                top: 20,
+                left: 20,
+                position: 'fixed',
+                width: '310px',
+                height: 'auto',
+                margin: 0,
+                padding: 0,
                 listStyleType: 'none',
-                zIndex       : 10000000
+                zIndex: 10000000
             });
 
-            if(window.innerWidth < 600) {
+            if (window.innerWidth < 600) {
                 $(this).css({
                     left: 5
                 });
             }
         }
     },
-    parent   : {
-        object  : '<li />',
+    parent: {
+        object: '<li />',
         selector: 'li',
-        css     : {}
+        css: {}
     },
-    css      : {
+    css: {
         display: 'none',
-        width  : '310px'
+        width: '310px'
     },
-    addClass : ''
+    addClass: ''
 };

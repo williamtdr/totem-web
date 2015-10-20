@@ -9,9 +9,10 @@ button,
     cursor: pointer;
 }
 
-.no-pointer{
+.no-pointer {
     cursor: default;
 }
+
 div {
     cursor: default;
 }
@@ -61,6 +62,7 @@ div {
     font-size: 0.9em;
     margin-right: 10px;
 }
+
 .room-option-green {
     color: #1ABC9C;
 }
@@ -94,8 +96,8 @@ div[role="navigation"] {
 }
 
 .navigation_option.active {
-     border-bottom: 2px solid #BDC3C7;
- }
+    border-bottom: 2px solid #BDC3C7;
+}
 
 .btn-info {
     color: #fff;
@@ -109,8 +111,8 @@ div[role="navigation"] {
     line-height: 1.4;
     border: none;
     border-radius: 4px;
-    -webkit-transition: border .25s linear,color .25s linear,background-color .25s linear;
-    transition: border .25s linear,color .25s linear,background-color .25s linear;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -238,14 +240,14 @@ div[role="navigation"] {
     color: white;
 }
 
-@media(max-width: 990px) {
+@media (max-width: 990px) {
     .room-option {
         margin-top: 7px;
         margin-bottom: 5px;
     }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     .logo {
         display: none;
     }
@@ -264,7 +266,7 @@ div[role="navigation"] {
     }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
     .site_navigation {
         padding-left: 10px;
         padding-right: 20px;

@@ -13,7 +13,7 @@ $.noty.themes.bootstrapTheme = {
             top: 0
         }
     },
-    style: function() {
+    style: function () {
 
         var containerSelector = this.options.layout.container.selector;
         $(containerSelector).addClass('list-group');
@@ -21,23 +21,24 @@ $.noty.themes.bootstrapTheme = {
         this.$closeButton.append('<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>');
         this.$closeButton.addClass('close');
 
-        this.$bar.addClass( "list-group-item" ).css('padding', '0px');
+        this.$bar.addClass("list-group-item").css('padding', '0px');
 
         switch (this.options.type) {
-            case 'alert': case 'notification':
-                this.$bar.addClass( "list-group-item-info" );
+            case 'alert':
+            case 'notification':
+                this.$bar.addClass("list-group-item-info");
                 break;
             case 'warning':
-                this.$bar.addClass( "list-group-item-warning" );
+                this.$bar.addClass("list-group-item-warning");
                 break;
             case 'error':
-                this.$bar.addClass( "list-group-item-danger" );
+                this.$bar.addClass("list-group-item-danger");
                 break;
             case 'information':
                 this.$bar.addClass("list-group-item-info");
                 break;
             case 'success':
-                this.$bar.addClass( "list-group-item-success" );
+                this.$bar.addClass("list-group-item-success");
                 break;
         }
 
@@ -51,8 +52,10 @@ $.noty.themes.bootstrapTheme = {
         });
     },
     callback: {
-        onShow: function() {  },
-        onClose: function() {  }
+        onShow: function () {
+        },
+        onClose: function () {
+        }
     }
 };
 

@@ -1,32 +1,38 @@
 $.noty.layouts.centerRight = {
-    name     : 'centerRight',
-    options  : { // overrides options
+    name: 'centerRight',
+    options: { // overrides options
 
     },
     container: {
-        object  : '<ul id="noty_centerRight_layout_container" />',
+        object: '<ul id="noty_centerRight_layout_container" />',
         selector: 'ul#noty_centerRight_layout_container',
-        style   : function() {
+        style: function () {
             $(this).css({
-                right        : 20,
-                position     : 'fixed',
-                width        : '310px',
-                height       : 'auto',
-                margin       : 0,
-                padding      : 0,
+                right: 20,
+                position: 'fixed',
+                width: '310px',
+                height: 'auto',
+                margin: 0,
+                padding: 0,
                 listStyleType: 'none',
-                zIndex       : 10000000
+                zIndex: 10000000
             });
 
             // getting hidden height
-            var dupe = $(this).clone().css({visibility: "hidden", display: "block", position: "absolute", top: 0, left: 0}).attr('id', 'dupe');
+            var dupe = $(this).clone().css({
+                visibility: "hidden",
+                display: "block",
+                position: "absolute",
+                top: 0,
+                left: 0
+            }).attr('id', 'dupe');
             $("body").append(dupe);
             dupe.find('.i-am-closing-now').remove();
             dupe.find('li').css('display', 'block');
             var actual_height = dupe.height();
             dupe.remove();
 
-            if($(this).hasClass('i-am-new')) {
+            if ($(this).hasClass('i-am-new')) {
                 $(this).css({
                     top: ($(window).height() - actual_height) / 2 + 'px'
                 });
@@ -37,7 +43,7 @@ $.noty.layouts.centerRight = {
                 }, 500);
             }
 
-            if(window.innerWidth < 600) {
+            if (window.innerWidth < 600) {
                 $(this).css({
                     right: 5
                 });
@@ -45,14 +51,14 @@ $.noty.layouts.centerRight = {
 
         }
     },
-    parent   : {
-        object  : '<li />',
+    parent: {
+        object: '<li />',
         selector: 'li',
-        css     : {}
+        css: {}
     },
-    css      : {
+    css: {
         display: 'none',
-        width  : '310px'
+        width: '310px'
     },
-    addClass : ''
+    addClass: ''
 };
