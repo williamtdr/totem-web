@@ -32,14 +32,14 @@ in_queue = false;
 fullscreen = false;
 
 function togglePlayerVisibility() {
-    if(player_is_visible) {
+    if (player_is_visible) {
         $(".fa-eye").toggleClass("fa-eye-slash");
         $(".fa-eye").toggleClass("fa-eye");
 
         $('#player').animate({
             opacity: 0,
             height: '0px'
-        }, 500, function() {
+        }, 500, function () {
             $("#player").attr("hidden", "hidden");
         });
         player_is_visible = false;
@@ -67,7 +67,7 @@ function switchMode(new_mode) {
     mode = new_mode;
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
-    if(new_mode == 1) {
+    if (new_mode == 1) {
         $("#in-room").attr("hidden", "hidden");
         $("#manual").removeAttr("hidden");
         $("#score_wrapper").attr("hidden", "hidden");
@@ -95,13 +95,13 @@ function loadVideo(id, title, artist) {
 }
 
 function onPlayerReady(event) {
-    if(window.localStorage.getItem("volume") != undefined) {
+    if (window.localStorage.getItem("volume") != undefined) {
         player.setVolume(window.localStorage.getItem("volume"));
     } else {
         player.setVolume(50);
     }
 
-    $("#volume-slider").on('input', function(e) {
+    $("#volume-slider").on('input', function (e) {
         vol = $("#volume-slider").val();
         player.setVolume(vol);
         window.localStorage.setItem('volume', vol);
@@ -111,20 +111,20 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(event) {
-    if(event.data == 2) {
+    if (event.data == 2) {
         player.playVideo();
     }
 
     ctime = player.getCurrentTime();
     duration = player.getDuration();
     artist_display_selector = $(".artist_display");
-    if(artist_display_selector.html() == "") {
+    if (artist_display_selector.html() == "") {
         artist_display_selector.html(player.getVideoData().author);
         $("title").html($(".title_display").html() + " · " + player.getVideoData().author + " · Totem");
     }
 
-    if(event.data == 0) {
-        if((player.getCurrentTime() + 1) > player.getDuration()) {
+    if (event.data == 0) {
+        if ((player.getCurrentTime() + 1) > player.getDuration()) {
             $("#no_video").removeAttr("hidden");
             $("#main_content").attr("hidden", "hidden");
             nothing_playing = true;
@@ -179,12 +179,17 @@ function addCurrentSongToQueue() {
     loadVideoById(last_url_fragment, Math.floor(Date.now() / 1000) - started_at);
 }
 
-if(window.localStorage.getItem("hide_video") == "true") togglePlayerVisibility();
+if (window.localStorage.getItem("hide_video") == "true") togglePlayerVisibility();
 
 $("#volume-slider").val(window.localStorage.getItem("volume"));
 
-setInterval(function() {
-    $("#time_elapsed > div").css("width", (player.getCurrentTime() / player.getDuration()) * 100 + '%');
+setInterval(function () {
+    if (playerNotInitiated()) {
+        return false;
+    }
+
+    $("#time_elapsed > div")
+        .css("width", (player.getCurrentTime() / player.getDuration()) * 100 + '%');
 
     time_remaining = new Date((player.getDuration() - player.getCurrentTime()) * 1000);
     $("#time-remaining").html(time_remaining.getMinutes() + ":" + zeroPad(time_remaining.getSeconds(), 2));
@@ -200,7 +205,7 @@ function onYouTubeIframeAPIReady() {
 function loadVideoById(id, time) {
     $("#no_video").attr("hidden", "hidden");
     $("#main_content").removeAttr("hidden");
-    if(!player_initialized) {
+    if (!player_initialized) {
         player = new YT.Player('player', {
             height: '390',
             width: '640',
@@ -237,7 +242,7 @@ function loadVideoById(id, time) {
 }
 
 function setSongInfo(title, artist) {
-    if(mode == 0) {
+    if (mode == 0) {
         $("title").html(title + " · " + artist + " · " + room_name + " · Totem");
     } else {
         $("title").html(title + " · " + artist + " · Totem");
@@ -253,13 +258,13 @@ function setScore(positive, negative) {
 
 function vote(type) {
     $(".activated").removeClass("activated");
-    switch(type) {
+    switch (type) {
         case -1:
             $(".score-negative-wrapper").addClass("activated");
-        break;
+            break;
         case 1:
             $(".score-positive-wrapper").addClass("activated");
-        break;
+            break;
     }
     server.send(JSON.stringify({
         event: "vote",
@@ -269,34 +274,34 @@ function vote(type) {
 }
 
 function finishInit() {
-    server = new WebSocket('ws://server.totem.fm:10000/', 'echo-protocol');
+    server = new WebSocket(config.SERVER, 'echo-protocol');
 
-    server.onclose = function() {
+    server.onclose = function () {
         $("#disconnected").removeAttr("hidden");
         var bgshader = $("#background_shader");
         bgshader.css("z-index", "8000");
         bgshader.animate({
             opacity: 1
         }, 500);
-        setInterval(function() {
+        setInterval(function () {
             disconnect_timer--;
             $("#disconnected-countdown").html(disconnect_timer);
-            if(disconnect_timer == 0) {
+            if (disconnect_timer == 0) {
                 window.location.reload();
             }
         }, 1000);
     };
 
-    $("#skip_song").click(function() {
+    $("#skip_song").click(function () {
         server.send(JSON.stringify({
             event: "skip",
             key: authkey
         }));
     });
 
-    if(force_room || (window.location.hash !== "" && window.location.hash.length > 0)) {
+    if (force_room || (window.location.hash !== "" && window.location.hash.length > 0)) {
         window.location.hash = room;
-        server.onopen = function() {
+        server.onopen = function () {
             server.send(JSON.stringify({
                 event: "login",
                 key: authkey,
@@ -305,14 +310,14 @@ function finishInit() {
         }
     }
 
-    server.onmessage = function(event) {
+    server.onmessage = function (event) {
         event_data = JSON.parse(event.data);
         data = event_data.data;
         console.log(event_data);
 
-        switch(event_data.event) {
+        switch (event_data.event) {
             case "room_data": // called to initialize room
-                if(data == false) {
+                if (data == false) {
                     window.location = "http://totem.fm";
                     return false;
                 }
@@ -321,7 +326,7 @@ function finishInit() {
                 $(".room-title").html(data.display_name);
                 $("#room-users").html(data.user_counter);
                 $("#room-queue").html(data.queue_counter);
-                if(data.song) {
+                if (data.song) {
                     started = data.song.started_at;
                     now = Math.floor(Date.now() / 1000);
                     difference = now - started;
@@ -344,14 +349,14 @@ function finishInit() {
                     $("#no_video").removeAttr("hidden");
                     nothing_playing = true;
                 }
-            break;
+                break;
             case "score_update":
                 setScore(data.positive, data.negative);
                 break;
             case "count_update":
                 $("#room-users").html(data.user_count);
                 $("#room-queue").html(data.queue_size);
-            break;
+                break;
             case "notification":
                 noty({
                     text: data.text,
@@ -365,14 +370,14 @@ function finishInit() {
                     },
                     timeout: 5000
                 });
-            break;
+                break;
             case "user_list_change":
                 user_list = data;
-            break;
+                break;
             case "song_change":
                 $(".activated").removeAttr("activated");
                 $(".history-content").append('<li class="list-group-item playlist" onclick="loadVideo(\'' + data.song.url_fragment + '\', \'' + data.song.name.replace("'", "&quot;") + '\', \'' + data.song.artist.replace("'", "&quot;") + '\')"><img class="playlist-item-thumbnail" src="' + data.song.picture_url + '"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + data.song.name + '</span><span class="playlist-item-artist-container">by <span class="playlist-item-artist">' + data.song.artist.replace("'", "&quot;") + '</span></span></div></li>');
-                if(mode == 0) {
+                if (mode == 0) {
                     loadVideoById(data.song.url_fragment, 0);
 
                     setSongInfo(data.song.name, data.song.artist);
@@ -403,12 +408,13 @@ function finishInit() {
                 }
 
                 advanceBackgroundImage();
-            break;
+                break;
             case "chat":
                 chatmessage = data.message;
                 chatclass = " ";
-                if(data.message.toLowerCase().indexOf("@" + display_name) > -1) {
-                    var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3'); audio.play();
+                if (data.message.toLowerCase().indexOf("@" + display_name) > -1) {
+                    var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
+                    audio.play();
                     var chatmessage = data.message.replace("@" + display_name, "<b>@" + display_name + "</b>");
                     var chatclass = " chat-tag ";
                     noty({
@@ -424,10 +430,10 @@ function finishInit() {
                         timeout: 5000
                     });
                 }
-                 if (chatmessage.match("[ ]*")) {
+                if (chatmessage.match("[ ]*")) {
                     console.log("only spaces")
-                 }
-                 if (chatmessage.indexOf("*") > -1) {
+                }
+                if (chatmessage.indexOf("*") > -1) {
                     var asterisktally = 0;
                     var msplit = chatmessage.split("");
                     var msplitl = msplit.length;
@@ -435,10 +441,12 @@ function finishInit() {
                         if (msplit[i] == "*") {
                             if (asterisktally == 0) {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("*", "<b>"); asterisktally = 1;
+                                chatmessage = chatmessage.replace("*", "<b>");
+                                asterisktally = 1;
                             } else {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("*", "</b>"); asterisktally = 0;
+                                chatmessage = chatmessage.replace("*", "</b>");
+                                asterisktally = 0;
                             }
                         }
                     }
@@ -454,10 +462,12 @@ function finishInit() {
                         if (msplit[i] == "_") {
                             if (uscoretally == 0) {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "<i>"); uscoretally = 1;
+                                chatmessage = chatmessage.replace("_", "<i>");
+                                uscoretally = 1;
                             } else {
                                 cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "</i>"); uscoretally = 0;
+                                chatmessage = chatmessage.replace("_", "</i>");
+                                uscoretally = 0;
                             }
                         }
                     }
@@ -466,9 +476,9 @@ function finishInit() {
                     }
                 }
                 if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
-		    var msplit = chatmessage.split(" ");
+                    var msplit = chatmessage.split(" ");
                     var msplitl = msplit.length;
-                        for (var i = 0; i < msplitl; i++) {
+                    for (var i = 0; i < msplitl; i++) {
                         console.log(msplit[i] + " msplit")
                         if (msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
                             var omlink = msplit[i];
@@ -477,26 +487,27 @@ function finishInit() {
                                 mlink = mlink.replace(/<i>/g, "_");
                                 mlink = mlink.replace(/<\/i>/g, "_");
                             }
-                       	mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
-                       	chatmessage = chatmessage.replace(omlink, mlink)
+                            mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
+                            chatmessage = chatmessage.replace(omlink, mlink)
                         }
-                        }
+                    }
                 }
                 var sender = data.sender.toLowerCase().toString()
                 var senderclass = ""
-                if(sender == "dcv" || sender == "williamtdr") {
+                if (sender == "dcv" || sender == "williamtdr") {
                     var senderclass = senderclass + " chat-dev ";
                 }
                 if (sender == "encadyma" || sender == "tugaaa" || sender == "xbytez" || sender == "felicity" || sender == "koolkidkenny" || sender == "not trevor" || sender == "pogodaanton" || sender == "vitals") {
-                   var senderclass = senderclass + " chat-beta ";	
+                    var senderclass = senderclass + " chat-beta ";
                 }
-                if(sender == display_name.toLowerCase()) {
+                if (sender == display_name.toLowerCase()) {
                     var senderclass = senderclass + " chat-you ";
                 }
                 chatmessage = chatmessage.trim()
-                if (chatmessage.length == 0) { } else {
-                $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
-                $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
+                if (chatmessage.length == 0) {
+                } else {
+                    $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+                    $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
                 }
         }
     };
@@ -504,12 +515,12 @@ function finishInit() {
     sidebarInit();
 }
 
-initDelayTimer = setInterval(function() {
-    if(youtube_ready && authkey) {
+initDelayTimer = setInterval(function () {
+    if (youtube_ready && authkey) {
         finishInit();
         clearTimeout(initDelayTimer);
     }
-    if(force_room) {
+    if (force_room) {
         $("#now_playing_content").removeAttr("hidden");
         $("#now_playing_placeholder").attr("hidden", "hidden");
     }
