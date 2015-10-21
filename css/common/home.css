@@ -281,3 +281,12 @@ div[role="navigation"] {
         display: none;
     }
 }
+
+/* Create room form */
+#createRoomForm textarea {
+    resize: vertical;
+}
+
+#createRoomForm .cancel-btn {
+    margin-right: 20px;
+}
