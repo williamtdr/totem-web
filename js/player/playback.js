@@ -273,6 +273,106 @@ function vote(type) {
     }));
 }
 
+function addChatMessage(sender, text) {
+    chatmessage = text.trim();
+    chatclass = " ";
+    if (chatmessage.toLowerCase().indexOf("@" + display_name) > -1) {
+        var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
+        audio.play();
+        var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
+        var chatclass = " chat-tag ";
+        noty({
+            text: data.sender + ": " + chatmessage,
+            theme: 'relax',
+            dismissQueue: true,
+            type: "information",
+            layout: "topRight",
+            animation: {
+                open: {height: 'toggle'},
+                close: {height: 'toggle'}
+            },
+            timeout: 5000
+        });
+    }
+    if (chatmessage.match("[ ]*")) {
+        console.log("only spaces")
+    }
+    if (chatmessage.indexOf("*") > -1) {
+        var asterisktally = 0;
+        var msplit = chatmessage.split("");
+        var msplitl = msplit.length;
+        for (var i = 0; i < msplitl; i++) {
+            if (msplit[i] == "*") {
+                if (asterisktally == 0) {
+                    cmp = chatmessage;
+                    chatmessage = chatmessage.replace("*", "<b>");
+                    asterisktally = 1;
+                } else {
+                    cmp = chatmessage;
+                    chatmessage = chatmessage.replace("*", "</b>");
+                    asterisktally = 0;
+                }
+            }
+        }
+        if (asterisktally == 1) {
+            chatmessage = cmp;
+        }
+    }
+    if (chatmessage.indexOf("_") > -1) {
+        var uscoretally = 0;
+        var msplit = chatmessage.split("");
+        var msplitl = msplit.length;
+        for (var i = 0; i < msplitl; i++) {
+            if (msplit[i] == "_") {
+                if (uscoretally == 0) {
+                    cmp = chatmessage;
+                    chatmessage = chatmessage.replace("_", "<i>");
+                    uscoretally = 1;
+                } else {
+                    cmp = chatmessage;
+                    chatmessage = chatmessage.replace("_", "</i>");
+                    uscoretally = 0;
+                }
+            }
+        }
+        if (uscoretally == 1) {
+            chatmessage = cmp;
+        }
+    }
+    if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
+        var msplit = chatmessage.split(" ");
+        var msplitl = msplit.length;
+        for (var i = 0; i < msplitl; i++) {
+            console.log(msplit[i] + " msplit")
+            if (msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
+                var omlink = msplit[i];
+                var mlink = msplit[i];
+                if (mlink.indexOf("<i>") > -1) {
+                    mlink = mlink.replace(/<i>/g, "_");
+                    mlink = mlink.replace(/<\/i>/g, "_");
+                }
+                mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
+                chatmessage = chatmessage.replace(omlink, mlink)
+            }
+        }
+    }
+    var sendercheck = sender.toLowerCase().toString();
+    var senderclass = "";
+    if (sendercheck == "dcv" || sendercheck == "williamtdr") {
+        senderclass = senderclass + " chat-dev ";
+    }
+    if (sendercheck == "encadyma" || sendercheck == "tugaaa" || sendercheck == "xbytez" || sendercheck == "felicity" || sendercheck == "koolkidkenny" || sendercheck == "not trevor" || sendercheck == "pogodaanton" || sendercheck == "vitals") {
+        senderclass = senderclass + " chat-beta ";
+    }
+    if (sendercheck == display_name.toLowerCase()) {
+        senderclass = senderclass + " chat-you ";
+    }
+    if (chatmessage.length > 0) {
+        $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+        $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
+    }
+}
+
 function finishInit() {
     server = new WebSocket(config.SERVER, 'echo-protocol');
 
@@ -326,6 +426,9 @@ function finishInit() {
                 $(".room-title").html(data.display_name);
                 $("#room-users").html(data.user_counter);
                 $("#room-queue").html(data.queue_counter);
+                $.each(data.chat_history, function(index, chat_obj){
+                    addChatMessage(chat_obj.sender, chat_obj.message);
+                });
                 if (data.song) {
                     started = data.song.started_at;
                     now = Math.floor(Date.now() / 1000);
@@ -410,109 +513,12 @@ function finishInit() {
                 advanceBackgroundImage();
                 break;
             case "chat":
-                chatmessage = data.message;
-                chatclass = " ";
-                if (data.message.toLowerCase().indexOf("@" + display_name) > -1) {
-                    var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
-                    audio.play();
-                    var chatmessage = data.message.replace("@" + display_name, "<b>@" + display_name + "</b>");
-                    var chatclass = " chat-tag ";
-                    noty({
-                        text: data.sender + ": " + chatmessage,
-                        theme: 'relax',
-                        dismissQueue: true,
-                        type: "information",
-                        layout: "topRight",
-                        animation: {
-                            open: {height: 'toggle'},
-                            close: {height: 'toggle'}
-                        },
-                        timeout: 5000
-                    });
-                }
-                if (chatmessage.match("[ ]*")) {
-                    console.log("only spaces")
-                }
-                if (chatmessage.indexOf("*") > -1) {
-                    var asterisktally = 0;
-                    var msplit = chatmessage.split("");
-                    var msplitl = msplit.length;
-                    for (var i = 0; i < msplitl; i++) {
-                        if (msplit[i] == "*") {
-                            if (asterisktally == 0) {
-                                cmp = chatmessage;
-                                chatmessage = chatmessage.replace("*", "<b>");
-                                asterisktally = 1;
-                            } else {
-                                cmp = chatmessage;
-                                chatmessage = chatmessage.replace("*", "</b>");
-                                asterisktally = 0;
-                            }
-                        }
-                    }
-                    if (asterisktally == 1) {
-                        chatmessage = cmp;
-                    }
-                }
-                if (chatmessage.indexOf("_") > -1) {
-                    var uscoretally = 0;
-                    var msplit = chatmessage.split("");
-                    var msplitl = msplit.length;
-                    for (var i = 0; i < msplitl; i++) {
-                        if (msplit[i] == "_") {
-                            if (uscoretally == 0) {
-                                cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "<i>");
-                                uscoretally = 1;
-                            } else {
-                                cmp = chatmessage;
-                                chatmessage = chatmessage.replace("_", "</i>");
-                                uscoretally = 0;
-                            }
-                        }
-                    }
-                    if (uscoretally == 1) {
-                        chatmessage = cmp;
-                    }
-                }
-                if (chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
-                    var msplit = chatmessage.split(" ");
-                    var msplitl = msplit.length;
-                    for (var i = 0; i < msplitl; i++) {
-                        console.log(msplit[i] + " msplit")
-                        if (msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
-                            var omlink = msplit[i];
-                            var mlink = msplit[i];
-                            if (mlink.indexOf("<i>") > -1) {
-                                mlink = mlink.replace(/<i>/g, "_");
-                                mlink = mlink.replace(/<\/i>/g, "_");
-                            }
-                            mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
-                            chatmessage = chatmessage.replace(omlink, mlink)
-                        }
-                    }
-                }
-                var sender = data.sender.toLowerCase().toString()
-                var senderclass = ""
-                if (sender == "dcv" || sender == "williamtdr") {
-                    var senderclass = senderclass + " chat-dev ";
-                }
-                if (sender == "encadyma" || sender == "tugaaa" || sender == "xbytez" || sender == "felicity" || sender == "koolkidkenny" || sender == "not trevor" || sender == "pogodaanton" || sender == "vitals") {
-                    var senderclass = senderclass + " chat-beta ";
-                }
-                if (sender == display_name.toLowerCase()) {
-                    var senderclass = senderclass + " chat-you ";
-                }
-                chatmessage = chatmessage.trim()
-                if (chatmessage.length == 0) {
-                } else {
-                    $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + data.sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
-                    $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
-                }
+                addChatMessage(data.sender, data.message);
         }
     };
 
     sidebarInit();
+    resize();
 }
 
 initDelayTimer = setInterval(function () {

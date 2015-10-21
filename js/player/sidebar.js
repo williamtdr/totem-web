@@ -87,8 +87,6 @@ function sidebarInit() {
             setFullscreen(true);
         }
     });
-
-    resize();
 }
 
 function resize() {
