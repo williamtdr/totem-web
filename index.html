@@ -323,11 +323,21 @@
 <script src="js/common/app.js"></script>
 <script src="js/init.js"></script>
 
-<script>loadJavascript(config.API + '/user/session.php')</script>
+<script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
+<script>
+    loadJavascript(config.API + '/app/session.php');
+
+    function initAuth2() {
+        gapi.load('auth2', function () {
+            auth2 = gapi.auth2.init({
+                client_id: config.GOOGLE_CLIENT_ID
+            });
+        });
+    }
+</script>
 
 <script src="js/player/playback.js"></script>
 <script src="js/player/sidebar.js"></script>
-
 <script src="js/common/app-events.js"></script>
 </body>
 </html>

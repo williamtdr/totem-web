@@ -1,3 +1,5 @@
+force_room = false;
+
 function switchRoom(destination) {
     window.location.hash = destination;
     server.send(JSON.stringify({
@@ -199,7 +201,7 @@ changebtn.click(function () {
                 case "length":
                     errors.append('<div class="alert alert-warning" role="alert">Username can be from 3 - 30 characters.</div>');
                     break;
-                case true:
+                default:
                     window.location.reload();
             }
         },
@@ -234,15 +236,15 @@ function refreshRoomList() {
 }
 
 function loadYoutubePlaylists() {
-    $(".sidebar-playlist-list").empty();
-    $(".sidebar-playlist-list").append('<b>Loading...</b>');
+    $(".sidebar-playlist-list").html('<b>Loading...</b>');
     $.ajax({
         url: config.API + "/youtube/getPlaylists.php",
         jsonp: "callback",
         dataType: "jsonp",
         success: function (response) {
-            $(".sidebar-playlist-list").empty();
-            $(".sidebar-playlist-list").append('<ul class="list-group sidebar-playlist"><li class="list-group-item" onclick="showSearch()">Search YouTube</li>');
+            $(".sidebar-playlist-list")
+                .html('<ul class="list-group sidebar-playlist"><li class="list-group-item" onclick="showSearch()">Search YouTube</li>');
+
             if (response.success) {
                 $.each(response.data, function (name, id) {
                     $(".sidebar-playlist-list ul").append("<li class=\"list-group-item\" onclick=\"loadPlaylistItems('" + id + "')\">" + name + "</li>");
@@ -259,17 +261,18 @@ function loadYoutubePlaylists() {
 }
 
 function sessionComplete() {
-    if (!display_name && display_name !== '') {
-        $("#login-menu").append('<a href="' + authUrl + '">Log In<span id="login-full"> with Google</span></a>');
-        $(".chat-textbox").append('<div class="chatbox-placeholder"><a href="' + authUrl + '">Log in</a> to chat</div>');
-        $(".sidebar-playlist-list").addClass("sidebar-no-login");
-        $(".sidebar-playlist-list").append("<a href=\"" + authUrl + "\">Log in</a> to see your playlists");
+    if (authkey == 'unauthenticated') {
+        $("#login-menu").html('<a class="signInButton">Log In<span id="login-full"> with Google</span></a>');
+        $(".chat-textbox").html('<div class="chatbox-placeholder"><a class="signInButton">Log in</a> to chat</div>');
+
+        $(".sidebar-playlist-list")
+            .addClass("sidebar-no-login")
+            .append('<a class="signInButton">Log in</a> to see your playlists');
     } else {
-        $("#login-menu")
-            .append('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
+        $("#login-menu").html('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
 
         $(".chat-textbox")
-            .append('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
+            .html('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
 
         loadYoutubePlaylists();
     }

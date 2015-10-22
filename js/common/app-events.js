@@ -24,16 +24,15 @@ $(document).ready(function () {
                 password: password
             },
             success: function (r) {
-                if (!isUndefined(r.success)) {
+                if (r.success) {
                     refreshRoomList();
                     switchRoom(name);
 
-                    console.log(r.success);
                     return false;
                 }
 
-                if (!isUndefined(r.error)) {
-                    error.html(r.error).show();
+                if (!r.success) {
+                    error.html(r.message).show();
 
                     return false;
                 }
@@ -41,5 +40,25 @@ $(document).ready(function () {
                 console.warn('Unhandled case after form submission');
             }
         })
+    });
+
+    $('body').delegate('.signInButton', 'click', function () {
+        auth2
+            .grantOfflineAccess({
+                redirect_uri: 'postmessage',
+                scope: 'https://www.googleapis.com/auth/youtube'
+            })
+            .then(function (response) {
+                $.ajax({
+                    url: config.API + '/app/session.php',
+                    method: 'POST',
+                    jsonp: 'callback',
+                    dataType: 'jsonp',
+                    data: response,
+                    complete: function () {
+                        // ..
+                    }
+                });
+            });
     });
 });
