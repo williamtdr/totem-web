@@ -1,3 +1,52 @@
+var toggleBoxes = function (exceptId) {
+    var tempEl,
+        toShow = $('#' + exceptId),
+        isVisible = (toShow.css('display') == 'block');
+
+    if (isVisible) {
+        toShow.fadeOut('fast');
+        $('.chat').fadeIn('fast');
+        return false;
+    }
+
+    $('.toToggle').each(function () {
+        tempEl = $(this);
+        if (tempEl.attr('id') !== exceptId) {
+            tempEl.fadeOut('fast');
+            return;
+        }
+
+        tempEl.fadeIn('fast');
+    });
+};
+
+var refreshQueueList = function () {
+    var queueList = $('#queueList');
+
+    queueList.html('<span>In queue:</span>');
+
+    queuedSongs.forEach(function (q, index) {
+        queueList.append('<li><span>' + q.song.artist + '-' + q.song.name + '</span></li>')
+    });
+};
+
+var refreshUserList = function () {
+    var roomList = $("#roomlist"), temp;
+
+    roomList.html('<span>Listeners</span>');
+
+    user_list.forEach(function (userName, index) {
+        temp = userName.toLowerCase;
+
+        if (temp == display_name)
+            roomList.append('<li><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
+        if (temp == "dcv" || temp == "williamtdr")
+            roomList.append('<li><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
+        else
+            roomList.append('<li><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
+    });
+};
+
 function sidebarInit() {
     $(".chat_message").keyup(function (event) {
         if (event.keyCode == 13) {
@@ -52,22 +101,19 @@ function sidebarInit() {
     });
 
     $("#room-users").click(function () {
-        $(".chat").fadeToggle("fast");
-        $("#roomlist")
-            .fadeToggle("fast")
-            .html('<li class="roomlist-title"><span>Listeners</span></li>');
+        toggleBoxes('roomlist');
 
-        var temp;
-        user_list.forEach(function (userName, index) {
-            temp = userName.toLowerCase;
+        refreshUserList();
+    });
 
-            if (temp == display_name)
-                $("#roomlist").append('<li><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
-            if (temp == "dcv" || temp == "williamtdr")
-                $("#roomlist").append('<li><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
-            else
-                $("#roomlist").append('<li><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
-        });
+    $('#room-queue').on('click', function () {
+        if (!queuedSongs.length) {
+            return false;
+        }
+
+        toggleBoxes('queueList');
+
+        refreshQueueList();
     });
 }
 

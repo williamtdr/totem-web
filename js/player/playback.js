@@ -30,6 +30,8 @@ started_at = 0;
 my_queue = [];
 in_queue = false;
 
+queuedSongs = [];
+
 function togglePlayerVisibility() {
     if (player_is_visible) {
         $(".fa-eye").toggleClass("fa-eye-slash");
@@ -483,6 +485,8 @@ function finishInit() {
                     nothing_playing = false;
 
                     getYoutubeRate(data.song.url_fragment);
+
+                    queuedSongs = data.queue;
                 } else {
                     $("#main_content").attr("hidden", "hidden");
                     $("#no_video").removeAttr("hidden");
@@ -508,9 +512,12 @@ function finishInit() {
                     },
                     timeout: 5000
                 });
+
                 break;
             case "user_list_change":
                 user_list = data;
+                refreshUserList();
+
                 break;
             case "song_change":
                 $(".activated").removeAttr("activated");
@@ -548,9 +555,21 @@ function finishInit() {
                 }
 
                 advanceBackgroundImage();
+
                 break;
             case "chat":
                 addChatMessage(data.sender, data.message);
+
+                break;
+            case 'queue_change':
+                queuedSongs = data;
+                refreshQueueList();
+
+                break;
+            default:
+                console.warn('Unhandled event: ' + event_data.event);
+
+                break;
         }
     };
 
