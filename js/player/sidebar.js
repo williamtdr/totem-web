@@ -123,6 +123,9 @@ function loadPlaylistItems(playlistId, more) {
         delete data.page;
 
         container.html('');
+
+        $(".sidebar-playlist-list").attr("hidden", "hidden");
+        $(".sidebar-playlist-items").removeAttr("hidden");
     }
 
     container.append('<li class="list-group-item playlist loading">Loading... </li>');
