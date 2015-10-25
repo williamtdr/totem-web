@@ -42,23 +42,27 @@ $(document).ready(function () {
         })
     });
 
-    $('body').delegate('.signInButton', 'click', function () {
-        auth2
-            .grantOfflineAccess({
-                redirect_uri: 'postmessage',
-                scope: 'https://www.googleapis.com/auth/youtube'
-            })
-            .then(function (response) {
-                $.ajax({
-                    url: config.API + '/app/session.php',
-                    method: 'POST',
-                    jsonp: 'callback',
-                    dataType: 'jsonp',
-                    data: response,
-                    complete: function () {
-                        // ..
-                    }
+    $('body')
+        .delegate('.signInButton', 'click', function () {
+            auth2
+                .grantOfflineAccess({
+                    redirect_uri: 'postmessage',
+                    scope: 'https://www.googleapis.com/auth/youtube'
+                })
+                .then(function (response) {
+                    $.ajax({
+                        url: config.API + '/app/session.php',
+                        method: 'POST',
+                        jsonp: 'callback',
+                        dataType: 'jsonp',
+                        data: response,
+                        complete: function () {
+                            // ..
+                        }
+                    });
                 });
-            });
-    });
+        })
+        .delegate('.youtubeRate', 'click', function () {
+            console.log('rating ... ?')
+        });
 });

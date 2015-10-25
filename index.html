@@ -178,35 +178,29 @@
 </div>
 <div id="now_playing" class="animsition player-container" hidden="hidden">
     <div id="now_playing_content" hidden="hidden" class="container">
-        <div id="main_content">
+
+        <!-- main content -->
+        <div id="main_content" class="fullscreen col-xs-8">
             <div class="song-title-container">
                 <h1 class="title_display"></h1>
 
                 <h3 class="artist_display"></h3>
             </div>
-            <div class="score_wrapper score_wrapper_top">
-                <div class="score-positive-wrapper" onclick="vote(1)">
-                    <i class="fa fa-chevron-up"></i>
 
-                    <div class="score-positive score"></div>
-                </div>
-                <div class="score-negative-wrapper" onclick="vote(-1)">
-                    <i class="fa fa-chevron-down"></i>
-
-                    <div class="score-negative score"></div>
-                </div>
-                <div class="current-dj-wrapper" hidden="hidden">
-                    <span class="current-dj-caption">Current DJ: </span>
-                    <span class="current-dj"></span>
-                </div>
-            </div>
             <div id="time_elapsed">
                 <div></div>
             </div>
             <span id="time-remaining">0:00</span>
-            <br>
 
-            <div id="player" class="youtube-player"></div>
+            <div class="current-dj-wrapper pull-right">
+                <span class="current-dj-caption">Current DJ: </span>
+                <span class="current-dj"></span>
+            </div>
+
+            <div class="item active embed-responsive embed-responsive-16by9">
+                <div id="player"></div>
+            </div>
+
             <div id="video_options">
                 <div class="score_wrapper score_wrapper_bottom" hidden="hidden">
                     <span class="current-dj dj_display_bottom"></span>
@@ -232,17 +226,37 @@
                     <div id="volume-toggle" style="margin-right: 10px">
                         <i class="fa fa-volume-down"></i>
                     </div>
+
                     <input type="range" value="50" min="0" max="100" id="volume-slider">
+
+                    <div class="score_wrapper score_wrapper_top pull-right">
+                        <a class="btn btn-sm youtubeRate" style="display:none;">
+                            <i class="fa fa-youtube"></i> <span class="rate">Like</span>
+                        </a>
+
+                        <div class="score-positive-wrapper" onclick="vote(1)">
+                            <i class="fa fa-chevron-up"></i>
+
+                            <div class="score-positive score"></div>
+                        </div>
+                        <div class="score-negative-wrapper" onclick="vote(-1)">
+                            <i class="fa fa-chevron-down"></i>
+
+                            <div class="score-negative score"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- end: main content -->
+
         <div id="no_video" hidden="hidden">
             <span class="big-header">Awkward silence...</span>
 
             <div class="small-header">No song is in the queue to play. You can add one from the <i>My Music</i> tab.
             </div>
         </div>
-        <div id="sidebar">
+        <div id="sidebar" class="col-xs-4">
             <div id="room-info">
                 <div id="in-room">
                     <span id="room-title" class="room-title"></span>
@@ -321,7 +335,7 @@
 
 <script src="js/common/utils.js"></script>
 <script src="js/common/app.js"></script>
-<script src="js/init.js"></script>
+<script src="js/init.dev.js"></script>
 
 <script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
 <script>

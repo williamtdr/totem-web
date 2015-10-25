@@ -29,7 +29,6 @@ last_url_fragment = "";
 started_at = 0;
 my_queue = [];
 in_queue = false;
-fullscreen = false;
 
 function togglePlayerVisibility() {
     if (player_is_visible) {
@@ -184,7 +183,7 @@ if (window.localStorage.getItem("hide_video") == "true") togglePlayerVisibility(
 $("#volume-slider").val(window.localStorage.getItem("volume"));
 
 setInterval(function () {
-    if (playerNotInitiated()) {
+    if (!playerInitiated()) {
         return false;
     }
 
@@ -373,6 +372,36 @@ function addChatMessage(sender, text) {
     }
 }
 
+function getYoutubeRate(videoId) {
+    var container = $('.youtubeRate'),
+        rateText;
+
+    $.ajax({
+        url: config.API + '/youtube/video.php',
+        data: $.param({
+            id: videoId,
+            action: 'status'
+        }),
+        jsonp: "callback",
+        dataType: "jsonp",
+        success: function (r) {
+            rateText = 'Like';
+            if (r.success) {
+                if (r.message == 'like') {
+                    rateText = 'Unlike';
+                }
+
+                container.find('.rate').text(rateText);
+                container.show();
+
+                return false;
+            }
+
+            console.warn(r);
+        }
+    });
+}
+
 function finishInit() {
     server = new WebSocket(config.SERVER, 'echo-protocol');
 
@@ -426,7 +455,7 @@ function finishInit() {
                 $(".room-title").html(data.display_name);
                 $("#room-users").html(data.user_counter);
                 $("#room-queue").html(data.queue_counter);
-                $.each(data.chat_history, function(index, chat_obj){
+                $.each(data.chat_history, function (index, chat_obj) {
                     addChatMessage(chat_obj.sender, chat_obj.message);
                 });
                 if (data.song) {
@@ -447,6 +476,8 @@ function finishInit() {
                     started_at = Math.floor(Date.now() / 1000);
 
                     nothing_playing = false;
+
+                    getYoutubeRate(data.song.url_fragment);
                 } else {
                     $("#main_content").attr("hidden", "hidden");
                     $("#no_video").removeAttr("hidden");
@@ -508,6 +539,8 @@ function finishInit() {
                     started_at = Math.floor(Date.now() / 1000);
                     nothing_playing = false;
                     setScore(0, 0);
+
+                    getYoutubeRate(data.song.url_fragment);
                 }
 
                 advanceBackgroundImage();
@@ -518,7 +551,6 @@ function finishInit() {
     };
 
     sidebarInit();
-    resize();
 }
 
 initDelayTimer = setInterval(function () {
