@@ -68,12 +68,6 @@ function sidebarInit() {
         $(".chat_message").val("");
     });
 
-    $("#search_text").keyup(function (event) {
-        if (event.keyCode == 13) {
-            $("#search_send").click();
-        }
-    });
-
     $("#volume-toggle").click(function () {
         if (muted) {
             player.setVolume(volumeBeforeMute);
@@ -89,11 +83,6 @@ function sidebarInit() {
             $(".fa-volume-off").removeClass("fa-volume-down");
             muted = true;
         }
-    });
-
-    $("#search_send").click(function () {
-        search($("#search_text").val());
-        $("#search_text").val("");
     });
 
     $("#add-to-queue").click(function () {
@@ -134,8 +123,6 @@ function loadPlaylistItems(playlistId, more) {
         delete data.page;
 
         container.html('');
-        $(".sidebar-playlist-list").attr("hidden", "hidden");
-        $(".sidebar-playlist-items").removeAttr("hidden");
     }
 
     container.append('<li class="list-group-item playlist loading">Loading... </li>');
@@ -146,6 +133,10 @@ function loadPlaylistItems(playlistId, more) {
         dataType: "jsonp",
         data: $.param(data),
         success: function (response) {
+            var title, by_string, by_title;
+
+            container.find('.loading').remove();
+
             $.each(response, function (index, e) {
                 title = e.title;
                 if (title.length > 60) {
@@ -160,8 +151,6 @@ function loadPlaylistItems(playlistId, more) {
 
                 container.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="loadVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="loadVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" onclick="addToQueueById(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-plus"></i> Add to Room Queue</span></li>');
             });
-
-            container.find('.loading').remove();
 
             if (response.length < 50) {
                 container.append('<li class="list-group-item playlist finished">End of list..</li>');
@@ -222,20 +211,40 @@ function showSearch() {
     $("#search_text").focus();
 }
 
-function search(text) {
-    $(".sidebar-search").attr("hidden", "hidden");
-    $(".sidebar-playlist-items").removeAttr("hidden");
-    $(".playlist-list-content").empty();
-    $(".playlist-list-content").append('<li class="list-group-item playlist">Loading... </li>');
+function search(more) {
+    var container = $(".searchResults"),
+        rowsContainer = container.find('.playlist-list-content'),
+        searchText = $('#search_text').val().trim(),
+        data;
+
+    more = more || false;
+
+    if (!searchText.length) {
+        return false;
+    }
+
+    data = {
+        q: searchText,
+        page: 'true'
+    };
+
+    if (!more) {
+        rowsContainer.html();
+        delete data.page;
+    }
+
+    rowsContainer.append('<li class="list-group-item playlist loading">Loading... </li>');
+
+    container.show();
     $.ajax({
         url: config.API + "/youtube/getSearchResults.php",
         jsonp: "callback",
         dataType: "jsonp",
-        data: {
-            q: text
-        },
+        data: $.param(data),
         success: function (response) {
-            $(".playlist-list-content").empty();
+            var title, by_string, by_title;
+            rowsContainer.find('.loading').remove();
+
             $.each(response, function (index, e) {
                 title = e.title;
                 if (title.length > 60) {
@@ -247,8 +256,13 @@ function search(text) {
                     by_string = '<span class="playlist-item-artist-container">by <span class="playlist-item-artist">' + e.by + '</span></span>';
                     by_title = e.by.replace('"', '\"');
                 }
-                $(".playlist-list-content").append('<li class="list-group-item playlist" onclick="loadVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><img class="playlist-item-thumbnail" src="' + e.thumb + '"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div></li>');
+
+                rowsContainer.append('<li class="list-group-item playlist" onclick="loadVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><img class="playlist-item-thumbnail" src="' + e.thumb + '"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div></li>');
             });
+
+            if (response.length < 50) {
+                container.append('<li class="list-group-item playlist finished">End of list..</li>');
+            }
         },
         error: function (error) {
             console.log(error);

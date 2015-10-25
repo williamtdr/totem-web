@@ -89,6 +89,13 @@ $(document).ready(function () {
             });
         });
 
+
+    $('#searchYoutube').on('submit', function (ev) {
+        ev.preventDefault();
+
+        search();
+    });
+
     $(window).scroll(function () {
         var docElement = $(document)[0].documentElement,
             winElement = $(window)[0],
@@ -96,11 +103,18 @@ $(document).ready(function () {
             rowsLoading = $('li.list-group-item.playlist.loading'),
             rowsFinished = $('li.list-group-item.playlist.finished');
 
-        if (!videoRows.length || !videoRows.first().is(':visible') || rowsLoading.length || rowsFinished.length) {
+        if (!videoRows.length || rowsLoading.length || rowsFinished.length) {
             return false;
         }
 
         if ((docElement.scrollHeight - winElement.innerHeight) == winElement.pageYOffset) {
+
+            if ($('#searchYoutube').is(':visible')) {
+                search(true);
+
+                return false;
+            }
+
             loadPlaylistItems(false, true);
         }
     });
