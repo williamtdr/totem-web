@@ -88,4 +88,20 @@ $(document).ready(function () {
                 }
             });
         });
+
+    $(window).scroll(function () {
+        var docElement = $(document)[0].documentElement,
+            winElement = $(window)[0],
+            videoRows = $('li.list-group-item.playlist'),
+            rowsLoading = $('li.list-group-item.playlist.loading'),
+            rowsFinished = $('li.list-group-item.playlist.finished');
+
+        if (!videoRows.length || !videoRows.first().is(':visible') || rowsLoading.length || rowsFinished.length) {
+            return false;
+        }
+
+        if ((docElement.scrollHeight - winElement.innerHeight) == winElement.pageYOffset) {
+            loadPlaylistItems(false, true);
+        }
+    });
 });
