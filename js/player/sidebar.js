@@ -51,7 +51,7 @@ function sidebarInit() {
         addCurrentSongToQueue();
     });
 
-    $("#room-users, .subcaption-users").click(function () {
+    $("#room-users").click(function () {
         $(".chat").fadeToggle("fast");
         $("#roomlist")
             .fadeToggle("fast")

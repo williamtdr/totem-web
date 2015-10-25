@@ -63,6 +63,29 @@ $(document).ready(function () {
                 });
         })
         .delegate('.youtubeRate', 'click', function () {
-            console.log('rating ... ?')
+            var btn = $(this),
+                btnText = btn.find('.rate'),
+                mode = (btn.text().trim().toLowerCase() == 'unlike') ? 'none' : 'like',
+                videoId = btn.data('videoid');
+
+            if (mode == 'none') {
+                btnText.text('Like');
+            } else {
+                btnText.text('Unlike');
+            }
+
+            $.ajax({
+                url: config.API + '/youtube/video.php',
+                data: $.param({
+                    id: videoId,
+                    mode: mode,
+                    action: 'rate'
+                }),
+                jsonp: 'callback',
+                dataType: 'jsonp',
+                success: function (r) {
+                    // console.log(r);
+                }
+            });
         });
 });

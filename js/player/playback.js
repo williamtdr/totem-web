@@ -373,8 +373,7 @@ function addChatMessage(sender, text) {
 }
 
 function getYoutubeRate(videoId) {
-    var container = $('.youtubeRate'),
-        rateText;
+    var container = $('.youtubeRate');
 
     $.ajax({
         url: config.API + '/youtube/video.php',
@@ -385,13 +384,11 @@ function getYoutubeRate(videoId) {
         jsonp: "callback",
         dataType: "jsonp",
         success: function (r) {
-            rateText = 'Like';
             if (r.success) {
-                if (r.message == 'like') {
-                    rateText = 'Unlike';
-                }
+                container.find('.rate')
+                    .text((r.message == 'like') ? 'Unlike' : 'Like');
 
-                container.find('.rate').text(rateText);
+                container.attr('data-videoid', videoId);
                 container.show();
 
                 return false;
@@ -400,6 +397,13 @@ function getYoutubeRate(videoId) {
             console.warn(r);
         }
     });
+}
+
+function counterUpdate(data) {
+    $("#room-users")
+        .find('.number').html(data.user_counter);
+    $("#room-queue")
+        .find('.number').html(data.queue_counter || data.queue_size);
 }
 
 function finishInit() {
@@ -453,8 +457,9 @@ function finishInit() {
                 room_name = data.display_name;
                 $("#room-description").html(data.description);
                 $(".room-title").html(data.display_name);
-                $("#room-users").html(data.user_counter);
-                $("#room-queue").html(data.queue_counter);
+
+                counterUpdate(data);
+
                 $.each(data.chat_history, function (index, chat_obj) {
                     addChatMessage(chat_obj.sender, chat_obj.message);
                 });
@@ -488,8 +493,7 @@ function finishInit() {
                 setScore(data.positive, data.negative);
                 break;
             case "count_update":
-                $("#room-users").html(data.user_count);
-                $("#room-queue").html(data.queue_size);
+                counterUpdate(data);
                 break;
             case "notification":
                 noty({

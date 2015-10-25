@@ -856,6 +856,10 @@ h1, h2, h3 {
     margin-top: 5px;
 }
 
+#room-users-wrapper .focused {
+    margin-left: 20px;
+}
+
 @media (max-width: 460px) {
     .current-dj {
         display: none;
