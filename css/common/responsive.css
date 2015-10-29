@@ -5,13 +5,26 @@
 	}
 }
 
-@media (max-width: 990px) {
+@media (max-width: 991px) {
     .room-option {
         margin-top: 7px;
         margin-bottom: 5px;
     }
     #time_elapsed {
 		width: calc(100% - 36%);
+	}
+	#main_content {
+		width: 100%;
+	}
+	#sidebar {
+		width: 100%;
+		right: 0;
+	}
+	.chat, #room-title, #room-description-wrapper, #room-description {
+		width: 100%;
+	}
+	.chat {
+		margin-bottom: 40px;
 	}
 }
 
@@ -48,5 +61,24 @@
     #now-playing-full {
         display: none;
     }
+}
+
+@media screen and (max-width:440px) {
+	.current-dj-caption {
+		display: none;
+	}
+	.score_wrapper {
+		margin-right: 0;
+		clear: both;
+	}
+	.score_wrapper > div {
+		margin-right: 0;
+	}
+	.score-negative-wrapper {
+		padding-right: 0;
+	}
+	#volume-slider {
+		float: right;
+	}
 }
 

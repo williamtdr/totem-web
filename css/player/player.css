@@ -127,7 +127,8 @@ h3 {
 }
 
 #no_video {
-    position: absolute;
+    /*position: absolute;*/
+    float: left;
 }
 
 .top {
