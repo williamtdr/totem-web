@@ -795,7 +795,7 @@ h1, h2, h3 {
     right: 0;
     height: 60%;
     max-height: 800px;
-    top: 249px;
+    /*top: 249px;*/
     min-height: 300px;
 }
 

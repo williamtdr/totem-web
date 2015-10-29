@@ -240,48 +240,6 @@ div[role="navigation"] {
     color: white;
 }
 
-@media (max-width: 990px) {
-    .room-option {
-        margin-top: 7px;
-        margin-bottom: 5px;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo {
-        display: none;
-    }
-
-    div[role="navigation"] {
-        padding-left: 0;
-    }
-
-    #login-full {
-        display: none;
-    }
-
-    #now_playing_placeholder {
-        padding-left: 10px;
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 500px) {
-    .site_navigation {
-        padding-left: 10px;
-        padding-right: 20px;
-    }
-
-    .navigation_option {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    #now-playing-full {
-        display: none;
-    }
-}
-
 /* Create room form */
 #createRoomForm textarea {
     resize: vertical;
@@ -289,4 +247,29 @@ div[role="navigation"] {
 
 #createRoomForm .cancel-btn {
     margin-right: 20px;
+}
+
+.list-group-item {
+	float: left;
+	width: 100%;
+}
+
+.playlist-item-title {
+	color: #7394B8;
+}
+
+img.playlist-item-thumbnail {
+	float: left;
+}
+
+.playlist-item-metadata-container {
+	float: left;
+	clear: none;
+	width: calc(100% - 135px) !important;
+	margin-left: 10px;
+	position: static !important;
+}
+
+span.playlist-item-artist-container {
+	clear: left;
 }

@@ -1,0 +1,52 @@
+
+@media screen and (max-width:1199px) {
+	#time_elapsed {
+		width: calc(100% - 26%);
+	}
+}
+
+@media (max-width: 990px) {
+    .room-option {
+        margin-top: 7px;
+        margin-bottom: 5px;
+    }
+    #time_elapsed {
+		width: calc(100% - 36%);
+	}
+}
+
+@media (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+
+    div[role="navigation"] {
+        padding-left: 0;
+    }
+
+    #login-full {
+        display: none;
+    }
+
+    #now_playing_placeholder {
+        padding-left: 10px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 500px) {
+    .site_navigation {
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+
+    .navigation_option {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #now-playing-full {
+        display: none;
+    }
+}
+
