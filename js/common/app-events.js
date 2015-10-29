@@ -47,7 +47,8 @@ $(document).ready(function () {
             auth2
                 .grantOfflineAccess({
                     redirect_uri: 'postmessage',
-                    scope: 'https://www.googleapis.com/auth/youtube'
+                    scope: 'https://www.googleapis.com/auth/youtube',
+                    approval_prompt: 'force'
                 })
                 .then(function (response) {
                     $.ajax({
