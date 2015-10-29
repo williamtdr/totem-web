@@ -33,17 +33,17 @@ var refreshQueueList = function () {
 var refreshUserList = function () {
     var roomList = $("#roomlist"), temp;
 
-    roomList.html('<span>Listeners</span>');
+    roomList.html('<span class="roomlist-listenerstitle">Listeners</span>');
 
     user_list.forEach(function (userName, index) {
         temp = userName.toLowerCase;
 
         if (temp == display_name)
-            roomList.append('<li><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
         if (temp == "dcv" || temp == "williamtdr")
-            roomList.append('<li><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
         else
-            roomList.append('<li><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
     });
 };
 

@@ -330,7 +330,8 @@ h3 {
 }
 
 .chat-message-sender {
-    color: grey;
+    /*color: grey;*/
+    color: #5792cf;
     margin-right: 2px;
 }
 
@@ -859,6 +860,38 @@ h1, h2, h3 {
 
 #room-users-wrapper .focused {
     margin-left: 20px;
+}
+
+.roomlist-listenerstitle {
+	padding-left: 10px;
+    margin-top: 5px;
+    float: left;
+    font-size: 0.8em;
+    width: 100%;
+	color: #F1C40F;
+}
+
+li.roomlist-listenersuser {
+	list-style-type: none;
+	font-size: 0.8em;
+	padding-left: 10px;
+}
+
+li.roomlist-listenersuser .roomlist-prename {
+	margin-right: 6px;
+	color: #5792cf;
+}
+
+#my_music .sidebar-playlist-list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container {
+	cursor: pointer;
+}
+
+.searchResults ul.list-group li.list-group-item:hover {
+	background-color: rgba(255,255,255,0.2);
+}
+
+.playlist-list-return {
+	cursor: pointer;
 }
 
 @media (max-width: 460px) {
