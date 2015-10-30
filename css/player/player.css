@@ -649,7 +649,7 @@ h1, h2, h3 {
     color: #2980B9;
     position: absolute;
     top: 35px;
-    padding-left: 5px;
+    left: 152px;
 }
 
 .playlist-item-queue {
@@ -794,7 +794,6 @@ h1, h2, h3 {
     color: white;
     width: 300px;
     position: absolute;
-    right: 0;
     height: 60%;
     max-height: 800px;
     /*top: 249px;*/

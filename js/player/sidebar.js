@@ -212,6 +212,7 @@ function showSearch() {
     $(".sidebar-playlist-items").attr("hidden", "hidden");
     $(".sidebar-search").removeAttr("hidden");
     $("#search_text").focus();
+	$(".searchResults .playlist-list-content").empty();
 }
 
 function search(more) {
@@ -221,7 +222,7 @@ function search(more) {
         data;
 
     more = more || false;
-
+	
     if (!searchText.length) {
         return false;
     }
@@ -235,7 +236,8 @@ function search(more) {
         rowsContainer.html();
         delete data.page;
     }
-
+	
+	rowsContainer.empty();
     rowsContainer.append('<li class="list-group-item playlist loading">Loading... </li>');
 
     container.show();

@@ -20,7 +20,7 @@
 		width: 100%;
 		right: 0;
 	}
-	.chat, #room-title, #room-description-wrapper, #room-description {
+	.chat, .chat-textbox, #room-title, #room-description-wrapper, #room-description {
 		width: 100%;
 	}
 	.chat {
@@ -45,6 +45,13 @@
         padding-left: 10px;
         font-size: 1em;
     }
+	.playlist-item-title {
+	    overflow: hidden;
+		text-overflow: ellipsis;
+		height: 20px;
+		width: 100%;
+		white-space: nowrap;
+	}
 }
 
 @media (max-width: 500px) {
@@ -61,6 +68,15 @@
     #now-playing-full {
         display: none;
     }
+	.playlist-item-queue {
+		top: 60px;
+		left: 152px;
+	}
+	.big-header {
+		margin-bottom: 0;
+		font-size: 1.6em;
+	}
+	.small-header {font-size: 1.2em;}
 }
 
 @media screen and (max-width:440px) {
