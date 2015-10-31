@@ -20,7 +20,7 @@
 		width: 100%;
 		right: 0;
 	}
-	.chat, .chat-textbox, #room-title, #room-description-wrapper, #room-description {
+	.chat, .chat-textbox, .chatbox-placeholder, #room-title, #room-description-wrapper, #room-description {
 		width: 100%;
 	}
 	.chat {
@@ -78,6 +78,20 @@
 	}
 	.small-header {font-size: 1.2em;}
 }
+
+@media (max-height: 580px) and (min-width: 991px) {
+	.chat {height: 40%;}
+}
+
+@media (max-height: 480px) and (min-width: 991px) {
+	.chat {height: 60%;}
+	#room-description-wrapper, #room-users-wrapper {display:none;}
+}
+
+@media (max-height: 400px) and (min-width: 991px) {
+	.chat {height: 47%;}
+}
+
 
 @media screen and (max-width:440px) {
 	.current-dj-caption {

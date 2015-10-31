@@ -33,17 +33,25 @@ var refreshQueueList = function () {
 var refreshUserList = function () {
     var roomList = $("#roomlist"), temp;
 
-    roomList.html('<span class="roomlist-listenerstitle">Listeners</span>');
+    roomList.html('<ul id="roomlist-row"><span class="roomlist-title">Listeners</span></ul>');
+	roomList.height($('#chat').height()).width($('#chat').width());
+	
+	roomList = $('#roomlist-row');
 
     user_list.forEach(function (userName, index) {
-        temp = userName.toLowerCase;
+        temp = userName.toLowerCase(),
+		dname = display_name.toLowerCase();
 
-        if (temp == display_name)
+        if (temp == dname) {
             roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
-        if (temp == "dcv" || temp == "williamtdr")
+			return;
+        } else if (temp == "dcv" || temp == "williamtdr") {
             roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
-        else
+			return;
+        } else {
             roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
+			console.log('normal');
+		}
     });
 };
 
@@ -93,6 +101,16 @@ function sidebarInit() {
         toggleBoxes('roomlist');
 
         refreshUserList();
+    });
+		
+	//Roomlist height resize
+    $(window).on('resize', function () {
+		if($('#roomlist').css('display') == 'block') {
+			$('#chat').show().css('visibility','hidden');
+			$('#roomlist').height($('#chat').height()).width($('#chat').width());
+			$('#chat').hide().css('visibility', 'visible');
+		} else
+			return;
     });
 
     $('#room-queue').on('click', function () {

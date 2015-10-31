@@ -298,10 +298,10 @@ h3 {
     background-color: rgba(34, 47, 63, 0.60);
     color: white;
     width: 300px;
-    height: calc(100% - 320px);
-    max-height: 800px;
+    height: 50%;
+    //max-height: 800px;
     top: 250px;
-    min-height: 300px;
+    //min-height: 300px;
 }
 
 .chat-textbox {
@@ -794,10 +794,10 @@ h1, h2, h3 {
     color: white;
     width: 300px;
     position: absolute;
-    height: 60%;
-    max-height: 800px;
+    height: 50%;
+    /*max-height: 800px;*/
     /*top: 249px;*/
-    min-height: 300px;
+    /*min-height: 300px;*/
 }
 
 #roomlist:before {
@@ -807,25 +807,24 @@ h1, h2, h3 {
     border-bottom: 15px solid rgba(26, 205, 175, 0.4);
     position: absolute;
     top: -15px;
-    right: 120px;
+    left: 85px;
 }
 
 #roomlist-row {
     padding: 10px 15px;
     height: 100%;
-    overflow-y: scroll;
-    font-size: 0.8em;
+    overflow-y: auto;
     overflow-x: hidden;
     list-style: none;
 }
 
-#roomlist-row .roomlist-title span {
+#roomlist-row .roomlist-title {
     font-size: 1.8em;
 }
 
 .roomlist-prename {
     color: #808080;
-    margin-right: 2px;
+    margin-right: 6px;
 }
 
 .fullscreen > .song-title-container {
@@ -874,11 +873,6 @@ li.roomlist-listenersuser {
 	list-style-type: none;
 	font-size: 0.8em;
 	padding-left: 10px;
-}
-
-li.roomlist-listenersuser .roomlist-prename {
-	margin-right: 6px;
-	color: #5792cf;
 }
 
 #my_music .sidebar-playlist-list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container {
