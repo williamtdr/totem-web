@@ -229,6 +229,7 @@ function showSearch() {
     $(".sidebar-no-login").attr("hidden", "hidden");
     $(".sidebar-playlist-items").attr("hidden", "hidden");
     $(".sidebar-search").removeAttr("hidden");
+    $(".searchResults").empty();
     $("#search_text").focus();
 	$(".searchResults .playlist-list-content").empty();
 }
