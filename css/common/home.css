@@ -149,6 +149,18 @@ div[role="navigation"] {
     -ms-user-select: none;
 }
 
+.room-users-wrapper {
+    float: right;
+    margin-right: 37px;
+}
+
+.room-users-wrapper > .fa {
+    font-size: 0.9em;
+    top: 11px;
+    right: 25px;
+    position: absolute;
+}
+
 .room-card > img {
     width: 100%;
     padding-top: 5px;
