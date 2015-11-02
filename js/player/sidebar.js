@@ -43,13 +43,13 @@ var refreshUserList = function () {
 		dname = display_name.toLowerCase();
 
         if (temp == dname) {
-            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-you">' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span class="chat-you">' + userName + '</span></li>');
 			return;
         } else if (temp == "dcv" || temp == "williamtdr") {
-            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span class="chat-dev">' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span class="chat-dev">' + userName + '</span></li>');
 			return;
         } else {
-            roomList.append('<li class="roomlist-listenersuser"><span class="roomlist-prename">&gt;</span><span>' + userName + '</span></li>');
+            roomList.append('<li class="roomlist-listenersuser"><span>' + userName + '</span></li>');
 			console.log('normal');
 		}
     });

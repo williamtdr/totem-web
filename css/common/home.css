@@ -18,6 +18,11 @@ div {
 }
 
 .site_navigation {
+    font-family: 'Raleway', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     width: 100%;
     height: 55px;
     position: fixed;
@@ -25,9 +30,13 @@ div {
     left: 0;
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 15px;
+    padding-top: 12px;
     z-index: 500;
     background: rgba(0, 0, 0, 0.3);
+}
+
+.btn {
+    font-family: 'Raleway', sans-serif;
 }
 
 .logo {
@@ -78,13 +87,6 @@ div {
 div[role="navigation"] {
     padding-left: 20px;
     float: left;
-    -webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
-
-    /* Rules below not implemented in browsers yet */
-    -o-user-select: none;
-    user-select: none;
 }
 
 .active > i {
@@ -138,14 +140,13 @@ div[role="navigation"] {
     color: #ffffff;
 }
 
-.room-users-wrapper {
-    float: right;
-    padding-right: 15px;
-}
-
-.room-users-wrapper > .fa {
-    font-size: 0.8em;
-    margin-left: 5px;
+#room-users-wrapper {
+    right: -15px;
+    position: absolute;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .room-card > img {
@@ -255,7 +256,7 @@ div[role="navigation"] {
 }
 
 .playlist-item-title {
-	color: #7394B8;
+    color: #BDC3C7;
 }
 
 img.playlist-item-thumbnail {

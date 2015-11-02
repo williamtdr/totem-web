@@ -4,8 +4,11 @@ html, body {
     background: #000;
 }
 
-body {
+input {
     font-family: 'Raleway', sans-serif;
+}
+
+body {
     font-size: 18px;
     line-height: 1.72222;
     color: #34495e;
@@ -127,7 +130,11 @@ h3 {
 }
 
 #no_video {
-    /*position: absolute;*/
+    font-family: 'Raleway', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     float: left;
 }
 
@@ -299,9 +306,7 @@ h3 {
     color: white;
     width: 300px;
     height: 50%;
-    //max-height: 800px;
-    top: 250px;
-    //min-height: 300px;
+    margin-top: 60px;
 }
 
 .chat-textbox {
@@ -383,6 +388,7 @@ h3 {
 }
 
 #room-title {
+    font-family: 'Raleway', sans-serif;
     font-size: 1.5em;
     font-weight: 500;
     display: block;
@@ -393,7 +399,7 @@ h3 {
 #room-description {
     display: block;
     margin-bottom: 5px;
-    color: #808080;
+    color: #BDC3C7;
     font-size: 0.8em;
     font-weight: 300;
 }
@@ -415,7 +421,6 @@ h3 {
 
 #in-room {
     text-align: right;
-    margin-bottom: 20px;
 }
 
 .subcaption {
@@ -431,19 +436,33 @@ h3 {
     color: #3f638f;
 }
 
+.room-info-footer {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8em;
+}
+
 .focused {
-    font-family: "Lato", sans-serif;
     font-size: 1.2em;
     color: #7daf9c;
     cursor: pointer;
 }
 
 #room-users {
-    color: #1acdaf;
+    color: #1ac3a5;
+    transition: .25s;
+}
+
+#room-users:hover {
+    color: #1cf5d5;
 }
 
 #room-queue {
-    color: #5792cf;
+    color: #5885c3;
+    transition: .25s;
+}
+
+#room-queue:hover {
+    color: #69abf5;
 }
 
 #add-to-queue {
@@ -647,16 +666,28 @@ h1, h2, h3 {
 
 .playlist-item-preview {
     color: #2980B9;
+    transition: .25s;
     position: absolute;
     top: 35px;
     left: 152px;
+    cursor: pointer;
+}
+
+.playlist-item-preview:hover {
+    color: #3498DB;
 }
 
 .playlist-item-queue {
     color: #16A085;
+    transition: .25s;
     position: absolute;
     top: 35px;
     left: 250px;
+    cursor: pointer;
+}
+
+.playlist-item-queue:hover {
+    color: #1ABC9C;
 }
 
 .playlist-item-preview > .fa {
@@ -700,6 +731,7 @@ h1, h2, h3 {
 }
 
 #landing_title {
+    font-family: 'Raleway', sans-serif;
     font-size: 2em;
     color: #ECF0F1;
     display: block;
@@ -795,9 +827,7 @@ h1, h2, h3 {
     width: 300px;
     position: absolute;
     height: 50%;
-    /*max-height: 800px;*/
-    /*top: 249px;*/
-    /*min-height: 300px;*/
+    top: 158px;
 }
 
 #roomlist:before {
@@ -807,7 +837,7 @@ h1, h2, h3 {
     border-bottom: 15px solid rgba(26, 205, 175, 0.4);
     position: absolute;
     top: -15px;
-    left: 85px;
+    right: 160px;
 }
 
 #roomlist-row {
@@ -819,16 +849,7 @@ h1, h2, h3 {
 }
 
 #roomlist-row .roomlist-title {
-    font-size: 1.8em;
-}
-
-.roomlist-prename {
-    color: #808080;
-    margin-right: 6px;
-}
-
-.fullscreen > .song-title-container {
-    /*padding-left: 10px;*/
+    font-size: 1.3em;
 }
 
 .fullscreen > .song-title-container > h1 {
@@ -857,7 +878,7 @@ h1, h2, h3 {
 }
 
 #room-users-wrapper .focused {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 .roomlist-listenerstitle {
