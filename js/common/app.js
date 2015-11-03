@@ -1,4 +1,5 @@
 force_room = false;
+loadJavascript(config.API + '/app/session.php');
 
 function switchRoom(destination) {
     window.location.hash = destination;
@@ -278,6 +279,14 @@ function loadYoutubePlaylists() {
     });
 }
 
+function initAuth2() {
+    gapi.load('auth2', function () {
+        auth2 = gapi.auth2.init({
+            client_id: config.GOOGLE_CLIENT_ID
+        });
+    });
+}
+
 function sessionComplete() {
     if (authkey == 'unauthenticated') {
         $("#login-menu").html('<a class="signInButton">Log In<span id="login-full"> with Google</span></a>');
@@ -299,11 +308,15 @@ function sessionComplete() {
         refreshRoomList();
     }
 
-    server.send(JSON.stringify({
-        event: "login",
-        key: authkey,
-        room: room
-    }));
+    try {
+        server.send(JSON.stringify({
+            event: "login",
+            key: authkey,
+            room: room
+        }));
+    } catch(e) {
+
+    }
 
     $(".chat_message").keyup(function (event) {
         if (event.keyCode == 13) {
