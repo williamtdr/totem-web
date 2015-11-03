@@ -448,6 +448,7 @@ function finishInit() {
                 room_name = data.display_name;
                 $("#room-description").html(data.description);
                 $(".room-title").html(data.display_name);
+                user_list = data.listeners_by_name;
 
                 counterUpdate(data);
 
