@@ -434,17 +434,6 @@ function finishInit() {
         }));
     });
 
-    if (force_room || (window.location.hash !== "" && window.location.hash.length > 0)) {
-        window.location.hash = room;
-        server.onopen = function () {
-            server.send(JSON.stringify({
-                event: "login",
-                key: authkey,
-                room: room
-            }));
-        }
-    }
-
     server.onmessage = function (event) {
         event_data = JSON.parse(event.data);
         data = event_data.data;

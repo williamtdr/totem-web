@@ -58,7 +58,7 @@ $(document).ready(function () {
                         dataType: 'jsonp',
                         data: response,
                         complete: function () {
-                            // ..
+
                         }
                     });
                 });

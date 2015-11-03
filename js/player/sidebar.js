@@ -56,26 +56,6 @@ var refreshUserList = function () {
 };
 
 function sidebarInit() {
-    $(".chat_message").keyup(function (event) {
-        if (event.keyCode == 13) {
-            $(".chat_send").click();
-        }
-    });
-
-    $(".chat_send").click(function () {
-        $(".chat_message").each(function (index, e) {
-            var message = $(e).val();
-            if (message.length > 0) {
-                server.send(JSON.stringify({
-                    event: "chat",
-                    data: message,
-                    key: authkey
-                }));
-            }
-        });
-        $(".chat_message").val("");
-    });
-
     $("#volume-toggle").click(function () {
         if (muted) {
             player.setVolume(volumeBeforeMute);

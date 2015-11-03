@@ -7,6 +7,7 @@ function switchRoom(destination) {
         key: authkey,
         room: destination
     }));
+    room = destination;
     $("#now_playing").removeAttr("hidden");
     $(".active").removeClass("active");
     $(".nav_room").addClass("active");
@@ -297,4 +298,30 @@ function sessionComplete() {
     if (!force_room) {
         refreshRoomList();
     }
+
+    server.send(JSON.stringify({
+        event: "login",
+        key: authkey,
+        room: room
+    }));
+
+    $(".chat_message").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $(".chat_send").click();
+        }
+    });
+
+    $(".chat_send").click(function () {
+        $(".chat_message").each(function (index, e) {
+            var message = $(e).val();
+            if (message.length > 0) {
+                server.send(JSON.stringify({
+                    event: "chat",
+                    data: message,
+                    key: authkey
+                }));
+            }
+        });
+        $(".chat_message").val("");
+    });
 }
