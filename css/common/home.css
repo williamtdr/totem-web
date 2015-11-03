@@ -231,6 +231,11 @@ div[role="navigation"] {
     float: right;
 }
 
+.fa-spin {
+    font-size: 0.8em;
+    color: #ffffff;
+}
+
 .panel {
     background-color: rgba(52, 73, 94, 0.8);
     color: #ECF0F1;

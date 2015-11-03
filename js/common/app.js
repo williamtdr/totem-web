@@ -216,7 +216,7 @@ changebtn.click(function () {
 function refreshRoomList() {
     content = $("#room_list_content");
     content.empty();
-    content.append('<b>Loading...</b>');
+    content.append('<b><i class="fa fa-circle-o-notch fa-spin"></i> Loading...</b>');
     $.ajax({
         url: config.API + "/room/list.php",
         jsonp: "callback",
@@ -255,7 +255,7 @@ function refreshRoomList() {
 }
 
 function loadYoutubePlaylists() {
-    $(".sidebar-playlist-list").html('<b>Loading...</b>');
+    $(".sidebar-playlist-list").html('<b><i class="fa fa-circle-o-notch fa-spin"></i> Loading...</b>');
     $.ajax({
         url: config.API + "/youtube/getPlaylists.php",
         jsonp: "callback",

@@ -126,7 +126,7 @@ function loadPlaylistItems(playlistId, more) {
         $(".sidebar-playlist-items").removeAttr("hidden");
     }
 
-    container.append('<li class="list-group-item playlist loading">Loading... </li>');
+    container.append('<li class="list-group-item playlist loading"><i class="fa fa-circle-o-notch fa-spin"></i> Loading... </li>');
 
     $.ajax({
         url: config.API + "/youtube/getPlaylistItems.php",
