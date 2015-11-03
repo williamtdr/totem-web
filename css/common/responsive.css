@@ -52,6 +52,10 @@
 		width: 100%;
 		white-space: nowrap;
 	}
+
+    #createRoomFormContent {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 500px) {

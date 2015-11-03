@@ -154,6 +154,47 @@ div[role="navigation"] {
     margin-right: 37px;
 }
 
+.room_form_header {
+    width: 100%;
+    height: 70px;
+}
+
+.room_form_back {
+    color: #BDC3C7;
+    font-size: 0.8em;
+}
+
+.room_form_back > .fa {
+    margin-right: 5px;
+    vertical-align: 2%;
+}
+
+.room_form_back:hover {
+    color: #ffffff;
+}
+
+.room_form_name {
+    font-family: 'Raleway', sans-serif;
+    color: #ECF0F1;
+    font-size: 1.2em;
+}
+
+#createRoomFormContent {
+    margin-left: 18px;
+}
+
+#roomDescription {
+    max-width: 400px;
+}
+
+#roomName {
+    max-width: 300px;
+}
+
+#roomPassword {
+    max-width: 200px;
+}
+
 .room-users-wrapper > .fa {
     font-size: 0.9em;
     top: 11px;

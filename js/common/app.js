@@ -337,4 +337,6 @@ function sessionComplete() {
         });
         $(".chat_message").val("");
     });
+
+    if(display_name) $("#roomName").val(display_name + "'s Room");
 }

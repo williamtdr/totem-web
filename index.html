@@ -297,24 +297,31 @@
 <div id="create_room" class="animsition" hidden="hidden">
     <div class="container create-form">
         <form id="createRoomForm">
-            <div class="alert alert-danger" style="display:none;"></div>
-            <div class="alert alert-success" style="display:none;"></div>
-            <div class="form-group">
-                <label for="roomName">Room name</label>
-                <input id="roomName" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="roomDescription">Room Description</label>
-                <textarea id="roomDescription" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="roomPassword">Room Password <em>(optional)</em></label>
-                <input type="password" id="roomPassword" class="form-control">
-            </div>
-            <div class="form-group text-right">
-                <button onclick="showRoomList()" class="btn btn-warning cancel-btn">Back</button>
-                <button type="submit" class="btn btn-success">Create</button>
-            </div>
+			<div id="room_form_header">
+				<span class="room_form_back" onclick="showRoomList()"><i class="fa fa-angle-left"></i></span>
+				<span class="room_form_name">Create Room</span>
+			</div>
+
+			<div class="alert alert-danger" style="display:none;"></div>
+			<div class="alert alert-success" style="display:none;"></div>
+
+            <div id="createRoomFormContent">
+				<div class="form-group">
+					<label for="roomName">Room name</label>
+					<input id="roomName" type="text" class="form-control input-lg">
+				</div>
+				<div class="form-group">
+					<label for="roomDescription">Room Description</label>
+					<textarea id="roomDescription" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="roomPassword">Room Password <em>(optional)</em></label>
+					<input type="password" id="roomPassword" class="form-control">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-info">Create</button>
+				</div>
+			</div>
         </form>
     </div>
 </div>
