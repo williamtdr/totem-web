@@ -2,6 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="">
     <title>Totem</title>
     <link href="css/common/background.css" rel="stylesheet">
     <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -343,6 +345,8 @@
 <script src="js/common/app.js"></script>
 <script src="js/common/app-events.js"></script>
 
-<script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
+<!--<script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>!-->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
 </body>
 </html>
