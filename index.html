@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="">
+    <meta name="google-signin-client_id" content="545747761221-rb098ajp2aik13fhp7h7bn5m0s9l7iir.apps.googleusercontent.com">
     <title>Totem</title>
     <link href="css/common/background.css" rel="stylesheet">
     <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -84,9 +84,8 @@
         <span class="navigation_option nav_room pointer" onclick="switchTab('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
         <span class="navigation_option nav_music pointer" onclick="switchTab('my_music')">My Music</span>
 
-        <div id="login-menu">
+        <div class="g-signin2" data-onsuccess="signIn" data-theme="light"></div>
 
-        </div>
     </div>
     <div id="mobile_navigation_emblems" hidden="hidden">
         <div class="nav_rooms" onclick="switchTab('rooms')">
@@ -98,7 +97,7 @@
         <div class="nav_chat">
             <i class="fa fa-comment-o"></i>
         </div>
-        <div class="nav_music" onclick="switchTab('my_music')">
+        <div class="nav_music" onclick="switchTab('my_music');checkYTAuth()">
             <i class="fa fa-music"></i>
         </div>
         <div class="nav_info">
@@ -118,7 +117,7 @@
 </div>
 <div id="my_music" class="animsition container" hidden="hidden">
     <div class="sidebar-playlist-list">
-
+	<button class="btn btn-primary" hidden="hidden">YT AUTH</button>
     </div>
     <div class="sidebar-playlist-items" hidden="hidden">
 		<span class="playlist-list-return" onclick="returnToPlaylistList()">
