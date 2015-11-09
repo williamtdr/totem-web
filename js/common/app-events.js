@@ -41,28 +41,59 @@ $(document).ready(function () {
             }
         })
     });
-
+        var apik = "AIzaSyDtzwkqYtp2LG1skKPj63EgzJxOJwLhdYk"
+        var authk = "545747761221-rb098ajp2aik13fhp7h7bn5m0s9l7iir.apps.googleusercontent.com"
+        function init() {
+            gapi.client.setApiKey(apik);
+        }
+        var OAUTH2_CLIENT_ID = authk;
+        var OAUTH2_SCOPES = [
+            'https://www.googleapis.com/auth/youtube'
+        ];
+        function handleAuthResult(authResult) {
+            if (authResult && !authResult.error) {
+                loadAPIClientInterfaces()
+            } else {
+            	document.getElementById("ytaa").close()
+                gapi.auth.authorize({
+                    client_id: OAUTH2_CLIENT_ID,
+                    scope: OAUTH2_SCOPES,
+                    immediate: false
+                    }, handleAuthResult);
+            }
+        }
+        function loadAPIClientInterfaces() {
+            gapi.client.load('youtube', 'v3', function() {
+                handleAPILoaded();
+            });
+        }
+        function signIn(gu) {
+            var gup = gu.getBasicProfile();
+            var name = gup.getName();
+            var image = gup.getImageUrl();
+            document.getElementById("signupin").style.display = "none";
+            document.getElementById("loggedin").style.display = "block";
+            dcvCheckAuth()
+        }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut()
+        }
+        function checkYTAuth() {
+            gapi.auth.authorize({
+                client_id: OAUTH2_CLIENT_ID,
+                scope: OAUTH2_SCOPES,
+                immediate: true
+            }, YTAuthResult);
+        }
+        function YTAuthResult(authResult) {
+            if (authResult && !authResult.error) {
+               console.log("auth success") 
+            } else {
+              ("#yt-auth").prop("hidden", null)
+            }
+        }
     $('body')
-        .delegate('.signInButton', 'click', function () {
-            auth2
-                .grantOfflineAccess({
-                    redirect_uri: 'postmessage',
-                    scope: 'https://www.googleapis.com/auth/youtube',
-                    approval_prompt: 'force'
-                })
-                .then(function (response) {
-                    $.ajax({
-                        url: config.API + '/app/session.php',
-                        method: 'POST',
-                        jsonp: 'callback',
-                        dataType: 'jsonp',
-                        data: response,
-                        complete: function () {
-
-                        }
-                    });
-                });
-        })
         .delegate('.youtubeRate', 'click', function () {
             var btn = $(this),
                 btnText = btn.find('.rate'),
