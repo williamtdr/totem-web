@@ -212,6 +212,12 @@ div[role="navigation"] {
     padding-left: 15px;
 }
 
+.g-signin2 {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .no-song {
     line-height: 2.4;
     color: #808080;
