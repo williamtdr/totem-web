@@ -78,25 +78,25 @@
 <div class="site_navigation" hidden="hidden">
     <div class="logo">totem</div>
     <div role="navigation">
-        <span class="navigation_option active nav_rooms pointer" onclick="switchTab('rooms')">Rooms</span>
-        <span class="navigation_option nav_room pointer" onclick="switchTab('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
-        <span class="navigation_option nav_music pointer" onclick="switchTab('my_music')">My Music</span>
+        <span class="navigation_option active nav_rooms pointer" onclick="switchView('rooms')">Rooms</span>
+        <span class="navigation_option nav_room pointer" onclick="switchView('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
+        <span class="navigation_option nav_music pointer" onclick="switchView('my_music')">My Music</span>
 
         <div id="login-menu">
 
         </div>
     </div>
     <div id="mobile_navigation_emblems" hidden="hidden">
-        <div class="nav_rooms" onclick="switchTab('rooms')">
+        <div class="nav_rooms" onclick="switchView('rooms')">
             <i class="fa fa-bars"></i>
         </div>
-        <div class="nav_room active" onclick="switchTab('now_playing')">
+        <div class="nav_room active" onclick="switchView('now_playing')">
             <i class="fa fa-play"></i>
         </div>
         <div class="nav_chat">
             <i class="fa fa-comment-o"></i>
         </div>
-        <div class="nav_music" onclick="switchTab('my_music')">
+        <div class="nav_music" onclick="switchView('my_music')">
             <i class="fa fa-music"></i>
         </div>
         <div class="nav_info">
@@ -199,7 +199,7 @@
                 <span class="current-dj"></span>
             </div>
 
-            <div class="item active embed-responsive embed-responsive-16by9">
+            <div class="item active player-wrapper">
                 <div id="player"></div>
             </div>
 

@@ -88,7 +88,7 @@ function loadVideo(id, title, artist) {
     loadVideoById(id, 0);
     $("#main_content").removeAttr("hidden");
     $("#no_video").attr("hidden", "hidden");
-    switchTab('now_playing');
+    switchView('now_playing');
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
 
@@ -151,7 +151,7 @@ function addToQueueById(id, title, artist) {
         "key": authkey
     }));
 
-    switchTab('now_playing');
+    switchView('now_playing');
 }
 
 function addCurrentSongToQueue() {
@@ -174,7 +174,7 @@ function addCurrentSongToQueue() {
         "key": authkey
     }));
 
-    switchTab('now_playing');
+    switchView('now_playing');
 
     setSongInfo(last_title, last_artist);
     loadVideoById(last_url_fragment, Math.floor(Date.now() / 1000) - started_at);

@@ -107,6 +107,10 @@ h3 {
     font-size: 0.8em;
 }
 
+.player-wrapper {
+    z-index: 9999;
+}
+
 .score {
     display: inline-block;
 }
