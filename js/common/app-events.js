@@ -24,7 +24,7 @@ function loadAPIClientInterfaces() {
     });
 }
 function signIn(gu) {
-    var gup = gu.getBasicProfile();
+    window.gup = gu.getBasicProfile();
     checkYTAuth()
 }
 function signOut() {
