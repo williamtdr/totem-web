@@ -26,7 +26,7 @@ var refreshQueueList = function () {
     queueList.html('<span>In queue:</span>');
 
     queuedSongs.forEach(function (q, index) {
-        queueList.append('<li><span>' + q.song.artist + '-' + q.song.name + '</span></li>')
+        queueList.append('<li><span>' + q.song.artist + ' - ' + q.song.name + '</span></li>')
     });
 };
 
