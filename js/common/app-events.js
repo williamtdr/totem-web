@@ -10,6 +10,7 @@ var OAUTH2_SCOPES = [
 function handleAuthResult(authResult) {
     if (authResult && !authResult.error) {
         loadAPIClientInterfaces()
+        checkYTAuth()
     } else {
         gapi.auth.authorize({
             client_id: OAUTH2_CLIENT_ID,
@@ -20,13 +21,10 @@ function handleAuthResult(authResult) {
 }
 function loadAPIClientInterfaces() {
     gapi.client.load('youtube', 'v3', function() {
-        handleAPILoaded();
     });
 }
 function signIn(gu) {
     var gup = gu.getBasicProfile();
-    var name = gup.getName();
-    var image = gup.getImageUrl();
     checkYTAuth()
 }
 function signOut() {
@@ -42,9 +40,9 @@ function checkYTAuth() {
 }
 function YTAuthResult(authResult) {
     if (authResult && !authResult.error) {
-       console.log("auth success") 
+        document.getElementById("#yt-auth").style.display = "none" 
     } else {
-      ("#yt-auth").prop("hidden", null)
+        document.getElementById("#yt-auth").style.display = "block" 
     }
 }
 $(document).ready(function () {
