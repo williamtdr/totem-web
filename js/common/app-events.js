@@ -40,9 +40,9 @@ function checkYTAuth() {
 }
 function YTAuthResult(authResult) {
     if (authResult && !authResult.error) {
-        document.getElementById("#yt-auth").style.display = "none" 
+        document.getElementById("yt-auth").style.display = "none" 
     } else {
-        document.getElementById("#yt-auth").style.display = "block" 
+        document.getElementById("yt-auth").style.display = "block" 
     }
 }
 $(document).ready(function () {
