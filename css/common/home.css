@@ -28,6 +28,7 @@ div {
     position: fixed;
     top: 0;
     left: 0;
+    opacity: 0;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 12px;
