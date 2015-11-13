@@ -31,7 +31,7 @@ function logout() {
     window.location.href = config.API + "/user/logout.php";
 }
 
-function switchView(destination) {
+function switchTab(destination) {
     $(".active").removeClass("active");
     $("#room_list").attr("hidden", "hidden");
     $("#now_playing").attr("hidden", "hidden");
@@ -54,7 +54,6 @@ function switchView(destination) {
             $('.site_navigation').css("background-color", "rgba(0,0,0,0.3)");
             $(".nav_room").addClass("active");
             $("#now_playing").removeAttr("hidden");
-            $(".player-wrapper").removeAttr("style");
             break;
         case "my_music":
             bgshader.animate({
@@ -63,14 +62,6 @@ function switchView(destination) {
             $(".nav_music").addClass("active");
             $("#my_music").removeAttr("hidden");
             $('.site_navigation').css("background-color", "rgba(0,0,0,1)");
-            var pl = $("#player");
-            pl.removeAttr("hidden");
-            pl.animate({
-                "height":"480px",
-                "width":"640px",
-                "opacity":1
-            }, 500);
-            $("#main_content").removeAttr("hidden");
             break;
     }
 }

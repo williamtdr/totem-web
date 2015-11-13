@@ -1,50 +1,3 @@
-var apik = "AIzaSyDtzwkqYtp2LG1skKPj63EgzJxOJwLhdYk"
-var authk = "545747761221-rb098ajp2aik13fhp7h7bn5m0s9l7iir.apps.googleusercontent.com"
-function init() {
-    gapi.client.setApiKey(apik);
-}
-var OAUTH2_CLIENT_ID = authk;
-var OAUTH2_SCOPES = [
-    'https://www.googleapis.com/auth/youtube'
-];
-function handleAuthResult(authResult) {
-    if (authResult && !authResult.error) {
-        loadAPIClientInterfaces()
-        checkYTAuth()
-    } else {
-        gapi.auth.authorize({
-            client_id: OAUTH2_CLIENT_ID,
-            scope: OAUTH2_SCOPES,
-            immediate: false
-            }, handleAuthResult);
-    }
-}
-function loadAPIClientInterfaces() {
-    gapi.client.load('youtube', 'v3', function() {
-    });
-}
-function signIn(gu) {
-    window.gup = gu.getBasicProfile();
-    checkYTAuth()
-}
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut()
-}
-function checkYTAuth() {
-    gapi.auth.authorize({
-        client_id: OAUTH2_CLIENT_ID,
-        scope: OAUTH2_SCOPES,
-        immediate: true
-    }, YTAuthResult);
-}
-function YTAuthResult(authResult) {
-    if (authResult && !authResult.error) {
-        document.getElementById("yt-auth").style.display = "none" 
-    } else {
-        document.getElementById("yt-auth").style.display = "block" 
-    }
-}
 $(document).ready(function () {
     $('#createRoomForm').on('submit', function (ev) {
         ev.preventDefault();
@@ -88,7 +41,28 @@ $(document).ready(function () {
             }
         })
     });
+
     $('body')
+        .delegate('.signInButton', 'click', function () {
+            auth2
+                .grantOfflineAccess({
+                    redirect_uri: 'postmessage',
+                    scope: 'https://www.googleapis.com/auth/youtube',
+                    approval_prompt: 'force'
+                })
+                .then(function (response) {
+                    $.ajax({
+                        url: config.API + '/app/session.php',
+                        method: 'POST',
+                        jsonp: 'callback',
+                        dataType: 'jsonp',
+                        data: response,
+                        complete: function () {
+
+                        }
+                    });
+                });
+        })
         .delegate('.youtubeRate', 'click', function () {
             var btn = $(this),
                 btnText = btn.find('.rate'),
