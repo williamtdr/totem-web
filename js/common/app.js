@@ -244,6 +244,10 @@ $(document).ready(function() {
         force_room = true;
         $(".active").removeClass("active");
         $("#nav_room").addClass("active");
+        $("#now_playing").removeAttr("hidden");
+        $(".site_navigation").animate({
+            "opacity": 1
+        }, 500);
     } else {
         $("#room_list").removeAttr("hidden");
     }
