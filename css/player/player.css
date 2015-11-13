@@ -107,6 +107,10 @@ h3 {
     font-size: 0.8em;
 }
 
+.player-wrapper {
+    z-index: 9999;
+}
+
 .score {
     display: inline-block;
 }
@@ -836,7 +840,7 @@ h1, h2, h3 {
     color: white;
     width: 300px;
     position: absolute;
-    height: 50%;
+    height: 600px;
     top: 158px;
 }
 
@@ -859,6 +863,39 @@ h1, h2, h3 {
 }
 
 #roomlist-row .roomlist-title {
+    font-size: 1.3em;
+}
+
+/* Room List */
+#queueList {
+    display: none;
+    background-color: rgba(205, 37, 20, 0.40);
+    color: white;
+    width: 300px;
+    position: absolute;
+    height: 600px;
+    top: 158px;
+}
+
+#queueList:before {
+    content: "";
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 15px solid rgba(205, 37, 20, 0.40);
+    position: absolute;
+    top: -15px;
+    right: 40px;
+}
+
+#queueList-row {
+    padding: 10px 15px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style: none;
+}
+
+#queueList-row .roomlist-title {
     font-size: 1.3em;
 }
 
