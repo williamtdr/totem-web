@@ -21,36 +21,37 @@ var toggleBoxes = function (exceptId) {
 };
 
 var refreshQueueList = function () {
-    var queueList = $('#queueList');
+    var queuelist = $('#queuelist');
 
-    queueList.html('<span>In queue:</span>');
+    queuelist.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
+    queuelist.height($('#chat').height()).width($('#chat').width());
+
+	queuelist = $('.list-row');
 
     queuedSongs.forEach(function (q, index) {
-        queueList.append('<li><span>' + q.song.artist + '-' + q.song.name + '</span></li>')
+        queuelist.append('<li class="list-item list-item-small"><span>' + q.song.artist + ' - ' + q.song.name + '</span></li>')
     });
+
 };
 
 var refreshUserList = function () {
-    var roomList = $("#roomlist"), temp;
+    var userlist = $("#userlist"), temp;
 
-    roomList.html('<ul id="roomlist-row"><span class="roomlist-title">Listeners</span></ul>');
-	roomList.height($('#chat').height()).width($('#chat').width());
-	
-	roomList = $('#roomlist-row');
+    userlist.html('<ul class="list-row list-title">Listeners</ul>');
+	userlist.height($('#chat').height()).width($('#chat').width());
+
+	userlist = $('.list-row');
 
     user_list.forEach(function (userName, index) {
         temp = userName.toLowerCase(),
 		dname = display_name.toLowerCase();
 
         if (temp == dname) {
-            roomList.append('<li class="roomlist-listenersuser"><span class="chat-you">' + userName + '</span></li>');
-			return;
+            userlist.append('<li class="list-item list-item-small"><span class="chat-you">' + userName + '</span></li>');
         } else if (temp == "dcv" || temp == "williamtdr") {
-            roomList.append('<li class="roomlist-listenersuser"><span class="chat-dev">' + userName + '</span></li>');
-			return;
+            userlist.append('<li class="list-item list-item-small"><span class="chat-dev">' + userName + '</span></li>');
         } else {
-            roomList.append('<li class="roomlist-listenersuser"><span>' + userName + '</span></li>');
-			console.log('normal');
+            userlist.append('<li class="list-item list-item-small"><span>' + userName + '</span></li>');
 		}
     });
 };
@@ -78,16 +79,16 @@ function sidebarInit() {
     });
 
     $("#room-users").click(function () {
-        toggleBoxes('roomlist');
+        toggleBoxes('userlist');
 
         refreshUserList();
     });
 		
 	//Roomlist height resize
     $(window).on('resize', function () {
-		if($('#roomlist').css('display') == 'block') {
+		if($('#userlist').css('display') == 'block') {
 			$('#chat').show().css('visibility','hidden');
-			$('#roomlist').height($('#chat').height()).width($('#chat').width());
+			$('#userlist').height($('#chat').height()).width($('#chat').width());
 			$('#chat').hide().css('visibility', 'visible');
 		} else
 			return;
@@ -98,7 +99,7 @@ function sidebarInit() {
             return false;
         }
 
-        toggleBoxes('queueList');
+        toggleBoxes('queuelist');
 
         refreshQueueList();
     });

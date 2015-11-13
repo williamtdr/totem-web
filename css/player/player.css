@@ -107,6 +107,10 @@ h3 {
     font-size: 0.8em;
 }
 
+.player-wrapper {
+    z-index: 9999;
+}
+
 .score {
     display: inline-block;
 }
@@ -732,28 +736,122 @@ h1, h2, h3 {
     font-size: 0.8em;
 }
 
+#landing_page {
+    z-index: 20000;
+    color: white;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#landing_title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em;
+    color: #ECF0F1;
+    display: block;
+    margin-bottom: 30px;
+}
+
+#landing_footer {
+    max-width: 400px;
+}
+
+#landing_screenshot {
+    float: right;
+    width: 40%;
+    margin: 30px;
+}
+
+#email_group {
+    margin-top: 20px;
+    max-width: 300px;
+    width: 100%;
+}
+
+#beta_footer {
+    margin-top: 20px;
+}
+
+#beta_footer > i {
+    font-size: 0.8em;
+    vertical-align: 10%;
+    margin-left: 3px;
+}
+
+#beta_launch {
+    margin-top: 10px;
+}
+
+#beta_launch_header {
+    color: #BDC3C7;
+    transition: .25s;
+}
+
+#beta_launch_header:hover {
+    color: #ECF0F1;
+}
+
+.action_btn {
+    background-color: #3498DB !important;
+}
+
+.action_btn:hover {
+    background-color: #2980B9 !important;
+}
+
+#beta_launch_content {
+    max-width: 200px;
+}
+
+#auth_failed {
+    line-height: 3;
+    color: #E74C3C;
+}
+
+@media (max-width: 768px) {
+    #landing_screenshot {
+        width: 300px;
+    }
+}
+
+@media (max-width: 500px) {
+    #landing_page {
+        padding: 10px;
+    }
+
+    #landing_screenshot {
+        width: 95%;
+        position: absolute;
+        top: 80px;
+        margin: 0;
+    }
+
+    #landing_footer {
+        position: absolute;
+        top: 400px;
+        max-width: 100%;
+    }
+}
+
 /* User List */
-#roomlist {
+.list-menu {
     display: none;
-    background-color: rgba(26, 205, 175, 0.4);
     color: white;
     width: 300px;
     position: absolute;
-    height: 50%;
+    height: 600px;
     top: 158px;
 }
 
-#roomlist:before {
+.list-menu:before {
     content: "";
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 15px solid rgba(26, 205, 175, 0.4);
     position: absolute;
     top: -15px;
-    right: 160px;
 }
 
-#roomlist-row {
+.list-row {
     padding: 10px 15px;
     height: 100%;
     overflow-y: auto;
@@ -761,8 +859,38 @@ h1, h2, h3 {
     list-style: none;
 }
 
-#roomlist-row .roomlist-title {
-    font-size: 1.3em;
+.list-title {
+    float: left;
+    width: 100%;
+    color: #F1C40F;
+    font-size: 1.2em;
+}
+
+li.list-item {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+li.list-item-small {
+    font-size: 0.8em;
+}
+
+#userlist {
+    background-color: rgba(26, 205, 175, 0.4);
+}
+
+#userlist:before {
+    border-bottom: 15px solid rgba(26, 205, 175, 0.4);
+	right: 170px;
+}
+
+#queuelist {
+    background-color: rgba(88, 133, 195, 0.40);
+}
+
+#queuelist:before {
+    border-bottom: 15px solid rgba(88, 133, 195, 0.40);
+	right: 60px;
 }
 
 .fullscreen > .song-title-container > h1 {
@@ -794,21 +922,6 @@ h1, h2, h3 {
     margin-left: 15px;
 }
 
-.roomlist-listenerstitle {
-	padding-left: 10px;
-    margin-top: 5px;
-    float: left;
-    font-size: 0.8em;
-    width: 100%;
-	color: #F1C40F;
-}
-
-li.roomlist-listenersuser {
-	list-style-type: none;
-	font-size: 0.8em;
-	padding-left: 10px;
-}
-
 .youtubeRate {
     color: #3498DB;
 }
@@ -820,18 +933,21 @@ li.roomlist-listenersuser {
 
 .youtubeRate:hover {
     color: #34bcff;
+    list-style-type: none;
+    font-size: 0.8em;
+    padding-left: 10px;
 }
 
 #my_music .sidebar-playlist-list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .searchResults ul.list-group li.list-group-item:hover {
-	background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255,255,255,0.2);
 }
 
 .playlist-list-return {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 @media (max-width: 460px) {

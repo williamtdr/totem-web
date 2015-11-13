@@ -243,7 +243,7 @@ $(document).ready(function() {
     if(window.location.hash !== "" && window.location.hash.length > 0) {
         force_room = true;
         $(".active").removeClass("active");
-        $("#nav_room").addClass("active");
+        $(".nav_room").addClass("active");
         $("#now_playing").removeAttr("hidden");
         $(".site_navigation").animate({
             "opacity": 1
