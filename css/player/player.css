@@ -810,11 +810,16 @@ li.roomlist-listenersuser {
 }
 
 .youtubeRate {
-    color: white;
+    color: #3498DB;
+}
+
+.youtubeRate > .fa {
+    font-size: 1.2em;
+    margin-right: 2px;
 }
 
 .youtubeRate:hover {
-    color: white;
+    color: #34bcff;
 }
 
 #my_music .sidebar-playlist-list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container {
