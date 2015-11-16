@@ -950,7 +950,7 @@ li.list-item-small {
     cursor: pointer;
 }
 
-@media (max-width: 460px) {
+@media(max-width: 460px) {
     .current-dj {
         display: none;
     }
@@ -958,4 +958,19 @@ li.list-item-small {
     .score-negative-wrapper {
         padding-right: 15px;
     }
+}
+
+@media(max-height: 767px) {
+	#now_playing {
+		padding-top: 70px;
+	}
+
+	h1 {
+		font-size: 2.6em;
+		margin-top: 0 !important;
+	}
+
+	h3 {
+		font-size: 1.5em !important;
+	}
 }
