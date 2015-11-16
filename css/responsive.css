@@ -114,5 +114,15 @@
 	#volume-slider {
 		float: right;
 	}
+    h1 {
+        font-size: 1.4em;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    h3 {
+        margin: 10px 0 10px 0 !important;
+        padding: 0 !important;
+        font-size: 1.2em !important;
+    }
 }
 

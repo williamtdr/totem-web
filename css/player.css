@@ -635,6 +635,21 @@ h1, h2, h3 {
     }
 }
 
+@media(max-width: 500px) {
+    .player-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #sidebar {
+        display: none;
+    }
+
+    #now_playing {
+        padding-top: 70px;
+    }
+}
+
 .chat-tag {
     background-color: rgba(52, 152, 219, 0.3);
 }
