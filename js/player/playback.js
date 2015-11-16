@@ -451,14 +451,10 @@ function finishInit() {
     server.onmessage = function (event) {
         event_data = JSON.parse(event.data);
         data = event_data.data;
-        console.log(event_data);
+		console.log(event_data);
 
         switch (event_data.event) {
             case "room_data": // called to initialize room
-                if (data == false) {
-                    window.location = "http://totem.fm";
-                    return false;
-                }
                 room_name = data.display_name;
                 $("#room-description").html(data.description);
                 $(".room-title").html(data.display_name);
@@ -466,9 +462,6 @@ function finishInit() {
 
                 counterUpdate(data);
 
-                $.each(data.chat_history, function (index, chat_obj) {
-                    addChatMessage(chat_obj.sender, chat_obj.message);
-                });
                 if (data.song) {
                     started = data.song.started_at;
                     now = Math.floor(Date.now() / 1000);
@@ -496,6 +489,10 @@ function finishInit() {
                     $("#no_video").removeAttr("hidden");
                     nothing_playing = true;
                 }
+
+				$.each(data.chat_history, function (index, chat_obj) {
+					addChatMessage(chat_obj.sender, chat_obj.message);
+				});
                 break;
             case "score_update":
                 setScore(data.positive, data.negative);
