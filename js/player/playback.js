@@ -369,8 +369,11 @@ function addChatMessage(sender, text) {
         senderclass = senderclass + " chat-you ";
     }
     if (chatmessage.length > 0) {
-        $(".chat-text").append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
-        $(".chat-text").scrollTop($(".chat-text")[0].scrollHeight);
+		var chat_text = $(".chat-text");
+		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+		$.each(chat_text, function(index, el) {
+			$(el).scrollTop(el.scrollHeight);
+		});
     }
 }
 
