@@ -204,6 +204,7 @@ h3 {
 #main_content {
     float: left;
     transition: .25s;
+	width: calc(100% - 400px);
 }
 
 .video-option {
@@ -512,7 +513,6 @@ h3 {
     color: #BDC3C7;
     font-size: 1.5em;
     max-width: 500px;
-    padding-right: 30px;
 }
 
 #queue-container {
@@ -536,6 +536,14 @@ h3 {
 .current-dj-wrapper {
     color: #808080;
     font-size: 0.8em;
+	display: inline;
+	float: right;
+}
+
+.current-dj-wrapper > .fa {
+	color: #BDC3C7;
+	margin-left: 5px;
+	vertical-align: -5%;
 }
 
 #mobile_navigation_emblems > div {
@@ -615,39 +623,6 @@ h1, h2, h3 {
     margin-top: 20px;
     margin-bottom: 20px;
     transition: .25s;
-}
-
-@media (max-width: 1700px) {
-    .player-container {
-        margin-left: 100px;
-        margin-right: 100px;
-    }
-}
-
-@media (max-width: 1250px) {
-    .player-container {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    #sidebar {
-        right: 30px;
-    }
-}
-
-@media(max-width: 500px) {
-    .player-container {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    #sidebar {
-        display: none;
-    }
-
-    #now_playing {
-        padding-top: 70px;
-    }
 }
 
 .chat-tag {
@@ -783,29 +758,6 @@ h1, h2, h3 {
     width: 100%;
 }
 
-#beta_footer {
-    margin-top: 20px;
-}
-
-#beta_footer > i {
-    font-size: 0.8em;
-    vertical-align: 10%;
-    margin-left: 3px;
-}
-
-#beta_launch {
-    margin-top: 10px;
-}
-
-#beta_launch_header {
-    color: #BDC3C7;
-    transition: .25s;
-}
-
-#beta_launch_header:hover {
-    color: #ECF0F1;
-}
-
 .action_btn {
     background-color: #3498DB !important;
 }
@@ -814,38 +766,9 @@ h1, h2, h3 {
     background-color: #2980B9 !important;
 }
 
-#beta_launch_content {
-    max-width: 200px;
-}
-
 #auth_failed {
     line-height: 3;
     color: #E74C3C;
-}
-
-@media (max-width: 768px) {
-    #landing_screenshot {
-        width: 300px;
-    }
-}
-
-@media (max-width: 500px) {
-    #landing_page {
-        padding: 10px;
-    }
-
-    #landing_screenshot {
-        width: 95%;
-        position: absolute;
-        top: 80px;
-        margin: 0;
-    }
-
-    #landing_footer {
-        position: absolute;
-        top: 400px;
-        max-width: 100%;
-    }
 }
 
 /* User List */
@@ -963,29 +886,4 @@ li.list-item-small {
 
 .playlist-list-return {
     cursor: pointer;
-}
-
-@media(max-width: 460px) {
-    .current-dj {
-        display: none;
-    }
-
-    .score-negative-wrapper {
-        padding-right: 15px;
-    }
-}
-
-@media(max-height: 767px) {
-	#now_playing {
-		padding-top: 70px;
-	}
-
-	h1 {
-		font-size: 2.6em;
-		margin-top: 0 !important;
-	}
-
-	h3 {
-		font-size: 1.5em !important;
-	}
 }
