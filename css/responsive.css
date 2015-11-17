@@ -29,6 +29,17 @@
 	.chat {
 		margin-bottom: 40px;
 	}
+
+	h1 {
+		font-size: 2em;
+		margin-top: 0 !important;
+	}
+
+	h3 {
+		font-size: 1.5em;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
 }
 
 @media (max-width: 768px) {

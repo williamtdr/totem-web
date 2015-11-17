@@ -7,10 +7,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 player = false;
 player_initialized = false;
 player_is_visible = true;
-last_image_url = "";
-last_title = "";
-last_room = "";
-last_author = "";
 ctime = 0;
 duration = 60;
 room = window.location.hash.replace("#", "");
@@ -23,6 +19,9 @@ user_list = [];
 songHistory = [];
 disconnect_timer = 3;
 
+last_image_url = "";
+last_room = "";
+last_author = "";
 last_title = "";
 last_artist = "";
 last_url_fragment = "";
@@ -243,6 +242,9 @@ function loadVideoById(id, time) {
 }
 
 function setSongInfo(title, artist) {
+	if(title.length > 80) title = $.trim(title).substring(0, 80).split(" ").slice(0, -1).join(" ") + "…";
+	if(artist.length > 40) artist = $.trim(artist).substring(0, 40).split(" ").slice(0, -1).join(" ") + "…";
+
     if (mode == 0) {
         $("title").html(title + " · " + artist + " · " + room_name + " · Totem");
     } else {
