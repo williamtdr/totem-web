@@ -864,14 +864,14 @@ li.list-item-small {
 
 .youtubeRate > .fa {
     font-size: 1.2em;
+	transition: .25s;
     margin-right: 2px;
 }
 
 .youtubeRate:hover {
     color: #34bcff;
     list-style-type: none;
-    font-size: 0.8em;
-    padding-left: 10px;
+    font-size: 0.9em;
 }
 
 #my_music .sidebar-playlist-list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container {
