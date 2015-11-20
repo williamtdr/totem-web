@@ -170,8 +170,6 @@ h3 {
     background-color: #34495E;
     border-radius: 13px; /* (height of inner div) / 2 + padding */
     padding: 3px;
-    width: calc(100% - 56px);
-    max-width: 500px;
     display: inline-block;
 }
 
@@ -778,7 +776,7 @@ h1, h2, h3 {
     width: 300px;
     position: absolute;
     height: 600px;
-    top: 158px;
+    top: 188px;
 }
 
 .list-menu:before {
@@ -819,7 +817,7 @@ li.list-item-small {
 
 #userlist:before {
     border-bottom: 15px solid rgba(26, 205, 175, 0.4);
-	right: 170px;
+	right: 135px;
 }
 
 #queuelist {
@@ -828,7 +826,7 @@ li.list-item-small {
 
 #queuelist:before {
     border-bottom: 15px solid rgba(88, 133, 195, 0.40);
-	right: 60px;
+	right: 25px;
 }
 
 .fullscreen > .song-title-container > h1 {

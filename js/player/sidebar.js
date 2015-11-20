@@ -25,9 +25,13 @@ var refreshQueueList = function () {
 
     queuelist.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
     queuelist.height($('#chat').height()).width($('#chat').width());
-
+	if ($('#chat').css('display') !== 'block') {
+		$('#chat').show().css('visibility','hidden');
+		$('#queuelist').height($('#chat').height()).width($('#chat').width());
+		$('#chat').hide().css('visibility', 'visible');
+	}
+	
 	queuelist = $('.list-row');
-
     queuedSongs.forEach(function (q, index) {
         queuelist.append('<li class="list-item list-item-small"><span>' + q.song.artist + ' - ' + q.song.name + '</span></li>')
     });
@@ -39,9 +43,13 @@ var refreshUserList = function () {
 
     userlist.html('<ul class="list-row list-title">Listeners</ul>');
 	userlist.height($('#chat').height()).width($('#chat').width());
-
+	if ($('#chat').css('display') !== 'block') {
+		$('#chat').show().css('visibility','hidden');
+		$('#userlist').height($('#chat').height()).width($('#chat').width());
+		$('#chat').hide().css('visibility', 'visible');
+	}
+	
 	userlist = $('.list-row');
-
     user_list.forEach(function (userName, index) {
         temp = userName.toLowerCase(),
 		dname = display_name.toLowerCase();
@@ -86,9 +94,13 @@ function sidebarInit() {
 		
 	//Roomlist height resize
     $(window).on('resize', function () {
-		if($('#userlist').css('display') == 'block') {
+		if ($('#userlist').css('display') == 'block') {
 			$('#chat').show().css('visibility','hidden');
 			$('#userlist').height($('#chat').height()).width($('#chat').width());
+			$('#chat').hide().css('visibility', 'visible');
+		} else if ($('#queuelist').css('display') == 'block') {
+			$('#chat').show().css('visibility','hidden');
+			$('#queuelist').height($('#chat').height()).width($('#chat').width());
 			$('#chat').hide().css('visibility', 'visible');
 		} else
 			return;
@@ -195,6 +207,7 @@ function switchSidebar(destination) {
             $(".sidebar-history").removeAttr("hidden");
             break;
     }
+	
 }
 
 function returnToPlaylistList() {

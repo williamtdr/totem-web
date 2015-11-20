@@ -1,9 +1,3 @@
-@media screen and (max-width: 1199px) {
-	#time_elapsed {
-		width: calc(100% - 200px);
-	}
-}
-
 @media (max-width: 991px) {
 	.room-option {
 		margin-top: 7px;
@@ -105,10 +99,6 @@
 	.small-header {
 		font-size: 1.2em;
 	}
-
-	#time_elapsed {
-		width: calc(100% - 100px);
-	}
 }
 
 @media (max-height: 580px) and (min-width: 991px) {
@@ -120,10 +110,12 @@
 @media (max-height: 480px) and (min-width: 991px) {
 	.chat {
 		height: 60%;
+		display: block !important;
+		margin-top: 0;
 	}
 
-	#room-description-wrapper, #room-users-wrapper {
-		display: none;
+	#room-description-wrapper, #room-users-wrapper, .list-menu {
+		display: none !important;
 	}
 }
 
@@ -139,7 +131,7 @@
 	}
 
 	#time_elapsed {
-		width: calc(100% - 50px);
+		width: calc(100% - 50px) !important;
 	}
 
 	.score_wrapper {

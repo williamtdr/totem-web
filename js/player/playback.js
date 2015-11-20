@@ -90,6 +90,7 @@ function loadVideo(id, title, artist) {
     switchTab('now_playing');
     $("#now_playing_content").removeAttr("hidden");
     $("#now_playing_placeholder").attr("hidden", "hidden");
+	$('#time_elapsed').attr('style','width: calc(100% - '+ Math.floor($('.current-dj-wrapper').width() + $('#time-remaining').width() + 20) +'px)')
 
     advanceBackgroundImage();
 }
@@ -486,6 +487,8 @@ function finishInit() {
                     getYoutubeRate(data.song.url_fragment);
 
                     queuedSongs = data.queue;
+					
+					$('#time_elapsed').attr('style','width: calc(100% - '+ Math.floor($('.current-dj-wrapper').width() + $('#time-remaining').width() + 20) +'px);')
                 } else {
                     $("#main_content").attr("hidden", "hidden");
                     $("#no_video").removeAttr("hidden");
@@ -553,6 +556,7 @@ function finishInit() {
                     started_at = Math.floor(Date.now() / 1000);
                     nothing_playing = false;
                     setScore(0, 0);
+					$('#time_elapsed').attr('style','width: calc(100% - '+ Math.floor($('.current-dj-wrapper').width() + $('#time-remaining').width() + 20) +'px)')
 
                     getYoutubeRate(data.song.url_fragment);
                 }
