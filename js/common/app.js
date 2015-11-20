@@ -197,7 +197,7 @@ function sessionComplete() {
         $("#login-menu").html('<a onclick="logout()"><span id="login-full">Hi, </span>' + display_name + '</a>');
 
         $(".chat-textbox")
-            .html('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
+            .html('<span title=":grinning:" class="twa twa-grinning chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
 
         loadYoutubePlaylists();
     }

@@ -277,6 +277,11 @@ function vote(type) {
     }));
 }
 
+var replaceTwemoji = function(emoji, name) {
+    var emojifiedString = "<div title=':"+ name +":' class='twa twa-"+ name +"'> </div>";
+    return emojifiedString;
+}
+
 function addChatMessage(sender, text) {
     chatmessage = text.trim();
     chatclass = " ";
@@ -371,9 +376,10 @@ function addChatMessage(sender, text) {
     if (sendercheck == display_name.toLowerCase()) {
         senderclass = senderclass + " chat-you ";
     }
+	
     if (chatmessage.length > 0) {
 		var chat_text = $(".chat-text");
-		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emojify.replace(chatmessage, replaceTwemoji) + '</span></span>');
 		$.each(chat_text, function(index, el) {
 			$(el).scrollTop(el.scrollHeight);
 		});

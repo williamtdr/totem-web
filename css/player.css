@@ -326,6 +326,13 @@ h3 {
     width: 298px;
 }
 
+.chat_emojisel {
+	position: relative;
+	display: table-cell !important;
+	left: 5px;
+	curser: pointer;
+}
+
 .chat_message {
     border: 0;
     background-color: transparent;
