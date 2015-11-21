@@ -20,6 +20,14 @@ var toggleBoxes = function (exceptId) {
     });
 };
 
+var toggleEmojiList = function() {
+	$('.chat-emojilist').toggle().empty();
+	
+	var emojiList = emojiListString.replace(/_/g,'-').split(',');
+	for (var x in emojiList)
+		$('.chat-emojilist').append('<span title=":'+ emojiList[x] +':" class="twa twa-'+ emojiList[x] +'"></span>')
+}
+
 var refreshQueueList = function () {
     var queuelist = $('#queuelist');
 
@@ -86,11 +94,11 @@ function sidebarInit() {
         addCurrentSongToQueue();
     });
 
-    $("#room-users").click(function () {
+    /*$("#room-users").click(function () {
         toggleBoxes('userlist');
 
         refreshUserList();
-    });
+    });*/
 		
 	//Roomlist height resize
     $(window).on('resize', function () {
@@ -105,6 +113,8 @@ function sidebarInit() {
 		} else
 			return;
     });
+	
+	$('.chat_emojisel').on('click', toggleEmojiList);
 
     $('#room-queue').on('click', function () {
         if (!queuedSongs.length) {
