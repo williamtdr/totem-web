@@ -1,0 +1,28 @@
+body {
+	margin: 0 auto;
+	font-family: 'Raleway', sans-serif;
+	background: #000000;
+	text-align: center;
+	color: #ECF0F1;
+	margin-top: 50px;
+	line-height: 1.5;
+}
+
+a {
+	color: #00bdef;
+	text-decoration: none;
+}
+
+#main_content {
+	z-index: 800;
+}
+
+#background_layer {
+	z-index: -1;
+	opacity: 0.3;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
