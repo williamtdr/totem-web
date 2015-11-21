@@ -286,22 +286,24 @@ function addChatMessage(sender, text) {
 	chatmessage = text.trim();
 	chatclass = " ";
 	if (chatmessage.toLowerCase().indexOf("@" + display_name) > -1) {
-		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
-		audio.play();
-		var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
-		var chatclass = " chat-tag ";
-		noty({
-			text: data.sender + ": " + chatmessage,
-			theme: 'relax',
-			dismissQueue: true,
-			type: "information",
-			layout: "topRight",
-			animation: {
-				open: {height: 'toggle'},
-				close: {height: 'toggle'}
-			},
-			timeout: 5000
-		});
+		if (! data.sender) { } else {
+			var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
+			audio.play();
+			var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
+			var chatclass = " chat-tag ";
+			noty({
+				text: data.sender + ": " + chatmessage,
+				theme: 'relax',
+				dismissQueue: true,
+				type: "information",
+				layout: "topRight",
+				animation: {
+					open: {height: 'toggle'},
+					close: {height: 'toggle'}
+				},
+				timeout: 5000
+			});
+		}
 	}
 	if (chatmessage.match("[ ]*")) {
 		console.log("only spaces")
