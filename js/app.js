@@ -1,3 +1,32 @@
+var config = {
+	API: 'http://api.totem.fm',
+	SERVER: 'ws://server.totem.fm:10000/',
+	GOOGLE_CLIENT_ID: '545747761221-rb098ajp2aik13fhp7h7bn5m0s9l7iir.apps.googleusercontent.com'
+};
+
+var isUndefined = function (a) {
+	return typeof a == 'undefined';
+};
+
+var isNull = function (a) {
+	return a == null;
+};
+
+var playerInitiated = function () {
+	return typeof player.setVolume == 'function';
+};
+
+var loadJavascript = function (path) {
+	var ref = document.createElement('script');
+
+	ref.setAttribute("type", "text/javascript");
+	ref.setAttribute('src', path);
+
+	document
+		.getElementsByTagName("head")[0]
+		.appendChild(ref)
+};
+
 force_room = false;
 loadJavascript(config.API + '/app/session.php');
 
@@ -240,6 +269,127 @@ function sessionComplete() {
 }
 
 $(document).ready(function() {
+	$('#createRoomForm').on('submit', function (ev) {
+		ev.preventDefault();
+		var form = $(this),
+			error = form.find('.alert-danger'),
+			success = form.find('.alert-success'),
+			name = form.find('#roomName')
+				.val().trim(),
+			description = form.find('#roomDescription')
+				.val().trim(),
+			password = form.find('#roomPassword')
+				.val().trim();
+
+		success.hide();
+		error.hide();
+
+		$.ajax({
+			url: config.API + '/room/create.php',
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			data: {
+				name: name,
+				description: description,
+				password: password
+			},
+			success: function (r) {
+				if (r.success) {
+					refreshRoomList();
+					switchRoom(name);
+
+					return false;
+				}
+
+				if (!r.success) {
+					error.html(r.message).show();
+
+					return false;
+				}
+
+				console.warn('Unhandled case after form submission');
+			}
+		})
+	});
+
+	$('body')
+		.delegate('.signInButton', 'click', function () {
+			auth2
+				.grantOfflineAccess({
+					redirect_uri: 'postmessage',
+					scope: 'https://www.googleapis.com/auth/youtube',
+					approval_prompt: 'force'
+				})
+				.then(function (response) {
+					$.ajax({
+						url: config.API + '/app/session.php',
+						method: 'POST',
+						jsonp: 'callback',
+						dataType: 'jsonp',
+						data: response,
+						complete: function () {
+
+						}
+					});
+				});
+		})
+		.delegate('.youtubeRate', 'click', function () {
+			var btn = $(this),
+				btnText = btn.find('.rate'),
+				mode = (btn.text().trim().toLowerCase() == 'unlike') ? 'none' : 'like',
+				videoId = btn.data('videoid');
+
+			if (mode == 'none') {
+				btnText.text('Like');
+			} else {
+				btnText.text('Unlike');
+			}
+
+			$.ajax({
+				url: config.API + '/youtube/video.php',
+				data: $.param({
+					id: videoId,
+					mode: mode,
+					action: 'rate'
+				}),
+				jsonp: 'callback',
+				dataType: 'jsonp',
+				success: function (r) {
+					// console.log(r);
+				}
+			});
+		});
+
+
+	$('#searchYoutube').on('submit', function (ev) {
+		ev.preventDefault();
+
+		search();
+	});
+
+	$(window).scroll(function () {
+		var docElement = $(document)[0].documentElement,
+			winElement = $(window)[0],
+			videoRows = $('li.list-group-item.playlist'),
+			rowsLoading = $('li.list-group-item.playlist.loading'),
+			rowsFinished = $('li.list-group-item.playlist.finished');
+
+		if (!videoRows.length || rowsLoading.length || rowsFinished.length) {
+			return false;
+		}
+
+		if ((docElement.scrollHeight - winElement.innerHeight) == winElement.pageYOffset) {
+
+			if ($('#searchYoutube').is(':visible')) {
+				search(true);
+
+				return false;
+			}
+
+			loadPlaylistItems(false, true);
+		}
+	});
+
     if(window.location.hash !== "" && window.location.hash.length > 0) {
         force_room = true;
         $(".active").removeClass("active");
