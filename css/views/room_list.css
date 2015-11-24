@@ -1,0 +1,137 @@
+#room_list_tools {
+	padding: 15px !important;
+}
+
+#room_list_options {
+	list-style-type: none;
+	padding: 0;
+}
+
+#room_list_options > li {
+	transition: .25s;
+	padding: 0 0 15px 0;
+	cursor: pointer;
+}
+
+#room_list_options > li > .fa {
+	font-size: 0.9em;
+	margin-right: 10px;
+}
+
+#nav_create_room {
+	color: #16A085;
+}
+
+#nav_create_room:hover {
+	color: #1ABC9C;
+}
+
+#nav_refresh_list {
+	color: #ff7f45;
+}
+
+#nav_refresh_list:hover {
+	color: #E69250;
+}
+
+.room_option_orange {
+	color: #E67E22;
+}
+
+.room_option_blue {
+	color: #3498DB;
+}
+
+#room_list {
+	z-index: 200;
+	padding-top: 90px;
+	color: #ffffff;
+}
+
+#room_users_wrapper {
+	right: -15px;
+	position: absolute;
+}
+
+.room_users_wrapper {
+	float: right;
+	margin-right: 37px;
+}
+
+.room_users_wrapper > .fa {
+	font-size: 0.9em;
+	top: 11px;
+	right: 25px;
+	position: absolute;
+}
+
+.room-card > img {
+	width: 100%;
+	padding-top: 5px;
+}
+
+.room-name {
+	float: left;
+	padding-left: 15px;
+}
+
+.no-song {
+	line-height: 2.4;
+	color: #808080;
+	padding-left: 15px;
+}
+
+.panel-body {
+	padding: 0;
+	padding-top: 5px;
+}
+
+.panel-default {
+	border: 0;
+}
+
+.footer_option {
+	float: right;
+}
+
+.panel {
+	background-color: rgba(52, 73, 94, 0.8);
+	color: #ECF0F1;
+}
+
+.panel-dark {
+	background-color: rgba(52, 73, 94, 1);
+	color: #ECF0F1;
+}
+
+.panel-footer {
+	background-color: rgba(52, 73, 94, 0.8);
+	color: #ECF0F1;
+	border: 0;
+	height: 60px;
+}
+
+.panel-footer > span {
+	font-size: 0.8em;
+	line-height: 1.4;
+}
+
+.song-name {
+	float: left;
+	color: #ECF0F1;
+	text-overflow: ellipsis;
+	width: calc(100% - 120px);
+	height: 20px;
+	overflow: hidden;
+}
+
+.song-artist {
+	float: left;
+	color: #BDC3C7;
+	padding-top: 20px;
+	left: 30px;
+	position: absolute;
+	text-overflow: ellipsis;
+	width: calc(100% - 120px);
+	overflow: hidden;
+}

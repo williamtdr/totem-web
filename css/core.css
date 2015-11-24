@@ -1,0 +1,122 @@
+html, body {
+	background: #000;
+	margin: 0;
+	line-height: 1.7;
+	color: white;
+}
+
+h1, h2, h3 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	transition: .25s;
+}
+
+h1 {
+	color: #ECF0F1;
+	font-size: 3em;
+	margin-top: 10px;
+}
+
+h3 {
+	color: #BDC3C7;
+	font-size: 30px;
+}
+
+a {
+	color: #1ABC9C;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+input {
+	font-family: 'Raleway', sans-serif;
+	font-size: 0.8em;
+}
+
+textarea {
+	background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.form-control {
+	font-size: 0.8em;
+}
+
+.form-control:focus {
+	border: none;
+	outline: none;
+	box-shadow: none;
+}
+
+.btn {
+	font-family: 'Raleway', sans-serif;
+	padding: 10px 15px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.4;
+	border: none;
+	border-radius: 4px;
+	-webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+	transition: border .25s linear, color .25s linear, background-color .25s linear;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+.btn-info {
+	color: #fff;
+	background-color: #3498db;
+}
+
+a, a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, #playlist_list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container, .playlist-list-return {
+	cursor: pointer;
+}
+
+.no-pointer, div {
+	cursor: default;
+}
+
+.no-sel {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+
+	-o-user-select: none;
+	user-select: none;
+}
+
+.fa {
+	font-size: 1.4em;
+	margin-right: 3px;
+	vertical-align: 10%;
+}
+
+.fa-spin {
+	font-size: 0.8em;
+	color: #ffffff;
+}
+
+.top {
+	z-index: 10;
+}
+
+.bottom {
+	z-index: 0;
+}
+
+.input-group-btn {
+	font-size: 1.4em;
+}
+
+.input-lg {
+	height: auto;
+}
+
+#music_list {
+	z-index: 200;
+	padding-top: 90px;
+	display: none;
+}
+
+#disconnected {
+	display: none;
+}

@@ -6,9 +6,9 @@ document.getElementById("background_layer").setAttribute('style', 'background: u
 var time = 10;
 var timer = document.getElementById("time");
 function countDown() {
-	setTimeout(function () {
+	setTimeout(function() {
 		time = time - 1;
-		if (time == 0) {
+		if(time == 0) {
 			location.href = "http://totem.fm";
 		}
 		timer.innerHTML = time;

@@ -1,0 +1,36 @@
+.list-group-item {
+	float: left;
+	width: 100%;
+}
+
+.playlist-item-title {
+	color: #BDC3C7;
+}
+
+img.playlist-item-thumbnail {
+	float: left;
+}
+
+#playlist_search {
+	display: none;
+}
+
+#playlist_items {
+	display: none;
+}
+
+.playlist-item-metadata-container {
+	float: left;
+	clear: none;
+	width: calc(100% - 135px) !important;
+	margin-left: 10px;
+	position: static !important;
+}
+
+span.playlist_item_artist_container {
+	clear: left;
+}
+
+.searchResults ul.list-group li.list-group-item:hover {
+	background-color: rgba(255,255,255,0.2);
+}

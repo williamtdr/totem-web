@@ -1,0 +1,119 @@
+#create_form {
+	z-index: 200;
+	margin-top: 90px;
+	color: #95A5A6;
+	display: none;
+}
+
+#create_room_form_content > .form-group > label {
+	font-family: 'Raleway', sans-serif;
+	margin-top: 15px;
+	font-weight: 300;
+	color: white;
+}
+
+#create_room_form_content > .form-group > .btn {
+	margin-top: 15px;
+}
+
+#room_form_name {
+	font-family: 'Raleway', sans-serif;
+	color: #ECF0F1;
+	font-size: 1.2em;
+}
+
+#room_form_header {
+	width: 100%;
+	height: 50px;
+}
+
+#room_form_back {
+	color: #BDC3C7;
+	font-size: 1.2em;
+	margin-right: 10px;
+}
+
+#room_form_back > .fa {
+	margin-right: 5px;
+	vertical-align: 2%;
+}
+
+#room_form_back:hover {
+	color: #ffffff;
+}
+
+#create_room_form_content {
+	margin-left: 18px;
+	max-width: 400px;
+}
+
+#room_form_password_select {
+	margin-top: 15px;
+}
+
+.password_switcher_disabled {
+	color: #BDC3C7;
+	transition: .25s;
+	cursor: pointer;
+}
+
+.password_switcher_disabled:hover {
+	color: #ECF0F1;
+}
+
+.password_switcher_enabled {
+	color: white;
+	font-weight: 500;
+}
+
+#new_room_description {
+	max-width: 400px;
+	width: 100%;
+}
+
+#room_form_password_well {
+	display: none;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+#new_room_name {
+	max-width: 300px;
+	width: 80%;
+	background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#new_room_password {
+	max-width: 200px;
+}
+
+#create_form > form > textarea {
+	resize: vertical;
+}
+
+#create_form > form > .cancel-btn {
+	margin-right: 20px;
+}
+
+#create_form > form > .alert {
+	display: none;
+}
+
+#room_form_back:before {
+	font-family: "FontAwesome";
+	content: "\f104";
+}
+
+@media screen and (max-width: 500px) {
+	#create_room_form_content {
+		margin-left: 0;
+	}
+
+	#room_form_header {
+		height: auto;
+	}
+
+	#create_form {
+		margin-top: 70px;
+	}
+}

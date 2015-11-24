@@ -32,8 +32,8 @@ var foo = {
         },
         b: {id: 456, type: "Int"}
     }
-	// fBar : function (x,y);
-    fOne: function (a, b, c, d, e, f, g, h) {
+	// fBar : function(x,y);
+    fOne: function(a, b, c, d, e, f, g, h) {
         var x = a + b + c + d + e + f + g + h;
         fTwo(a, b, c, fThree(d, e, f, g, h));
         var z = a == 'Some string' ? 'yes' : 'no';
@@ -49,17 +49,17 @@ var foo = {
      * @param {string} a Parameter A description.
      * @param {string} b Parameter B description. Can extend beyond the right margin.
      */
-    fTwo: function (a, b, c, d) {
+    fTwo: function(a, b, c, d) {
         foo(a, b, c, d); // Line comment which can be wrapped if long.
-        if (true)
+        if(true)
             return c;
-        if (a == 'one' && (b == 'two' || c == 'three')) {
+        if(a == 'one' && (b == 'two' || c == 'three')) {
             return a + b + c + d;
         } else return strD;
-        if (a == 'one') {
+        if(a == 'one') {
             return 1;
         }
-        else if (a == 'two') {
+        else if(a == 'two') {
             return 2;
         }
         var number = -10;
@@ -72,7 +72,7 @@ var foo = {
         return d;
     },
 
-    fThree: function (strA, strB, strC, strD, strE) {
+    fThree: function(strA, strB, strC, strD, strE) {
         var number = prompt("Enter a number:", 0);
         switch (number) {
             case 0 :

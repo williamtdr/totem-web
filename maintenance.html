@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maintenance Mode &middot; Totem</title>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
+	<link href='css/error.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="main_content">
+	<h1>Don't look!</h1>
+
+	<p>
+		Our team of monkeys told us they needed to take the site down for a bit so they could fix things. We'll be back soon!
+	</p>
+</div>
+<div id="background_layer"></div>
+<script>
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	document.getElementById("background_layer").setAttribute('style', 'background: url("http://d35y9swri9q567.cloudfront.net/background/' + getRandomInt(1, 572) + '.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;');
+</script>
+</body>
+</html>

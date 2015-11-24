@@ -12,98 +12,86 @@
 	<link href="http://static.totem.fm/css/bootstrap-modal.css" rel="stylesheet">
 	<link href="http://static.totem.fm/css/font-awesome.min.css" rel="stylesheet">
 	<link href="http://static.totem.fm/css/emojify.min.css" rel="stylesheet">
-	<link href="css/player.css" rel="stylesheet">
-	<link href="css/home.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
+	<link href="css/core.css" rel="stylesheet">
+	<link href="css/nav.css" rel="stylesheet">
+	<link href="css/views/create_form.css" rel="stylesheet">
+	<link href="css/views/music_list.css" rel="stylesheet">
+	<link href="css/views/player.css" rel="stylesheet">
+	<link href="css/views/room_list.css" rel="stylesheet">
+	<link href="css/views/username.css" rel="stylesheet">
 </head>
 <body>
 <div id="background_layer"></div>
 <div id="background_shader"></div>
-<div class="room-list-spinner"></div>
-<div class="modal fade" id="changeUsernameModal" tabindex="-1" role="dialog" aria-labelledby="changeUsernameModalLabel">
+<nav class="no-sel">
+	<span id="logo">totem <span id="logo_subheader">beta</span></span>
+	<ul id="desktop_nav">
+		<li class="nav_room_list active">Rooms</li>
+		<li class="nav_player">Now Playing</li>
+		<li class="nav_music_list">My Music</li>
+	</ul>
+	<ul id="mobile_nav">
+		<li class="nav_room_list active"></li>
+		<li class="nav_player"></li>
+		<li class="nav_music_list"></li>
+		<li class="nav_chat"></li>
+		<li class="nav_info"></li>
+	</ul>
+	<a id="login_menu"></a>
+</nav>
+<div class="modal fade" id="change_username_modal" tabindex="-1" role="dialog" aria-labelledby="change_username_modalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="changeUsernameModalLabel">Welcome!</h4>
+				<h4 class="modal-title" id="change_username_modalLabel">Welcome!</h4>
 			</div>
 			<div class="modal-body">
-				<p>Thanks for joining the party. Pick a username:</p>
-				<input type="text" class="form-control" id="username-change">
+				Thanks for joining the party. Pick a username:
+				<input type="text" class="form-control" id="username_change">
 
-				<div class="errors">
-
-				</div>
+				<div class="errors"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="save-username">Save</button>
-				<span class="change-username-spinner"></span>
+				<button type="button" class="btn btn-primary" id="save_username">Save</button>
+				<span id="change_username_spinner"><i class="fa fa-circle-o-notch fa-spin"></i></span>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="site_navigation">
-	<div class="logo">totem</div>
-	<div role="navigation">
-		<span class="navigation_option active nav_rooms pointer" onclick="switchTab('rooms')">Rooms</span>
-		<span class="navigation_option nav_room pointer" onclick="switchTab('now_playing')"><span id="now-playing-full">Now </span>Playing</span>
-		<span class="navigation_option nav_music pointer" onclick="switchTab('my_music')">My Music</span>
-
-		<div id="login-menu">
-
-		</div>
-	</div>
-	<div id="mobile_navigation_emblems" hidden="hidden">
-		<div class="nav_rooms" onclick="switchTab('rooms')">
-			<i class="fa fa-bars"></i>
-		</div>
-		<div class="nav_room active" onclick="switchTab('now_playing')">
-			<i class="fa fa-play"></i>
-		</div>
-		<div class="nav_chat">
-			<i class="fa fa-comment-o"></i>
-		</div>
-		<div class="nav_music" onclick="switchTab('my_music')">
-			<i class="fa fa-music"></i>
-		</div>
-		<div class="nav_info">
-			<i class="fa fa-info-circle"></i>
-		</div>
-	</div>
+<div id="disconnected" class="animsition">
+	<table>
+		<tr>
+			<td width="100px">
+				<i class="fa fa-exclamation-triangle disconnected-triangle"></i>
+			</td>
+			<td>
+				<div class="disconnected-header">Disconnected
+					<div class="disconnected-body">
+						The server is probably restarting or being worked on. Refreshing in <span id="disconnected-countdown">3</span>...
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
-<div id="disconnected" class="animsition" hidden="hidden">
-	<i class="fa fa-exclamation-triangle disconnected-triangle"></i>
-
-	<div class="disconnected-header">Disconnected
-		<div class="disconnected-body">
-			The server is probably restarting or being worked on. Refreshing in <span
-				id="disconnected-countdown">3</span>...
-		</div>
-	</div>
-</div>
-<div id="my_music" class="animsition container" hidden="hidden">
-	<div class="sidebar-playlist-list">
+<div id="music_list" class="animsition container">
+	<div id="playlist_list">
 
 	</div>
-	<div class="sidebar-playlist-items" hidden="hidden">
-		<span class="playlist-list-return" onclick="returnToPlaylistList()">
-			&laquo; Playlists
-		</span>
+	<div id="playlist_items">
+		<span class="playlist-list-return">&laquo; Playlists</span>
 		<ul class="list-group sidebar-playlist playlist-list-content">
 			<li class="list-group-item playlist">
 				Loading...
 			</li>
 		</ul>
 	</div>
-	<div class="sidebar-search animsition" hidden="hidden">
-		<span class="playlist-list-return" onclick="returnToPlaylistList()">
-			&laquo; Search
-		</span>
+	<div id="playlist_search" class="animsition">
+		<span class="playlist-list-return">&laquo; Search</span>
 
 		<form id="searchYoutube" class="input-group">
 			<input type="text" class="form-control" id="search_text" placeholder="Search Youtube">
-			<span class="input-group-btn" style="font-size: 1.4em">
+			<span class="input-group-btn">
 				<button class="btn btn-primary" type="submit" id="search_send">Search</button>
 			</span>
 		</form>
@@ -113,52 +101,34 @@
 		</div>
 	</div>
 </div>
-<div id="room_list" class="animsition container" hidden="hidden">
+<div id="room_list" class="animsition container">
 	<div class="row">
 		<div class="col-sm-4">
-			<div class="panel panel-default panel-dark">
-				<div class="panel-body room-list-tools">
-					<span class="room-list-intro">
-						<b>Welcome!</b> Totem lets you find new music through great communities. Share your favorite songs, or just hang out!
-					</span>
-					<a class="room-option room-option-green pointer" onclick="showCreateForm()">
-						<i class="fa fa-plus"></i>Create Room
-					</a>
-					<span class="room-option room-option-orange pointer" onclick="refreshRoomList()">
-						<i class="fa fa-refresh"></i>Refresh List
-					</span>
-					<span class="room-option room-option-blue pointer">
-						<i class="fa fa-expand"></i>Show All Rooms
-					</span>
-				</div>
+			<div class="panel panel-dark" id="room_list_tools">
+				<b>Welcome!</b> Totem lets you find new music through great communities. Share your favorite songs, or just hang out!
+				<ul id="room_list_options">
+					<li id="nav_create_room"><i class="fa fa-plus"></i>Create Room</li>
+					<li id="nav_refresh_list"><i class="fa fa-refresh"></i>Refresh List</li>
+				</ul>
 			</div>
 		</div>
-		<div id="room_list_content">
-
-		</div>
+		<div id="room_list_content"></div>
 	</div>
 </div>
-<div id="room_chat_tab" hidden="hidden" class="animsition container">
-	<div class="chat">
-		<div class="chat-text">
-
+<div id="player" class="animsition player_container">
+	<div id="now_playing_content">
+		<div id="waiting_for_server">
+			<div class="container">
+				<i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...
+			</div>
 		</div>
-		<div class="chat-textbox input-group">
-
-		</div>
-	</div>
-</div>
-<div id="now_playing" class="animsition player-container" hidden="hidden">
-	<div id="now_playing_content" hidden="hidden">
 		<div id="main_content">
 			<div class="song-title-container">
 				<h1 class="title_display"></h1>
 				<h3 class="artist_display"></h3>
 			</div>
 
-			<div id="time_elapsed">
-				<div></div>
-			</div>
+			<div id="time_elapsed"><div></div></div>
 			<span id="time-remaining">0:00</span>
 
 			<div class="current-dj-wrapper">
@@ -166,91 +136,70 @@
 				<i class="fa fa-headphones"></i>
 			</div>
 
-			<div class="item active embed-responsive embed-responsive-16by9">
-				<div id="player"></div>
+			<div class="embed-responsive embed-responsive-16by9">
+				<div id="youtube_player"></div>
 			</div>
 
-			<div id="video_options">
-				<div class="score_wrapper score_wrapper_bottom" hidden="hidden">
-					<span class="current-dj dj_display_bottom"></span>
-
-					<div class="score-positive-wrapper" onclick="vote(1)">
-						<i class="fa fa-chevron-up"></i>
-
-						<div class="score-positive score"></div>
-					</div>
-					<div class="score-negative-wrapper" onclick="vote(-1)">
-						<i class="fa fa-chevron-down"></i>
-
-						<div class="score-negative score"></div>
-					</div>
-				</div>
-				<div id="toggles">
-					<div id="video-toggle" onclick="togglePlayerVisibility()">
+			<div id="toggle_block" class="no-sel">
+				<div id="player_actions" class="pull-left">
+					<div id="video-toggle" class="toggle">
 						<i class="fa fa-eye"></i>
 					</div>
-					<div id="volume-toggle" style="margin-right: 10px">
+					<div id="volume-toggle" class="toggle">
 						<i class="fa fa-volume-down"></i>
 					</div>
 
 					<input type="range" value="50" min="0" max="100" id="volume-slider">
+				</div>
 
-					<div class="score_wrapper score_wrapper_top pull-right">
-						<a class="btn btn-sm youtubeRate" style="display:none;">
-							<i class="fa fa-thumbs-up"></i> <span class="rate">Like</span>
-						</a>
-
-						<div class="score-positive-wrapper" onclick="vote(1)">
-							<i class="fa fa-chevron-up"></i>
-
-							<div class="score-positive score"></div>
-						</div>
-						<div class="score-negative-wrapper" onclick="vote(-1)">
+				<div id="vote_actions" class="pull-right">
+					<div id="score_wrapper">
+						<div id="score-negative-wrapper" class="pointer">
 							<i class="fa fa-chevron-down"></i>
-
-							<div class="score-negative score"></div>
+							<div id="score-negative" class="score"></div>
+						</div>
+						<div id="score-positive-wrapper" class="pointer">
+							<i class="fa fa-chevron-up"></i>
+							<div id="score-positive" class="score"></div>
 						</div>
 					</div>
+					<span id="youtube_rate">
+						<i class="fa fa-thumbs-up"></i> <span class="rate">Like</span>
+					</span>
 				</div>
 			</div>
 		</div>
-		<!-- end: main content -->
 
-		<div id="no_video" hidden="hidden">
+		<div id="no_video" class="no-sel">
 			<span class="big-header">Awkward silence...</span>
 
 			<div class="small-header">No song is in the queue to play. You can add one from the <i>My Music</i> tab.
 			</div>
 		</div>
 		<div id="sidebar" class="col-xs-4">
-			<div id="room-info">
-				<div id="in-room">
+			<div id="top_info_panel">
+				<div id="room_info">
 					<span id="room-title" class="room-title"></span>
-				<span id="room-description-wrapper">
-					<span id="room-description">
-
-					</span>
-					<span id="room-description-extend" hidden="hidden">read more...</span>
+				<span id="room_description_wrapper">
+					<span id="room_description"></span>
+					<span id="room_description-extend">read more...</span>
 				</span>
-				<span id="room-users-wrapper">
+				<span id="room_users_wrapper" class="no-sel">
 					<span id="room-users" class="focused"><span class="number">0</span> <span class="room-info-footer">listening</span></span>
 					<span id="room-queue" class="focused"><span class="number">0</span> <span class="room-info-footer">in queue</span></span>
 				</span>
 				</div>
-				<div id="manual" hidden="hidden">
+				<div id="manual">
 					<span id="playlist-title"></span>
-					<span id="add-to-queue" class="manual-option"><a href="#"><i class="fa fa-plus"></i> add song to
-						queue</a></span>
-					<span id="manual-notice" class="manual-option"><a href="#" onclick="switchMode(0)"><i
-							class="fa fa-chevron-left"></i> back to <span class="room-title"></span></a></span>
+					<span id="add-to-queue" class="manual-option"><a><i class="fa fa-plus"></i> add song to queue</a></span>
+					<span id="manual-notice" class="manual-option"><a onclick="switchClientState(STATE_PLAYING)"><i class="fa fa-chevron-left"></i> back to <span class="room-title"></span></a></span>
 				</div>
 			</div>
-			<div id="userlist" class="toToggle list-menu"></div>
-			<div id="queuelist" class="toToggle list-menu"></div>
+			<div id="user_list" class="toToggle list_menu"></div>
+			<div id="queue_list" class="toToggle list_menu"></div>
 			<div id="chat" class="chat toToggle">
 				<div class="chat-text"></div>
-				<div id="new-messages-indicator" hidden="hidden">new messages below</div>
-				<div class="chat-textbox input-group"></div>
+				<div class="chat_textbox input-group"></div>
 				<div class="chat-emojilist"></div>
 			</div>
 		</div>
@@ -259,36 +208,34 @@
 		Join a room or queue a song from your collection to see controls here.
 	</div>
 </div>
-<div id="create_room" class="animsition" hidden="hidden">
-	<div class="container create-form">
-		<form id="createRoomForm">
-			<div id="room_form_header">
-				<span class="room_form_back" onclick="showRoomList()"><i class="fa fa-angle-left"></i></span>
-				<span class="room_form_name">Create Room</span>
-			</div>
+<div id="create_form" class="animsition container">
+	<form>
+		<div id="room_form_header">
+			<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
+		</div>
 
-			<div class="alert alert-danger" style="display:none;"></div>
-			<div class="alert alert-success" style="display:none;"></div>
+		<div class="alert alert-danger"></div>
 
-			<div id="createRoomFormContent">
-				<div class="form-group">
-					<label for="roomName">Room name</label>
-					<input id="roomName" type="text" class="form-control input-lg">
+		<div id="create_room_form_content">
+			<div class="form-group">
+				<label for="new_room_name">Room name</label>
+				<input id="new_room_name" type="text" class="form-control input-lg">
+
+				<label for="new_room_description">Room Description</label>
+				<textarea id="new_room_description" class="form-control"></textarea>
+
+				<div id="room_form_password_select">
+					<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
 				</div>
-				<div class="form-group">
-					<label for="roomDescription">Room Description</label>
-					<textarea id="roomDescription" class="form-control"></textarea>
+
+				<div id="room_form_password_well">
+					<input type="password" id="new_room_password" class="form-control" placeholder="password">
 				</div>
-				<div class="form-group">
-					<label for="roomPassword">Room Password <em>(optional)</em></label>
-					<input type="password" id="roomPassword" class="form-control">
-				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-info">Create</button>
-				</div>
+
+				<button type="submit" class="btn btn-info">Create</button>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 </div>
 
 <script src="http://static.totem.fm/js/jquery.min.js"></script>
@@ -300,11 +247,21 @@
 <script src="http://static.totem.fm/js/emojify.min.js"></script>
 
 <script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/client.js"></script>
+<script src="js/view/player.js"></script>
+<script src="js/view/create_form.js"></script>
+<script src="js/view/room_list.js"></script>
+<script src="js/view/username.js"></script>
+<script src="js/youtube.js"></script>
 <script src="js/playback.js"></script>
 <script src="js/sidebar.js"></script>
 
 <script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+#change_username_modal {
+	color: black;
+}
+
+#change_username_spinner {
+	display: none;
+	opacity: 0;
+	transition: .25s;
+}
+
+#change_username_spinner > .fa {
+	color: black;
+	right: 90px;
+	bottom: 30px;
+	position: absolute;
+}
