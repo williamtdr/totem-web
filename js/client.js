@@ -62,7 +62,6 @@ client = {
 						song.url_fragment = data.song.url_fragment;
 						song.started_at = Math.floor(Date.now() / 1000);
 						room.dj = data.current_dj;
-						$('#time_elapsed').css('width','calc(100% - '+ Math.floor((room.dj.length * 10) + 70) +'px)');
 
 						setScore(data.score.positive, data.score.negative);
 						getYoutubeRate(data.song.url_fragment);
@@ -119,7 +118,6 @@ client = {
 					if(client.state == STATE_PLAYING) {
 						$("#current-dj-wrapper").show();
 						$(".current-dj").html(data.dj);
-						$('#time_elapsed').css('width','calc(100% - '+ Math.floor((room.dj.length * 10) + 70) +'px)');
 						setSongInfo(song.name, song.artist);
 						loadVideoById(song.url_fragment, song.progress);
 						getYoutubeRate(data.song.url_fragment);
