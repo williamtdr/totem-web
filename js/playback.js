@@ -174,11 +174,6 @@ function vote(type) {
 	}));
 }
 
-var replaceTwemoji = function(emoji, name) {
-	var emojifiedString = "<div title=':"+ name +":' class='twa twa-"+ name +"'> </div>";
-	return emojifiedString;
-}
-
 function addChatMessage(sender, text) {
 	chatmessage = text.trim();
 	chatclass = " ";
@@ -498,4 +493,3 @@ initDelayTimer = setInterval(function () {
 		$("#now_playing_placeholder").attr("hidden", "hidden");
 	}
 }, 100);
->>>>>>> origin/master
