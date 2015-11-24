@@ -89,7 +89,7 @@ function switchClientState(state) {
 			$("#no_video").hide();
 			$("#main_content").show();
 			setSongInfo(song.name, song.artist);
-			if(song.url_fragment) loadVideoById(song.url_fragment, song.progress);
+			if(song.url_fragment) loadVideoById(song.url_fragment, Math.floor(Date.now() / 1000) - song.started_at);
 		}
 		$("#manual").hide();
 		$("#score_wrapper").show();

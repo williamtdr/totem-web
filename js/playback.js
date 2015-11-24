@@ -87,7 +87,7 @@ setInterval(function() {
 	$("#time_elapsed div").css("width", (yt_player.getCurrentTime() / yt_player.getDuration()) * 100 + '%');
 	$('#time_elapsed').css('width','calc(100% - '+ Math.floor((room.dj.length * 15) + 70) +'px)');
 	// Above is a temporary fix for the username messing up the video sometimes... get order of things better so this isn't a problem
-	song.progress = yt_player.getCurrentTime();
+	if(client.state == STATE_PLAYING) song.progress = yt_player.getCurrentTime();
 
 	var time_remaining = new Date((yt_player.getDuration() - yt_player.getCurrentTime()) * 1000);
 	$("#time-remaining").html(time_remaining.getMinutes() + ":" + zeroPad(time_remaining.getSeconds(), 2));

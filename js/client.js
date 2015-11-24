@@ -60,7 +60,6 @@ client = {
 						song.name = data.song.name;
 						song.artist = data.song.artist;
 						song.url_fragment = data.song.url_fragment;
-						song.started_at = Math.floor(Date.now() / 1000);
 						room.dj = data.current_dj;
 
 						setScore(data.score.positive, data.score.negative);
