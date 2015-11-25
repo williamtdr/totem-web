@@ -99,6 +99,7 @@ client = {
 				break;
 				case "song_change":
 					$(".activated").removeClass("activated");
+					client.vote = VOTE_NEUTRAL;
 					song.progress = 0;
 					room.history.push(song);
 

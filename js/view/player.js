@@ -164,8 +164,6 @@ function setScore(positive, negative) {
 
 function vote(vote) {
 	$(".activated").removeClass("activated");
-	console.log(client.vote);
-	console.log(vote);
 	if(client.vote == vote) {
 		server.send(JSON.stringify({
 			event: "vote",
