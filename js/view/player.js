@@ -302,7 +302,7 @@ function addChatMessage(sender, text) {
 
 	if(chatmessage.length > 0) {
 		var chat_text = $(".chat-text");
-		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emojify.replace(chatmessage, replaceTwemoji) + '</span></span>');
+		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
 		$.each(chat_text, function(index, el) {
 			$(el).scrollTop(el.scrollHeight);
 		});
@@ -366,7 +366,7 @@ function togglePlayerVisibility() {
 		yt_player_el.show();
 		yt_player_el.animate({
 			opacity: 1,
-			height: '390px'
+			height: '100%'
 		}, 500);
 		client.player_shown = true;
 		window.localStorage.setItem("hide_video", false);
