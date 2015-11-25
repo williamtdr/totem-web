@@ -16,6 +16,9 @@ client = {
 	disconnect_timer_id: 0,
 	logged_in: false,
 	muted: false,
+	queue_banned: false,
+	banned: false,
+	chat_muted: false,
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
 		$("#waiting_for_server").show();
@@ -44,11 +47,13 @@ client = {
 					room.description = data.description;
 					room.user_list = data.listeners_by_name;
 					room.queue = data.queue;
+					client.banned = false;
+					client.queue_banned = false;
 
 					updateRoomMetadata();
 					counterUpdate();
 
-					if(data.song) {
+					if(data.song && !this.banned) {
 						var now = Math.floor(Date.now() / 1000);
 
 						song.started_at = data.song.started_at;
@@ -77,6 +82,7 @@ client = {
 					setScore(data.positive, data.negative);
 				break;
 				case "notification":
+					if(client.banned) return false;
 					noty({
 						text: data.text,
 						theme: 'relax',
@@ -97,7 +103,67 @@ client = {
 					counterUpdate();
 
 				break;
+				case "permission":
+					var banned_notification = function(text) {
+						noty({
+							text: text,
+							theme: 'relax',
+							dismissQueue: true,
+							type: "danger",
+							layout: "topRight",
+							animation: {
+								open: {height: 'toggle'},
+								close: {height: 'toggle'}
+							},
+							timeout: 15000
+						});
+					}, textbox = $(".chat_textbox");
+					switch(data.type) {
+						case "room":
+							banned_notification("You are banned from this room.");
+							switchClientState(STATE_NO_SONG);
+							yt_player.pauseVideo();
+							client.banned = true;
+							$("#permission_failure h2").html("You are banned from joining " + room.name + ".");
+							switchView(VIEW_BANNED);
+						break;
+						case "site":
+							disableNavigation();
+							switchClientState(STATE_NO_SONG);
+							yt_player.pauseVideo();
+							client.connected = false;
+							client.banned = true;
+							server.disconnect();
+							$("#permission_failure h2").html("You have been banned from this website.");
+							$("#permission_failure p").html("Contact a site admin for more information or to ask for the ban to be removed.");
+							switchView(VIEW_BANNED);
+						break;
+						case "queue_ban_room":
+							client.banFromQueue();
+							banned_notification("You are not allowed to queue songs in this room.");
+						break;
+						case "queue_ban_site":
+							client.banFromQueue();
+							banned_notification("You are not allowed to queue songs.");
+						break;
+						case "muted_room":
+							textbox.empty();
+							textbox.append("You are muted in this room.");
+						break;
+						case "muted_site":
+							textbox.empty();
+							textbox.append("You are muted.");
+						break;
+						case "room_admin":
+						break;
+						case "room_owner":
+						break;
+						case "site_admin":
+						break;
+					}
+				break;
 				case "song_change":
+					if(client.banned) return false;
 					$(".activated").removeClass("activated");
 					client.vote = VOTE_NEUTRAL;
 					song.progress = 0;
@@ -160,6 +226,12 @@ client = {
 		if(room.enabled) {
 			window.location.hash = room.id;
 			server.onopen = client.sendLoginRequest;
+		}
+	},
+	banFromQueue: function() {
+		client.queue_banned = true;
+		if(current_view == VIEW_MUSIC_LIST) {
+			switchSubView(SUBVIEW_QUEUE_BANNED);
 		}
 	},
 	onDisconnect: function() {

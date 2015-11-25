@@ -4,11 +4,13 @@ const VIEW_DEFAULT = 0,
 	  VIEW_MUSIC_LIST = 3,
 	  VIEW_CREATE_FORM = 4,
 	  VIEW_CHAT = 5,
-	  VIEW_INFO = 6;
+	  VIEW_INFO = 6,
+	  VIEW_BANNED = 7;
 
 const SUBVIEW_PLAYLIST_LIST = 0,
 	  SUBVIEW_SEARCH = 1,
-	  SUBVIEW_PLAYLIST_ITEMS = 2;
+	  SUBVIEW_PLAYLIST_ITEMS = 2,
+	  SUBVIEW_QUEUE_BANNED = 3;
 
 const NAV_DEFAULT_SHADING = "rgba(0,0,0,0.3)",
 	  NAV_DARK_SHADING = "rgba(0,0,0,0.9)",
@@ -26,17 +28,23 @@ var nav = $("nav"),
 var room_list = $("#room_list"),
 	player = $("#player"),
 	music_list = $("#music_list"),
-	create_form = $("#create_form");
+	create_form = $("#create_form"),
+	banned = $("#permission_failure");
 
 var playlist_items = $("#playlist_items"),
 	playlist_search = $("#playlist_search"),
-	playlist_list = $("#playlist_list");
+	playlist_list = $("#playlist_list"),
+	playlist_banned = $("#queue_permission_failure");
 
 var navbar_shown = false;
 current_view = VIEW_DEFAULT;
 
 function shadeBackground(level) {
 	bg_shader.css("opacity", level);
+}
+
+function disableNavigation() {
+	nav.hide();
 }
 
 // Hides & resets all page switching elements so
@@ -95,12 +103,23 @@ function switchView(destination) {
 			music_list.show();
 			shadeBackground(BACKGROUND_MUSIC_LIST_SHADING);
 			current_view = VIEW_MUSIC_LIST;
+			if(client.queue_banned) {
+				switchSubView(SUBVIEW_QUEUE_BANNED);
+			}
 		break;
 		case VIEW_CREATE_FORM:
 			nav_room_list.addClass("active");
 			create_form.show();
 			current_view = VIEW_CREATE_FORM;
 		break;
+		case VIEW_BANNED:
+			nav_player.addClass("active");
+			$("#now_playing").hide();
+			$("#no_video").hide();
+			player.show();
+			banned.show();
+			$("#sidebar").hide();
+			current_view = VIEW_BANNED;
 	}
 }
 
@@ -110,7 +129,11 @@ function switchSubView(destination) {
 	playlist_list.hide();
 	switch(destination) {
 		case SUBVIEW_PLAYLIST_LIST:
-			playlist_list.show();
+			if(client.queue_banned) {
+				playlist_banned.show();
+			} else {
+				playlist_list.show();
+			}
 		break;
 		case SUBVIEW_SEARCH:
 			playlist_search.show();
@@ -118,6 +141,9 @@ function switchSubView(destination) {
 			$(".searchResults .playlist-list-content").empty();
 		break;
 		case SUBVIEW_PLAYLIST_ITEMS:
+		break;
+		case SUBVIEW_QUEUE_BANNED:
+			playlist_banned.show();
 		break;
 	}
 }

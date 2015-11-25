@@ -4,6 +4,20 @@
 	display: none;
 }
 
+#permission_failure, #queue_permission_failure {
+	display: none;
+}
+
+#permission_failure > div > h2, #queue_permission_failure > div > h2 {
+	display: inline;
+	margin-left: 10px;
+}
+
+#permission_failure > div > .fa, #queue_permission_failure > div > h2 {
+	font-size: 1.5em;
+	vertical-align: 0;
+}
+
 #youtube_player {
 	margin-top: 10px;
 	width: 100%;
@@ -296,6 +310,7 @@
 
 .chat_textbox {
 	width: 298px;
+	text-align: center;
 }
 
 .chat_emojisel {
