@@ -68,7 +68,7 @@ function loadVideoById(id, time) {
 		});
 		player_initialized = true;
 	} else {
-		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'large'});
+		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
 		yt_player.seekTo(time);
 	}
 }
