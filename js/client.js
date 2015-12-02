@@ -119,7 +119,7 @@ client = {
 						});
 					}, textbox = $(".chat_textbox");
 					switch(data.type) {
-						case "room":
+						case "banned_room":
 							banned_notification("You are banned from this room.");
 							switchClientState(STATE_NO_SONG);
 							yt_player.pauseVideo();
@@ -127,7 +127,7 @@ client = {
 							$("#permission_failure h2").html("You are banned from joining " + room.name + ".");
 							switchView(VIEW_BANNED);
 						break;
-						case "site":
+						case "banned_site":
 							disableNavigation();
 							switchClientState(STATE_NO_SONG);
 							yt_player.pauseVideo();
