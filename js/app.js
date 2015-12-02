@@ -71,7 +71,15 @@ $(document).ready(function() {
 	initGoogleAuth();
 
 	if(room.enabled) {
-		client.connect();
+		if(client.connected) {
+			server.send(JSON.stringify({
+				event: "login",
+				key: authkey,
+				room: client.room.id
+			}));
+		} else {
+			client.connect();
+		}
 		switchView(VIEW_PLAYER);
 	} else {
 		switchView(VIEW_ROOM_LIST);

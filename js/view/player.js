@@ -84,7 +84,7 @@ function switchClientState(state) {
 			$("#no_video").show();
 			$("#main_content").hide();
 			$("title").html(room.name + " &middot; Totem");
-			yt_player.pauseVideo();
+			if(yt_player.pauseVideo) yt_player.pauseVideo();
 		} else {
 			$("#no_video").hide();
 			$("#main_content").show();

@@ -22,7 +22,7 @@ client = {
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
 		$("#waiting_for_server").show();
-		this.connected = true;
+		client.connected = true;
 
 		server.onclose = client.onDisconnect;
 
@@ -122,7 +122,7 @@ client = {
 						case "banned_room":
 							banned_notification("You are banned from this room.");
 							switchClientState(STATE_NO_SONG);
-							yt_player.pauseVideo();
+							if(yt_player.pauseVideo) yt_player.pauseVideo();
 							client.banned = true;
 							$("#permission_failure h2").html("You are banned from joining " + room.name + ".");
 							switchView(VIEW_BANNED);
@@ -130,7 +130,7 @@ client = {
 						case "banned_site":
 							disableNavigation();
 							switchClientState(STATE_NO_SONG);
-							yt_player.pauseVideo();
+							if(yt_player.pauseVideo) yt_player.pauseVideo();
 							client.connected = false;
 							client.banned = true;
 							server.disconnect();
