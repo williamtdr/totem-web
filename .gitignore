@@ -11,4 +11,8 @@ Desktop.ini
 # Mac crap
 .DS_Store
 /nbproject/private/
+
+# Project
 /js/init.dev.js
+node_modules/
+dist/
