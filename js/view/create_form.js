@@ -20,15 +20,16 @@ function initCreateForm() {
 		switchView(VIEW_ROOM_LIST);
 	});
 
-	$('#create_form.form').on('submit', function(ev) {
-		ev.preventDefault();
-		var form = $(this),
-			error = form.find('.alert-danger'),
-			name = form.find('#room_name').val().trim(),
-			description = form.find('#room_description').val().trim(),
-			password = form.find('#room_password').val().trim();
+	$('#create_room_form_content div button').click(function() {
+		var form = $('#create_room_form_content div'),
+			error = $("#create_form").find('.alert-danger'),
+			name = form.find('#new_room_name').val().trim(),
+			description = form.find('#new_room_description').val().trim();
 
 		error.hide();
+
+        var password = false;
+        if($("#room_form_password").hasClass("password_switcher_enabled")) password = form.find('#new_room_password').val().trim();
 
 		$.ajax({
 			url: config.API + '/room/create.php',
@@ -41,7 +42,7 @@ function initCreateForm() {
 			},
 			success: function(r) {
 				if(r.success) {
-					joinRoom(name);
+					joinRoom(r.room_id);
 				} else {
 					error.html(r.message).show();
 				}
@@ -56,5 +57,9 @@ function initCreateForm() {
 }
 
 function createFormOnLogin() {
-	if(display_name) $("#new_room_name").val(display_name + "'s Room");
+    if(display_name && display_name !== "false") {
+        $("#create_room_form_placeholder").hide();
+        $("#create_room_form_content").show();
+        $("#new_room_name").val(display_name + "'s Room");
+    }
 }

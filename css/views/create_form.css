@@ -45,6 +45,7 @@
 #create_room_form_content {
 	margin-left: 18px;
 	max-width: 400px;
+    display: none;
 }
 
 #room_form_password_select {
@@ -87,15 +88,15 @@
 	max-width: 200px;
 }
 
-#create_form > form > textarea {
+#create_form > textarea {
 	resize: vertical;
 }
 
-#create_form > form > .cancel-btn {
+#create_form > .cancel-btn {
 	margin-right: 20px;
 }
 
-#create_form > form > .alert {
+#create_form > .alert {
 	display: none;
 }
 

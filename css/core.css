@@ -24,10 +24,12 @@ h3 {
 
 a {
 	color: #1ABC9C;
+    transition: .25s;
 }
 
 a:hover {
 	text-decoration: none;
+    color: #1ee2bd;
 }
 
 input {

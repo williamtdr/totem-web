@@ -244,33 +244,34 @@
 	</div>
 </div>
 <div id="create_form" class="animsition container">
-	<form>
-		<div id="room_form_header">
-			<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
-		</div>
+	<div id="room_form_header">
+		<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
+	</div>
 
-		<div class="alert alert-danger"></div>
+	<div class="alert alert-danger"></div>
 
-		<div id="create_room_form_content">
-			<div class="form-group">
-				<label for="new_room_name">Room name</label>
-				<input id="new_room_name" type="text" class="form-control input-lg">
+	<div id="create_room_form_placeholder">
+		Please <a class="signInButton">log in</a> to create a room.
+	</div>
+	<div id="create_room_form_content">
+		<div class="form-group">
+			<label for="new_room_name">Room name</label>
+			<input id="new_room_name" type="text" class="form-control input-lg">
 
-				<label for="new_room_description">Room Description</label>
-				<textarea id="new_room_description" class="form-control"></textarea>
+			<label for="new_room_description">Room Description</label>
+			<textarea id="new_room_description" class="form-control"></textarea>
 
-				<div id="room_form_password_select">
-					<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
-				</div>
-
-				<div id="room_form_password_well">
-					<input type="password" id="new_room_password" class="form-control" placeholder="password">
-				</div>
-
-				<button type="submit" class="btn btn-info">Create</button>
+			<div id="room_form_password_select">
+				<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
 			</div>
+
+			<div id="room_form_password_well">
+				<input type="password" id="new_room_password" class="form-control" placeholder="password">
+			</div>
+
+			<button type="submit" class="btn btn-info">Create</button>
 		</div>
-	</form>
+	</div>
 </div>
 
 <script src="http://static.totem.fm/js/jquery.min.js"></script>
