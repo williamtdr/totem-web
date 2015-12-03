@@ -119,6 +119,12 @@ client = {
 						});
 					}, textbox = $(".chat_textbox");
 					switch(data.type) {
+                        case "unbanned":
+                            window.location.reload();
+                        break;
+                        case "unmuted":
+                            playerOnLogin();
+                        break;
 						case "banned_room":
 							banned_notification("You are banned from this room.");
 							switchClientState(STATE_NO_SONG);
