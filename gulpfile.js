@@ -25,3 +25,9 @@ gulp.task('minify-js', function() {
 gulp.task('default', ['minify-css', 'minify-js'], function() {
 	gulp.src(['**/*']).pipe(gulp.dest('/usr/local/var/www/'));
 });
+
+
+var watcher = gulp.watch(['*.*', 'css/**', 'js/**'], ['default']);
+watcher.on('change', function(event) {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+});
