@@ -36,10 +36,14 @@ client = {
 		server.onmessage = function(event) {
 			event_data = JSON.parse(event.data);
 			data = event_data.data;
-			console.log(event_data);
+            console.log(event_data);
 
 			switch (event_data.event) {
 				case "room_data": // called to initialize room
+                    if(data == false) {
+                        switchView(VIEW_ROOM_LIST);
+                        return false;
+                    }
 					$("#waiting_for_server").hide();
 					$("#main_content").show();
 					$("#sidebar").show();
