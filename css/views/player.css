@@ -326,6 +326,36 @@
 	color: #ffffff;
 }
 
+#commands_modal {
+	color: black;
+}
+
+#commands_modal > .modal-dialog > .modal-content > .modal-footer {
+	text-align: center;
+	color: #95A5A6;
+	font-style: italic;
+}
+
+#commands_modal > .modal-dialog > .modal-content > .modal-body {
+	padding-top: 5px;
+}
+
+#commands_modal > .modal-dialog > .modal-content > .modal-body > b {
+	line-height: 2.4;
+}
+
+.command_stem {
+	color: #C0392B;
+}
+
+.command_arguments {
+	color: #2C3E50;
+}
+
+.command {
+	display: block;
+}
+
 .chat_send {
 	background-color: transparent !important;
 	border: none !important;

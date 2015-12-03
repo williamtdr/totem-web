@@ -57,6 +57,34 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="commands_modal" tabindex="-1" role="dialog" aria-labelledby="commands_modalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="commands_modalLabel">Command Reference</h4>
+			</div>
+			<div class="modal-body">
+				<b>Normal</b>
+				<span class="command"><span class="command_stem">/help:</span> Show this reference.</span>
+				<span class="command"><span class="command_stem">/me <span class="command_arguments">[message]</span>:</span> Express an action.</span>
+				<b>Host</b>
+				<span class="command"><span class="command_stem">/skip (/s):</span> Skips the current song and advances the queue.</span>
+				<span class="command"><span class="command_stem">/queueban (/qb) <span class="command_arguments">[username]</span>:</span> Prevents a user from queueing songs.</span>
+				<span class="command"><span class="command_stem">/mute (/m) <span class="command_arguments">[username]</span>:</span> Prevents a user from talking in chat.</span>
+				<span class="command"><span class="command_stem">/unqueueban (/uqb) <span class="command_arguments">[username]</span>:</span> Revokes a queue restriction for a user.</span>
+				<span class="command"><span class="command_stem">/unmute (/um) <span class="command_arguments">[username]</span>:</span> Revokes a chat restriction for a user.</span>
+				<b>Admin</b>
+				<span class="command"><span class="command_stem">/ban (/b) <span class="command_arguments">[username]</span>:</span> Prevents a user from joining a room.</span>
+				<span class="command"><span class="command_stem">/pardon | /unban (/ub) <span class="command_arguments">[username]</span>:</span> Revokes a ban for a user.</span>
+				<span class="command"><span class="command_stem">/promote <span class="command_arguments">[username] [host/admin]</span>:</span> Grants a user privileges.</span>
+				<span class="command"><span class="command_stem">/demote <span class="command_arguments">[username]</span>:</span> Revokes privileges for a user.</span>
+			</div>
+			<div class="modal-footer">
+				press esc to close
+			</div>
+		</div>
+	</div>
+</div>
 <div id="disconnected" class="animsition">
 	<table>
 		<tr>
