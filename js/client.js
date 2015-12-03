@@ -47,6 +47,7 @@ client = {
 					room.description = data.description;
 					room.user_list = data.listeners_by_name;
 					room.queue = data.queue;
+                    room.user_counter = data.listener_count;
 					client.banned = false;
 					client.queue_banned = false;
 
@@ -97,10 +98,13 @@ client = {
 					});
 
 				break;
+				case "user_counter_update":
+                    room.user_counter = data;
+                    counterUpdate();
+                break;
 				case "user_list_change":
 					room.user_list = data;
 					refreshUserList();
-					counterUpdate();
 
 				break;
 				case "permission":
