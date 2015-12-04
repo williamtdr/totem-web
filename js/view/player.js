@@ -300,7 +300,7 @@ function addChatMessage(sender, text) {
 
 	if(chatmessage.length > 0) {
 		var chat_text = $(".chat-text");
-		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + chatmessage + '</span></span>');
+		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(chatmessage) + '</span></span>');
 		$.each(chat_text, function(index, el) {
 			$(el).scrollTop(el.scrollHeight);
 		});
