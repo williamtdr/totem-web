@@ -54,9 +54,7 @@ function sessionComplete() {
 	createFormOnLogin();
 	assignAuthButtonHandler();
 
-	if(!room.enabled) {
-		refreshRoomList();
-	} else {
+	if(room.enabled) {
 		client.sendLoginRequest();
 	}
 }
