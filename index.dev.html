@@ -5,16 +5,21 @@
 	<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="">
 	<title>Totem</title>
-	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<link href="http://static.totem.fm/totem.vendor.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,300|Raleway:400,300,500" rel="stylesheet">
-	<link href="dist/totem.min.css" rel="stylesheet">
+	<link href="css/core.css" rel="stylesheet">
+	<link href="css/nav.css" rel="stylesheet">
+	<link href="css/views/create_form.css" rel="stylesheet">
+	<link href="css/views/music_list.css" rel="stylesheet">
+	<link href="css/views/player.css" rel="stylesheet">
+	<link href="css/views/room_list.css" rel="stylesheet">
+	<link href="css/views/username.css" rel="stylesheet">
 </head>
 <body>
 <div id="background_layer"></div>
 <div id="background_shader"></div>
 <nav class="no-sel">
-	<span id="logo">totem <span id="logo_subheader">beta</span></span>
+	<span id="logo">totem <span id="logo_subheader">dev</span></span>
 	<ul id="desktop_nav">
 		<li class="nav_room_list active">Rooms</li>
 		<li class="nav_player">Now Playing</li>
@@ -240,41 +245,53 @@
 	</div>
 </div>
 <div id="create_form" class="animsition container">
-	<div id="room_form_header">
-		<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
-	</div>
-
-	<div class="alert alert-danger"></div>
-
-	<div id="create_room_form_placeholder">
-		Please <a class="signInButton">log in</a> to create a room.
-	</div>
-	<div id="create_room_form_content">
-		<div class="form-group">
-			<label for="new_room_name">Room name</label>
-			<input id="new_room_name" type="text" class="form-control input-lg">
-
-			<label for="new_room_description">Room Description</label>
-			<textarea id="new_room_description" class="form-control"></textarea>
-
-			<div id="room_form_password_select">
-				<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
-			</div>
-
-			<div id="room_form_password_well">
-				<input type="password" id="new_room_password" class="form-control" placeholder="password">
-			</div>
-
-			<button type="submit" class="btn btn-info">Create</button>
+	<form>
+		<div id="room_form_header">
+			<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
 		</div>
-	</div>
+
+		<div class="alert alert-danger"></div>
+
+		<div id="create_room_form_content">
+			<div class="form-group">
+				<label for="new_room_name">Room name</label>
+				<input id="new_room_name" type="text" class="form-control input-lg">
+
+				<label for="new_room_description">Room Description</label>
+				<textarea id="new_room_description" class="form-control"></textarea>
+
+				<div id="room_form_password_select">
+					<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
+				</div>
+
+				<div id="room_form_password_well">
+					<input type="password" id="new_room_password" class="form-control" placeholder="password">
+				</div>
+
+				<button type="submit" class="btn btn-info">Create</button>
+			</div>
+		</div>
+	</form>
 </div>
 
 <script src="http://static.totem.fm/totem.vendor.min.js"></script>
-<script src="dist/totem.min.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/client.js"></script>
+<script src="js/youtube.js"></script>
+<script src="js/view/player.js"></script>
+<script src="js/view/create_form.js"></script>
+<script src="js/view/room_list.js"></script>
+<script src="js/view/username.js"></script>
+<script src="js/playback.js"></script>
+<script src="js/sidebar.js"></script>
+
 <script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
