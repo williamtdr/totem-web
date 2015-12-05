@@ -2,12 +2,13 @@ var emoji = {
 
 	emojilist	: "",
 	parseMessage: function (msg) {
-		msg = msg.replace(':)', '<div title=":)" class="emoji emoji-chat" style="background-position:-416px -288px"> </div>');
-		msg = msg.replace(':(', '<div title=":(" class="emoji emoji-chat" style="background-position:-416px -288px"> </div>');
-		msg = msg.replace('<3', '<div title="<3" class="emoji emoji-chat" style="background-position:-64px -144px"> </div>');
-		msg = msg.replace(';(', '<div title=";(" class="emoji emoji-chat" style="background-position:-432px -288px"> </div>');
-		msg = msg.replace(":'(", '<div title=";\'(" class="emoji emoji-chat" style="background-position:-432px -288px"> </div>');
-		msg = msg.replace("xD", '<div title="xD" class="emoji emoji-chat" style="background-position:-416px -320px"> </div>');
+		msg = msg.replace(/:)/g, '<div title=":)" class="emoji emoji-chat" style="background-position:-416px -224px"> </div>');
+		msg = msg.replace(/:D/g, '<div title=":D" class="emoji emoji-chat" style="background-position:-416px -288px"> </div>');
+		msg = msg.replace(/:(/g, '<div title=":(" class="emoji emoji-chat" style="background-position:-432px -48px"> </div>');
+		msg = msg.replace(/<3/g, '<div title="<3" class="emoji emoji-chat" style="background-position:-64px -144px"> </div>');
+		msg = msg.replace(/;(/g, '<div title=";(" class="emoji emoji-chat" style="background-position:-432px -288px"> </div>');
+		msg = msg.replace(/:'(/g, '<div title=";\'(" class="emoji emoji-chat" style="background-position:-432px -288px"> </div>');
+		msg = msg.replace(/xD/g, '<div title="xD" class="emoji emoji-chat" style="background-position:-416px -320px"> </div>');
 	
 		if(msg.indexOf(":") > -1) {
 			var isEmoji = false,

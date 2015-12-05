@@ -206,7 +206,7 @@ function counterUpdate() {
 
 function updateRoomMetadata() {
 	$(".room-title").html(room.name);
-	$("#room_description").html(room.description);
+	$("#room_description").html(emoji.parseMessage(room.description));
 }
 
 function addChatMessage(sender, text) {
