@@ -816,7 +816,7 @@ li.list-item-small {
 
 #user_list:before {
 	border-bottom: 15px solid rgba(26, 205, 175, 0.4);
-	right: 135px;
+	right: 145px;
 }
 
 #queue_list {
@@ -825,7 +825,7 @@ li.list-item-small {
 
 #queue_list:before {
 	border-bottom: 15px solid rgba(88, 133, 195, 0.40);
-	right: 25px;
+	right: 30px;
 }
 
 #room_users_wrapper .focused {

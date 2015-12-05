@@ -106,6 +106,11 @@ function refreshQueueList() {
 
 	queue_list.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
 	queue_list.height($('#chat').height()).width($('#chat').width());
+	if ($('#room_description').height() == 0)
+		queue_list.css('top', ($('#room-title').height() + $('#room_description').height() + 60));
+	else
+		queue_list.css('top', ($('#room-title').height() + $('#room_description').height() + 70));
+	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
 		$('#queue_list').height($('#chat').height()).width($('#chat').width());
@@ -123,6 +128,11 @@ function refreshUserList() {
 
 	user_list.html('<ul class="list-row list-title">Listeners</ul>');
 	user_list.height($('#chat').height()).width($('#chat').width());
+	if ($('#room_description').height() == 0)
+		user_list.css('top', ($('#room-title').height() + $('#room_description').height() + 60));
+	else
+		user_list.css('top', ($('#room-title').height() + $('#room_description').height() + 70));
+	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
 		$('#user_list').height($('#chat').height()).width($('#chat').width());
@@ -187,10 +197,6 @@ function vote(vote) {
 		}));
 		client.vote = vote;
 	}
-}
-
-function replaceTwemoji(name) {
-	return "<div title=':"+ name +":' class='twa twa-"+ name +"'> </div>";
 }
 
 function counterUpdate() {
