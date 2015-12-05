@@ -68,7 +68,9 @@ $(document).ready(function() {
 	initCreateForm();
 	initGoogleAuth();
 
-	$.getJSON( "https://cdn.rawgit.com/iamcal/emoji-data/master/emoji.json", function(data) {emoji.emojilist = data;});
+	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
+		emoji.emojilist = data;
+	});
 	
 	if(room.enabled) {
 		if(client.connected) {
