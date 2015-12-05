@@ -2,7 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="">
 	<title>Totem</title>
 	<link rel="shortcut icon" type="image/png" href="favicon.png">
@@ -72,6 +72,23 @@
 			</div>
 			<div class="modal-footer">
 				press esc to close
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="room_settings_modal" tabindex="-1" role="dialog" aria-labelledby="room_settings_modalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content dark-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="room_settings_modalLabel">Room Settings</h4>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save_room_settings">Save</button>
+				<button type="button" class="btn" id="cancel_room_settings">Cancel</button>
+				<span id="change_username_spinner"><i class="fa fa-circle-o-notch fa-spin"></i></span>
 			</div>
 		</div>
 	</div>

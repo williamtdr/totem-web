@@ -122,3 +122,11 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #disconnected {
 	display: none;
 }
+
+.dark-content {
+	background-color: rgba(0,0,0,0.8);
+}
+
+.dark-content > div {
+	border-color: rgba(255,255,255,0.5);
+}
