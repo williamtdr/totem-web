@@ -67,6 +67,8 @@ $(document).ready(function() {
 	initRoomList();
 	initCreateForm();
 	initGoogleAuth();
+    initRoomSettings();
+    //$("#room_settings_modal").modal();
 
 	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
 		emoji.emojilist = data;

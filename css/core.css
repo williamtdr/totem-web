@@ -123,10 +123,117 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	display: none;
 }
 
-.dark-content {
-	background-color: rgba(0,0,0,0.8);
+#room_settings_modal {
+    color: black;
 }
 
-.dark-content > div {
-	border-color: rgba(255,255,255,0.5);
+.form-group > .fa {
+    font-size: 1em;
+    vertical-align: baseline;
+    color: #2C3E50;
+}
+
+.modal-action > label {
+    position: absolute;
+    line-height: 0.9;
+    left: 43px;
+    cursor: pointer;
+}
+
+.modal-action {
+    cursor: pointer;
+}
+
+#room_settings_home > .form-group > span {
+    font-style: italic;
+    color: #7F8C8D;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+#room_settings_spinner {
+    display: none;
+}
+
+#room_settings_return {
+    color: #2980B9;
+}
+
+#room_settings_return > i {
+    vertical-align: -8%;
+    margin-right: 9px;
+}
+
+#room_settings_return:hover {
+    color: #3498DB;
+}
+
+#room_settings_blacklist, #room_settings_whitelist, #room_settings_admins, #room_settings_admins, #room_settings_hosts, #room_settings_gallery, #room_settings_icon {
+    display: none;
+}
+
+.room_settings_example {
+    margin: 5px 0 15px 15px;
+    color: #7F8C8D;
+    font-style: italic;
+    display: block;
+}
+
+.room_settings_instructions {
+    display: block;
+    color: #2C3E50;
+}
+
+.modal-body > div > textarea {
+    margin-top: 15px;
+}
+
+.dynamic_user_list {
+    width: 400px;
+}
+
+.dynamic_user_list > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.dynamic_user_list > ul > li {
+    list-style-type: none;
+    border-bottom: 1px solid #95A5A6;
+    color: #000000;
+}
+
+.dynamic_user_list > ul > li:hover:after {
+    content: "x";
+    font-family: sans-serif;
+    line-height: 1;
+    color: #C0392B;
+    font-size: 1.4em;
+    float: right;
+    cursor: pointer;
+    right: 0;
+    margin-right: 5px;
+    transition: .25s;
+}
+
+.dynamic_user_list > ul > li:hover:after:hover {
+    color: #E74C3C;
+}
+
+.dynamic_user_list_footer {
+    border: 0;
+    padding-left: 0;
+    box-shadow: none;
+    padding-top: 3px;
+}
+
+.user_suggestion_wrapper > ul {
+    padding: 0;
+    margin: 0;
+}
+
+.user_suggestion_wrapper > ul > li {
+    list-style-type: none;
+    cursor: pointer;
 }

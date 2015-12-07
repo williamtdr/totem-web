@@ -22,6 +22,7 @@ function assignAuthButtonHandler() {
 					dataType: 'jsonp',
 					data: response
 				});
+                window.location.reload();
 			});
 	});
 }
