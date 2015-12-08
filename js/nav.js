@@ -36,6 +36,8 @@ var playlist_items = $("#playlist_items"),
 	playlist_list = $("#playlist_list"),
 	playlist_banned = $("#queue_permission_failure");
 
+var previous_playlist_scroll_pos = 0;
+
 var navbar_shown = false;
 current_view = VIEW_DEFAULT;
 
@@ -70,7 +72,7 @@ function resetNavigation() {
 			player.addClass("zoom-in-sm");
 		break;
 		case VIEW_MUSIC_LIST:
-			music_list.addClass("zoom-in-sm");
+			if(previous_playlist_scroll_pos == 0) music_list.addClass("zoom-in-sm");
 		break;
 	}
 }
@@ -79,6 +81,10 @@ function resetNavigation() {
 // tabs in the navigation bar, create form, and additional
 // views mobile users get as tabs.
 function switchView(destination) {
+	if(current_view == VIEW_MUSIC_LIST && destination != VIEW_MUSIC_LIST) {
+		previous_playlist_scroll_pos = pageYOffset;
+	}
+
 	resetNavigation();
 
 	if(!navbar_shown) {
@@ -105,6 +111,8 @@ function switchView(destination) {
 			current_view = VIEW_MUSIC_LIST;
 			if(client.queue_banned) {
 				switchSubView(SUBVIEW_QUEUE_BANNED);
+			} else {
+				window.scrollTo(0, previous_playlist_scroll_pos);
 			}
 		break;
 		case VIEW_CREATE_FORM:
