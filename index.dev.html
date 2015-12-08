@@ -81,6 +81,96 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="room_settings_modal" tabindex="-1" role="dialog" aria-labelledby="room_settings_modalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content room-settings-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="room_settings_modalLabel"><a id="room_settings_return"><i class="fa fa-angle-left"></i></a><span id="room_settings_title">Room Settings</span></h4>
+			</div>
+			<div class="modal-body">
+				<div id="room_settings_home" data-title="Room Settings">
+					<div class="form-group">
+						<label for="room_settings_desc">Description</label>
+						<textarea class="form-control" id="room_settings_desc"></textarea>
+					</div>
+					<div class="form-group modal-action" data-destination="blacklist">
+						<i class="fa fa-ban" style="margin-left: 4px"></i><label>Song Blacklist &raquo;</label>
+						<span>Songs whose video titles or channels contain words on this list cannot be added to the queue.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="whitelist">
+						<i class="fa fa-check" style="margin-left: 3px"></i><label>Song Whitelist &raquo;</label>
+						<span>Songs whose video titles or channels contain words on this list bypass the blacklist.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="admins">
+						<i class="fa fa-black-tie" style="margin-left: 4px"></i><label>Room Admins &raquo;</label>
+						<span>Admins can add or remove hosts, ban/pardon rogue listeners, and edit room settings in addition to all of a host's moderation abilities.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="hosts">
+						<i class="fa fa-balance-scale"></i><label>Room Hosts &raquo;</label>
+						<span>Hosts can skip songs, mute people in chat, and ban users from queueing songs.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="gallery">
+						<i class="fa fa-picture-o"></i><label>Custom Gallery &raquo;</label>
+						<span>Upload a collection of images to rotate through as the background for this room. Can replace or supplement the default set.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="icon">
+						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
+						<span>Upload an image to show on desktop notifications from this room. Only for users who have this feature enabled.</span>
+					</div>
+				</div>
+				<div id="room_settings_blacklist" data-title="Song Blacklist">
+					<span class="room_settings_instructions">
+						Type or paste the list of video blacklist terms, one per line. Matches channel and title, not case sensitive.
+					</span>
+					<textarea id="room_blacklist" class="form-control" rows="8"></textarea>
+				</div>
+				<div id="room_settings_whitelist" data-title="Song Whitelist">
+					<span class="room_settings_instructions">
+						Type or paste the list of video whitelist terms, one per line. Items on this list bypass the blacklist and will be allowed to queue. Matches channel and title, not case sensitive.
+					</span>
+					<textarea id="room_whitelist" class="form-control" rows="8"></textarea>
+				</div>
+				<div id="room_settings_admins" data-title="Room Admins">
+					<div class="dynamic_user_list">
+						<ul id="room_admins_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="admin_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_admin">Add</button>
+						<span id="admin_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+				<div id="room_settings_hosts" data-title="Room Hosts">
+					<div class="dynamic_user_list">
+						<ul id="room_hosts_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="host_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_host">Add</button>
+						<span id="host_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+				<div id="room_settings_gallery" data-title="Custom Gallery">
+					Coming soon!
+				</div>
+				<div id="room_settings_icon" data-title="Custom Icon">
+					Coming soon!
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save_room_settings">Save</button>
+				<button type="button" class="btn" id="cancel_room_settings">Cancel</button>
+				<span id="room_settings_spinner"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+			</div>
+		</div>
+	</div>
+</div>
 <div id="disconnected" class="animsition">
 	<table>
 		<tr>
@@ -285,6 +375,7 @@
 <script src="js/view/player.js"></script>
 <script src="js/view/create_form.js"></script>
 <script src="js/view/room_list.js"></script>
+<script src="js/view/room_settings.js"></script>
 <script src="js/view/username.js"></script>
 <script src="js/playback.js"></script>
 <script src="js/sidebar.js"></script>
