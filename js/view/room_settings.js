@@ -56,7 +56,7 @@ function bindHoverHandler(destination) {
 
 function initRoomSettings() {
     $(".modal-action").click(function(el) {
-        var destination = $(el.target).parent().data('destination'),
+        var destination = $(el.target).data('destination') || $(el.target).parent().data('destination'),
             destination_el = $("#room_settings_" + destination),
             home = $("#room_settings_home"),
             back = $("#room_settings_return"),
