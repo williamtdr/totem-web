@@ -207,7 +207,8 @@ function counterUpdate() {
 function updateRoomMetadata() {
     var room_title = $(".room-title"),
 		newlines = room.description.split("\n"),
-		short_desc = room.description.substring(0, 200),
+		short_desc = emoji.parseMessage(room.description.substring(0, 200)),
+		newlines_only = emoji.parseMessage(newlines.splice(0, 4).join("<br>").substring(0, 200)),
 		read_more = '<span id="room_description_extend">read more...</span>';
 	room_title.empty();
 	room_title.html(room.name);
@@ -215,10 +216,11 @@ function updateRoomMetadata() {
 	if((newlines && newlines.length > 4) || room.description.length > 300) {
 		if(newlines.length < 4) {
 			$("#room_description").html(emoji.parseMessage(short_desc + read_more));
+		} else {
+			$("#room_description").html(newlines_only);
 		}
-	}
-	if(newlines) {
-		$("#room_description").html(emoji.parseMessage(newlines.splice(0, 4).join("<br>").substring(0, 200)) + read_more);
+	} else {
+		$("#room_description").html(newlines_only);
 	}
 	$("#room_description_modal_label").html(room.title);
 	$("#room_description_extend_content").html(room.description.replace(/\n/g, "<br>"));
