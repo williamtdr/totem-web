@@ -31,11 +31,13 @@ function joinRoom(destination) {
 	$("#waiting_for_server").show();
 	$("#main_content").hide();
 	if(client.connected) {
-		server.send(JSON.stringify({
+		var packet = {
 			event: "login",
 			key: authkey,
 			room: destination
-		}));
+		};
+		if(client.guest_key) packet.guest_key = client.guest_key;
+		server.send(JSON.stringify(packet));
 	} else {
 		client.connect();
 	}

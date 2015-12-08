@@ -20,6 +20,7 @@ client = {
 	banned: false,
 	chat_muted: false,
 	is_admin: false,
+	guest_key: false,
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
 		$("#waiting_for_server").show();
@@ -180,6 +181,9 @@ client = {
 						break;
 					}
 				break;
+				case "guest_key":
+					client.guest_key = data;
+				break;
 				case "song_change":
 					if(client.banned) return false;
 					$(".activated").removeClass("activated");
@@ -274,11 +278,13 @@ client = {
 			}
 			if(authkey) {
 				try {
-					server.send(JSON.stringify({
+					var packet = {
 						event: "login",
 						key: authkey,
 						room: room.id
-					}));
+					};
+					if(client.guest_key != undefined) packet.guest_key = client.guest_key;
+					server.send(JSON.stringify(packet));
 					client.logged_in = true;
 					return false;
 				} catch(e) {
