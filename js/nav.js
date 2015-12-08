@@ -145,7 +145,7 @@ function switchSubView(destination) {
 		break;
 		case SUBVIEW_SEARCH:
 			playlist_search.show();
-			$("#search_text").focus();
+			$("#search_text").empty().focus();
 			$(".searchResults .playlist-list-content").empty();
 		break;
 		case SUBVIEW_PLAYLIST_ITEMS:
