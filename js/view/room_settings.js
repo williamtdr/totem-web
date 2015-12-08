@@ -1,4 +1,7 @@
 room_description_changed = false;
+room_blacklist_changed = false;
+room_whitelist_changed = false;
+
 function bindHoverHandler(destination) {
     $("#room_" + destination + "_list li").click(function(e) {
         if($(this).hasClass("no_hover_x")) return false;
@@ -84,6 +87,22 @@ function initRoomSettings() {
                         }
 
                         bindHoverHandler(destination);
+                    }
+                });
+            break;
+            case "blacklist":
+            case "whitelist":
+                var content = $("#room_" + destination);
+                content.val("Loading...");
+                $.ajax({
+                    url: config.API + '/room/get_' + destination + '.php',
+                    data: {
+                        scope: room.id
+                    },
+                    jsonp: 'callback',
+                    dataType: 'jsonp',
+                    success: function(data) {
+                        content.val(data.data);
                     }
                 });
         }
@@ -184,6 +203,8 @@ function initRoomSettings() {
         $("#room_settings_modal").modal('toggle');
         $("#room_settings_desc").val(room.description);
         room_description_changed = false;
+        room_whitelist_changed = false;
+        room_blacklist_changed = false;
     });
 
     $("#save_room_settings").click(function() {
@@ -195,7 +216,97 @@ function initRoomSettings() {
                 key: authkey
             }));
         }
+        if(room_blacklist_changed) {
+            $.ajax({
+                url: config.API + '/room/blacklist.php',
+                data: {
+                    scope: room.id,
+                    content: $("#room_blacklist").val()
+                },
+                jsonp: 'callback',
+                dataType: 'jsonp',
+                success: function(data) {
+                    if(data.success) {
+                        noty({
+                            text: "Updated room blacklist.",
+                            theme: 'relax',
+                            dismissQueue: true,
+                            type: "success",
+                            layout: "topRight",
+                            animation: {
+                                open: {height: 'toggle'},
+                                close: {height: 'toggle'}
+                            },
+                            timeout: 5000
+                        });
+                    } else {
+                        noty({
+                            text: "Encountered an error when trying to update the room blacklist.",
+                            theme: 'relax',
+                            dismissQueue: true,
+                            type: "danger",
+                            layout: "topRight",
+                            animation: {
+                                open: {height: 'toggle'},
+                                close: {height: 'toggle'}
+                            },
+                            timeout: 5000
+                        });
+                    }
+                }
+            });
+        }
+        if(room_whitelist_changed) {
+            $.ajax({
+                url: config.API + '/room/whitelist.php',
+                data: {
+                    scope: room.id,
+                    content: $("#room_whitelist").val()
+                },
+                jsonp: 'callback',
+                dataType: 'jsonp',
+                success: function(data) {
+                    if(data.success) {
+                        noty({
+                            text: "Updated room whitelist.",
+                            theme: 'relax',
+                            dismissQueue: true,
+                            type: "success",
+                            layout: "topRight",
+                            animation: {
+                                open: {height: 'toggle'},
+                                close: {height: 'toggle'}
+                            },
+                            timeout: 5000
+                        });
+                    } else {
+                        noty({
+                            text: "Encountered an error when trying to update the room whitelist.",
+                            theme: 'relax',
+                            dismissQueue: true,
+                            type: "danger",
+                            layout: "topRight",
+                            animation: {
+                                open: {height: 'toggle'},
+                                close: {height: 'toggle'}
+                            },
+                            timeout: 5000
+                        });
+                    }
+                }
+            });
+        }
         room_description_changed = false;
+        room_whitelist_changed = false;
+        room_blacklist_changed = false;
+    });
+
+    $("#room_blacklist").keyup(function() {
+        room_blacklist_changed = true;
+    });
+
+    $("#room_whitelist").keyup(function() {
+        room_whitelist_changed = true;
     });
 
     $("#room_settings_desc").keyup(function() {
