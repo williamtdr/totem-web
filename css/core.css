@@ -158,6 +158,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 #room_settings_return {
     color: #2980B9;
+	display: none;
 }
 
 #room_settings_return > i {
