@@ -205,11 +205,26 @@ function counterUpdate() {
 }
 
 function updateRoomMetadata() {
-    var room_title = $(".room-title");
+    var room_title = $(".room-title"),
+		newlines = room.description.split("\n"),
+		short_desc = room.description.substring(0, 200),
+		read_more = '<span id="room_description_extend">read more...</span>';
 	room_title.empty();
 	room_title.html(room.name);
 	room_title.append('<i class="fa fa-cog" id="room_settings_launcher"></i>');
-	$("#room_description").html(emoji.parseMessage(room.description));
+	if((newlines && newlines.length > 4) || room.description.length > 300) {
+		if(newlines.length < 4) {
+			$("#room_description").html(emoji.parseMessage(short_desc + read_more));
+		}
+	}
+	if(newlines) {
+		$("#room_description").html(emoji.parseMessage(newlines.splice(0, 4).join("<br>").substring(0, 200)) + read_more);
+	}
+	$("#room_description_modal_label").html(room.title);
+	$("#room_description_extend_content").html(room.description.replace(/\n/g, "<br>"));
+	$("#room_description_extend").click(function() {
+		$("#room_description_modal").modal();
+	});
     $("#room_settings_desc").html(room.description);
     $("#room_settings_launcher").click(function() {
         $("#room_settings_modal").modal();

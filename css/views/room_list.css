@@ -34,6 +34,16 @@
 	color: #E69250;
 }
 
+#room_description_extend {
+	color: #2980B9;
+	display: block;
+	transition: .25s;
+}
+
+#room_description_extend:hover {
+	color: #3498DB;
+}
+
 .room_option_orange {
 	color: #E67E22;
 }

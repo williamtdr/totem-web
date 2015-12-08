@@ -35,10 +35,6 @@
 	width: 200px;
 }
 
-#room_description-extend {
-	display: none;
-}
-
 #manual {
 	display: none;
 }
@@ -338,7 +334,11 @@
 	color: black;
 }
 
-#commands_modal > .modal-dialog > .modal-content > .modal-footer {
+#room_description_modal {
+	color: black;
+}
+
+#commands_modal > .modal-dialog > .modal-content > .modal-footer, #room_description_modal > .modal-dialog > .modal-content > .modal-footer {
 	text-align: center;
 	color: #95A5A6;
 	font-style: italic;
