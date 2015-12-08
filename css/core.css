@@ -274,6 +274,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     margin-left: 10px;
     font-size: 1em;
     vertical-align: 0;
+	transition: .25s;
 }
 
 #room_settings_launcher:hover {

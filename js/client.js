@@ -173,8 +173,8 @@ client = {
 							textbox.append("You are muted.");
 						break;
 						case "room_admin":
-                            $("#room_settings_launcher").show();
 							client.is_admin = true;
+							updateRoomMetadata();
 						break;
 						case "room_host":
 						break;
