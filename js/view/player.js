@@ -211,7 +211,7 @@ function updateRoomMetadata() {
 		read_more = '<span id="room_description_extend">read more...</span>';
 	room_title.empty();
 	room_title.html(room.name);
-	room_title.append('<i class="fa fa-cog" id="room_settings_launcher"></i>');
+	if(client.is_admin) room_title.append('<i class="fa fa-cog" id="room_settings_launcher"></i>');
 	if((newlines && newlines.length > 4) || room.description.length > 300) {
 		if(newlines.length < 4) {
 			$("#room_description").html(emoji.parseMessage(short_desc + read_more));

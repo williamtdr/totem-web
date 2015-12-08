@@ -19,6 +19,7 @@ client = {
 	queue_banned: false,
 	banned: false,
 	chat_muted: false,
+	is_admin: false,
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
 		$("#waiting_for_server").show();
@@ -173,6 +174,7 @@ client = {
 						break;
 						case "room_admin":
                             $("#room_settings_launcher").show();
+							client.is_admin = true;
 						break;
 						case "room_host":
 						break;
