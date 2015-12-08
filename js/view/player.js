@@ -205,9 +205,15 @@ function counterUpdate() {
 }
 
 function updateRoomMetadata() {
-	$(".room-title").html(room.name);
+    var room_title = $(".room-title");
+	room_title.empty();
+	room_title.html(room.name);
+	room_title.append('<i class="fa fa-cog" id="room_settings_launcher"></i>');
 	$("#room_description").html(emoji.parseMessage(room.description));
     $("#room_settings_desc").html(room.description);
+    $("#room_settings_launcher").click(function() {
+        $("#room_settings_modal").modal();
+    })
 }
 
 function addChatMessage(sender, text) {

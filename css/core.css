@@ -204,7 +204,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #000000;
 }
 
-.dynamic_user_list > ul > li:hover:after {
+.hover_x:hover:after {
     content: "x";
     font-family: sans-serif;
     line-height: 1;
@@ -217,7 +217,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     transition: .25s;
 }
 
-.dynamic_user_list > ul > li:hover:after:hover {
+.hover_x:hover:after:hover {
     color: #E74C3C;
 }
 
@@ -226,6 +226,8 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     padding-left: 0;
     box-shadow: none;
     padding-top: 3px;
+    width: calc(100% - 80px);
+    float: left;
 }
 
 .user_suggestion_wrapper > ul {
@@ -236,4 +238,44 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 .user_suggestion_wrapper > ul > li {
     list-style-type: none;
     cursor: pointer;
+}
+
+.user_add {
+    float: right;
+    margin-top: 3px;
+}
+
+.dynamic_user_list > span {
+    padding-left: 15px;
+    color: #C0392B;
+    display: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cancel_demotion {
+    color: #2980B9;
+}
+
+.cancel_demotion:hover {
+    color: #3498DB;
+}
+
+.do_demotion {
+    color: #C0392B;
+}
+
+.do_demotion:hover {
+    color: #E74C3C;
+}
+
+#room_settings_launcher {
+    color: #95A5A6;
+    margin-left: 10px;
+    font-size: 1em;
+    vertical-align: 0;
+}
+
+#room_settings_launcher:hover {
+    color: white;
 }

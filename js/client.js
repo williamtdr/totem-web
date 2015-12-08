@@ -109,8 +109,11 @@ client = {
 				case "user_list_change":
 					room.user_list = data;
 					refreshUserList();
-
 				break;
+                case "desc_update":
+                    room.description = data;
+                    updateRoomMetadata();
+                break;
 				case "permission":
 					var banned_notification = function(text) {
 						noty({
@@ -169,10 +172,9 @@ client = {
 							textbox.append("You are muted.");
 						break;
 						case "room_admin":
+                            $("#room_settings_launcher").show();
 						break;
-						case "room_owner":
-						break;
-						case "site_admin":
+						case "room_host":
 						break;
 					}
 				break;

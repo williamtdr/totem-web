@@ -127,19 +127,29 @@
 				</div>
 				<div id="room_settings_admins" data-title="Room Admins">
 					<div class="dynamic_user_list">
-						<ul>
-							<li>williamtdr</li>
-							<li>neptune</li>
-							<li>obnoxiousllama</li>
+						<ul id="room_admins_list">
+							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" placeholder="Type a username...">
+						<input class="dynamic_user_list_footer form-control" id="admin_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_admin">Add</button>
+						<span id="admin_error"></span>
 						<div class="user_suggestion_wrapper">
 							<ul></ul>
 						</div>
 					</div>
 				</div>
 				<div id="room_settings_hosts" data-title="Room Hosts">
-
+					<div class="dynamic_user_list">
+						<ul id="room_hosts_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="host_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_host">Add</button>
+						<span id="host_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
 				</div>
 				<div id="room_settings_gallery" data-title="Custom Gallery">
 
