@@ -21,6 +21,15 @@ client = {
 	chat_muted: false,
 	is_admin: false,
 	guest_key: false,
+	attempting_auto_login: false,
+	showRequiresAuthentication: function() {
+		switchClientState(STATE_NO_SONG);
+		if(yt_player.pauseVideo) yt_player.pauseVideo();
+		$("#invalid_room_password").hide();
+		$("#room_password_name_target").html(room.display_name);
+		$("title").html(room.display_name + " &middot; Totem");
+		switchView(VIEW_REQUIRES_AUTHENTICATION);
+	},
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
 		$("#waiting_for_server").show();
@@ -36,16 +45,57 @@ client = {
 		});
 
 		server.onmessage = function(event) {
-			event_data = JSON.parse(event.data);
-			data = event_data.data;
+			var event_data = JSON.parse(event.data);
+			var data = event_data.data;
             console.log(event_data);
 
 			switch (event_data.event) {
+				case "requires_authentication":
+					room.display_name = event_data.display_name;
+					try {
+						var password_store = window.localStorage.getItem("saved_room_passwords");
+						if(password_store && JSON.parse(password_store)[room.id]) {
+							client.attempting_auto_login = true;
+							server.send(JSON.stringify({
+								event: "password_attempt",
+								data: {
+									password: JSON.parse(password_store)[room.id],
+									scope: room.id
+								}
+							}));
+						} else {
+							client.attempting_auto_login = false;
+							client.showRequiresAuthentication();
+						}
+					} catch(e) {
+						client.attempting_auto_login = false;
+						client.showRequiresAuthentication();
+					}
+				break;
+				case "invalid_password":
+					if(client.attempting_auto_login) {
+						client.attempting_auto_login = false;
+						client.showRequiresAuthentication();
+					} else {
+						$("#invalid_room_password").show();
+					}
+				break;
 				case "room_data": // called to initialize room
+					$("#requires_authentication").hide();
                     if(data == false) {
                         switchView(VIEW_ROOM_LIST);
                         return false;
                     }
+					if(room.password && $("#remember_room_password").attr("checked") == "checked") {
+						if(window.localStorage.getItem("saved_room_passwords")) {
+							window.localStorage.setItem("saved_room_passwords", JSON.parse(window.localStorage.getItem("saved_room_passwords"))[room.id] = room.password);
+						} else {
+							var password_obj = {};
+							password_obj[room.id] = room.password;
+							window.localStorage.setItem("saved_room_passwords", JSON.stringify(password_obj));
+						}
+						room.password = false;
+					}
 					$("#waiting_for_server").hide();
 					$("#main_content").show();
 					$("#sidebar").show();

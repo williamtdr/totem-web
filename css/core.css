@@ -281,3 +281,33 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #room_settings_launcher:hover {
     color: white;
 }
+
+.room-name > .fa-lock {
+	font-size: 1em;
+	margin-left: 5px;
+	vertical-align: 0;
+}
+
+#invalid_room_password {
+	color: #E74C3C;
+	display: block;
+	margin-top: 10px;
+}
+
+.input-group > input {
+	height: 41px;
+}
+
+#remember_room_password {
+	margin-right: 5px;
+	margin-top: 10px;
+	float: left;
+}
+
+#room_password_name_target {
+	color: white;
+}
+
+#requires_authentication > h2 {
+	color: #BDC3C7;
+}

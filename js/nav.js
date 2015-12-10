@@ -5,7 +5,8 @@ const VIEW_DEFAULT = 0,
 	  VIEW_CREATE_FORM = 4,
 	  VIEW_CHAT = 5,
 	  VIEW_INFO = 6,
-	  VIEW_BANNED = 7;
+	  VIEW_BANNED = 7,
+	  VIEW_REQUIRES_AUTHENTICATION = 8;
 
 const SUBVIEW_PLAYLIST_LIST = 0,
 	  SUBVIEW_SEARCH = 1,
@@ -29,7 +30,9 @@ var room_list = $("#room_list"),
 	player = $("#player"),
 	music_list = $("#music_list"),
 	create_form = $("#create_form"),
-	banned = $("#permission_failure");
+	banned = $("#permission_failure"),
+	requires_authentication = $("#requires_authentication"),
+	waiting_for_server = $("#waiting_for_server");
 
 var playlist_items = $("#playlist_items"),
 	playlist_search = $("#playlist_search"),
@@ -58,6 +61,8 @@ function resetNavigation() {
 	player.hide();
 	music_list.hide();
 	create_form.hide();
+	banned.hide();
+	requires_authentication.hide();
 
 	shadeBackground(BACKGROUND_DEFAULT_SHADING);
 
@@ -128,6 +133,16 @@ function switchView(destination) {
 			banned.show();
 			$("#sidebar").hide();
 			current_view = VIEW_BANNED;
+		break;
+		case VIEW_REQUIRES_AUTHENTICATION:
+			nav_player.addClass("active");
+			waiting_for_server.hide();
+			$("#now_playing").hide();
+			$("#no_video").hide();
+			player.show();
+			requires_authentication.show();
+			$("#sidebar").hide();
+			current_view = VIEW_REQUIRES_AUTHENTICATION;
 	}
 }
 

@@ -199,12 +199,10 @@
 	<div id="playlist_list">
 
 	</div>
-	<div id="queue_permission_failure">
-		<div class="container">
-			<i class="fa fa-ban"></i>
-			<h2>You are banned from queueing songs in this room.</h2>
-			<p>Contact a room staff member for more information or to remove the ban.
-		</div>
+	<div id="queue_permission_failure" class="container">
+		<i class="fa fa-ban"></i>
+		<h2>You are banned from queueing songs in this room.</h2>
+		<p>Contact a room staff member for more information or to remove the ban.</p>
 	</div>
 	<div id="playlist_items">
 		<span class="playlist-list-return">&laquo; Playlists</span>
@@ -250,12 +248,22 @@
 				<i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...
 			</div>
 		</div>
-		<div id="permission_failure">
-			<div class="container">
-				<i class="fa fa-ban"></i>
-				<h2>You are banned from joining this room.</h2>
-				<p>Contact a room staff member for more information or to remove the ban. <a class="nav_room_list">Return to the room list?</a></p>
+		<div id="requires_authentication" class="container">
+			<i class="fa fa-lock"></i>
+			<h2><span id="room_password_name_target"></span> requires a password to join.</h2>
+			<div class="input-group">
+				<input class="form-control" type="password" placeholder="room password" id="room_password_prompt">
+				<span class="input-group-btn">
+					<button class="btn btn-info" id="submit_room_password">Go</button>
+				</span>
 			</div>
+			<input type="checkbox" checked id="remember_room_password"> Remember Password
+			<span id="invalid_room_password">Incorrect password.</span>
+		</div>
+		<div id="permission_failure" class="container">
+			<i class="fa fa-ban"></i>
+			<h2>You are banned from joining this room.</h2>
+			<p>Contact a room staff member for more information or to remove the ban. <a class="nav_room_list">Return to the room list?</a></p>
 		</div>
 		<div id="main_content">
 			<div class="song-title-container">

@@ -4,18 +4,31 @@
 	display: none;
 }
 
-#permission_failure, #queue_permission_failure {
+#permission_failure, #queue_permission_failure, #requires_authentication {
 	display: none;
 }
 
-#permission_failure > div > h2, #queue_permission_failure > div > h2 {
+#permission_failure > h2, #queue_permission_failure > h2 {
 	display: inline;
 	margin-left: 10px;
 }
 
-#permission_failure > div > .fa, #queue_permission_failure > div > h2 {
+#permission_failure > .fa, #queue_permission_failure > h2 {
 	font-size: 1.5em;
 	vertical-align: 0;
+}
+
+#requires_authentication > h2 {
+	display: inline-block;
+	margin-left: 5px;
+}
+
+#requires_authentication > .fa {
+	vertical-align: baseline;
+}
+
+#requires_authentication > .input-group {
+	width: 300px;
 }
 
 #youtube_player {

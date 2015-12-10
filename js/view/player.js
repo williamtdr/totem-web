@@ -17,7 +17,8 @@ room = {
 	user_list: [],
 	queue: [],
 	history: [],
-	enabled: false
+	enabled: false,
+	password: false
 };
 
 yt_player = false;
@@ -482,6 +483,26 @@ function initPlayerToggles() {
 		toggleBoxes('user_list');
 
 		refreshUserList();
+	});
+}
+
+function initRequiresAuthentication() {
+	$("#room_password_prompt").keyup(function(event) {
+		if(event.keyCode == 13) {
+			$("#submit_room_password").click();
+		}
+	});
+
+	$("#submit_room_password").click(function(){
+		var password = $("#room_password_prompt").val();
+		server.send(JSON.stringify({
+			event: "password_attempt",
+			data: {
+				password: password,
+				scope: room.id
+			}
+		}));
+		room.password = password;
 	});
 }
 
