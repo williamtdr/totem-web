@@ -34,3 +34,22 @@ span.playlist_item_artist_container {
 .searchResults ul.list-group li.list-group-item:hover {
 	background-color: rgba(255,255,255,0.2);
 }
+
+#playlist_list > a {
+    color: #BDC3C7;
+    margin-right: 15px;
+    text-decoration: none !important;
+}
+
+#playlist_list > a:hover {
+    color: #ECF0F1;
+}
+
+#playlist_list > a > .fa {
+    vertical-align: 0;
+    font-size: 1em;
+}
+
+.fa-spotify {
+    font-size: 1.1em;
+}

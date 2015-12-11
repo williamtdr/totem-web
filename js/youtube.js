@@ -9,7 +9,7 @@ function loadYoutubePlaylists() {
 		dataType: "jsonp",
 		success: function(response) {
 			$("#playlist_list")
-				.html('<ul class="list-group sidebar-playlist""><li class="list-group-item" id="search_launcher">Search YouTube</li>');
+				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage Playlists</a><a href="http://www.playlistbuddy.com/" target="_blank"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group sidebar-playlist"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
 
 			$("#search_launcher").click(function() {
 				switchSubView(SUBVIEW_SEARCH);
