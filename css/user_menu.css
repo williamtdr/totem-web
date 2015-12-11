@@ -1,0 +1,52 @@
+#user_menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    width: 300px;
+    background-color: rgba(0,0,0,0.8);
+    font-family: "Raleway", sans-serif;
+    z-index: 200;
+    user-select: none;
+}
+
+#user_menu > ul {
+    list-style-type: none;
+    margin: 0 0 15px 15px;
+    padding: 0;
+}
+
+#user_menu > ul > li {
+    color: #BDC3C7;
+    transition: .25s;
+    cursor: pointer;
+}
+
+#user_menu > ul > li:hover {
+    color: #ECF0F1;
+}
+
+.seperator {
+    margin-top: 15px;
+}
+
+.header, .header:hover {
+    color: #7F8C8D !important;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-top: 15px;
+    cursor: default !important;
+}
+
+.switch-multiple {
+    color: #3498DB;
+}
+
+.switch {
+    float: right;
+    margin-right: 15px;
+}
+
+.switch-enabled {
+   color: #2ECC71;
+}

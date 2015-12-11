@@ -201,7 +201,10 @@ function navOnLogin() {
 		menu.addClass("signInButton");
 		menu.html('Log In<span id="login-full"> with Google');
 	} else {
-		menu.click(logout);
+		menu.click(function() {
+            $("#user_menu").animate({height:"toggle"});
+        });
+        $("#logout").click(logout);
 		menu.html('<span id="login-full">Hi, </span>' + display_name);
 	}
 }

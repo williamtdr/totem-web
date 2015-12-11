@@ -70,6 +70,7 @@ $(document).ready(function() {
 	initCreateForm();
 	initGoogleAuth();
     initRoomSettings();
+    initMenu();
 	initRequiresAuthentication();
 
 	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
