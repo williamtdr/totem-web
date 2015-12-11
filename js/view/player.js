@@ -4,7 +4,9 @@ song = {
 	url_fragment: false,
 	progress: 0,
 	duration: 0,
-	started_at: 0
+	started_at: 0,
+	queueDeleted: 0,
+	queueCountdown: false,
 };
 
 room = {
@@ -78,38 +80,39 @@ function loadVideoById(id, time) {
 			}
 		});
 		player_initialized = true;
-		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase()) {
+		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
 			removeArray(queue, id);
-			console.log(id);
 			console.log(queue);
+			console.log(id);
 			localStorage.setItem("Queue", JSON.stringify(queue));
+			song.queueDeleted = 1;
 			
-			
-			server.send(JSON.stringify({
+			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
 				"event": "queue",
 				"song": {
 					url_fragment: queue[0]
 				},
 				"key": authkey
-			}));
+			}));}, ((song.duration - 20) * 1000));
 		}
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
 		yt_player.seekTo(time);
 		
-		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase()) {
+		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
 			removeArray(queue, id);
 			console.log(id);
 			console.log(queue);
+			song.queueDeleted = 1;
 			localStorage.setItem("Queue", JSON.stringify(queue));
 			
-			server.send(JSON.stringify({
+			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
 				"event": "queue",
 				"song": {
 					url_fragment: queue[0]
 				},
 				"key": authkey
-			}));
+			}));}, ((song.duration - 20) * 1000));
 		}
 	}
 }

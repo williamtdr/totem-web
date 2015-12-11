@@ -131,6 +131,8 @@ client = {
 						song.name = data.song.name;
 						song.artist = data.song.artist;
 						song.url_fragment = data.song.url_fragment;
+						song.queueDeleted = 0;
+						song.queueCountdown = false;
 						room.dj = data.current_dj;
 
 						setScore(data.score.positive, data.score.negative);
@@ -265,7 +267,9 @@ client = {
 					song.url_fragment = data.song.url_fragment;
 					song.started_at = Math.floor(Date.now() / 1000);
 					song.progress = 0;
-					song.duration = 0;
+					song.duration = data.song.duration;
+					song.queueDeleted = 0;
+					song.queueCountdown = false;
 
 					room.dj = data.dj;
 					if(client.state == STATE_NO_SONG) {
