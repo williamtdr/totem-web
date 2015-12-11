@@ -11,7 +11,7 @@ advanceBackgroundImage = function () {
     var top_img = $(".top");
     var bottom_img = $(".bottom");
 
-    var new_background = 'http://d35y9swri9q567.cloudfront.net/background/' + getRandomInt(1, 572) + '.jpg';
+    var new_background = 'http://static.totem.fm/bg/' + getRandomInt(1, 572) + '.jpg';
     if(room.backgrounds) {
         new_background = room.backgrounds[Math.floor(Math.random()*room.backgrounds.length)];
     }
