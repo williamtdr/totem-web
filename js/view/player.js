@@ -32,6 +32,15 @@ function onYouTubeIframeAPIReady() {
 	youtube_ready = true;
 }
 
+function removeArray (array, value) {
+	array.forEach(function(result, index) {
+		if(result == value) {
+			array.splice(index, 1);
+			return;
+		}    
+	});
+}
+
 function loadVideoById(id, time) {
 	if(id == "") return false;
 	$("#no_video").hide();
@@ -69,9 +78,39 @@ function loadVideoById(id, time) {
 			}
 		});
 		player_initialized = true;
+		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase()) {
+			removeArray(queue, id);
+			console.log(id);
+			console.log(queue);
+			localStorage.setItem("Queue", JSON.stringify(queue));
+			
+			
+			server.send(JSON.stringify({
+				"event": "queue",
+				"song": {
+					url_fragment: queue[0]
+				},
+				"key": authkey
+			}));
+		}
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
 		yt_player.seekTo(time);
+		
+		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase()) {
+			removeArray(queue, id);
+			console.log(id);
+			console.log(queue);
+			localStorage.setItem("Queue", JSON.stringify(queue));
+			
+			server.send(JSON.stringify({
+				"event": "queue",
+				"song": {
+					url_fragment: queue[0]
+				},
+				"key": authkey
+			}));
+		}
 	}
 }
 
