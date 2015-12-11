@@ -43,6 +43,7 @@ var previous_playlist_scroll_pos = 0;
 
 var navbar_shown = false;
 current_view = VIEW_DEFAULT;
+set_initial_background = false;
 
 function shadeBackground(level) {
 	bg_shader.css("opacity", level);
@@ -89,6 +90,11 @@ function switchView(destination) {
 	if(current_view == VIEW_MUSIC_LIST && destination != VIEW_MUSIC_LIST) {
 		previous_playlist_scroll_pos = pageYOffset;
 	}
+
+    if(destination != VIEW_PLAYER && !set_initial_background) {
+        advanceBackgroundImage();
+        set_initial_background = true;
+    }
 
 	resetNavigation();
 

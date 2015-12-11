@@ -18,7 +18,8 @@ room = {
 	queue: [],
 	history: [],
 	enabled: false,
-	password: false
+	password: false,
+    backgrounds: false
 };
 
 yt_player = false;

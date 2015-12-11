@@ -104,6 +104,15 @@ client = {
 					room.user_list = data.listeners_by_name;
 					room.queue = data.queue;
                     room.user_counter = data.listener_count;
+                    room.backgrounds = data.backgrounds;
+                    if(room.backgrounds && room.backgrounds.length > 0) {
+                        advanceBackgroundImage();
+                    } else {
+                        if(!set_initial_background) {
+                            set_initial_background = true;
+                            advanceBackgroundImage();
+                        }
+                    }
 					client.banned = false;
 					client.queue_banned = false;
 
@@ -165,6 +174,16 @@ client = {
                 case "desc_update":
                     room.description = data;
                     updateRoomMetadata();
+                break;
+                case "backgrounds":
+                    if(data.length > 0) {
+                        if(!room.backgrounds) {
+                            room.backgrounds = data;
+                            advanceBackgroundImage();
+                        } else {
+                            room.backgrounds = data;
+                        }
+                    }
                 break;
 				case "permission":
 					var banned_notification = function(text) {

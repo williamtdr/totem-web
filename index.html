@@ -119,7 +119,7 @@
 					</div>
 					<div class="form-group modal-action" data-destination="gallery">
 						<i class="fa fa-picture-o"></i><label>Custom Gallery &raquo;</label>
-						<span>Upload a collection of images to rotate through as the background for this room. Can replace or supplement the default set.</span>
+						<span>Upload a collection of images to rotate through as the background for this room.</span>
 					</div>
 					<div class="form-group modal-action" data-destination="icon">
 						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
@@ -165,7 +165,12 @@
 					</div>
 				</div>
 				<div id="room_settings_gallery" data-title="Custom Gallery">
-					Coming soon!
+					<input id="fileupload" type="file" name="files[]" multiple>
+					<br>
+					<div id="progress" class="progress">
+						<div class="progress-bar progress-bar-success"></div>
+					</div>
+					<div id="files" class="files"></div>
 				</div>
 				<div id="room_settings_icon" data-title="Custom Icon">
 					Coming soon!

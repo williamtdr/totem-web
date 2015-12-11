@@ -11,7 +11,7 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('minify-js', function() {
-	return gulp.src('js/**/*.js')
+	return gulp.src(['js/view/player.js', 'js/background.js', 'js/**/*.js'])
 		.pipe(uglify())
 		.pipe(concat('totem.min.js'))
 		.pipe(gulp.dest('dist'));

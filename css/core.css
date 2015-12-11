@@ -311,3 +311,18 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #requires_authentication > h2 {
 	color: #BDC3C7;
 }
+
+.background-image-preview {
+    width: 160px;
+    display: block;
+}
+
+.background-preview-container {
+    display: inline-block;
+    width: 189px;
+    height: 130px;
+}
+
+#files {
+    padding-bottom: 100px;
+}
