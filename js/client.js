@@ -22,6 +22,11 @@ client = {
 	is_admin: false,
 	guest_key: false,
 	attempting_auto_login: false,
+    settings: {
+        notif_song_change: true,
+        notif_chat: "mention",
+        hide_hints: false
+    },
 	showRequiresAuthentication: function() {
 		switchClientState(STATE_NO_SONG);
 		if(yt_player.pauseVideo) yt_player.pauseVideo();

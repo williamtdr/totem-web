@@ -1,3 +1,39 @@
+$.fn.extend({clearIndicator: function() {
+    this.removeClass("switch-disabled").removeClass("switch-enabled").removeClass("switch-multiple");
+    return this;
+}});
+
+function updateClientSettings() {
+    var setting_song_change = $("#setting_song_change"),
+        setting_chat_notifications = $("#setting_chat_notifications"),
+        have_notifs_to_show = false;
+    if(client.settings.notif_song_change) {
+        $(setting_song_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-enabled").html("ON");
+        have_notifs_to_show = true;
+    } else {
+        $(setting_song_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("OFF");
+    }
+    if(client.settings.notif_chat) {
+        have_notifs_to_show = true;
+        if(client.settings.notif_chat == "mention") {
+            $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-multiple").html("MENTION");
+        } else {
+            $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-enabled").html("ALL");
+        }
+    } else {
+        $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("OFF");
+    }
+}
+
+function saveSettings() {
+    $.ajax({
+        url: config.API + '/user/set_settings.php',
+        jsonp: 'callback',
+        dataType: 'jsonp',
+        data: client.settings
+    });
+}
+
 function initMenu() {
     $("#setting_change_username").click(function() {
 		$("#user_menu").animate({height: 0});
@@ -41,11 +77,12 @@ function initMenu() {
 					indicator.removeClass("switch-disabled");
 					indicator.removeClass("switch-multiple");
 					indicator.addClass("switch-enabled");
-					console.log(target.parent().parent());
 					if(target.parent().parent().is("#setting_chat_notifications")) {
 						indicator.html("ALL");
 					} else {
+                        client.settings.notif_song_change = true;
 						indicator.html("ON");
+                        saveSettings();
 					}
 				}
 				if(target.hasClass("switch-disabled")) {
@@ -62,7 +99,46 @@ function initMenu() {
 				}
 				target.parent().find(".switch-active").removeClass("switch-active");
 				target.addClass("switch-active");
+                if(target.parent().parent().is("#setting_chat_notifications")) {
+                    switch(indicator.html()) {
+                        case "ALL":
+                            client.settings.notif_chat = true;
+                            break;
+                        case "MENTION":
+                            client.settings.notif_chat = "mention";
+                            break;
+                        case "OFF":
+                            client.settings.notif_chat = false;
+                            break;
+                    }
+                    saveSettings();
+                }
+                if(target.parent().parent().is("#setting_song_change")) {
+                    switch(indicator.html()) {
+                        case "ON":
+                            client.settings.notif_song_change = true;
+                            break;
+                        case "OFF":
+                            client.settings.notif_song_change = false;
+                            break;
+                    }
+                    saveSettings();
+                }
 			});
 		}
 	});
+
+    $.ajax({
+        url: config.API + '/user/get_settings.php',
+        jsonp: 'callback',
+        dataType: 'jsonp',
+        success: function(data) {
+            client.settings = data;
+            if(client.settings.notif_song_change === "0") client.settings.notif_song_change = false;
+            if(client.settings.notif_song_change === "1") client.settings.notif_song_change = true;
+            if(client.settings.notif_chat === "false") client.settings.notif_chat = false;
+            if(client.settings.notif_chat === "true") client.settings.notif_chat = true;
+            updateClientSettings();
+        }
+    });
 }
