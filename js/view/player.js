@@ -280,11 +280,26 @@ function updateRoomMetadata() {
 function addChatMessage(sender, text) {
 	chatmessage = text.trim();
 	chatclass = " ";
-	if(chatmessage.toLowerCase().indexOf("@" + display_name) > -1) {
+	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
 		audio.play();
 		var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
 		var chatclass = " chat-tag ";
+
+        if(client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+            var notification = new Notification('Mentioned by ' + sender + ' in ' + room.display_name + ':', {
+                icon: 'http://static.totem.fm/default_notification.png',
+                body: text
+            });
+
+            notification.onclick = function() {
+                window.focus();
+                this.cancel();
+            };
+
+            setTimeout(notification.close.bind(notification), 10000);
+        }
+
 		noty({
 			text: data.sender + ": " + chatmessage,
 			theme: 'relax',
@@ -297,10 +312,21 @@ function addChatMessage(sender, text) {
 			},
 			timeout: 5000
 		});
-	}
-	if(chatmessage.match("[ ]*")) {
-		console.log("only spaces")
-	}
+	} else {
+        if(client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+            var notification = new Notification(sender + ' in ' + room.display_name + ' said:', {
+                icon: 'http://static.totem.fm/default_notification.png',
+                body: text
+            });
+
+            notification.onclick = function() {
+                window.focus();
+                this.cancel();
+            };
+
+            setTimeout(notification.close.bind(notification), 5000);
+        }
+    }
 	if(chatmessage.indexOf("*") > -1) {
 		var asterisktally = 0;
 		var msplit = chatmessage.split("");

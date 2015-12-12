@@ -276,6 +276,20 @@ client = {
 					song.queueDeleted = 0;
 					song.queueCountdown = false;
 
+                    if(client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
+                        var notification = new Notification(song.name, {
+                            icon: 'http://static.totem.fm/default_notification.png',
+                            body: song.artist
+                        });
+
+                        notification.onclick = function() {
+                            window.focus();
+                            this.cancel();
+                        };
+
+                        setTimeout(notification.close.bind(notification), 5000);
+                    }
+
 					room.dj = data.dj;
 					if(client.state == STATE_NO_SONG) {
 						switchClientState(STATE_PLAYING);
