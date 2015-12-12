@@ -3,6 +3,8 @@ $.fn.extend({clearIndicator: function() {
     return this;
 }});
 
+delayed_notification_request = false;
+
 function updateClientSettings() {
     var setting_song_change = $("#setting_song_change"),
         setting_chat_notifications = $("#setting_chat_notifications"),
@@ -23,6 +25,41 @@ function updateClientSettings() {
     } else {
         $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("OFF");
     }
+    if(!have_notifs_to_show) return false;
+    if(current_view == VIEW_PLAYER) {
+        showNotificationPrompt();
+    } else {
+        delayed_notification_request = true;
+    }
+}
+
+function showNotificationPrompt() {
+    if(Notification.permission !== "granted") {
+        if(!window.localStorage.getItem("no_notifications")) {
+            $("#notification_request").delay(5000).animate({height: "toggle"});
+        }
+    }
+    $("#notification_request_actions").click(function() {
+        $("#notification_request_actions").animate({height: "toggle"});
+    });
+    $("#notification_request_accept").click(function() {
+        $("#notification_request p").html("Your browser will now ask you if you want to see the notifications. Click \"Allow\", \"Accept\", etc.");
+        $("#notification_request").animate({height: "125px"});
+        Notification.requestPermission(function() {
+            $("#notification_request").animate({height: "165px"});
+            $("#notification_request p").html("You're all set! You can change which events you get notified in the settings menu (click your name in the upper right).");
+            $("#notification_request_actions").animate({height: "toggle"});
+            $("#notification_request_actions span").hide();
+            $("#notification_request_dismiss").show();
+        });
+    });
+    $("#notification_request_deny").click(function() {
+        window.localStorage.setItem("no_notifications", true);
+        $("#notification_request").animate({height: "toggle"});
+    });
+    $("#notification_request_dismiss").click(function() {
+        $("#notification_request").animate({height: "toggle"});
+    });
 }
 
 function saveSettings() {

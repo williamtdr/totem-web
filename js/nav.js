@@ -114,6 +114,7 @@ function switchView(destination) {
 			nav_player.addClass("active");
 			player.show();
 			current_view = VIEW_PLAYER;
+            if(delayed_notification_request) showNotificationPrompt();
 		break;
 		case VIEW_MUSIC_LIST:
 			nav_music_list.addClass("active");
