@@ -47,13 +47,18 @@ function onPlayerStateChange(event) {
 }
 
 function addToQueueById(id) {
-	server.send(JSON.stringify({
-		"event": "queue",
-		"song": {
-			url_fragment: id
-		},
-		"key": authkey
-	}));
+	
+	if (!room.isUserQueued) {
+		server.send(JSON.stringify({
+			"event": "queue",
+			"song": {
+				url_fragment: id
+			},
+			"key": authkey
+		}));
+		
+		room.isUserQueued = true;
+	}
 	
 	queue.push(id);
 	localStorage.setItem("Queue", JSON.stringify(queue));

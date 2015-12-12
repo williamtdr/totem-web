@@ -21,7 +21,8 @@ room = {
 	history: [],
 	enabled: false,
 	password: false,
-    backgrounds: false
+    backgrounds: false,
+	isUserQueued: false
 };
 
 yt_player = false;
@@ -87,6 +88,9 @@ function loadVideoById(id, time) {
 			localStorage.setItem("Queue", JSON.stringify(queue));
 			song.queueDeleted = 1;
 			
+			if ($('.playlist.in_queue').css('display') !== 'block')
+				loadqueueplaylist();
+			
 			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
 				"event": "queue",
 				"song": {
@@ -94,6 +98,8 @@ function loadVideoById(id, time) {
 				},
 				"key": authkey
 			}));}, ((song.duration - 20) * 1000));
+			
+			room.isUserQueued = false;
 		}
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
@@ -106,6 +112,9 @@ function loadVideoById(id, time) {
 			song.queueDeleted = 1;
 			localStorage.setItem("Queue", JSON.stringify(queue));
 			
+			if ($('.playlist.in_queue').css('display') !== 'block')
+				loadqueueplaylist();
+			
 			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
 				"event": "queue",
 				"song": {
@@ -113,6 +122,8 @@ function loadVideoById(id, time) {
 				},
 				"key": authkey
 			}));}, ((song.duration - 20) * 1000));
+			
+			room.isUserQueued = false;
 		}
 	}
 }
@@ -301,7 +312,7 @@ function addChatMessage(sender, text) {
         }
 
 		noty({
-			text: data.sender + ": " + chatmessage,
+			text: sender + ": " + chatmessage,
 			theme: 'relax',
 			dismissQueue: true,
 			type: "information",

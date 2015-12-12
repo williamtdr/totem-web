@@ -94,6 +94,15 @@ function search(more) {
 	});
 }
 
+function deleteFromQueueList(id) {
+	var container = $('.playlist-list-content');
+
+	removeArray(queue, id);
+	localStorage.setItem("Queue", JSON.stringify(queue));
+	
+	container.find('.playlist.id-'+ id).remove();
+}
+
 function loadqueueplaylist() {
 	var container = $('.playlist-list-content');
 	
@@ -121,7 +130,7 @@ function loadqueueplaylist() {
 				dataType: "jsonp",
 				async	: false,
 				success: function(e) {
-					container.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumbnail + '" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ e.artist + ' - ' + e.name + '</span></div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="deleteFromQueueList(\'' + e.thumbnail.substr(23, 11) + '\')"><i class="fa fa-play"></i> Delete this from queue</span></li>');
+					container.append('<li class="list-group-item playlist id-'+ e.thumbnail.substr(23, 11) +'"><img class="playlist-item-thumbnail" src="' + e.thumbnail + '" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ e.artist + ' - ' + e.name + '</span></div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="deleteFromQueueList(\'' + e.thumbnail.substr(23, 11) + '\')"><i class="fa fa-trash-o"></i> Delete this from queue</span></li>');
 				}
 			});
 		}

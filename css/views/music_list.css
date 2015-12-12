@@ -5,6 +5,7 @@
 
 .list-group-item.in_queue {
 	background-color: rgba(88, 133, 195, 0.40);
+	cursor: not-allowed;
 }
 
 .playlist-item-title {
@@ -57,4 +58,16 @@ span.playlist_item_artist_container {
 .fa-spotify {
     font-size: 1.1em !important;
 	vertical-align: -5% !important;
+}
+
+.playlist-item-delete {
+    color: #B92929;
+    transition: .25s;
+    position: absolute;
+    top: 35px;
+    left: 242px;
+    cursor: pointer;
+}
+.playlist-item-delete > .fa {
+    font-size: 0.8em;
 }

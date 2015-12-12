@@ -38,8 +38,8 @@
 <div id="user_menu">
 	<ul>
 		<li class="header">Notifications</li>
-		<li id="setting_song_change">Song Change<span class="switch switch-enabled">ON</span></li>
-		<li id="setting_chat_notifications">Chat<span class="switch switch-multiple">MENTION</span></li>
+		<li id="setting_song_change" class="switch">Song Change<span class="switch-indicator switch-enabled">ON</span><div class="switch_selector"></div></li>
+		<li id="setting_chat_notifications" class="switch">Chat<span class="switch-indicator switch-multiple">MENTION</span><div class="switch_selector big_selector"></div></li>
 		<li class="seperator"></li>
 		<li id="setting_change_username">Change Username</li>
 		<li id="logout">Logout</li>
@@ -65,7 +65,7 @@
 				<h4 class="modal-title" id="change_username_modalLabel">Welcome!</h4>
 			</div>
 			<div class="modal-body">
-				Thanks for joining the party. Pick a username:
+				<span id="change_username_modal_text">Thanks for joining the party. Pick a username:</span>
 				<input type="text" class="form-control" id="username_change">
 
 				<div class="errors"></div>
@@ -76,6 +76,15 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id="notification_request">
+	<h4>Show desktop notifications?</h4>
+	<p>We'll let you know when you're mentioned in chat or the song changes, configurable in the settings menu.</p>
+	<span id="notification_request_actions">
+		<span id="notification_request_accept">Sure!</span>
+		<span id="notification_request_deny">No thanks.</span>
+		<span id="notification_request_dismiss">Got it!</span>
+	</span>
 </div>
 <div class="modal fade" id="commands_modal" tabindex="-1" role="dialog" aria-labelledby="commands_modalLabel">
 	<div class="modal-dialog">
@@ -135,7 +144,7 @@
 					</div>
 					<div class="form-group modal-action" data-destination="gallery">
 						<i class="fa fa-picture-o"></i><label>Custom Gallery &raquo;</label>
-						<span>Upload a collection of images to rotate through as the background for this room. Can replace or supplement the default set.</span>
+						<span>Upload a collection of images to rotate through as the background for this room.</span>
 					</div>
 					<div class="form-group modal-action" data-destination="icon">
 						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
@@ -181,7 +190,12 @@
 					</div>
 				</div>
 				<div id="room_settings_gallery" data-title="Custom Gallery">
-					Coming soon!
+					<input id="fileupload" type="file" name="files[]" multiple>
+					<br>
+					<div id="progress" class="progress">
+						<div class="progress-bar progress-bar-success"></div>
+					</div>
+					<div id="files" class="files"></div>
 				</div>
 				<div id="room_settings_icon" data-title="Custom Icon">
 					Coming soon!
@@ -215,12 +229,10 @@
 	<div id="playlist_list">
 
 	</div>
-	<div id="queue_permission_failure">
-		<div class="container">
-			<i class="fa fa-ban"></i>
-			<h2>You are banned from queueing songs in this room.</h2>
-			<p>Contact a room staff member for more information or to remove the ban.
-		</div>
+	<div id="queue_permission_failure" class="container">
+		<i class="fa fa-ban"></i>
+		<h2>You are banned from queueing songs in this room.</h2>
+		<p>Contact a room staff member for more information or to remove the ban.</p>
 	</div>
 	<div id="playlist_items">
 		<span class="playlist-list-return">&laquo; Playlists</span>
@@ -266,12 +278,22 @@
 				<i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...
 			</div>
 		</div>
-		<div id="permission_failure">
-			<div class="container">
-				<i class="fa fa-ban"></i>
-				<h2>You are banned from joining this room.</h2>
-				<p>Contact a room staff member for more information or to remove the ban. <a class="nav_room_list">Return to the room list?</a></p>
+		<div id="requires_authentication" class="container">
+			<i class="fa fa-lock"></i>
+			<h2><span id="room_password_name_target"></span> requires a password to join.</h2>
+			<div class="input-group">
+				<input class="form-control" type="password" placeholder="room password" id="room_password_prompt">
+				<span class="input-group-btn">
+					<button class="btn btn-info" id="submit_room_password">Go</button>
+				</span>
 			</div>
+			<input type="checkbox" checked id="remember_room_password"> Remember Password
+			<span id="invalid_room_password">Incorrect password.</span>
+		</div>
+		<div id="permission_failure" class="container">
+			<i class="fa fa-ban"></i>
+			<h2>You are banned from joining this room.</h2>
+			<p>Contact a room staff member for more information or to remove the ban. <a class="nav_room_list">Return to the room list?</a></p>
 		</div>
 		<div id="main_content">
 			<div class="song-title-container">
@@ -358,33 +380,34 @@
 	</div>
 </div>
 <div id="create_form" class="animsition container">
-	<form>
-		<div id="room_form_header">
-			<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
-		</div>
+	<div id="room_form_header">
+		<span id="room_form_back"></span><span id="room_form_name">Create Room</span>
+	</div>
 
-		<div class="alert alert-danger"></div>
+	<div class="alert alert-danger"></div>
 
-		<div id="create_room_form_content">
-			<div class="form-group">
-				<label for="new_room_name">Room name</label>
-				<input id="new_room_name" type="text" class="form-control input-lg">
+	<div id="create_room_form_placeholder">
+		Please <a class="signInButton">log in</a> to create a room.
+	</div>
+	<div id="create_room_form_content">
+		<div class="form-group">
+			<label for="new_room_name">Room name</label>
+			<input id="new_room_name" type="text" class="form-control input-lg">
 
-				<label for="new_room_description">Room Description</label>
-				<textarea id="new_room_description" class="form-control"></textarea>
+			<label for="new_room_description">Room Description</label>
+			<textarea id="new_room_description" class="form-control"></textarea>
 
-				<div id="room_form_password_select">
-					<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
-				</div>
-
-				<div id="room_form_password_well">
-					<input type="password" id="new_room_password" class="form-control" placeholder="password">
-				</div>
-
-				<button type="submit" class="btn btn-info">Create</button>
+			<div id="room_form_password_select">
+				<span id="room_form_public" class="password_switcher_enabled">anyone can join</span>  &middot;  <span id="room_form_password" class="password_switcher_disabled">ask for a password</span>
 			</div>
+
+			<div id="room_form_password_well">
+				<input type="password" id="new_room_password" class="form-control" placeholder="password">
+			</div>
+
+			<button type="submit" class="btn btn-info">Create</button>
 		</div>
-	</form>
+	</div>
 </div>
 
 <script src="http://static.totem.fm/totem.vendor.min.js"></script>
