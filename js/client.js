@@ -11,6 +11,7 @@ client = {
 	vote: VOTE_NEUTRAL,
 	player_shown: true,
 	state: STATE_LOADING,
+	stateBefore: STATE_NO_SONG,
 	connected: false,
 	disconnect_timer: 3,
 	disconnect_timer_id: 0,

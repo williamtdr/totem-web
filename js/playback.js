@@ -1,5 +1,6 @@
 function previewVideo(id, title, artist) {
 	setSongInfo(title, artist);
+	client.stateBefore = STATE_PREVIEWING;
 
 	loadVideoById(id, 0);
 	switchClientState(STATE_PREVIEWING);

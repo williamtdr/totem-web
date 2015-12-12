@@ -88,7 +88,7 @@ function loadVideoById(id, time) {
 			localStorage.setItem("Queue", JSON.stringify(queue));
 			song.queueDeleted = 1;
 			
-			if ($('.playlist.in_queue').css('display') !== 'block')
+			if ($('.playlist.in_queue').css('display') == 'block')
 				loadqueueplaylist();
 			
 			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
@@ -112,7 +112,7 @@ function loadVideoById(id, time) {
 			song.queueDeleted = 1;
 			localStorage.setItem("Queue", JSON.stringify(queue));
 			
-			if ($('.playlist.in_queue').css('display') !== 'block')
+			if ($('.playlist.in_queue').css('display') == 'block')
 				loadqueueplaylist();
 			
 			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
@@ -126,6 +126,8 @@ function loadVideoById(id, time) {
 			room.isUserQueued = false;
 		}
 	}
+	if (client.stateBefore == STATE_PREVIEWING || client.stateBefore == STATE_NO_SONG && client.state == STATE_PLAYING)
+		client.stateBefore == STATE_PLAYING;
 }
 
 function switchClientState(state) {
