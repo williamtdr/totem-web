@@ -54,6 +54,9 @@ function addToQueueById(id) {
 		},
 		"key": authkey
 	}));
+	
+	queue.push(id);
+	localStorage.setItem("Queue", JSON.stringify(queue));
 
 	switchView(VIEW_PLAYER);
 	if(client.state != STATE_PLAYING) switchClientState(STATE_PLAYING);
@@ -72,6 +75,9 @@ function addCurrentSongToQueue() {
 		},
 		"key": authkey
 	}));
+	
+	queue.push(id);
+	localStorage.setItem("Queue", JSON.stringify(queue));
 
 	switchClientState(STATE_PLAYING);
 	switchView(VIEW_PLAYER);

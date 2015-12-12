@@ -3,6 +3,10 @@
 	width: 100%;
 }
 
+.list-group-item.in_queue {
+	background-color: rgba(88, 133, 195, 0.40);
+}
+
 .playlist-item-title {
 	color: #BDC3C7;
 }
