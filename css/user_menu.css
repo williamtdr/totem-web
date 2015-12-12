@@ -8,6 +8,7 @@
     font-family: "Raleway", sans-serif;
     z-index: 2000;
     user-select: none;
+	overflow: hidden;
 }
 
 #user_menu > ul {
@@ -42,11 +43,56 @@
     color: #3498DB;
 }
 
-.switch {
+.switch-indicator {
     float: right;
     margin-right: 15px;
 }
 
 .switch-enabled {
-   color: #2ECC71;
+	color: #27AE60;
+	transition: .25s;
+}
+
+.switch-enabled:hover {
+	color: #2ECC71;
+}
+
+.switch-disabled {
+	color: #C0392B;
+	transition: .25s;
+}
+
+.switch-disabled:hover {
+	color: #E74C3C;
+}
+
+.switch_selector {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	height: 0;
+}
+
+.big_selector {
+	width: 100%;
+	padding-top: 10px;
+}
+
+.big_selector > span:first-child {
+	margin-left: 15px;
+}
+
+.big_selector > span:last-child {
+	margin-right: 30px;
+}
+
+.big_selector > .switch-multiple {
+	text-align: center;
+	width: 120px;
+	display: inline-block;
+}
+
+.switch-active {
+	font-weight: 700;
 }

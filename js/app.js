@@ -45,6 +45,7 @@ function joinRoom(destination) {
 }
 
 function logout() {
+	$("#user_menu").animate({height: 0});
 	window.location.href = config.API + "/user/logout.php";
 }
 

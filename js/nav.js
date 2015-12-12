@@ -202,7 +202,9 @@ function navOnLogin() {
 		menu.html('Log In<span id="login-full"> with Google');
 	} else {
 		menu.click(function() {
-            $("#user_menu").animate({height:"toggle"});
+			var user_menu = $("#user_menu");
+			if(user_menu.is(":visible")) $(".expanded").click();
+            user_menu.animate({height:"toggle"});
         });
         $("#logout").click(logout);
 		menu.html('<span id="login-full">Hi, </span>' + display_name);
