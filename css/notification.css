@@ -1,4 +1,4 @@
-#notification_request {
+.dark-notification {
     width: 400px;
     height: 165px;
     position: absolute;
@@ -7,54 +7,82 @@
     background-color: rgba(0,0,0,0.9);
     color: #ECF0F1;
     display: none;
-    z-index: 2000;
+    z-index: 3000;
     padding: 15px;
 }
 
-#notification_request h4 {
+.dark-notification h4 {
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-#notification_request p {
+.dark-notification p {
     color: #BDC3C7;
     margin-bottom: 15px;
     font-size: 0.8em;
 }
 
-#notification_request_actions {
+.dark-notification-actions {
     text-transform: uppercase;
     display: block;
 }
 
-#notification_request_accept, #notification_request_deny, #notification_request_dismiss {
+.dark-notification-actions > span {
     transition: .25s;
     cursor: pointer;
 }
 
-#notification_request_accept {
-    color: #27AE60;
+.dark-notification-actions > span:first-child {
     margin-left: 5px;
     margin-right: 30px;
 }
 
-#notification_request_accept:hover {
+.dark-notification-success {
+    color: #27AE60;
+}
+
+.dark-notification-success:hover {
     color: #2ECC71;
 }
 
-#notification_request_deny {
+.dark-notification-failure {
     color: #E74C3C;
 }
 
-#notification_request_deny:hover {
+.dark-notification-failure:hover {
     color: #C0392B;
 }
 
-#notification_request_dismiss {
-    display: none;
+.dark-notification-other {
     color: #2980B9;
 }
 
-#notification_request_dismiss:hover {
+.dark-notification-other:hover {
     color: #3498DB;
+}
+
+#notification_request_dismiss, #basic_player_tutorial_advance {
+    display: none;
+}
+
+.progress-dots {
+    float: right;
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.progress-dots > div {
+    margin: 0 4px 0 0;
+    padding: 0;
+    border: 1px solid #BDC3C7;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: .5s;
+    z-index: 30000;
+}
+
+.dot-done {
+    border: 5px solid #fff !important;
 }

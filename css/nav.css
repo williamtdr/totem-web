@@ -100,6 +100,10 @@ nav > ul > li.active {
 	font-size: 0.6em;
 }
 
+#playlist_list > .signInButton {
+    margin-right: 0;
+}
+
 @media screen and (max-width: 500px) {
 	#desktop_nav {
 		display: none;
