@@ -1,4 +1,4 @@
-var localqueue = [], queue = JSON.parse(localStorage.getItem("Queue")) || localqueue;
+var local_queue = JSON.parse(localStorage.getItem("Queue")) || [];
 searching = false;
 search_term = "";
 
@@ -10,15 +10,12 @@ function loadYoutubePlaylists() {
 		dataType: "jsonp",
 		success: function(response) {
 			$("#playlist_list")
-				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage Playlists</a><a href="http://www.playlistbuddy.com/" target="_blank"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group sidebar-playlist"><li class="list-group-item" id="queueplaylist_launcher">Personal queue playlist</li><li class="list-group-item" id="search_launcher">Search YouTube</li>');
+				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage Playlists</a><a href="http://www.playlistbuddy.com/" target="_blank"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group sidebar-playlist"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
 
 			$("#search_launcher").click(function() {
 				switchSubView(SUBVIEW_SEARCH);
 			});
-						
-			$("#queueplaylist_launcher").click(function() {
-				loadqueueplaylist();
-			});
+
 			if(response.success) {
 				$.each(response.data, function(name, id) {
 					$("#playlist_list ul").append("<li class=\"list-group-item\" onclick=\"loadPlaylistItems('" + id + "')\">" + name + "</li>");
@@ -79,7 +76,11 @@ function search(more) {
 					by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
 					by_title = e.by.replace('"', '\"');
 				}
-				rowsContainer.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" onclick="addToQueueById(\'' + e.link + '\')"><i class="fa fa-plus"></i> Add to Queue</span></li>');
+				rowsContainer.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> Add to Queue</span></li>');
+			});
+			$(".playlist-item-queue").click(function(e) {
+				var target = $(e.target);
+				addToQueueById(target.data('id'));
 			});
 
 			if(response.length == 0) {
@@ -110,31 +111,7 @@ function loadqueueplaylist() {
 	$("#playlist_list").hide();
 	$("#playlist_items").show();
 	
-	container.append('<li class="list-group-item playlist loading"><i class="fa fa-circle-o-notch fa-spin"></i> Loading... </li>');	
-	
-	container.find('.loading').remove();
-	
-	for (var i in queue) {
-		if (i == 0) {
-			$.ajax({
-				url: "http://api.totem.fm/youtube/getSongInfo.php?id="+ queue[i],
-				dataType: "jsonp",
-				async	: false,
-				success: function(e) {
-					container.append('<li class="list-group-item playlist in_queue"><img class="playlist-item-thumbnail" src="' + e.thumbnail + '" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ e.artist + ' - ' + e.name + ' -</span>&nbsp;Already in queue!</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><i class="fa fa-play"></i> Preview</span></li>');
-				}
-			});
-		} else {
-			$.ajax({
-				url: "http://api.totem.fm/youtube/getSongInfo.php?id="+ queue[i],
-				dataType: "jsonp",
-				async	: false,
-				success: function(e) {
-					container.append('<li class="list-group-item playlist id-'+ e.thumbnail.substr(23, 11) +'"><img class="playlist-item-thumbnail" src="' + e.thumbnail + '" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ e.artist + ' - ' + e.name + '</span></div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.thumbnail.substr(23, 11) + '\', \'' + e.name.replace(/(['"])/g, "&quot;") + '\', \'' + e.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="deleteFromQueueList(\'' + e.thumbnail.substr(23, 11) + '\')"><i class="fa fa-trash-o"></i> Delete this from queue</span></li>');
-				}
-			});
-		}
-	}
+
 }
 
 var currentPlaylistId;
@@ -183,7 +160,11 @@ function loadPlaylistItems(playlistId, more) {
 					by_title = e.by.replace('"', '\"');
 				}
 
-				container.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" onclick="addToQueueById(\'' + e.link + '\')"><i class="fa fa-plus"></i> Add to Queue</span></li>');
+				container.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> Add to Queue</span></li>');
+			});
+			$(".playlist-item-queue").click(function(e) {
+				var target = $(e.target);
+				addToQueueById(target.data('id'));
 			});
 
 			if(response.length == 0) {

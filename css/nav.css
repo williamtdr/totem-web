@@ -50,11 +50,9 @@ nav > ul > li.active {
 }
 
 #login_menu {
-	right: 30px;
-	position: absolute;
-	top: 13px;
 	color: #27AE60;
 	transition: .25s;
+	float: right;
 }
 
 #login_menu:hover {
@@ -102,6 +100,25 @@ nav > ul > li.active {
 
 #playlist_list > .signInButton {
     margin-right: 0;
+}
+
+#my_queue {
+	display: none;
+	float: left;
+	margin-right: 30px;
+	color: #BDC3C7;
+	transition: .25s;
+	cursor: pointer;
+}
+
+#my_queue:hover {
+	color: #ECF0F1;
+}
+
+#my_queue > .fa {
+	vertical-align: 0;
+	margin-right: 3px;
+	font-size: 1em;
 }
 
 @media screen and (max-width: 500px) {

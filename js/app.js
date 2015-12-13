@@ -73,6 +73,7 @@ $(document).ready(function() {
     initRoomSettings();
     initMenu();
 	initRequiresAuthentication();
+	initQueue();
 
 	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
 		emoji.emojilist = data;

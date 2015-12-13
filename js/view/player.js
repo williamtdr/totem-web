@@ -6,7 +6,7 @@ song = {
 	duration: 0,
 	started_at: 0,
 	queueDeleted: 0,
-	queueCountdown: false,
+	queueCountdown: false
 };
 
 room = {
@@ -81,53 +81,31 @@ function loadVideoById(id, time) {
 			}
 		});
 		player_initialized = true;
-		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
-			removeArray(queue, id);
-			console.log(queue);
-			console.log(id);
-			localStorage.setItem("Queue", JSON.stringify(queue));
-			song.queueDeleted = 1;
-			
-			if ($('.playlist.in_queue').css('display') == 'block')
-				loadqueueplaylist();
-			
-			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
-				"event": "queue",
-				"song": {
-					url_fragment: queue[0]
-				},
-				"key": authkey
-			}));}, ((song.duration - 20) * 1000));
-			
-			room.isUserQueued = false;
-		}
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
 		yt_player.seekTo(time);
-		
-		if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
-			removeArray(queue, id);
-			console.log(id);
-			console.log(queue);
-			song.queueDeleted = 1;
-			localStorage.setItem("Queue", JSON.stringify(queue));
-			
-			if ($('.playlist.in_queue').css('display') == 'block')
-				loadqueueplaylist();
-			
-			song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
-				"event": "queue",
-				"song": {
-					url_fragment: queue[0]
-				},
-				"key": authkey
-			}));}, ((song.duration - 20) * 1000));
-			
-			room.isUserQueued = false;
-		}
 	}
+	if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
+		removeArray(local_queue, id);
+		localStorage.setItem("Queue", JSON.stringify(local_queue));
+		song.queueDeleted = 1;
+
+		if ($('.playlist.in_queue').css('display') == 'block')
+			loadqueueplaylist();
+
+		song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
+			"event": "queue",
+			"song": {
+				url_fragment: queue[0]
+			},
+			"key": authkey
+		}));}, ((song.duration - 20) * 1000));
+
+		room.isUserQueued = false;
+	}
+
 	if (client.stateBefore == STATE_PREVIEWING || client.stateBefore == STATE_NO_SONG && client.state == STATE_PLAYING)
-		client.stateBefore == STATE_PLAYING;
+		client.stateBefore = STATE_PLAYING;
 }
 
 function switchClientState(state) {

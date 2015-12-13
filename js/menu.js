@@ -43,37 +43,42 @@ var tutorial_progress = -1;
 var tutorial_stops = [
     {
         title: "Video Player",
-        text: "Here's the information and video for the current song. Everyone takes turns adding songs to play, and you can see who's playing now next to the headphones.",
+        text: "This shows the information and video for the current song. You can see who chose this song next to the headphones. Anyone can take a turn choosing music.",
         height: "185px",
         top: "55px",
-        right: (window.innerWidth - 430) + "px"
+        right: (window.innerWidth - 430) + "px",
+		width: "400px"
     }, {
         title: "Actions",
-        text: "On the left, you can hide or show the video and adjust the volume. Use the up and down arrows on the right to vote on a song - songs that people dislike are skipped, and positive feedback helps the DJ. The like button will save the song to your liked playlist on YouTube.",
-        height: "235px",
+        text: "Here you can hide or show the video and adjust the volume. Use the up and down arrows to vote on a song. The like button saves the song to your liked playlist on YouTube.",
+        height: "210px",
         top: (window.innerHeight - 300) + "px",
-        right: (window.innerWidth - 430) + "px"
+        right: (window.innerWidth - 400) + "px",
+		width: "380px"
     }, {
         title: "Room",
-        text: "Here you can see information about the room. Click on the listening and queue numbers to see more information.",
-        height: "165px",
+        text: "Here you can see information about the room. Click on the listening and queue numbers to see more.",
+        height: "190px",
         top: "250px",
-        right: "30px"
+        right: "30px",
+		width: "350px"
     }, {
         title: "My Music",
-        text: "From this screen you can select music to play for everyone else in the room. You can use songs from your YouTube playlists or the search feature to find music.",
-        height: "185px",
+        text: "From this screen you select music to play for everyone else in the room. You can use songs from your YouTube playlists or the search feature to find music.",
+        height: "210px",
         top: "55px",
         right: "30px",
+		width: "370px",
         oncomplete: function() {
             switchView(VIEW_MUSIC_LIST);
         }
     }, {
         title: "Room List",
         text: "On the Rooms tab, you can see all of the rooms on Totem and what they're playing. You can also create a room here.",
-        height: "165px",
+        height: "185px",
         top: "55px",
         right: "30px",
+		width: "360px",
         oncomplete: function() {
             switchView(VIEW_ROOM_LIST);
         }
@@ -83,6 +88,7 @@ var tutorial_stops = [
         height: "165px",
         top: "55px",
         right: "30px",
+		width: "340px",
         oncomplete: function() {
             switchView(VIEW_PLAYER);
             $("#basic_player_tutorial_advance").html("Bye!");
@@ -115,7 +121,7 @@ function showBasicTutorial() {
             $("#dot" + tutorial_progress).addClass("dot-done");
             header.html(stop.title);
             text.html(stop.text);
-            notification.animate({right: stop.right,height: stop.height, top: stop.top});
+            notification.animate({right: stop.right,height: stop.height, top: stop.top, width: stop.width});
             if(stop.oncomplete) stop.oncomplete();
         });
         advance.click();

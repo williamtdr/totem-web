@@ -1,3 +1,5 @@
+var song_info_cache = {};
+
 function previewVideo(id, title, artist) {
 	setSongInfo(title, artist);
 	client.stateBefore = STATE_PREVIEWING;
@@ -48,7 +50,6 @@ function onPlayerStateChange(event) {
 }
 
 function addToQueueById(id) {
-	
 	if (!room.isUserQueued) {
 		server.send(JSON.stringify({
 			"event": "queue",
@@ -61,11 +62,95 @@ function addToQueueById(id) {
 		room.isUserQueued = true;
 	}
 	
-	queue.push(id);
-	localStorage.setItem("Queue", JSON.stringify(queue));
+	local_queue.push(id);
+	localStorage.setItem("Queue", JSON.stringify(local_queue));
+
+	if(client.state != STATE_NO_SONG) {
+		var target = $("[data-id='" + id + "']");
+		target.text("Remove From Queue");
+		target.unbind("click");
+		target.find("i").addClass("fa-times");
+		target.find("i").removeClass("fa-plus");
+		target.click(function(e) {
+			var target = $(e.target);
+			removeFromQueueById(target.data('id'));
+		});
+		updateLocalQueue();
+	}
 
 	switchView(VIEW_PLAYER);
 	if(client.state != STATE_PLAYING) switchClientState(STATE_PLAYING);
+}
+
+function updateLocalQueue() {
+	var my_queue = $("#my_queue"),
+		container = $("#queue_view_container"),
+		view = $("#queue_view");
+
+	if(local_queue.length > 0) {
+		$("#my_queue").show();
+	} else {
+		$("#my_queue").hide();
+		if(container.is(":visible")) container.animate({height: "toggle"});
+	}
+	view.empty();
+	for(var index in local_queue) {
+		var item = local_queue[index];
+		if(song_info_cache[item]) {
+			var data = song_info_cache[item];
+			view.append('<li class="list-group-item playlist"><img class="queue-item-thumbnail" src="' + data.thumbnail + '" onclick="previewVideo(\'' + id + '\', \'' + data.name.replace(/(['"])/g, "&quot;") + '\', \'' + data.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ data.artist + ' - ' + data.name + '</span></div><span class="queue-item-preview" onclick="previewVideo(\'' + id + '\', \'' + data.name.replace(/(['"])/g, "&quot;") + '\', \'' + data.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="deleteFromQueueList(\'' + item + '\')"><i class="fa fa-trash-o"></i>Remove</span></li>');
+		} else {
+			$.ajax({
+				url: "http://api.totem.fm/youtube/getSongInfo.php?id="+ item,
+				dataType: "jsonp",
+				async	: false,
+				success: function(data) {
+					var id = data.thumbnail.substr(23, 11);
+					song_info_cache[id] = data;
+					view.append('<li class="list-group-item playlist"><img class="queue-item-thumbnail" src="' + data.thumbnail + '" onclick="previewVideo(\'' + id + '\', \'' + data.name.replace(/(['"])/g, "&quot;") + '\', \'' + data.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ data.artist + ' - ' + data.name + '</span></div><span class="queue-item-preview" onclick="previewVideo(\'' + id + '\', \'' + data.name.replace(/(['"])/g, "&quot;") + '\', \'' + data.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="deleteFromQueueList(\'' + id + '\')"><i class="fa fa-trash-o"></i>Remove</span></li>');
+				}
+			});
+		}
+	}
+
+}
+
+function initQueue() {
+	var my_queue = $("#my_queue"),
+		container = $("#queue_view_container"),
+		view = $("#queue_view");
+	my_queue.click(function () {
+		if(container.css("display") == "block") {
+			my_queue.removeAttr("style");
+		} else {
+			my_queue.css("color", "#fff");
+		}
+		container.animate({height: "toggle"});
+	});
+}
+
+function removeFromQueueById(id) {
+	if(local_queue[0] == id) {
+		server.send(JSON.stringify({
+			"event": "revoke_queue",
+			"key": authkey
+		}));
+	}
+	for(var index in local_queue) {
+		if(local_queue[index] == id) {
+			delete local_queue[index];
+		}
+	}
+	var target = $("[data-id='" + id + "']");
+	target.text("Add To Queue");
+	target.unbind("click");
+	target.find("i").addClass("fa-plus");
+	target.find("i").removeClass("fa-times");
+	target.click(function(e) {
+		var target = $(e.target);
+		addToQueueById(target.data('id'));
+	});
+	updateLocalQueue();
 }
 
 function addCurrentSongToQueue() {

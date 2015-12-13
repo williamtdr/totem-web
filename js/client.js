@@ -138,6 +138,7 @@ client = {
 						song.artist = data.song.artist;
 						song.url_fragment = data.song.url_fragment;
 						song.queueDeleted = 0;
+						if(song.queueCountdown) clearTimeout(song.queueCountdown);
 						song.queueCountdown = false;
 						room.dj = data.current_dj;
 
@@ -275,6 +276,7 @@ client = {
 					song.progress = 0;
 					song.duration = data.song.duration;
 					song.queueDeleted = 0;
+					if(song.queueCountdown) clearTimeout(song.queueCountdown);
 					song.queueCountdown = false;
 
                     if(client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {

@@ -3,11 +3,6 @@
 	width: 100%;
 }
 
-.list-group-item.in_queue {
-	background-color: rgba(88, 133, 195, 0.40);
-	cursor: not-allowed;
-}
-
 .playlist-item-title {
 	color: #BDC3C7;
 }
@@ -61,13 +56,16 @@ span.playlist_item_artist_container {
 }
 
 .playlist-item-delete {
-    color: #B92929;
+    color: #E74C3C;
     transition: .25s;
-    position: absolute;
-    top: 35px;
-    left: 242px;
     cursor: pointer;
 }
+
+.playlist-item-delete:hover {
+	color: #C0392B;
+}
+
 .playlist-item-delete > .fa {
     font-size: 0.8em;
+	padding-right: 3px;
 }
