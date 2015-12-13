@@ -142,7 +142,7 @@ function showNotificationPrompt() {
         $("#notification_request p").html("Your browser will now ask you if you want to see the notifications. Click \"Allow\", \"Accept\", etc.");
         $("#notification_request").animate({height: "125px"});
         Notification.requestPermission(function() {
-            $("#notification_request").animate({height: "165px"});
+            $("#notification_request").animate({height: "185px"});
             $("#notification_request p").html("You're all set! You can change which events you get notified in the settings menu (click your name in the upper right).");
             $("#notification_request_actions").animate({height: "toggle"});
             $("#notification_request_actions span").hide();
