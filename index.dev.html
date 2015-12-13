@@ -2,14 +2,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="">
 	<title>Totem</title>
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<link href="http://static.totem.fm/totem.vendor.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,300|Raleway:400,300,500" rel="stylesheet">
 	<link href="css/core.css" rel="stylesheet">
 	<link href="css/nav.css" rel="stylesheet">
 	<link href="css/user_menu.css" rel="stylesheet">
+	<link href="css/notification.css" rel="stylesheet">
 	<link href="css/views/create_form.css" rel="stylesheet">
 	<link href="css/views/music_list.css" rel="stylesheet">
 	<link href="css/views/player.css" rel="stylesheet">
@@ -20,7 +22,7 @@
 <div id="background_layer"></div>
 <div id="background_shader"></div>
 <nav class="no-sel">
-	<span id="logo">totem <span id="logo_subheader">dev</span></span>
+	<span id="logo">totem <span id="logo_subheader">beta</span></span>
 	<ul id="desktop_nav">
 		<li class="nav_room_list active">Rooms</li>
 		<li class="nav_player">Now Playing</li>
@@ -77,13 +79,25 @@
 		</div>
 	</div>
 </div>
-<div id="notification_request">
+<div id="notification_request" class="dark-notification">
 	<h4>Show desktop notifications?</h4>
 	<p>We'll let you know when you're mentioned in chat or the song changes, configurable in the settings menu.</p>
-	<span id="notification_request_actions">
-		<span id="notification_request_accept">Sure!</span>
-		<span id="notification_request_deny">No thanks.</span>
-		<span id="notification_request_dismiss">Got it!</span>
+	<span id="notification_request_actions" class="dark-notification-actions">
+		<span id="notification_request_accept" class="dark-notification-success">Sure!</span>
+		<span id="notification_request_deny" class="dark-notification-failure">No thanks.</span>
+		<span id="notification_request_dismiss" class="dark-notification-other">Got it!</span>
+	</span>
+</div>
+<div id="basic_player_tutorial" class="dark-notification">
+	<div class="progress-dots">
+		<div id="dot0"></div><div id="dot1"></div><div id="dot2"></div><div id="dot3"></div><div id="dot4"></div><div id="dot5"></div>
+	</div>
+	<h4>Welcome!</h4>
+	<p>Totem is a music sharing site where everyone can participate. I can show you around if you'd like.</p>
+	<span id="basic_player_tutorial_actions" class="dark-notification-actions">
+		<span id="basic_player_tutorial_accept" class="dark-notification-success">Sure!</span>
+		<span id="basic_player_tutorial_deny" class="dark-notification-failure">No thanks.</span>
+		<span id="basic_player_tutorial_advance" class="dark-notification-other">Next &raquo;</span>
 	</span>
 </div>
 <div class="modal fade" id="commands_modal" tabindex="-1" role="dialog" aria-labelledby="commands_modalLabel">
@@ -431,7 +445,6 @@
 <script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
-
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
