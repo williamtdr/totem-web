@@ -138,7 +138,7 @@
 				<h4 class="modal-title" id="room_settings_modalLabel"><a id="room_settings_return"><i class="fa fa-angle-left"></i></a><span id="room_settings_title">Room Settings</span></h4>
 			</div>
 			<div class="modal-body">
-				<div id="room_settings_home" data-title="Room Settings">
+				<div id="room_settings_home" data-title="Room Settings" class="room_settings_list">
 					<div class="form-group">
 						<label for="room_settings_desc">Description</label>
 						<textarea class="form-control" id="room_settings_desc"></textarea>
@@ -167,6 +167,14 @@
 						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
 						<span>Upload an image to show on desktop notifications from this room. Only for users who have this feature enabled.</span>
 					</div>
+					<div class="form-group modal-action" data-destination="icon">
+						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
+						<span>Upload an image to show on desktop notifications from this room. Only for users who have this feature enabled.</span>
+					</div>
+					<div class="form-group modal-action danger" data-destination="danger">
+						<i class="fa fa-exclamation-triangle danger" style="margin-left: 2px"></i><label>Danger Zone &raquo;</label>
+						<span>Set or change a room password, transfer ownership, or delete a room.</span>
+					</div>
 				</div>
 				<div id="room_settings_blacklist" data-title="Song Blacklist">
 					<span class="room_settings_instructions">
@@ -179,6 +187,31 @@
 						Type or paste the list of video whitelist terms, one per line. Items on this list bypass the blacklist and will be allowed to queue. Matches channel and title, not case sensitive.
 					</span>
 					<textarea id="room_whitelist" class="form-control" rows="8"></textarea>
+				</div>
+				<div id="room_settings_set_password" data-title="Set Password">
+					<span class="room_settings_instructions">
+						New users will have to know this password to join the room. Any existing users will be kicked out.
+					</span>
+					<div id="set_password_errors"></div>
+					<label>Password</label>
+					<input class="form-control" type="password" placeholder="Password" id="set_room_password_1">
+					<label>Confirm Password</label>
+					<input class="form-control" type="password" placeholder="Password" id="set_room_password_2">
+					<button class="btn btn-info" id="set_room_password_btn">Go</button>
+				</div>
+				<div id="room_settings_danger" data-title="Danger Zone" class="room_settings_list">
+					<div class="form-group modal-action" data-destination="set_password">
+						<i class="fa fa-lock" style="margin-left: 4px"></i><label>Set Password &raquo;</label>
+						<span>Requires new listeners to enter a password before accessing the room.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="transfer_ownership">
+						<i class="fa fa-sign-in" style="margin-left: 2px"></i><label>Transfer Ownership &raquo;</label>
+						<span>Transfer owner privileges to another user.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="delete_room">
+						<i class="fa fa-trash" style="margin-left: 3px"></i><label>Delete Room &raquo;</label>
+						<span>Permanently deletes this room and kicks all listeners back to the main page. The name can be used again by another user.</span>
+					</div>
 				</div>
 				<div id="room_settings_admins" data-title="Room Admins">
 					<div class="dynamic_user_list">

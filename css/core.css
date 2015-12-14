@@ -144,12 +144,16 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     cursor: pointer;
 }
 
-#room_settings_home > .form-group > span {
+.room_settings_list > .form-group > span {
     font-style: italic;
     color: #7F8C8D;
     display: block;
     margin-top: 5px;
     font-size: 0.8em;
+}
+
+#room_settings_danger > div > label {
+	left: 38px;
 }
 
 #room_settings_spinner {
@@ -170,7 +174,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #3498DB;
 }
 
-#room_settings_blacklist, #room_settings_whitelist, #room_settings_admins, #room_settings_admins, #room_settings_hosts, #room_settings_gallery, #room_settings_icon {
+#room_settings_blacklist, #room_settings_whitelist, #room_settings_admins, #room_settings_admins, #room_settings_hosts, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password {
     display: none;
 }
 
@@ -325,4 +329,21 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 #files {
     padding-bottom: 100px;
+}
+
+.danger {
+	color: #C0392B !important;
+	transition: .25s;
+}
+
+.danger:hover {
+	color: #E74C3C !important;
+}
+
+#set_password_errors {
+	margin-top: 10px;
+}
+
+#set_room_password_btn {
+	margin-top: 15px;
 }

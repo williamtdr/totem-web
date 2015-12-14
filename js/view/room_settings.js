@@ -202,7 +202,9 @@ function initRoomSettings() {
             destination_el = $("#room_settings_" + destination),
             home = $("#room_settings_home"),
             back = $("#room_settings_return"),
-            title = $("#room_settings_title");
+            title = $("#room_settings_title"),
+			danger = $("#room_settings_danger");
+		danger.hide();
         home.hide();
         back.show();
         destination_el.show();
@@ -447,6 +449,42 @@ function initRoomSettings() {
         room_whitelist_changed = false;
         room_blacklist_changed = false;
     });
+
+	$("#set_room_password_2").keyup(function(e) {
+		if(e.keyCode == 13) {
+			$("#set_room_password_btn").click();
+		}
+	});
+
+	$("#set_room_password_btn").click(function() {
+		var errors = $("#set_password_errors"),
+			password = $("#set_room_password_1").val();
+
+		errors.empty();
+		if(password != $("#set_room_password_2").val()) {
+			errors.append('<div class="alert alert-danger">Passwords do not match.</div>');
+			return false;
+		}
+		$.ajax({
+			url: config.API + '/room/set_password.php',
+			data: {
+				scope: room.id,
+				password: password
+			},
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			success: function (data) {
+				if(data.success) {
+					$('#room_settings_modal').modal('toggle');
+					server.send(JSON.stringify({
+						event: "set_password",
+						password: password,
+						key: authkey
+					}));
+				}
+			}
+		});
+	});
 
     $("#room_blacklist").keyup(function() {
         room_blacklist_changed = true;
