@@ -1,3 +1,11 @@
+.title_display {
+	font-size: 2em;
+}
+
+.artist_display {
+	font-size: 1.2em;
+}
+
 #queue_view_container {
 	display: none;
 	position: absolute;
