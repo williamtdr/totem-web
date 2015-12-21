@@ -2,6 +2,7 @@ room_description_changed = false;
 room_blacklist_changed = false;
 room_whitelist_changed = false;
 file_upload_loaded = false;
+var subview = false;
 
 function bindHoverHandler(destination) {
     $("#room_" + destination + "_list li").click(function(e) {
@@ -15,36 +16,64 @@ function bindHoverHandler(destination) {
                 if($(el).html() == target) {
                     $(el).addClass("demotion_target");
                     $(el).removeClass("hover_x");
-                    $(el).html('Are you sure that you want to demote ' + target + '? <a class="do_demotion" data-target="' + target + '" data-rank="' + destination.substring(0, destination.length - 1) + '">demote</a> &middot; <a class="cancel_demotion">cancel</a>');
+					var verb = "demote";
+					switch(subview) {
+						case "muted":
+							verb = "unmute";
+						break;
+						case "banned":
+							verb = "unban";
+						break;
+						case "queue_banned":
+							verb = "unqueueban";
+					}
+					var rank = subview;
+					if(subview === 'admins' || subview === 'hosts') rank = rank.substring(0, rank.length - 1);
+                    $(el).html('Are you sure that you want to ' + verb + ' ' + target + '? <a class="do_demotion" data-target="' + target + '" data-rank="' + rank + '">' + verb + '</a> &middot; <a class="cancel_demotion">cancel</a>');
                 }
             });
         }
 
         $(".do_demotion").click(function(e) {
-            var target = $(e.target).data("target"),
-                rank = $(e.target).data("rank");
-            $.ajax({
-                url: config.API + '/room/demote.php',
-                data: {
-                    username: target,
-                    scope: room.id,
-                    rank: rank
-                },
-                jsonp: 'callback',
-                dataType: 'jsonp',
-                success: function(data) {
-                    if(data.success) {
-                        $(".demotion_target").remove();
-                        server.send(JSON.stringify({
-                            event: "chat",
-                            data: "/demote " + target + " silent",
-                            key: authkey
-                        }));
-                    } else {
-                        $(".demotion_target").html('Demotion failed: ' + data.reason);
-                    }
-                }
-            });
+			var target = $(e.target).data("target"),
+				rank = $(e.target).data("rank");
+			$.ajax({
+				url: config.API + '/room/demote.php',
+				data: {
+					username: target,
+					scope: room.id,
+					rank: rank
+				},
+				jsonp: 'callback',
+				dataType: 'jsonp',
+				success: function(data) {
+					if(data.success) {
+						$(".demotion_target").remove();
+						var command = false;
+						switch(rank) {
+							case 'admin':
+							case 'host':
+								command = "demote";
+							break;
+							case 'muted':
+								command = "um";
+							break;
+							case 'banned':
+								command = "ub";
+							break;
+							case 'queue_banned':
+								command = "uqb";
+						}
+						server.send(JSON.stringify({
+							event: "chat",
+							data: "/" + command + " " + target + " silent",
+							key: authkey
+						}));
+					} else {
+						$(".demotion_target").html('Demotion failed: ' + data.reason);
+					}
+				}
+			});
         });
 
         $(".cancel_demotion").click(function() {
@@ -203,13 +232,19 @@ function initRoomSettings() {
             home = $("#room_settings_home"),
             back = $("#room_settings_return"),
             title = $("#room_settings_title"),
-			danger = $("#room_settings_danger");
+			danger = $("#room_settings_danger"),
+			moderation = $("#room_settings_moderation");
 		danger.hide();
         home.hide();
         back.show();
+		moderation.hide();
         destination_el.show();
+		subview = destination;
         switch(destination) {
             case "admins":
+			case "muted":
+			case "banned":
+			case "queue_banned":
             case "hosts":
                 var user_list = $("#room_" + destination + "_list");
                 user_list.empty();
@@ -311,15 +346,10 @@ function initRoomSettings() {
     });
 
     $(".user_add").click(function() {
-        var level;
-        if($(this).attr("id") == "user_add_admin") {
-            level = "admin";
-        } else {
-            level = "host";
-        }
-        var box = $("#" + level + "_textbox");
-        var error_target = $("#" + level + "_error");
-        var target = box.val();
+		var level = $(this).attr("id").replace("user_add_", ""),
+			box = $("#" + level + "_textbox"),
+			error_target = $("#" + level + "_error"),
+			target = box.val();
         $.ajax({
             url: config.API + '/room/promote.php',
             data: {
@@ -331,7 +361,7 @@ function initRoomSettings() {
             dataType: 'jsonp',
             success: function(data) {
                 if(data.success) {
-                    $("#room_" + level + "s_list").append('<li class="hover_x">' + target + '</li>');
+                    $("#room_" + level + "_list").append('<li class="hover_x">' + target + '</li>');
                     bindHoverHandler(level + "s");
                     server.send(JSON.stringify({
                         event: "chat",

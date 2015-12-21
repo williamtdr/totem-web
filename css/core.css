@@ -174,7 +174,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #3498DB;
 }
 
-#room_settings_blacklist, #room_settings_whitelist, #room_settings_admins, #room_settings_admins, #room_settings_hosts, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password {
+#room_settings_blacklist, #room_settings_whitelist, #room_settings_admins, #room_settings_admins, #room_settings_hosts, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_banned, #room_settings_queue_banned, #room_settings_muted {
     display: none;
 }
 

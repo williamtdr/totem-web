@@ -151,21 +151,17 @@
 						<i class="fa fa-check" style="margin-left: 3px"></i><label>Song Whitelist &raquo;</label>
 						<span>Songs whose video titles or channels contain words on this list bypass the blacklist.</span>
 					</div>
-					<div class="form-group modal-action" data-destination="admins">
-						<i class="fa fa-black-tie" style="margin-left: 4px"></i><label>Room Admins &raquo;</label>
-						<span>Admins can add or remove hosts, ban/pardon rogue listeners, and edit room settings in addition to all of a host's moderation abilities.</span>
-					</div>
-					<div class="form-group modal-action" data-destination="hosts">
-						<i class="fa fa-balance-scale"></i><label>Room Hosts &raquo;</label>
-						<span>Hosts can skip songs, mute people in chat, and ban users from queueing songs.</span>
-					</div>
 					<div class="form-group modal-action" data-destination="gallery">
 						<i class="fa fa-picture-o"></i><label>Custom Gallery &raquo;</label>
 						<span>Upload a collection of images to rotate through as the background for this room.</span>
 					</div>
-					<div class="form-group modal-action" data-destination="icon">
+					<!--<div class="form-group modal-action" data-destination="icon">
 						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
 						<span>Upload an image to show on desktop notifications from this room. Only for users who have this feature enabled.</span>
+					</div>!-->
+					<div class="form-group modal-action" data-destination="moderation">
+						<i class="fa fa-balance-scale"></i><label>Moderation &raquo;</label>
+						<span>Manage users with administration or moderation privileges, as well as those who are muted, banned or queue-banned.</span>
 					</div>
 					<div class="form-group modal-action danger" data-destination="danger">
 						<i class="fa fa-exclamation-triangle danger" style="margin-left: 2px"></i><label>Danger Zone &raquo;</label>
@@ -197,9 +193,31 @@
 						<span>Permanently deletes this room and kicks all listeners back to the main page. The name can be used again by another user.</span>
 					</div>
 				</div>
+				<div id="room_settings_moderation" data-title="Moderation" class="room_settings_list">
+					<div class="form-group modal-action" data-destination="admins">
+						<i class="fa fa-black-tie" style="margin-left: 4px"></i><label>Room Admins &raquo;</label>
+						<span>Admins can add or remove hosts, ban/pardon rogue listeners, and edit room settings in addition to all of a host's moderation abilities.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="hosts">
+						<i class="fa fa-balance-scale"></i><label>Room Hosts &raquo;</label>
+						<span>Hosts can skip songs, mute people in chat, and ban users from queueing songs.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="banned">
+						<i class="fa fa-ban" style="margin-left: 4px"></i><label>Banned Users &raquo;</label>
+						<span>Manage users who can't access this room.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="muted">
+						<i class="fa fa-volume-off" style="margin-left: 6px"></i><label>Muted Users &raquo;</label>
+						<span>Manage users who can't talk in this room.</span>
+					</div>
+					<div class="form-group modal-action" data-destination="queue_banned">
+						<i class="fa fa-gavel" style="margin-left: 4px"></i><label>Queue Banned Users &raquo;</label>
+						<span>Manage users who are banned from queueing songs in this room.</span>
+					</div>
+				</div>
 				<div id="room_settings_admins" data-title="Room Admins">
 					<div class="dynamic_user_list">
-						<ul id="room_admins_list">
+						<ul id="room_admin_list">
 							<li>Loading...</li>
 						</ul>
 						<input class="dynamic_user_list_footer form-control" id="admin_textbox" placeholder="Type a username...">
@@ -212,12 +230,51 @@
 				</div>
 				<div id="room_settings_hosts" data-title="Room Hosts">
 					<div class="dynamic_user_list">
-						<ul id="room_hosts_list">
+						<ul id="room_host_list">
 							<li>Loading...</li>
 						</ul>
 						<input class="dynamic_user_list_footer form-control" id="host_textbox" placeholder="Type a username...">
 						<button class="btn btn-info user_add" id="user_add_host">Add</button>
 						<span id="host_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+				<div id="room_settings_banned" data-title="Banned Users">
+					<div class="dynamic_user_list">
+						<ul id="room_banned_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="banned_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_banned">Add</button>
+						<span id="banned_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+				<div id="room_settings_muted" data-title="Muted Users">
+					<div class="dynamic_user_list">
+						<ul id="room_muted_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="muted_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_muted">Add</button>
+						<span id="muted_error"></span>
+						<div class="user_suggestion_wrapper">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+				<div id="room_settings_queue_banned" data-title="Queue Banned Users">
+					<div class="dynamic_user_list">
+						<ul id="room_queue_banned_list">
+							<li>Loading...</li>
+						</ul>
+						<input class="dynamic_user_list_footer form-control" id="queue_banned_textbox" placeholder="Type a username...">
+						<button class="btn btn-info user_add" id="user_add_queue_banned">Add</button>
+						<span id="queue_banned_error"></span>
 						<div class="user_suggestion_wrapper">
 							<ul></ul>
 						</div>
