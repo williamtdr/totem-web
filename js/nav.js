@@ -202,6 +202,8 @@ function navOnLogin() {
 		menu.addClass("signInButton");
 		menu.html('Log In<span id="login-full"> with Google');
 	} else {
+        menu.removeClass("signInButton");
+        menu.unbind();
 		menu.click(function() {
 			var user_menu = $("#user_menu");
 			if(user_menu.is(":visible")) $(".expanded").click();
