@@ -86,7 +86,7 @@ function loadVideoById(id, time) {
 		yt_player.seekTo(time);
 	}
 	if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
-		removeArray(local_queue, id);
+		removeFromQueueById(id);
 		localStorage.setItem("Queue", JSON.stringify(local_queue));
 		song.queueDeleted = 1;
 
@@ -96,7 +96,7 @@ function loadVideoById(id, time) {
 		song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
 			"event": "queue",
 			"song": {
-				url_fragment: queue[0]
+				url_fragment: local_queue[0]
 			},
 			"key": authkey
 		}));}, ((song.duration - 20) * 1000));

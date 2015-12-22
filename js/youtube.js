@@ -95,25 +95,6 @@ function search(more) {
 	});
 }
 
-function deleteFromQueueList(id) {
-	var container = $('.playlist-list-content');
-
-	removeArray(queue, id);
-	localStorage.setItem("Queue", JSON.stringify(queue));
-	
-	container.find('.playlist.id-'+ id).remove();
-}
-
-function loadqueueplaylist() {
-	var container = $('.playlist-list-content');
-	
-	container.html('');
-	$("#playlist_list").hide();
-	$("#playlist_items").show();
-	
-
-}
-
 var currentPlaylistId;
 function loadPlaylistItems(playlistId, more) {
 	var data, container = $('.playlist-list-content');
