@@ -27,9 +27,7 @@ function bindHoverHandler(destination) {
 						case "queue_banned":
 							verb = "unqueueban";
 					}
-					var rank = subview;
-					if(subview === 'admins' || subview === 'hosts') rank = rank.substring(0, rank.length - 1);
-                    $(el).html('Are you sure that you want to ' + verb + ' ' + target + '? <a class="do_demotion" data-target="' + target + '" data-rank="' + rank + '">' + verb + '</a> &middot; <a class="cancel_demotion">cancel</a>');
+                    $(el).html('Are you sure that you want to ' + verb + ' ' + target + '? <a class="do_demotion" data-target="' + target + '" data-rank="' + subview + '">' + verb + '</a> &middot; <a class="cancel_demotion">cancel</a>');
                 }
             });
         }
@@ -64,6 +62,7 @@ function bindHoverHandler(destination) {
 							case 'queue_banned':
 								command = "uqb";
 						}
+                        console.log("/" + command + " " + target + " silent");
 						server.send(JSON.stringify({
 							event: "chat",
 							data: "/" + command + " " + target + " silent",
@@ -241,11 +240,11 @@ function initRoomSettings() {
         destination_el.show();
 		subview = destination;
         switch(destination) {
-            case "admins":
+            case "admin":
 			case "muted":
 			case "banned":
 			case "queue_banned":
-            case "hosts":
+            case "host":
                 var user_list = $("#room_" + destination + "_list");
                 user_list.empty();
                 user_list.append('<li>Loading...</li>');
@@ -361,8 +360,9 @@ function initRoomSettings() {
             dataType: 'jsonp',
             success: function(data) {
                 if(data.success) {
+                    $(".user_suggestion_wrapper").empty();
                     $("#room_" + level + "_list").append('<li class="hover_x">' + target + '</li>');
-                    bindHoverHandler(level + "s");
+                    bindHoverHandler(level);
                     server.send(JSON.stringify({
                         event: "chat",
                         data: "/promote " + target + " " + level + " silent",
