@@ -50,7 +50,7 @@ function onPlayerStateChange(event) {
 }
 
 function addToQueueById(id) {
-	if (!room.isUserQueued) {
+	if (!room.isUserQueued && !room.willAddToQueue) {
 		server.send(JSON.stringify({
 			"event": "queue",
 			"song": {
@@ -67,10 +67,8 @@ function addToQueueById(id) {
 
 	if(client.state != STATE_NO_SONG) {
 		var target = $("[data-id='" + id + "']");
-		target.text("Remove From Queue");
+		target.html('<i class="fa fa-trash-o"></i>Remove From Queue');
 		target.unbind("click");
-		target.find("i").addClass("fa-times");
-		target.find("i").removeClass("fa-plus");
 		target.click(function(e) {
 			var target = $(e.target);
 			removeFromQueueById(target.data('id'));
@@ -145,14 +143,12 @@ function removeFromQueueById(id) {
 	}
 	for(var index in local_queue) {
 		if(local_queue[index] == id) {
-			delete local_queue[index];
+			local_queue.splice(index, 1);
 		}
 	}
 	var target = $("[data-id='" + id + "']");
-	target.text("Add To Queue");
+	target.html('<i class="fa fa-plus"></i> Add to Queue');
 	target.unbind("click");
-	target.find("i").addClass("fa-plus");
-	target.find("i").removeClass("fa-times");
 	target.click(function(e) {
 		var target = $(e.target);
 		addToQueueById(target.data('id'));

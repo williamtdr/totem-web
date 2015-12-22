@@ -22,7 +22,8 @@ room = {
 	enabled: false,
 	password: false,
     backgrounds: false,
-	isUserQueued: false
+	isUserQueued: false,
+	willAddToQueue: false
 };
 
 yt_player = false;
@@ -89,17 +90,19 @@ function loadVideoById(id, time) {
 		removeFromQueueById(id);
 		localStorage.setItem("Queue", JSON.stringify(local_queue));
 		song.queueDeleted = 1;
+		room.willAddToQueue = true;
 
-		if ($('.playlist.in_queue').css('display') == 'block')
-			loadqueueplaylist();
-
-		song.queueCountdown = setTimeout(function() {server.send(JSON.stringify({
-			"event": "queue",
-			"song": {
-				url_fragment: local_queue[0]
-			},
-			"key": authkey
-		}));}, ((song.duration - 20) * 1000));
+		song.queueCountdown = setTimeout(function() {
+			server.send(JSON.stringify({
+				"event": "queue",
+				"song": {
+					url_fragment: local_queue[0]
+				},
+				"key": authkey
+			}));
+			
+			room.willAddToQueue = false;
+		}, ((song.duration - 20) * 1000));
 
 		room.isUserQueued = false;
 	}
