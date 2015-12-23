@@ -35,7 +35,7 @@ function bindHoverHandler(destination) {
                     $(el).removeClass("hover_x");
 					var verb = "demote";
 					switch(subview) {
-						case "muted":
+						case "mute":
 							verb = "unmute";
 						break;
 						case "ban":
@@ -71,13 +71,13 @@ function bindHoverHandler(destination) {
 							case 'host':
 								command = "demote";
 							break;
-							case 'muted':
+							case 'mute':
 								command = "um";
 							break;
-							case 'banned':
+							case 'ban':
 								command = "ub";
 							break;
-							case 'queue_banned':
+							case 'queue_ban':
 								command = "uqb";
 						}
                         console.log("/" + command + " " + target + " silent");
@@ -394,9 +394,23 @@ function initRoomSettings() {
                     $(".user_suggestion_wrapper").empty();
                     $("#room_" + level + "_list").append('<li class="hover_x">' + target + '</li>');
                     bindHoverHandler(level);
+					var command;
+					switch(level) {
+						case "admin":
+						case "host":
+							command = "/promote " + target + " " + level + " silent";
+						break;
+						case "ban":
+						case "mute":
+							command = "/" + level + " " + target;
+						break;
+						case "queue_ban":
+							command = "/qb " + target;
+						break;
+					}
                     server.send(JSON.stringify({
                         event: "chat",
-                        data: "/promote " + target + " " + level + " silent",
+                        data: command,
                         key: authkey
                     }));
                     box.val("");
