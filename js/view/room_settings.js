@@ -2,25 +2,22 @@ room_description_changed = false;
 room_blacklist_changed = false;
 room_whitelist_changed = false;
 file_upload_loaded = false;
+hide_password_on_next_load = false;
 var subview = false;
 
 function updateRoomSettings() {
 	var remove_password_well = $("#remove_password_well"),
 		set_password_well = $("#set_password_well");
 	if(client.room_needs_auth) {
-		$("[data-destination='set_password'] label").html("Remove Password »");
-		$("[data-destination='set_password'] span").html("Removes the password required from new listeners before accessing the room.");
-		$("#room_settings_set_password").data('title', 'Remove Password');
-		$("#room_settings_set_password .room_settings_instructions").html("No changes will happen to listeners already in the room. Those waiting to access the room must refresh.");
+		$("[data-destination='set_password'] label").html("Change/Remove Password »");
+		$("[data-destination='set_password'] span").html("Change or remove the password required from new listeners before accessing the room.");
+		$("#room_settings_set_password").data('title', 'Change/Remove Password');
 		remove_password_well.show();
-		set_password_well.hide();
 	} else {
 		$("[data-destination='set_password'] label").html("Set Password »");
 		$("[data-destination='set_password'] span").html("Requires new listeners to enter a password before accessing the room.");
 		$("#room_settings_set_password").data('title', 'Set Password');
-		$("#room_settings_set_password .room_settings_instructions").html("New users will have to know this password to join the room. Any existing users will be kicked out.");
 		remove_password_well.hide();
-		set_password_well.show();
 	}
 }
 
@@ -261,6 +258,14 @@ function initRoomSettings() {
         back.show();
 		moderation.hide();
         destination_el.show();
+		$("#set_password_well").show();
+		if(hide_password_on_next_load) {
+			$("#remove_password_well").hide();
+			$("#set_room_password_1").val("");
+			$("#set_room_password_2").val("");
+			hide_password_on_next_load = false;
+		}
+		$("#set_password_errors").empty();
 		subview = destination;
         switch(destination) {
             case "admin":
@@ -551,12 +556,17 @@ function initRoomSettings() {
 			dataType: 'jsonp',
 			success: function (data) {
 				if(data.success) {
+					$("#set_password_well").hide();
+					$("#remove_password_well").hide();
 					$("#set_password_errors").append('<div class="alert alert-success">Password removed.</div>');
-					$('#room_settings_modal').modal('toggle');
 					server.send(JSON.stringify({
 						event: "remove_password",
 						key: authkey
 					}));
+					$("[data-destination='set_password'] label").html("Set Password »");
+					$("[data-destination='set_password'] span").html("Requires new listeners to enter a password before accessing the room.");
+					$("#room_settings_set_password").data('title', 'Set Password');
+					hide_password_on_next_load = true;
 				}
 			}
 		});

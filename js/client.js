@@ -61,6 +61,8 @@ client = {
 			switch (event_data.event) {
 				case "requires_authentication":
 					room.display_name = event_data.display_name;
+					client.room_needs_auth = true;
+					updateRoomSettings();
 					try {
 						var password_store = window.localStorage.getItem("saved_room_passwords");
 						if(password_store && JSON.parse(password_store)[room.id]) {
@@ -107,10 +109,8 @@ client = {
 							window.localStorage.setItem("saved_room_passwords", JSON.stringify(password_obj));
 						}
 						room.password = false;
-					} else {
-						client.room_needs_auth = false;
-						updateRoomSettings();
 					}
+					updateRoomSettings();
 					$("#waiting_for_server").hide();
 					$("#main_content").show();
 					$("#sidebar").show();
