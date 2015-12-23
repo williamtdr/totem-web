@@ -21,10 +21,10 @@ function bindHoverHandler(destination) {
 						case "muted":
 							verb = "unmute";
 						break;
-						case "banned":
+						case "ban":
 							verb = "unban";
 						break;
-						case "queue_banned":
+						case "queue_ban":
 							verb = "unqueueban";
 					}
                     $(el).html('Are you sure that you want to ' + verb + ' ' + target + '? <a class="do_demotion" data-target="' + target + '" data-rank="' + subview + '">' + verb + '</a> &middot; <a class="cancel_demotion">cancel</a>');
@@ -36,10 +36,11 @@ function bindHoverHandler(destination) {
 			var target = $(e.target).data("target"),
 				rank = $(e.target).data("rank");
 			$.ajax({
-				url: config.API + '/room/demote.php',
+				url: config.API + '/room/permission.php',
 				data: {
 					username: target,
 					scope: room.id,
+					type: "remove",
 					rank: rank
 				},
 				jsonp: 'callback',
@@ -87,10 +88,11 @@ function bindRemoveButtons() {
     $(".remove-background-image").click(function(e) {
         var target = $(e.target).data("url");
         $.ajax({
-            url: config.API + '/room/remove_background.php',
+            url: config.API + '/room/background.php',
             data: {
                 url: target,
-                scope: room.id
+                scope: room.id,
+				action: "remove"
             },
             jsonp: 'callback',
             dataType: 'jsonp',
@@ -209,9 +211,10 @@ function fileUploadLoaded() {
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
     $.ajax({
-        url: config.API + '/room/get_backgrounds.php',
+        url: config.API + '/room/info.php',
         data: {
-            scope: room.id
+            scope: room.id,
+			q: "backgrounds"
         },
         jsonp: 'callback',
         dataType: 'jsonp',
@@ -249,9 +252,10 @@ function initRoomSettings() {
                 user_list.empty();
                 user_list.append('<li>Loading...</li>');
                 $.ajax({
-                    url: config.API + '/room/get_' + destination + '.php',
+                    url: config.API + '/room/info.php',
                     data: {
-                        scope: room.id
+                        scope: room.id,
+						q: destination
                     },
                     jsonp: 'callback',
                     dataType: 'jsonp',
@@ -350,11 +354,12 @@ function initRoomSettings() {
 			error_target = $("#" + level + "_error"),
 			target = box.val();
         $.ajax({
-            url: config.API + '/room/promote.php',
+            url: config.API + '/room/permission.php',
             data: {
                 username: target,
                 scope: room.id,
-                rank: level
+                rank: level,
+				type: "add"
             },
             jsonp: 'callback',
             dataType: 'jsonp',
@@ -397,10 +402,11 @@ function initRoomSettings() {
         }
         if(room_blacklist_changed) {
             $.ajax({
-                url: config.API + '/room/blacklist.php',
+                url: config.API + '/room/settings.php',
                 data: {
                     scope: room.id,
-                    content: $("#room_blacklist").val()
+                    content: $("#room_blacklist").val(),
+					action: "blacklist"
                 },
                 jsonp: 'callback',
                 dataType: 'jsonp',
@@ -437,10 +443,11 @@ function initRoomSettings() {
         }
         if(room_whitelist_changed) {
             $.ajax({
-                url: config.API + '/room/whitelist.php',
+                url: config.API + '/room/settings.php',
                 data: {
                     scope: room.id,
-                    content: $("#room_whitelist").val()
+                    content: $("#room_whitelist").val(),
+					action: "whitelist"
                 },
                 jsonp: 'callback',
                 dataType: 'jsonp',
@@ -496,10 +503,11 @@ function initRoomSettings() {
 			return false;
 		}
 		$.ajax({
-			url: config.API + '/room/set_password.php',
+			url: config.API + '/room/settings.php',
 			data: {
 				scope: room.id,
-				password: password
+				password: password,
+				action: "set_password"
 			},
 			jsonp: 'callback',
 			dataType: 'jsonp',
