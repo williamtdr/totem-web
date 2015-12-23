@@ -25,8 +25,9 @@ function onPlayerReady(event) {
 		yt_player.setVolume(vol);
 		window.localStorage.setItem('volume', vol);
 	});
-
+	
 	event.target.playVideo();
+	yt_player.setPlaybackQuality(getquality());
 }
 
 function onPlayerStateChange(event) {

@@ -37,13 +37,18 @@ function onYouTubeIframeAPIReady() {
 	youtube_ready = true;
 }
 
-function removeArray (array, value) {
-	array.forEach(function(result, index) {
-		if(result == value) {
-			array.splice(index, 1);
-			return;
-		}    
-	});
+function getquality() {
+	switch (client.settings.video_quality) {
+		case "1080p":
+			return "hd1080"
+			break;
+		case "720p":
+			return "hd720"
+			break;
+		case "480p":
+			return "large"
+			break;
+	}
 }
 
 function loadVideoById(id, time) {
@@ -82,7 +87,7 @@ function loadVideoById(id, time) {
 		});
 		player_initialized = true;
 	} else {
-		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': 'hd720'});
+		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': getquality()});
 		yt_player.seekTo(time);
 	}
 	if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {

@@ -66,6 +66,15 @@
 	color: #E74C3C;
 }
 
+.switch-grey {
+    color: #BDC3C7;
+    transition: .25s;
+}
+
+.switch-grey:hover {
+	color: #8b969c;
+}
+
 .switch_selector {
 	display: block;
 	margin-left: auto;
@@ -74,9 +83,8 @@
 	height: 0;
 }
 
-.big_selector {
+.big_selector, .quality_selector {
 	width: 100%;
-	padding-top: 10px;
 }
 
 .big_selector > span:first-child {
@@ -91,6 +99,22 @@
 	text-align: center;
 	width: 120px;
 	display: inline-block;
+}
+
+.quality_selector > span:first-child {
+	margin-left: 10px;
+}
+
+.quality_selector > span:last-child {
+	margin-right: 25px;
+	color: #BDC3C7;
+}
+
+.quality_selector > .switch-multiple {
+	text-align: center;
+	width: 100px;
+	display: inline-block;
+	color: #C0392B;
 }
 
 .switch-active {

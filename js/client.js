@@ -27,7 +27,8 @@ client = {
     settings: {
         notif_song_change: true,
         notif_chat: "mention",
-        hide_hints: false
+        hide_hints: false,
+		video_quality: "720p"
     },
 	showRequiresAuthentication: function() {
 		switchClientState(STATE_NO_SONG);

@@ -8,7 +8,7 @@
 
 #queue_view_container {
 	display: none;
-	position: absolute;
+	position: fixed;
 	width: 400px;
 	height: 400px;
 	top: 55px;
