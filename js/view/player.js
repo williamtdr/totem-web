@@ -563,7 +563,8 @@ function initRequiresAuthentication() {
 			data: {
 				password: password,
 				scope: room.id
-			}
+			},
+			key: authkey
 		}));
 		room.password = password;
 	});

@@ -70,7 +70,8 @@ client = {
 								data: {
 									password: JSON.parse(password_store)[room.id],
 									scope: room.id
-								}
+								},
+								key: authkey
 							}));
 						} else {
 							client.attempting_auto_login = false;
