@@ -184,6 +184,17 @@
 						<button class="btn" id="remove_room_password_btn">Remove Room Password</button>
 					</div>
 				</div>
+				<div id="room_settings_transfer_ownership" data-title="Transfer Ownership">
+					<span class="room_settings_instructions">
+						You will lose admin privledges in this room, and they will be transferred to the user whom you select.
+					</span>
+					<div id="transfer_ownership_errors"></div>
+					<input class="dynamic_user_list_footer form-control" id="transfer_ownership_textbox" placeholder="Type a username..." maxlength="30">
+					<button class="btn btn-info" id="transfer_ownership_btn">Go</button>
+					<div class="user_suggestion_wrapper" id="transfer_ownership_suggestion">
+						<ul></ul>
+					</div>
+				</div>
 				<div id="room_settings_danger" data-title="Danger Zone" class="room_settings_list">
 					<div class="form-group modal-action" data-destination="set_password">
 						<i class="fa fa-lock" style="margin-left: 4px"></i><label>Set Password &raquo;</label>

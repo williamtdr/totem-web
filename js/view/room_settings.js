@@ -616,6 +616,37 @@ function initRoomSettings() {
 		});
 	});
 
+	$("#transfer_ownership_btn").click(function() {
+		var errors = $("#transfer_ownership_errors");
+
+		errors.empty();
+		$.ajax({
+			url: config.API + '/room/settings.php',
+			data: {
+				scope: room.id,
+				action: "transfer_ownership",
+				username: $("#transfer_ownership_textbox").val()
+			},
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			success: function (data) {
+				if(data.success) {
+					errors.empty();
+					server.send(JSON.stringify({
+						event: "reload_room_permission_table",
+						key: authkey
+					}));
+					errors.append('<div class="alert alert-success">Ownership transferred. Reloading in 3s...</div>');
+					setTimeout(function() {
+						window.location.reload();
+					}, 3000);
+				} else {
+					errors.append('<div class="alert alert-danger">' + data.reason + '</div>');
+				}
+			}
+		});
+	});
+
     $("#room_blacklist").keyup(function() {
         room_blacklist_changed = true;
     });

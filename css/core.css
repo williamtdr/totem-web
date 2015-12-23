@@ -174,7 +174,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #3498DB;
 }
 
-#room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors {
+#room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership {
     display: none;
 }
 
@@ -352,11 +352,15 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	margin-top: 15px;
 }
 
-#delete_room_errors {
+#delete_room_errors, #transfer_ownership_errors {
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
 
 #remove_room_password_btn {
 	margin-top: 15px;
+}
+
+#transfer_ownership_textbox {
+	width: 300px;
 }
