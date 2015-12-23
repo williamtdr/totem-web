@@ -215,6 +215,13 @@
 						<span>Manage users who are banned from queueing songs in this room.</span>
 					</div>
 				</div>
+				<div id="room_settings_delete_room" data-title="Delete Room">
+					<span class="room_settings_instructions">
+						All existing users will be kicked out of the room, and all settings associated with this room will be deleted. This included backgrounds, lists of banned, muted, queue banned users, hosts and admins.
+					</span>
+					<div id="delete_room_errors"></div>
+					<button class="btn btn-danger" id="delete_room_btn">Delete Room</button>
+				</div>
 				<div id="room_settings_admin" data-title="Room Admins">
 					<div class="dynamic_user_list">
 						<ul id="room_admin_list">

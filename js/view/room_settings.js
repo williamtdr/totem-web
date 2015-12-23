@@ -493,6 +493,30 @@ function initRoomSettings() {
 		}
 	});
 
+	$("#delete_room_btn").click(function() {
+		var errors = $("#delete_room_errors");
+
+		errors.empty();
+		$.ajax({
+			url: config.API + '/room/settings.php',
+			data: {
+				scope: room.id,
+				action: "delete_room"
+			},
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			success: function (data) {
+				if(data.success) {
+					$('#room_settings_modal').modal('toggle');
+					server.send(JSON.stringify({
+						event: "delete_room",
+						key: authkey
+					}));
+				}
+			}
+		});
+	});
+
 	$("#set_room_password_btn").click(function() {
 		var errors = $("#set_password_errors"),
 			password = $("#set_room_password_1").val();

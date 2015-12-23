@@ -241,7 +241,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="room_settings_banned" data-title="Banned Users">
+				<div id="room_settings_ban" data-title="Banned Users">
 					<div class="dynamic_user_list">
 						<ul id="room_banned_list">
 							<li>Loading...</li>
@@ -253,6 +253,13 @@
 							<ul></ul>
 						</div>
 					</div>
+				</div>
+				<div id="room_settings_delete_room" data-title="Delete Room">
+					<span class="room_settings_instructions">
+						All existing users will be kicked out of the room, and all settings associated with this room will be deleted. This included backgrounds, lists of banned, muted, queue banned users, hosts and admins.
+					</span>
+					<div id="delete_room_errors"></div>
+					<button class="btn btn-danger" id="delete_room_btn">Delete Room</button>
 				</div>
 				<div id="room_settings_mute" data-title="Muted Users">
 					<div class="dynamic_user_list">

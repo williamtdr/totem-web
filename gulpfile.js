@@ -22,7 +22,7 @@ gulp.task('default', ['minify-css', 'minify-js'], function() {
 });
 
 
-var watcher = gulp.watch(['*.*', 'css/**', 'js/**'], ['default']);
+var watcher = gulp.watch(['*.*', 'css/**', 'js/**', 'offline/**'], ['default']);
 watcher.on('change', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 });
