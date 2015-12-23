@@ -30,6 +30,7 @@ function joinRoom(destination) {
 	room.id = destination;
 	$("#waiting_for_server").show();
 	$("#main_content").hide();
+	$(".chat-text").empty();
 	if(client.connected) {
 		var packet = {
 			event: "login",
