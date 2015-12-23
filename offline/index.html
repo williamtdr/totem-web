@@ -173,11 +173,16 @@
 						New users will have to know this password to join the room. Any existing users will be kicked out.
 					</span>
 					<div id="set_password_errors"></div>
-					<label>Password</label>
-					<input class="form-control" type="password" placeholder="Password" id="set_room_password_1">
-					<label>Confirm Password</label>
-					<input class="form-control" type="password" placeholder="Password" id="set_room_password_2">
-					<button class="btn btn-info" id="set_room_password_btn">Go</button>
+					<div id="set_password_well">
+						<label>Password</label>
+						<input class="form-control" type="password" placeholder="Password" id="set_room_password_1">
+						<label>Confirm Password</label>
+						<input class="form-control" type="password" placeholder="Password" id="set_room_password_2">
+						<button class="btn btn-info" id="set_room_password_btn">Go</button>
+					</div>
+					<div id="remove_password_well">
+						<button class="btn btn-info" id="remove_room_password_btn">Remove Room Password</button>
+					</div>
 				</div>
 				<div id="room_settings_danger" data-title="Danger Zone" class="room_settings_list">
 					<div class="form-group modal-action" data-destination="set_password">

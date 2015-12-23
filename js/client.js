@@ -23,6 +23,7 @@ client = {
 	is_admin: false,
 	guest_key: false,
 	attempting_auto_login: false,
+	room_needs_auth: false,
     settings: {
         notif_song_change: true,
         notif_chat: "mention",
@@ -35,6 +36,8 @@ client = {
 		$("#room_password_name_target").html(room.display_name);
 		$("title").html(room.display_name + " &middot; Totem");
 		switchView(VIEW_REQUIRES_AUTHENTICATION);
+		client.room_needs_auth = true;
+		updateRoomSettings();
 	},
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
@@ -93,6 +96,8 @@ client = {
                         return false;
                     }
 					if(room.password && $("#remember_room_password").attr("checked") == "checked") {
+						client.room_needs_auth = true;
+						updateRoomSettings();
 						if(window.localStorage.getItem("saved_room_passwords")) {
 							window.localStorage.setItem("saved_room_passwords", JSON.parse(window.localStorage.getItem("saved_room_passwords"))[room.id] = room.password);
 						} else {
@@ -101,6 +106,9 @@ client = {
 							window.localStorage.setItem("saved_room_passwords", JSON.stringify(password_obj));
 						}
 						room.password = false;
+					} else {
+						client.room_needs_auth = false;
+						updateRoomSettings();
 					}
 					$("#waiting_for_server").hide();
 					$("#main_content").show();

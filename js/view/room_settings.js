@@ -4,6 +4,26 @@ room_whitelist_changed = false;
 file_upload_loaded = false;
 var subview = false;
 
+function updateRoomSettings() {
+	var remove_password_well = $("#remove_password_well"),
+		set_password_well = $("#set_password_well");
+	if(client.room_needs_auth) {
+		$("[data-destination='set_password'] label").html("Remove Password »");
+		$("[data-destination='set_password'] span").html("Removes the password required from new listeners before accessing the room.");
+		$("#room_settings_set_password").data('title', 'Remove Password');
+		$("#room_settings_set_password .room_settings_instructions").html("No changes will happen to listeners already in the room. Those waiting to access the room must refresh.");
+		remove_password_well.show();
+		set_password_well.hide();
+	} else {
+		$("[data-destination='set_password'] label").html("Set Password »");
+		$("[data-destination='set_password'] span").html("Requires new listeners to enter a password before accessing the room.");
+		$("#room_settings_set_password").data('title', 'Set Password');
+		$("#room_settings_set_password .room_settings_instructions").html("New users will have to know this password to join the room. Any existing users will be kicked out.");
+		remove_password_well.hide();
+		set_password_well.show();
+	}
+}
+
 function bindHoverHandler(destination) {
     $("#room_" + destination + "_list li").click(function(e) {
         if($(this).hasClass("no_hover_x")) return false;
@@ -510,6 +530,31 @@ function initRoomSettings() {
 					$('#room_settings_modal').modal('toggle');
 					server.send(JSON.stringify({
 						event: "delete_room",
+						key: authkey
+					}));
+				}
+			}
+		});
+	});
+
+	$("#remove_room_password_btn").click(function() {
+		var errors = $("#set_password_errors");
+
+		errors.empty();
+		$.ajax({
+			url: config.API + '/room/settings.php',
+			data: {
+				scope: room.id,
+				action: "remove_password"
+			},
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			success: function (data) {
+				if(data.success) {
+					$("#set_password_errors").append('<div class="alert alert-success">Password removed.</div>');
+					$('#room_settings_modal').modal('toggle');
+					server.send(JSON.stringify({
+						event: "remove_password",
 						key: authkey
 					}));
 				}
