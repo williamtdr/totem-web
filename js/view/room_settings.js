@@ -269,9 +269,9 @@ function initRoomSettings() {
 		subview = destination;
         switch(destination) {
             case "admin":
-			case "muted":
-			case "banned":
-			case "queue_banned":
+			case "mute":
+			case "ban":
+			case "queue_ban":
             case "host":
                 var user_list = $("#room_" + destination + "_list");
                 user_list.empty();
@@ -332,47 +332,47 @@ function initRoomSettings() {
         destination_el.show();
         title.html('Room Settings');
     });
-    $(".dynamic_user_list_footer").keyup(function(event) {
-        if(event.keyCode == 13) {
-            if($(this).attr("id") == "admin_textbox") {
-                $("#user_add_admin").click();
-            } else {
-                $("#user_add_host").click();
-            }
-            return true;
-        }
-        var suggestion_textbox = $(".dynamic_user_list_footer"),
-            content = suggestion_textbox.val(),
-            suggestion_list = $(".user_suggestion_wrapper ul");
-        if(content.length > 0) {
-            $.ajax({
-                url: config.API + '/room/suggest_user.php',
-                data: {
-                    q: content
-                },
-                jsonp: 'callback',
-                dataType: 'jsonp',
-                success: function(data) {
-                    suggestion_list.empty();
-                    for(i = 0; i <= data.length; i++) {
-                        var item = data[i];
-                        if(item) {
-                            suggestion_list.append('<li class="user-selection-option">' + item + '</li>');
-                        }
-                    }
-                    $(".user-selection-option").click(function(el) {
-                        var target_user = $(el.target).html(),
-                            box = $(".dynamic_user_list_footer");
-                        box.val(target_user);
-                        box.focus();
-                        $(".user_suggestion_wrapper ul").empty();
-                    });
-                }
-            });
-        } else {
-            suggestion_list.empty();
-        }
-    });
+    $(".dynamic_user_list_footer").each(function(index, el) {
+		console.log(el);
+		$(el).keyup(function(event) {
+			var wrapper = $(this).attr("id").replace("_textbox", "");
+			if(event.keyCode == 13) {
+				$("#user_add_" + wrapper).click();
+				return true;
+			}
+			var suggestion_textbox = $(this),
+				content = suggestion_textbox.val(),
+				suggestion_list = $("#" + wrapper + "_suggestion ul");
+			if(content.length > 0) {
+				$.ajax({
+					url: config.API + '/room/suggest_user.php',
+					data: {
+						q: content
+					},
+					jsonp: 'callback',
+					dataType: 'jsonp',
+					success: function(data) {
+						suggestion_list.empty();
+						for(i = 0; i <= data.length; i++) {
+							var item = data[i];
+							if(item) {
+								suggestion_list.append('<li class="user-selection-option">' + item + '</li>');
+							}
+						}
+						$(".user-selection-option").click(function(el) {
+							var target_user = $(el.target).html(),
+								box = $(".dynamic_user_list_footer");
+							box.val(target_user);
+							box.focus();
+							$(".user_suggestion_wrapper ul").empty();
+						});
+					}
+				});
+			} else {
+				suggestion_list.empty();
+			}
+		});
+	});
 
     $(".user_add").click(function() {
 		var level = $(this).attr("id").replace("user_add_", ""),
