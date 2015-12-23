@@ -2,8 +2,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="">
+	<meta name="description" content="Totem is a group music discovery service. Share your favorite tunes, or sit back and let new ones come to you.">
 	<title>Totem</title>
 	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<link href="http://static.totem.fm/totem.vendor.min.css" rel="stylesheet">
@@ -156,10 +157,10 @@
 						<i class="fa fa-picture-o"></i><label>Custom Gallery &raquo;</label>
 						<span>Upload a collection of images to rotate through as the background for this room.</span>
 					</div>
-					<!--<div class="form-group modal-action" data-destination="icon">
+					<div class="form-group modal-action" data-destination="icon">
 						<i class="fa fa-bell" style="margin-left: 2px"></i><label>Custom Icon &raquo;</label>
 						<span>Upload an image to show on desktop notifications from this room. Only for users who have this feature enabled.</span>
-					</div>!-->
+					</div>
 					<div class="form-group modal-action" data-destination="moderation">
 						<i class="fa fa-balance-scale"></i><label>Moderation &raquo;</label>
 						<span>Manage users with administration or moderation privileges, as well as those who are muted, banned or queue-banned.</span>
@@ -317,15 +318,20 @@
 					</div>
 				</div>
 				<div id="room_settings_gallery" data-title="Custom Gallery">
-					<input id="fileupload" type="file" name="files[]" multiple>
+					<input id="file_upload_gallery" type="file" name="files[]" multiple>
 					<br>
-					<div id="progress" class="progress">
+					<div id="progress_gallery" class="progress">
 						<div class="progress-bar progress-bar-success"></div>
 					</div>
-					<div id="files" class="files"></div>
+					<div id="files_gallery" class="files"></div>
 				</div>
 				<div id="room_settings_icon" data-title="Custom Icon">
-					Coming soon!
+					<input id="file_upload_icon" type="file" name="files">
+					<br>
+					<div id="progress_icon" class="progress">
+						<div class="progress-bar progress-bar-success"></div>
+					</div>
+					<div id="files_icon" class="files"></div>
 				</div>
 			</div>
 			<div class="modal-footer">
