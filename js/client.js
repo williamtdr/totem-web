@@ -93,6 +93,7 @@ client = {
 					}
 				break;
 				case "room_data": // called to initialize room
+					room.joined_at = Math.floor(Date.now() / 1000);
 					$("#requires_authentication").hide();
                     if(data == false) {
                         switchView(VIEW_ROOM_LIST);
@@ -294,7 +295,7 @@ client = {
 					if(song.queueCountdown) clearTimeout(song.queueCountdown);
 					song.queueCountdown = false;
 
-                    if(client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
+                    if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
                         var notification = new Notification(song.name, {
                             icon: 'http://static.totem.fm/default_notification.png',
                             body: song.artist

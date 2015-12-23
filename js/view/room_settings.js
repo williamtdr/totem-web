@@ -80,7 +80,6 @@ function bindHoverHandler(destination) {
 							case 'queue_ban':
 								command = "uqb";
 						}
-                        console.log("/" + command + " " + target + " silent");
 						server.send(JSON.stringify({
 							event: "chat",
 							data: "/" + command + " " + target + " silent",
@@ -333,7 +332,6 @@ function initRoomSettings() {
         title.html('Room Settings');
     });
     $(".dynamic_user_list_footer").each(function(index, el) {
-		console.log(el);
 		$(el).keyup(function(event) {
 			var wrapper = $(this).attr("id").replace("_textbox", "");
 			if(event.keyCode == 13) {

@@ -23,7 +23,8 @@ room = {
 	password: false,
     backgrounds: false,
 	isUserQueued: false,
-	willAddToQueue: false
+	willAddToQueue: false,
+	joined_at: 0
 };
 
 yt_player = false;
@@ -50,8 +51,6 @@ function loadVideoById(id, time) {
 	$("#no_video").hide();
 	$("#main_content").show();
 	if(!youtube_ready) return false;
-
-	console.log(player_initialized);
 
 	if (!player_initialized) {
 		yt_player = new YT.Player('youtube_player', {
@@ -280,7 +279,7 @@ function addChatMessage(sender, text) {
 		var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
 		var chatclass = " chat-tag ";
 
-        if(client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+        if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
             var notification = new Notification('Mentioned by ' + sender + ' in ' + room.display_name + ':', {
                 icon: 'http://static.totem.fm/default_notification.png',
                 body: text
@@ -307,7 +306,7 @@ function addChatMessage(sender, text) {
 			timeout: 5000
 		});
 	} else {
-        if(client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+        if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
             var notification = new Notification(sender + ' in ' + room.display_name + ' said:', {
                 icon: 'http://static.totem.fm/default_notification.png',
                 body: text
@@ -367,7 +366,6 @@ function addChatMessage(sender, text) {
 		var msplit = chatmessage.split(" ");
 		var msplitl = msplit.length;
 		for (var i = 0; i < msplitl; i++) {
-			console.log(msplit[i] + " msplit")
 			if(msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
 				var omlink = msplit[i];
 				var mlink = msplit[i];

@@ -22,7 +22,6 @@ function showUsernameModal() {
 				spinner.hide();
 				errors = $(".errors");
 				errors.empty();
-				console.log(response);
 				switch(response.success) {
 					case "exists":
 						errors.append('<div class="alert alert-warning" role="alert">Someone\'s already registered an account using that name.</div>');
