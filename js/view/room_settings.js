@@ -539,7 +539,7 @@ function initRoomSettings() {
 			url: config.API + '/room/settings.php',
 			data: {
 				scope: room.id,
-				action: "delete_room"
+				action: "delete"
 			},
 			jsonp: 'callback',
 			dataType: 'jsonp',

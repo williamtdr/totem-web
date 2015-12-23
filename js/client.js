@@ -208,7 +208,7 @@ client = {
 					switchClientState(STATE_NO_SONG);
 					if(yt_player.pauseVideo) yt_player.pauseVideo();
 					switchView(VIEW_ROOM_LIST);
-					alert(room.display_name + " has been deleted by a room owner.");
+					alert(room.name + " has been deleted by a room owner.");
 				break;
 				case "permission":
 					var banned_notification = function(text) {
