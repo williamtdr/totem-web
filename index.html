@@ -220,6 +220,18 @@
 						<span>Manage users who are banned from queueing songs in this room.</span>
 					</div>
 				</div>
+				<div id="room_settings_blacklist" data-title="Song Blacklist">
+					<span class="room_settings_instructions">
+						Type or paste the list of video blacklist terms, one per line. Matches channel and title, not case sensitive.
+					</span>
+					<textarea id="room_blacklist" class="form-control" rows="8"></textarea>
+				</div>
+				<div id="room_settings_whitelist" data-title="Song Whitelist">
+					<span class="room_settings_instructions">
+						Type or paste the list of video whitelist terms, one per line. Items on this list bypass the blacklist and will be allowed to queue. Matches channel and title, not case sensitive.
+					</span>
+					<textarea id="room_whitelist" class="form-control" rows="8"></textarea>
+				</div>
 				<div id="room_settings_delete_room" data-title="Delete Room">
 					<span class="room_settings_instructions">
 						All existing users will be kicked out of the room, and all settings associated with this room will be deleted. This included backgrounds, lists of banned, muted, queue banned users, hosts and admins.

@@ -302,9 +302,10 @@ function initRoomSettings() {
                 var content = $("#room_" + destination);
                 content.val("Loading...");
                 $.ajax({
-                    url: config.API + '/room/get_' + destination + '.php',
+                    url: config.API + '/room/info.php',
                     data: {
-                        scope: room.id
+                        scope: room.id,
+						q: destination
                     },
                     jsonp: 'callback',
                     dataType: 'jsonp',
