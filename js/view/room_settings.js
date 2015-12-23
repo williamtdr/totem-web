@@ -151,16 +151,12 @@ function fileUploadLoaded() {
             });
         });
     $('#fileupload').fileupload({
-        url: 'http://origin.totem.fm/upload.php?authkey=' + authkey + '&scope=' + room.id,
+        url: 'http://origin.totem.fm/upload.php?authkey=' + authkey + '&scope=' + room.id + '&type=background',
         dataType: 'json',
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         maxFileSize: 2000000,
-        // Enable image resizing, except for Android and Opera,
-        // which actually support image resizing, but fail to
-        // send Blob objects via XHR requests:
-        disableImageResize: /Android(?!.*Chrome)|Opera/
-            .test(window.navigator.userAgent),
+        disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
         previewMaxWidth: 160,
         previewMaxHeight: 90,
         previewCrop: true
