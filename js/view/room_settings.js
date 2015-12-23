@@ -104,11 +104,12 @@ function bindRemoveButtons() {
     $(".remove-background-image").click(function(e) {
         var target = $(e.target).data("url");
         $.ajax({
-            url: config.API + '/room/background.php',
+            url: config.API + '/room/image.php',
             data: {
                 url: target,
                 scope: room.id,
-				action: "remove"
+				action: "remove",
+				type: "background"
             },
             jsonp: 'callback',
             dataType: 'jsonp',
