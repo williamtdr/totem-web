@@ -58,7 +58,7 @@ function bindHoverHandler(destination) {
 					username: target,
 					scope: room.id,
 					type: "remove",
-					rank: rank
+					level: rank
 				},
 				jsonp: 'callback',
 				dataType: 'jsonp',
@@ -383,7 +383,7 @@ function initRoomSettings() {
             data: {
                 username: target,
                 scope: room.id,
-                rank: level,
+                level: level,
 				type: "add"
             },
             jsonp: 'callback',
