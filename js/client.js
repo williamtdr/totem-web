@@ -319,6 +319,15 @@ client = {
 					song.progress = 0;
 					song.duration = data.song.duration;
 					song.queueDeleted = 0;
+					$.each($(".playing-indicator"), function(index, el) {
+						if($(el).data('id') != song.started_at) {
+							console.log($(el).data('id'));
+							$(el).html('<i class="fa fa-plus"></i> Add to Queue').removeClass('playing-indicator').click(function() {
+								addToQueueById($(this).data('id'));
+							});
+						}
+					});
+
 					if(song.queueCountdown) clearTimeout(song.queueCountdown);
 					song.queueCountdown = false;
 

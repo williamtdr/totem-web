@@ -74,6 +74,10 @@ function addToQueueById(id) {
 			removeFromQueueById(target.data('id'));
 		});
 		updateLocalQueue();
+	} else {
+		setTimeout(function() {
+			$("[data-id='" + id + "']").html('<i class="fa fa-play"></i>Playing').unbind("click").addClass("playing-indicator");
+		}, 500);
 	}
 
 	switchView(VIEW_PLAYER);
