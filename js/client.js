@@ -231,6 +231,10 @@ client = {
 					switchView(VIEW_ROOM_LIST);
 					alert(room.name + " has been deleted by a room owner.");
 				break;
+				case "skip_to_black":
+					switchClientState(STATE_NO_SONG);
+					yt_player.pauseVideo();
+				break;
 				case "icon_change":
 					setIcon(data);
 				break;
