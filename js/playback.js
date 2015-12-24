@@ -33,7 +33,7 @@ function onPlayerStateChange(event) {
 	song.progress = yt_player.getCurrentTime();
 	song.duration = yt_player.getDuration();
 	artist_display_selector = $(".artist_display");
-	if(artist_display_selector.html() == "") {
+	if(artist_display_selector.html() == "" && yt_player.getVideoData().author != "") {
 		artist_display_selector.html(yt_player.getVideoData().author);
 		$("title").html($(".title_display").html() + " · " + yt_player.getVideoData().author + " · Totem");
 	}
