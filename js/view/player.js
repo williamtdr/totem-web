@@ -32,7 +32,8 @@ yt_player = false;
 youtube_ready = false;
 player_initialized = false;
 authkey = false;
-var volumeBeforeMute;
+var volumeBeforeMute,
+	last_chat_message = "";
 
 function onYouTubeIframeAPIReady() {
 	youtube_ready = true;
@@ -413,6 +414,14 @@ function playerOnLogin() {
 		if(event.keyCode == 13) {
 			$(".chat_send").click();
 		}
+
+		if(event.keyCode == 38) {
+			$(".chat_message").val(last_chat_message);
+		}
+
+		if(event.keyCode == 40) {
+			$(".chat_message").val("");
+		}
 	});
 
 	$(".chat_send").click(function() {
@@ -422,6 +431,7 @@ function playerOnLogin() {
 				$("#commands_modal").modal();
 			} else {
 				if(message.length > 0) {
+					last_chat_message = message;
 					server.send(JSON.stringify({
 						event: "chat",
 						data: message,
