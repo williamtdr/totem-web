@@ -167,8 +167,21 @@ function switchSubView(destination) {
 		break;
 		case SUBVIEW_SEARCH:
 			playlist_search.show();
-			$("#search_text").val("").focus();
 			$(".searchResults .playlist-list-content").empty();
+			$("#search_suggestions").show().empty();
+			$("#search_text").val("").focus();
+			if(localStorage.getItem("search_history")) {
+				var history = JSON.parse(localStorage.getItem("search_history"));
+				if(history) {
+					history.reverse();
+					$.each(history, function(index, history_item) {
+						console.log(history_item);
+						$("#search_suggestions").append('<li>' + history_item + '</li>');
+					});
+					bindSuggestionActions();
+				}
+				if(history.length > 0) $("#clear_search_history").show();
+			}
 		break;
 		case SUBVIEW_PLAYLIST_ITEMS:
 		break;

@@ -495,3 +495,33 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 .in-room-queue:hover {
 	color: #C0392B !important;
 }
+
+#search_suggestions {
+	font-family: "Raleway", sans-serif;
+	list-style-type: none;
+}
+
+#search_suggestions > li {
+	font-size: 1.2em;
+	color: #BDC3C7;
+	transition: .25s;
+	cursor: pointer;
+}
+
+#search_suggestions > li:hover {
+	color: white;
+}
+
+#clear_search_history {
+	display: none;
+	color: #95A5A6;
+	font-size: 0.8em;
+	transition: .25s;
+	cursor: pointer;
+	-webkit-user-select: none;
+	margin-left: 40px;
+}
+
+#clear_search_history:hover {
+	color: #ECF0F1;
+}

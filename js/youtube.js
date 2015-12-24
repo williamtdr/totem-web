@@ -36,6 +36,8 @@ function search(more) {
 		searchText = $('#search_text').val().trim(),
 		data;
 
+	$("#search_suggestions").hide();
+
 	more = more || false;
 
 	if(!searchText.length) {
@@ -47,8 +49,26 @@ function search(more) {
 		page: 'true'
 	};
 
+	var append_to_history = false;
 	if(!more) {
 		rowsContainer.html();
+		if(localStorage.getItem("search_history")) {
+			var history = JSON.parse(localStorage.getItem("search_history"));
+			if(history && history.indexOf(data.q) == -1) append_to_history = true;
+		} else {
+			localStorage.setItem("search_history", "[]");
+		}
+
+		if(append_to_history) {
+			if(history) {
+				if(history.length >= 7) history.shift();
+				history.push(data.q);
+				window.localStorage.setItem("search_history", JSON.stringify(history));
+			} else {
+				window.localStorage.setItem("search_history", JSON.stringify([data.q]));
+			}
+		}
+
 		delete data.page;
 	}
 
@@ -216,6 +236,8 @@ function getYoutubeRate(videoId) {
 	});
 }
 
+var last_search_text = "";
+
 function initSearch() {
 	$(".playlist-list-return").click(function() {
 		switchSubView(SUBVIEW_PLAYLIST_LIST);
@@ -225,5 +247,57 @@ function initSearch() {
 		ev.preventDefault();
 
 		search();
+	});
+
+	$("#search_text").keydown(function (event) {
+		var search_text = $("#search_text").val();
+		if(event.keyCode == 9) {
+			event.preventDefault();
+			$("#search_text").val($("#search_suggestions li").first().text());
+			$("#search_suggestions").empty();
+		} else {
+			if(search_text == "") {
+				last_search_text = "";
+				$("#search_suggestions").hide();
+			} else if(search_text != last_search_text) {
+				$("#clear_search_history").hide();
+				$("#search_suggestions").show();
+				$.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
+					{
+						"hl":"en",
+						"ds":"yt",
+						"jsonp":"suggestCallBack",
+						"q": search_text,
+						"client":"youtube"
+					}
+				);
+				last_search_text = search_text;
+			}
+		}
+	});
+
+	$("#search_text").keyup(function (event) {
+		if($("#search_text").val() == "") $("#search_suggestions").hide();
+	});
+
+	$("#clear_search_history").click(function() {
+		$("#search_suggestions").empty();
+		$("#clear_search_history").hide();
+		localStorage.setItem("search_history", "[]");
+	});
+}
+
+suggestCallBack = function (data) {
+	$("#search_suggestions").empty();
+	$.each(data[1], function(key, val) {
+		if(key <= 7) $("#search_suggestions").append("<li>" + val[0] + "</li>");
+		bindSuggestionActions();
+	});
+};
+
+function bindSuggestionActions() {
+	$("#search_suggestions li").click(function() {
+		$("#search_text").val($(this).text()).focus();
+		$("#search_suggestions").empty();
 	});
 }
