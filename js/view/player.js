@@ -305,7 +305,7 @@ function addChatMessage(sender, text) {
 		});
 	} else {
         if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
-            var notification = new Notification(sender + ' in ' + room.display_name + ' said:', {
+            var notification = new Notification(sender + ' in ' + room.name + ' said:', {
                 icon: room.icon,
                 body: text
             });
