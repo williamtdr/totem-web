@@ -371,6 +371,8 @@ function addChatMessage(sender, text) {
 	}
 }
 
+last_suggestion = false;
+
 function playerOnLogin() {
 	if(authkey == 'unauthenticated') {
 		$(".chat_textbox").html('<div class="chatbox-placeholder"><a class="signInButton">Log in</a> to chat</div>');
@@ -384,7 +386,11 @@ function playerOnLogin() {
 		loadYoutubePlaylists();
 	}
 
-	$(".chat_message").keyup(function(event) {
+	$(".chat_message").keydown(function(event) {
+		var message = $(".chat_message").val(),
+			list = $("#user_mention ul"),
+			last_word = message.split(' ').pop();
+
 		if(event.keyCode == 13) {
 			$(".chat_send").click();
 		}
@@ -397,18 +403,29 @@ function playerOnLogin() {
 			$(".chat_message").val("");
 		}
 
-		var message = $(".chat_message").val(),
-			list = $("#user_mention ul"),
-			last_word = message.split(' ').pop();
-
 		list.empty();
 		if(message.length > 0) {
-			console.log(last_word);
 			$.each(room.user_list, function(index, potential_match) {
-				if(potential_match.indexOf(last_word) > -1) {
+				if(potential_match.indexOf(last_word) == 0 && last_word.length >= 3 && potential_match != last_word) {
 					list.append('<li>' + potential_match + '</li>');
+					$('li:contains(' + potential_match + ')').click(function() {
+						var box = $(".chat_message"),
+							message = box.val();
+						box.val(message.substring(0, message.lastIndexOf(message.split(' ').pop())) + $(this).text());
+						$("#user_mention ul").empty();
+						box.focus();
+						last_suggestion = false;
+					});
+					last_suggestion = potential_match;
 				}
 			});
+		}
+
+		if(event.keyCode == 9 && last_suggestion) {
+			event.preventDefault();
+			$(".chat_message").val(message.substring(0, message.lastIndexOf(last_word)) + last_suggestion);
+			list.empty();
+			last_suggestion = false;
 		}
 	});
 
@@ -420,6 +437,7 @@ function playerOnLogin() {
 			} else {
 				if(message.length > 0) {
 					last_chat_message = message;
+					last_suggestion = false;
 					server.send(JSON.stringify({
 						event: "chat",
 						data: message,
