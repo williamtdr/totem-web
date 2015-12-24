@@ -82,6 +82,7 @@ function search(more) {
 				var target = $(e.target);
 				addToQueueById(target.data('id'));
 			});
+			$("[data-id='" + song.url_fragment + "']:not(.playing-in-room)").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
 			if(response.length == 0) {
 				container.append('<li class="list-group-item playlist finished">No results. Check your spelling and try again.</li>');

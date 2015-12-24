@@ -486,3 +486,12 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #user_mention ul li {
 	font-size: 0.8em;
 }
+
+.in-room-queue {
+	color: #E74C3C !important;
+	transition: .25s;
+}
+
+.in-room-queue:hover {
+	color: #C0392B !important;
+}
