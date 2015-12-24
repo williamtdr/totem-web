@@ -4,9 +4,7 @@ song = {
 	url_fragment: false,
 	progress: 0,
 	duration: 0,
-	started_at: 0,
-	queueDeleted: 0,
-	queueCountdown: false
+	started_at: 0
 };
 
 room = {
@@ -22,8 +20,6 @@ room = {
 	enabled: false,
 	password: false,
     backgrounds: false,
-	isUserQueued: false,
-	willAddToQueue: false,
 	joined_at: 0,
 	icon: 'http://static.totem.fm/default_notification.png'
 };
@@ -46,7 +42,7 @@ function loadVideoById(id, time) {
 	$("#main_content").show();
 	if(!youtube_ready) return false;
 
-	if (!player_initialized) {
+	if (!(typeof yt_player.loadVideoById == "function") || !player_initialized) {
 		yt_player = new YT.Player('youtube_player', {
 			height: '390',
 			width: '640',
@@ -62,7 +58,7 @@ function loadVideoById(id, time) {
 				playsinline: 1,
 				iv_load_policy: 3,
 				modestbranding: 1,
-				origin: "http://localhost",
+				origin: "http://totem.fm",
 				playerapiid: "yt_player",
 				rel: 0,
 				showinfo: 0,
@@ -76,31 +72,11 @@ function loadVideoById(id, time) {
 		});
 		player_initialized = true;
 		setTimeout(function() {
-			yt_player.setPlaybackQuality(getVideoQuality());
+			if(typeof yt_player.setPlaybackQuality == "function") yt_player.setPlaybackQuality(getVideoQuality());
 		}, 3000);
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': getVideoQuality()});
 		yt_player.seekTo(time);
-	}
-	if (client.state !== STATE_PREVIEWING && room.dj.toLowerCase() == display_name.toLowerCase() && song.queueDeleted == 0) {
-		removeFromQueueById(id);
-		localStorage.setItem("Queue", JSON.stringify(local_queue));
-		song.queueDeleted = 1;
-		room.willAddToQueue = true;
-
-		song.queueCountdown = setTimeout(function() {
-			server.send(JSON.stringify({
-				"event": "queue",
-				"song": {
-					url_fragment: local_queue[0]
-				},
-				"key": authkey
-			}));
-			
-			room.willAddToQueue = false;
-		}, ((song.duration - 20) * 1000));
-
-		room.isUserQueued = false;
 	}
 
 	if (client.stateBefore == STATE_PREVIEWING || client.stateBefore == STATE_NO_SONG && client.state == STATE_PLAYING)

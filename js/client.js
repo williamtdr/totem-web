@@ -25,6 +25,7 @@ client = {
 	attempting_auto_login: false,
 	room_needs_auth: false,
 	new_room: false,
+	queue: [],
     settings: {
         notif_song_change: true,
         notif_chat: "mention",
@@ -120,7 +121,6 @@ client = {
 					room.name = data.display_name;
 					room.description = data.description;
 					room.user_list = data.listeners_by_name;
-					room.queue = data.queue;
                     room.user_counter = data.listener_count;
                     room.backgrounds = data.backgrounds;
 					setIcon(data.icon);
@@ -150,9 +150,6 @@ client = {
 						song.name = data.song.name;
 						song.artist = data.song.artist;
 						song.url_fragment = data.song.url_fragment;
-						song.queueDeleted = 0;
-						if(song.queueCountdown) clearTimeout(song.queueCountdown);
-						song.queueCountdown = false;
 						room.dj = data.current_dj;
 
 						setScore(data.score.positive, data.score.negative);
@@ -318,18 +315,6 @@ client = {
 					song.started_at = Math.floor(Date.now() / 1000);
 					song.progress = 0;
 					song.duration = data.song.duration;
-					song.queueDeleted = 0;
-					$.each($(".playing-indicator"), function(index, el) {
-						if($(el).data('id') != song.started_at) {
-							console.log($(el).data('id'));
-							$(el).html('<i class="fa fa-plus"></i> Add to Queue').removeClass('playing-indicator').click(function() {
-								addToQueueById($(this).data('id'));
-							});
-						}
-					});
-
-					if(song.queueCountdown) clearTimeout(song.queueCountdown);
-					song.queueCountdown = false;
 
                     if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
                         var notification = new Notification(song.name, {
@@ -379,6 +364,10 @@ client = {
 					addChatMessage(data.sender, data.message);
 
 					break;
+				case "queue_update":
+					client.queue = data;
+					updateMyQueue();
+				break;
 				case "queue_change":
 					room.queue = data;
 					refreshQueueList();
