@@ -440,3 +440,33 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	margin-top: 10px;
 	font-size: 0.8em;
 }
+
+.playlist_header {
+	display: block;
+	color: white;
+	margin-bottom: 5px;
+}
+
+.queue_current_playlist {
+	transition: .25s;
+	color: #BDC3C7;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.queue_current_playlist:hover {
+	color: #ECF0F1;
+}
+
+.queue_current_playlist > .fa {
+	vertical-align: 0;
+	font-size: 1em;
+	margin-left: 15px;
+}
+
+.playlist_name {
+	margin-left: 15px;
+	font-size: 1.4em;
+	font-family: "Raleway", sans-serif;
+	display: inline-block;
+}

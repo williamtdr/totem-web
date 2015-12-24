@@ -18,8 +18,9 @@ function loadYoutubePlaylists() {
 
 			if(response.success) {
 				$.each(response.data, function(name, id) {
-					$("#playlist_list ul").append("<li class=\"list-group-item\" onclick=\"loadPlaylistItems('" + id + "')\">" + name + "</li>");
+					$("#playlist_list ul").append("<li class=\"list-group-item playlist-launcher\" data-name=\"" + name.replace('"', "&quot;") + "\" data-id=\"" + id + "\">" + name + "</li>");
 				});
+				$(".playlist-launcher").click(loadPlaylistItems);
 			} else {
 				$("#playlist_list ul").append("There was a problem retrieving your YouTube playlists. Check to make sure that a Youtube channel exists for your account and you are logged in.");
 			}
@@ -96,8 +97,11 @@ function search(more) {
 }
 
 var currentPlaylistId;
-function loadPlaylistItems(playlistId, more) {
-	var data, container = $('.playlist-list-content');
+function loadPlaylistItems(el, more) {
+	var playlistId = $(this).data('id'),
+		name = $(this).data('name'),
+		data,
+		container = $('.playlist-list-content');
 	more = more || false;
 	playlistId = playlistId || currentPlaylistId;
 
@@ -125,10 +129,12 @@ function loadPlaylistItems(playlistId, more) {
 		dataType: "jsonp",
 		data: $.param(data),
 		success: function(response) {
+			console.log(response);
 			var title, by_string, by_title;
 
 			container.find('.loading').remove();
 
+			container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
 			$.each(response, function(index, e) {
 				title = e.title;
 				if(title.length > 60) {
