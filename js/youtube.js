@@ -1,4 +1,10 @@
-var local_queue = JSON.parse(localStorage.getItem("Queue")) || [];
+var local_queue = [];
+if(local_queue.length > 2) {
+	local_queue = JSON.parse(localStorage.getItem("Queue"));
+} else {
+	localStorage.setItem("Queue", JSON.stringify(local_queue));
+}
+
 searching = false;
 search_term = "";
 
