@@ -470,3 +470,19 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	font-family: "Raleway", sans-serif;
 	display: inline-block;
 }
+
+#user_mention {
+	position: absolute;
+	bottom: 40px;
+	left: 15px;
+}
+
+#user_mention ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#user_mention ul li {
+	font-size: 0.8em;
+}

@@ -405,7 +405,7 @@ function playerOnLogin() {
 			.addClass("sidebar-no-login")
 			.append('<a class="signInButton">Log in</a> to see your playlists');
 	} else {
-		$(".chat_textbox").html('<span title=":grinning:" class="twa twa-grinning chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span>');
+		$(".chat_textbox").html('<span title=":grinning:" class="twa twa-grinning chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div>');
 
 		loadYoutubePlaylists();
 	}
@@ -421,6 +421,20 @@ function playerOnLogin() {
 
 		if(event.keyCode == 40) {
 			$(".chat_message").val("");
+		}
+
+		var message = $(".chat_message").val(),
+			list = $("#user_mention ul"),
+			last_word = message.split(' ').pop();
+
+		list.empty();
+		if(message.length > 0) {
+			console.log(last_word);
+			$.each(room.user_list, function(index, potential_match) {
+				if(potential_match.indexOf(last_word) > -1) {
+					list.append('<li>' + potential_match + '</li>');
+				}
+			});
 		}
 	});
 
