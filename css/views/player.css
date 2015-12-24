@@ -81,10 +81,6 @@
 	display: none;
 }
 
-#no_video {
-	display: none;
-}
-
 #vote_actions {
 	width: 200px;
 }
@@ -114,9 +110,11 @@
 	padding-left: 30px;
 }
 
-#no_video {
+#no_video, #new_room_welcome {
 	font-family: 'Raleway', sans-serif;
 	float: left;
+	display: none;
+	max-width: 600px;
 }
 
 .song-title-container {

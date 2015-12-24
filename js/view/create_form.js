@@ -42,6 +42,8 @@ function initCreateForm() {
 			},
 			success: function(r) {
 				if(r.success) {
+					client.new_room = true;
+					advanceBackgroundImage();
 					joinRoom(r.room_id);
 				} else {
 					error.html(r.message).show();
@@ -55,6 +57,25 @@ function initCreateForm() {
 
 	$("#room_form_password_select").click(onPasswordSwitcherSwitch);
 }
+
+function selectText(element) {
+	var doc = document
+		, text = doc.getElementById(element)
+		, range, selection
+		;
+	if (doc.body.createTextRange) {
+		range = document.body.createTextRange();
+		range.moveToElementText(text);
+		range.select();
+	} else if (window.getSelection) {
+		selection = window.getSelection();
+		range = document.createRange();
+		range.selectNodeContents(text);
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
+}
+
 
 function createFormOnLogin() {
     if(display_name && display_name !== "false") {

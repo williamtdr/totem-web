@@ -24,6 +24,7 @@ client = {
 	guest_key: false,
 	attempting_auto_login: false,
 	room_needs_auth: false,
+	new_room: false,
     settings: {
         notif_song_change: true,
         notif_chat: "mention",
@@ -164,6 +165,27 @@ client = {
 					$.each(data.chat_history, function(index, chat_obj) {
 						addChatMessage(chat_obj.sender, chat_obj.message);
 					});
+
+					if(client.new_room) {
+						$("#no_video").hide();
+						$("#new_room_welcome").show();
+						$("#share_room_text").html("http://totem.fm/#" + room.id);
+						$(".fa-twitter").click(function() {
+							window.open("https://twitter.com/intent/tweet?text=I%20just%20created%20" + room.name + "%20on%20Totem.%20Let's%20share%20some%20tunes%20together%3A%20http%3A%2F%2Ftotem.fm%2F%23" + room.id)
+						});
+						$(".fa-facebook").click(function() {
+							window.open("https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Ftotem.fm%2F%23" + room.id + "&picture=http%3A%2F%2Fstatic.totem.fm%2Fshare.png&name=" + room.name + "%20on%20Totem&caption=%20&description=Totem%20is%20a%20group%20DJ%20site%20where%20anyone%20can%20share%20their%20favorite%20songs%20or%20find%20new%20ones.&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F")
+						});
+						$(".fa-link").click(function() {
+							$("#share_room_well").animate({height:"toggle"}, 500);
+							selectText("share_room_text");
+						});
+						$(".room_welcome_description a").click(function() {
+							$("#new_room_welcome").animate({height: "toggle"}, 500, function() {
+								$("#no_video").animate({height: "toggle"}, 500);
+							});
+						})
+					}
 				break;
 				case "score_update":
 					setScore(data.positive, data.negative);

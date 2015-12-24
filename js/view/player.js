@@ -41,6 +41,7 @@ function onYouTubeIframeAPIReady() {
 function loadVideoById(id, time) {
 	if(id == "") return false;
 	$("#no_video").hide();
+	$("#new_room_welcome").hide();
 	$("#main_content").show();
 	if(!youtube_ready) return false;
 
@@ -118,6 +119,7 @@ function switchClientState(state) {
 			$("title").html(room.name + " &middot; Totem");
 			if(yt_player.pauseVideo) yt_player.pauseVideo();
 		} else {
+			$("#new_room_welcome").hide();
 			$("#no_video").hide();
 			$("#main_content").show();
 			setSongInfo(song.name, song.artist);

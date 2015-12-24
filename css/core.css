@@ -385,3 +385,58 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #icon_upload_wrapper > .room_settings_instructions {
 	margin-bottom: 15px;
 }
+
+.room_welcome_description {
+	display: block;
+	margin-top: 15px;
+}
+
+.social-share-links > i {
+	margin-right: 15px;
+	transition: .25s;
+}
+
+.social-share-links > i:hover {
+	cursor: pointer;
+	font-size: 1.8em;
+	vertical-align: 4%;
+}
+
+.social-share-links > .fa-twitter:hover {
+	color: #3498DB;
+}
+
+.social-share-links > .fa-facebook:hover {
+	color: #9B59B6;
+}
+
+.social-share-links > .fa-link:hover {
+	color: #1ABC9C;
+}
+
+#share_room_well {
+	display: none;
+}
+
+#share_room_text {
+	color: white;
+	font-size: 1.4em;
+	display: block;
+	margin-bottom: 3px;
+}
+
+#share_room_well > span {
+	font-size: 0.8em;
+	color: #BDC3C7;
+	font-style: italic;
+}
+
+#share_room_text {
+	-webkit-user-select: initial;
+}
+
+#create_room_form_content > .form-group > span {
+	display: block;
+	margin-top: 10px;
+	font-size: 0.8em;
+}
