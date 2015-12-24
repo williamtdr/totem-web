@@ -21,13 +21,12 @@ function onPlayerReady(event) {
 	}
 
 	$("#volume-slider").on('input', function(e) {
-		vol = $("#volume-slider").val();
+		var vol = $("#volume-slider").val();
 		yt_player.setVolume(vol);
 		window.localStorage.setItem('volume', vol);
 	});
 	
 	event.target.playVideo();
-	yt_player.setPlaybackQuality(getquality());
 }
 
 function onPlayerStateChange(event) {

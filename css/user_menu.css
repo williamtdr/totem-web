@@ -66,15 +66,6 @@
 	color: #E74C3C;
 }
 
-.switch-grey {
-    color: #BDC3C7;
-    transition: .25s;
-}
-
-.switch-grey:hover {
-	color: #8b969c;
-}
-
 .switch_selector {
 	display: block;
 	margin-left: auto;
@@ -119,4 +110,41 @@
 
 .switch-active {
 	font-weight: 700;
+}
+
+.big_selector > .switch-720p {
+	width: 95px;
+	text-align: center;
+	display: inline-block;
+}
+
+.switch_selector > span {
+	cursor: pointer;
+}
+
+.switch-480p {
+	color: #d53f2c;
+	transition: .25s;
+}
+
+.switch-480p:hover {
+	color: #fd4d3d;
+}
+
+.switch-720p {
+	color: #F39C12;
+	transition: .25s;
+}
+
+.switch-720p:hover {
+	color: #F1C40F;
+}
+
+.switch-1080p {
+	color: #27AE60;
+	transition: .25s;
+}
+
+.switch-1080p:hover {
+	color: #2ECC71;
 }

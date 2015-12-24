@@ -1,10 +1,24 @@
 $.fn.extend({clearIndicator: function() {
-    this.removeClass("switch-grey").removeClass("switch-disabled").removeClass("switch-enabled").removeClass("switch-multiple");
+    this.removeClass("switch-disabled").removeClass("switch-enabled").removeClass("switch-multiple").removeClass("switch-720p").removeClass("switch-480p").removeClass("switch-1080p");
     return this;
 }});
 
 delayed_notification_request = false;
 supress_notification_request = false;
+
+function getVideoQuality() {
+	switch(client.settings.video_quality) {
+		case "480p":
+			return "large";
+		break;
+		case "720p":
+			return "hd720";
+		break;
+		case "1080p":
+			return "hd1080";
+		break;
+	}
+}
 
 function updateClientSettings() {
     var setting_song_change = $("#setting_song_change"),
@@ -28,16 +42,13 @@ function updateClientSettings() {
         $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("OFF");
     }
     if(client.settings.video_quality) {
-        if (client.settings.notif_chat == "1080p") {
-            $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("1080p");
-        } else if (client.settings.notif_chat == "720p") {
-            $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("720p");
-        } else if (client.settings.notif_chat == "480p") {
-            $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-grey").html("480p");
-        }
+		var video_quality_options = ['480p', '720p','1080p'];
+		for(var index in video_quality_options) {
+			var video_quality_option = video_quality_options[index];
+			if(client.settings.video_quality == video_quality_option) $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().html(video_quality_option).addClass("switch-" + video_quality_option);
+		}
     } else {
-		console.log(client.settings.video_quality);
-        $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().addClass("switch-disabled").html("720p");
+        $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().html("720p").addClass("switch-720p");
     }
     if(!client.settings.hide_hints) {
         supress_notification_request = true;
@@ -216,7 +227,7 @@ function initMenu() {
 				menu_target.append('<span class="switch-disabled pull-left">OFF</span><span class="switch-multiple">MENTION</span><span class="switch-enabled pull-right">ALL</span>');
 			}
 			if(target.is("#setting_quality_change")) {
-				menu_target.append('<span class="switch-disabled pull-left">1080p</span><span class="switch-multiple">720p</span><span class="switch-enabled pull-right">480p</span>');
+				menu_target.append('<span class="switch-480p pull-left">480p</span><span class="switch-720p">720p</span><span class="switch-1080p pull-right">1080p</span>');
 			}
 			var options = ["switch-disabled", "switch-multiple", "switch-enabled"];
 			for(var option_id in options) {
@@ -228,67 +239,40 @@ function initMenu() {
 			$(".switch_selector span").click(function(e) {
 				var target = $(e.target);
 				var indicator = target.parent().parent().find(".switch-indicator");
+
+				var video_quality_options = ['480p', '720p','1080p'];
+				for(var index in video_quality_options) {
+					var video_quality_option = video_quality_options[index];
+					if(target.hasClass("switch-" + video_quality_option)) {
+						indicator.clearIndicator().addClass("switch-" + video_quality_option).html(video_quality_option);
+						client.settings.video_quality = video_quality_option;
+						saveSettings();
+						yt_player.setPlaybackQuality(getVideoQuality());
+					} else {
+						indicator.removeClass("switch-" + video_quality_option);
+					}
+				}
+
 				if(target.hasClass("switch-enabled")) {
 					indicator.removeClass("switch-disabled");
 					indicator.removeClass("switch-multiple");
-					if(target.parent().parent().is("#setting_quality_change")) {
-						indicator.addClass("switch-grey");
-						indicator.html("480p");
-					} else if(target.parent().parent().is("#setting_chat_notifications")) {
-						indicator.addClass("switch-enabled");
-						indicator.html("ALL");
+					if(target.parent().parent().is("#setting_chat_notifications")) {
+						indicator.addClass("switch-enabled").html("ALL");
 					} else {
 						client.settings.notif_song_change = true;
-						indicator.addClass("switch-enabled");
-						indicator.html("ON");
+						indicator.addClass("switch-enabled").html("ON");
                         saveSettings();
 					}
 				}
 				
 				if(target.hasClass("switch-disabled")) {
-					indicator.removeClass("switch-enabled");
-					indicator.removeClass("switch-multiple");
-					indicator.addClass("switch-disabled");
-					
-					if (target.parent().parent().is("#setting_quality_change")) {
-						indicator.html("1080p");
-					} else {
-						indicator.html("OFF");
-					}
+					indicator.clearIndicator().addClass("switch-disabled").html("OFF");
 				}
 				if(target.hasClass("switch-multiple")) {
-					indicator.removeClass("switch-enabled");
-					indicator.removeClass("switch-disabled");
-					
-					if (target.parent().parent().is("#setting_quality_change")) {
-						indicator.addClass("switch-disabled");
-						indicator.html("720p");
-					} else {
-						indicator.addClass("switch-multiple");
-						indicator.html("MENTION");
-					}
+					indicator.clearIndicator().addClass("switch-multiple").html("MENTION");
 				}
 				target.parent().find(".switch-active").removeClass("switch-active");
 				target.addClass("switch-active");
-				if(target.parent().parent().is("#setting_quality_change")) {
-                    switch(indicator.html()) {
-                        case "1080p":
-                            client.settings.video_quality = "1080p";
-                            break;
-                        case "720p":
-                            client.settings.video_quality = "720p";
-                            break;
-                        case "480p":
-                            client.settings.video_quality = "480p";
-                            break;
-                    }
-                    saveSettings();
-					
-					if (client.state == STATE_PREVIEWING || client.state == STATE_PLAYING) {
-						console.log('Changed to:'+ getquality());
-						yt_player.setPlaybackQuality(getquality());
-					}
-                }
                 if(target.parent().parent().is("#setting_chat_notifications")) {
                     switch(indicator.html()) {
                         case "ALL":
@@ -323,13 +307,13 @@ function initMenu() {
         jsonp: 'callback',
         dataType: 'jsonp',
         success: function(data) {
-			console.log(data);
             client.settings = data;
             if(client.settings.notif_song_change === "0") client.settings.notif_song_change = false;
             if(client.settings.notif_song_change === "1") client.settings.notif_song_change = true;
             if(client.settings.hide_hints === "0") client.settings.hide_hints = false;
             if(client.settings.hide_hints === "1") client.settings.hide_hints = true;
             if(client.settings.notif_chat === "false") client.settings.notif_chat = false;
+			if(yt_player.setPlaybackQuality) yt_player.setPlaybackQuality(getVideoQuality());
             updateClientSettings();
         }
     });
