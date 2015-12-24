@@ -24,7 +24,8 @@ room = {
     backgrounds: false,
 	isUserQueued: false,
 	willAddToQueue: false,
-	joined_at: 0
+	joined_at: 0,
+	icon: 'http://static.totem.fm/default_notification.png'
 };
 
 yt_player = false;
@@ -286,7 +287,7 @@ function addChatMessage(sender, text) {
 
         if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
             var notification = new Notification('Mentioned by ' + sender + ' in ' + room.display_name + ':', {
-                icon: 'http://static.totem.fm/default_notification.png',
+                icon: room.icon,
                 body: text
             });
 
@@ -313,7 +314,7 @@ function addChatMessage(sender, text) {
 	} else {
         if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
             var notification = new Notification(sender + ' in ' + room.display_name + ' said:', {
-                icon: 'http://static.totem.fm/default_notification.png',
+                icon: room.icon,
                 body: text
             });
 

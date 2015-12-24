@@ -129,6 +129,11 @@ function bindRemoveButtons() {
     });
 }
 
+function setIcon(url) {
+	room.icon = url;
+	$("#icon_preview img").attr('src', url);
+}
+
 function fileUploadLoaded() {
     file_upload_loaded = true;
     'use strict';
@@ -150,7 +155,8 @@ function fileUploadLoaded() {
                 $this.remove();
             });
         });
-    $('#fileupload').fileupload({
+
+    $('#file_upload_gallery').fileupload({
         url: 'http://origin.totem.fm/upload.php?authkey=' + authkey + '&scope=' + room.id + '&type=background',
         dataType: 'json',
         autoUpload: false,
@@ -161,7 +167,7 @@ function fileUploadLoaded() {
         previewMaxHeight: 90,
         previewCrop: true
     }).on('fileuploadadd', function (e, data) {
-        data.context = $('<div class="background-preview-container"></div>').appendTo('#files');
+        data.context = $('<div class="background-preview-container"></div>').appendTo('#files_gallery');
         $.each(data.files, function (index, file) {
             var node = $('<span/>').text(file.name);
             if (!index) {
@@ -192,7 +198,7 @@ function fileUploadLoaded() {
         }
     }).on('fileuploadprogressall', function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar').css(
+        $('#progress_gallery .progress-bar').css(
             'width',
             progress + '%'
         );
@@ -223,6 +229,78 @@ function fileUploadLoaded() {
         });
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+	$('#file_upload_icon').fileupload({
+		url: 'http://origin.totem.fm/upload.php?authkey=' + authkey + '&scope=' + room.id + '&type=icon',
+		dataType: 'json',
+		autoUpload: false,
+		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+		maxFileSize: 1000000,
+		disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
+		previewMaxWidth: 128,
+		previewMaxHeight: 128,
+		previewCrop: true
+	}).on('fileuploadadd', function (e, data) {
+		data.context = $('<div class="icon-preview-container"></div>').appendTo('#files_icon');
+		$.each(data.files, function (index, file) {
+			var node = $('<span/>').text(file.name);
+			if (!index) {
+				node
+					.append('<br>')
+					.append(uploadButton.clone(true).data(data));
+			}
+			node.appendTo(data.context);
+		});
+	}).on('fileuploadprocessalways', function (e, data) {
+		var index = data.index,
+			file = data.files[index],
+			node = $(data.context.children()[index]);
+		if (file.preview) {
+			node
+				.prepend('<br>')
+				.prepend(file.preview);
+		}
+		if (file.error) {
+			node
+				.append('<br>')
+				.append($('<span class="text-danger"/>').text(file.error));
+		}
+		if (index + 1 === data.files.length) {
+			data.context.find('button')
+				.text('Upload')
+				.prop('disabled', !!data.files.error);
+		}
+	}).on('fileuploadprogressall', function (e, data) {
+		var progress = parseInt(data.loaded / data.total * 100, 10);
+		$('#progress_gallery .progress-bar').css(
+			'width',
+			progress + '%'
+		);
+	}).on('fileuploaddone', function (e, data) {
+		$.each(data.result.files, function (index, file) {
+			if (file.error) {
+				var error = $('<span class="text-danger"/>').text(file.error);
+				$(data.context.children()[index])
+					.append('<br>')
+					.append(error);
+			} else if(file.name) {
+				server.send(JSON.stringify({event:"reload_icon",key:authkey}));
+				$("#files_icon").empty();
+				$("#file_upload_icon").hide();
+				$("#progress_icon").empty().removeClass("progress").html("Icon uploaded.");
+				$("#icon_upload_wrapper .room_settings_instructions").css("margin-bottom", "0");
+			}
+		});
+	}).on('fileuploadfail', function (e, data) {
+		$.each(data.files, function (index) {
+			var error = $('<span class="text-danger"/>').text('File upload failed.');
+			$(data.context.children()[index])
+				.append('<br>')
+				.append(error);
+		});
+	}).prop('disabled', !$.support.fileInput)
+		.parent().addClass($.support.fileInput ? undefined : 'disabled');
+
     $.ajax({
         url: config.API + '/room/info.php',
         data: {
@@ -233,7 +311,7 @@ function fileUploadLoaded() {
         dataType: 'jsonp',
         success: function(data) {
             $.each(data, function(index, url) {
-                $("#files").append('<div class="background-preview-container"><img src="' + url + '" class="background-image-preview"><a class="remove-background-image" data-url="' + url + '">remove</a></div>');
+                $("#files_gallery").append('<div class="background-preview-container"><img src="' + url + '" class="background-image-preview"><a class="remove-background-image" data-url="' + url + '">remove</a></div>');
             });
             bindRemoveButtons();
         }
@@ -310,6 +388,7 @@ function initRoomSettings() {
                     }
                 });
             break;
+			case "icon":
             case "gallery":
                 if(!file_upload_loaded) {
                     loadJavascript("http://static.origin.totem.fm/totem.fileupload.min.js");

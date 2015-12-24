@@ -122,6 +122,7 @@ client = {
 					room.queue = data.queue;
                     room.user_counter = data.listener_count;
                     room.backgrounds = data.backgrounds;
+					setIcon(data.icon);
                     if(room.backgrounds && room.backgrounds.length > 0) {
                         advanceBackgroundImage();
                     } else {
@@ -211,6 +212,9 @@ client = {
 					switchView(VIEW_ROOM_LIST);
 					alert(room.name + " has been deleted by a room owner.");
 				break;
+				case "icon_change":
+					setIcon(data);
+				break;
 				case "permission":
 					var banned_notification = function(text) {
 						noty({
@@ -298,7 +302,7 @@ client = {
 
                     if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
                         var notification = new Notification(song.name, {
-                            icon: 'http://static.totem.fm/default_notification.png',
+                            icon: room.icon,
                             body: song.artist
                         });
 

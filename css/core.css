@@ -364,3 +364,24 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #transfer_ownership_textbox {
 	width: 300px;
 }
+
+#icon_preview {
+	width: 150px;
+	display: inline-block;
+	float: left;
+}
+
+#icon_preview > img {
+	width: 128px;
+	height: 128px;
+}
+
+#icon_upload_wrapper {
+	display: inline-block;
+	width: calc(100% - 150px);
+	float: left;
+}
+
+#icon_upload_wrapper > .room_settings_instructions {
+	margin-bottom: 15px;
+}
