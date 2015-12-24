@@ -26,12 +26,36 @@ room = {
 
 yt_player = false;
 youtube_ready = false;
-player_initialized = false;
 authkey = false;
 var volumeBeforeMute,
 	last_chat_message = "";
 
 function onYouTubeIframeAPIReady() {
+	yt_player = new YT.Player('youtube_player', {
+		height: '360',
+		width: '640',
+		playerVars: {
+			autoplay: 1,
+			border: 0,
+			cc_load_policy: 0,
+			controls: 0,
+			disablekb: 1,
+			enablejsapi: 1,
+			hd: 1,
+			playsinline: 1,
+			iv_load_policy: 3,
+			modestbranding: 1,
+			origin: "http://totem.fm",
+			playerapiid: "yt_player",
+			rel: 0,
+			showinfo: 0,
+			showsearch: 0
+		},
+		events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
+	});
 	youtube_ready = true;
 }
 
@@ -40,40 +64,14 @@ function loadVideoById(id, time) {
 	$("#no_video").hide();
 	$("#new_room_welcome").hide();
 	$("#main_content").show();
-	if(!youtube_ready) return false;
-
-	if (!(typeof yt_player.loadVideoById == "function") || !player_initialized) {
-		yt_player = new YT.Player('youtube_player', {
-			height: '390',
-			width: '640',
-			videoId: id,
-			playerVars: {
-				autoplay: 1,
-				border: 0,
-				cc_load_policy: 0,
-				controls: 0,
-				disablekb: 1,
-				enablejsapi: 1,
-				hd: 1,
-				playsinline: 1,
-				iv_load_policy: 3,
-				modestbranding: 1,
-				origin: "http://totem.fm",
-				playerapiid: "yt_player",
-				rel: 0,
-				showinfo: 0,
-				showsearch: 0,
-				start: time
-			},
-			events: {
-				'onReady': onPlayerReady,
-				'onStateChange': onPlayerStateChange
+	if(!(typeof yt_player.loadVideoById == "function")) {
+		waiting_for_youtube_timer = setInterval(function() {
+			if(typeof yt_player.loadVideoById == "function") {
+				yt_player.loadVideoById({'videoId': song.url_fragment, 'suggestedQuality': getVideoQuality()});
+				yt_player.seekTo(Math.floor(Date.now() / 1000) - song.started_at);
+				clearInterval(waiting_for_youtube_timer);
 			}
-		});
-		player_initialized = true;
-		setTimeout(function() {
-			if(typeof yt_player.setPlaybackQuality == "function") yt_player.setPlaybackQuality(getVideoQuality());
-		}, 3000);
+		}, 100);
 	} else {
 		yt_player.loadVideoById({'videoId': id, 'suggestedQuality': getVideoQuality()});
 		yt_player.seekTo(time);
