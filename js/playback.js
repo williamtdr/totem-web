@@ -153,6 +153,7 @@ function removeFromQueueById(id) {
 		var target = $(e.target);
 		addToQueueById(target.data('id'));
 	});
+	window.localStorage.setItem("Queue", local_queue);
 	updateLocalQueue();
 }
 
