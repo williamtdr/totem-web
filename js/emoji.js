@@ -42,7 +42,7 @@ var emoji = {
 	},
 	
 	showList: function() {
-		var list = $('#chat-emojilist'),
+		var list = $('#chat-emojilist, #mobile-chat-emojilist'),
 			short_names = "";
 		
 		list.html('<ul id="emojilist-People"><h2>People</h2></ul>\

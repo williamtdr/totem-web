@@ -379,7 +379,7 @@
 	background-size: contain;
 }
 
-#chat-emojilist {
+#chat-emojilist, #mobile-chat-emojilist {
 	display: none;
 	position: absolute;
 	background: rgba(198, 171, 73, 0.89);
@@ -390,14 +390,14 @@
 	right: 0;
 }
 
-#chat-emojilist ul {
+#chat-emojilist ul, #mobile-chat-emojilist ul {
     padding: 0 5px;
     margin: 0;
     display: inline-block;
 	width: 100%;
 }
 
-#chat-emojilist ul h2 {
+#chat-emojilist ul h2 , #mobile-chat-emojilist ul h2{
 	margin: 0;
 	padding: 0;
 	font-size: 1.3em;
@@ -405,12 +405,20 @@
 }
 
 #chat-emojilist ul > li {
+	height: 20px;
     float: left;
     list-style: none;
     padding: 2px;
 }
 
-#chat-emojilist ul > li , #chat-emojilist ul > li  .emoji {
+#mobile-chat-emojilist ul > li {
+	height: 20px;
+    float: left;
+    list-style: none;
+    padding: 2px;
+}
+
+#chat-emojilist ul > li , #chat-emojilist ul > li  .emoji, #mobile-chat-emojilist ul > li , #mobile-chat-emojilist ul > li  .emoji {
 	cursor: pointer;
 }
 

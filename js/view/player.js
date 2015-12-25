@@ -378,7 +378,9 @@ function playerOnLogin() {
 			.addClass("sidebar-no-login")
 			.append('<a class="signInButton">Log in</a> to see your playlists');
 	} else {
-		$(".chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div><div id="chat-emojilist"></div>');
+		$("#chat .chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div><div id="chat-emojilist"></div>');
+		
+		$("#mobile_chat .chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="mobile-user_mention"><ul></ul></div><div id="mobile-chat-emojilist"></div>');
 		
 		$('.chat_emojisel').click(toggleEmojiList);
 		loadYoutubePlaylists();
@@ -606,7 +608,7 @@ function toggleBoxes(exceptId) {
 
 function toggleEmojiList() {
 	if ($('#mobile_chat').css('display') == 'block')
-		$('#chat-emojilist').fadeToggle(200).height($('.chat-text').height());
+		$('#mobile-chat-emojilist').fadeToggle(200).height($('.chat-text').height());
 	else
 		$('#chat-emojilist').fadeToggle(200).height($('#chat').height() - 41);
 	
