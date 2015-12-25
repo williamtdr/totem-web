@@ -18,14 +18,15 @@ var emoji = {
 				split = msg.split("");
 				
 			for(var i = 0; i < split.length; i++) {
-				if (split[i] == ":") {
+				if (split[i] == ':') {
 					if(!isEmoji) {
 						isEmoji = true;
 					} else {
 						for(var a in emoji.emojilist) {
 							for(var b in emoji.emojilist[a].short_names) {
-								if(emoji.emojilist[a].short_names[b] == emojiname)
-									msg = msg.replace(':'+ emojiname +':', '<div title=":'+ emojiname +':" class="emoji emoji-chat" style="background-position:-'+ (emoji.emojilist[a].sheet_x * 16) +'px -'+ (emoji.emojilist[a].sheet_y * 16) +'px"> </div>');
+								if(emoji.emojilist[a].short_names[b] == emojiname) {
+									msg = msg.replace(':'+ emojiname +':', '<div title="'+ emojiname +'" class="emoji emoji-chat" style="background-position:-'+ (emoji.emojilist[a].sheet_x * 16) +'px -'+ (emoji.emojilist[a].sheet_y * 16) +'px"> </div>');
+								}
 							}
 						}
 						emojiname = "";
