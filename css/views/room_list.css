@@ -34,13 +34,14 @@
 	color: #E69250;
 }
 
-#room_description_extend {
+.room_description_extend {
 	color: #2980B9;
 	display: block;
 	transition: .25s;
+	cursor: pointer;
 }
 
-#room_description_extend:hover {
+.room_description_extend:hover {
 	color: #3498DB;
 }
 

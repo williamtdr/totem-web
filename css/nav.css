@@ -93,10 +93,6 @@ nav > ul > li.active {
 	content: "\f05a";
 }
 
-#mobile_nav > .nav_myqueue:before {
-	content: "\f01e"
-}
-
 #logo_subheader {
 	color: #3498DB;
 	font-size: 0.6em;
@@ -155,5 +151,10 @@ nav > ul > li.active {
 
 	nav > ul {
 		padding-left: 0;
+	}
+
+	#login_menu {
+		margin-top: 4px;
+		margin-right: 3px;
 	}
 }

@@ -115,10 +115,10 @@ function refreshQueueList() {
 
 	queue_list.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
 	queue_list.height($('#chat').height()).width($('#chat').width());
-	if ($('#room_description').height() == 0)
-		queue_list.css('top', ($('#room-title').height() + $('#room_description').height() + 60));
+	if ($('#room_description_wrapper .room-description').height() == 0)
+		queue_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
-		queue_list.css('top', ($('#room-title').height() + $('#room_description').height() + 70));
+		queue_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
 	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
@@ -137,10 +137,10 @@ function refreshUserList() {
 
 	user_list.html('<ul class="list-row list-title">Listeners</ul>');
 	user_list.height($('#chat').height()).width($('#chat').width());
-	if ($('#room_description').height() == 0)
-		user_list.css('top', ($('#room-title').height() + $('#room_description').height() + 60));
+	if ($('#room_description_wrapper .room-description').height() == 0)
+		user_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
-		user_list.css('top', ($('#room-title').height() + $('#room_description').height() + 70));
+		user_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
 	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
@@ -216,28 +216,23 @@ function counterUpdate() {
 function updateRoomMetadata() {
     var room_title = $(".room-title"),
 		newlines = room.description.split("\n"),
-		short_desc = emoji.parseMessage(room.description.substring(0, 200)),
-		newlines_only = emoji.parseMessage(newlines.splice(0, 4).join("<br>").substring(0, 200)),
-		read_more = '<span id="room_description_extend">read more...</span>';
+		short_desc = emoji.parseMessage(room.description.split("\n").splice(0, 4).join("<br>").substring(0, 200)),
+		read_more = '<span class="room_description_extend">read more...</span>';
 	room_title.empty();
 	room_title.html(room.name);
-	if(client.is_admin) room_title.append('<i class="fa fa-cog" id="room_settings_launcher"></i>');
+	if(client.is_admin) room_title.append('<i class="fa fa-cog room_settings_launcher"></i>');
 	if((newlines && newlines.length > 4) || room.description.length > 300) {
-		if(newlines.length < 4) {
-			$("#room_description").html(emoji.parseMessage(short_desc + read_more));
-		} else {
-			$("#room_description").html(newlines_only);
-		}
+		$(".room-description").html(emoji.parseMessage(short_desc + read_more));
 	} else {
-		$("#room_description").html(newlines_only);
+		$(".room-description").html(newlines.join("<br>"));
 	}
 	$("#room_description_modal_label").html(room.title);
 	$("#room_description_extend_content").html(room.description.replace(/\n/g, "<br>"));
-	$("#room_description_extend").click(function() {
+	$(".room_description_extend").click(function() {
 		$("#room_description_modal").modal();
 	});
     $("#room_settings_desc").html(room.description);
-    $("#room_settings_launcher").click(function() {
+    $(".room_settings_launcher").click(function() {
         $("#room_settings_modal").modal();
     })
 }

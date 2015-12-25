@@ -29,6 +29,7 @@ var nav = $("nav"),
 var room_list = $("#room_list"),
 	player = $("#player"),
 	mobile_chat = $("#mobile_chat"),
+	mobile_info = $("#mobile_info"),
 	music_list = $("#music_list"),
 	create_form = $("#create_form"),
 	banned = $("#permission_failure"),
@@ -64,6 +65,7 @@ function resetNavigation() {
 	mobile_chat.hide();
 	music_list.hide();
 	create_form.hide();
+	mobile_info.hide();
 	banned.hide();
 	requires_authentication.hide();
 
@@ -84,6 +86,9 @@ function resetNavigation() {
 		break;
 		case VIEW_CHAT:
 			mobile_chat.addClass("zoom-in-sm");
+		break;
+		case VIEW_INFO:
+			mobile_info.addClass("zoom-in-sm");
 		break;
 	}
 }
@@ -155,10 +160,16 @@ function switchView(destination) {
 			requires_authentication.show();
 			$("#sidebar").hide();
 			current_view = VIEW_REQUIRES_AUTHENTICATION;
+		break;
 		case VIEW_CHAT:
 			nav_chat.addClass("active");
 			mobile_chat.show();
 			current_view = VIEW_CHAT;
+		break;
+		case VIEW_INFO:
+			nav_info.addClass("active");
+			mobile_info.show();
+			current_view = VIEW_INFO;
 	}
 }
 

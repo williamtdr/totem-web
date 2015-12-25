@@ -274,7 +274,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #E74C3C;
 }
 
-#room_settings_launcher {
+.room_settings_launcher {
     color: #95A5A6;
     margin-left: 10px;
     font-size: 1em;
@@ -282,7 +282,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	transition: .25s;
 }
 
-#room_settings_launcher:hover {
+.room_settings_launcher:hover {
     color: white;
 }
 

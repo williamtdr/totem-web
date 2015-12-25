@@ -27,7 +27,6 @@
 		<li class="nav_music_list"></li>
 		<li class="nav_chat"></li>
 		<li class="nav_info"></li>
-		<li class="nav_myqueue"></li>
 	</ul>
 	<div class="pull-right">
 		<div id="my_queue">
@@ -365,9 +364,13 @@
 		</tr>
 	</table>
 </div>
-<div id="mobile_chat" class="chat toToggle">
-		<div class="chat-text"></div>
-		<div class="chat_textbox input-group"></div>
+<div id="mobile_chat" class="chat toToggle animsition">
+	<div class="chat-text"></div>
+	<div class="chat_textbox input-group"></div>
+</div>
+<div id="mobile_info" class="toToggle animsition">
+	<div class="room-title"></div>
+	<div class="room-description"></div>
 </div>
 <div id="music_list" class="animsition container">
 	<div id="playlist_list">
@@ -522,9 +525,9 @@
 		<div id="sidebar" class="col-xs-4">
 			<div id="top_info_panel">
 				<div id="room_info">
-					<span id="room-title" class="room-title"></span>
+					<span class="room-title"></span>
 				<span id="room_description_wrapper">
-					<span id="room_description"></span>
+					<span class="room-description"></span>
 				</span>
 				<span id="room_users_wrapper" class="no-sel">
 					<span id="room-users" class="focused"><span class="number">0</span> <span class="room-info-footer">listening</span></span>
