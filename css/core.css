@@ -525,3 +525,27 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 #clear_search_history:hover {
 	color: #ECF0F1;
 }
+
+#room_description_extend_content {
+	padding: 0 15px 0 15px;
+}
+
+#markdown_info {
+	font-style: normal;
+	color: black;
+}
+
+#markdown_info > a {
+	color: #2980B9;
+	transition: .25s;
+}
+
+#markdown_info > a:hover {
+	color: #3498DB;
+}
+
+#room_description_extend_content > h1, h2, h3, h4, h5, h6 {
+	color: black;
+	margin: 0;
+	padding: 0;
+}
