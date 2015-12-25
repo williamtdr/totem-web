@@ -381,8 +381,9 @@ function playerOnLogin() {
 			.addClass("sidebar-no-login")
 			.append('<a class="signInButton">Log in</a> to see your playlists');
 	} else {
-		$(".chat_textbox").html('<span title=":grinning:" class="twa twa-grinning chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div>');
-
+		$(".chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div><div id="chat-emojilist"></div>');
+		
+		$('.chat_emojisel').click(toggleEmojiList);
 		loadYoutubePlaylists();
 	}
 
@@ -406,6 +407,9 @@ function playerOnLogin() {
 		list.empty();
 		if(message.length > 0) {
 			$.each(room.user_list, function(index, potential_match) {
+				if (last_word.indexOf('@') == 0)
+					last_word = last_word.substr(1);
+			
 				if(potential_match.indexOf(last_word) == 0 && last_word.length >= 3 && potential_match != last_word) {
 					list.append('<li>' + potential_match + '</li>');
 					$('li:contains(' + potential_match + ')').click(function() {
@@ -423,7 +427,7 @@ function playerOnLogin() {
 
 		if(event.keyCode == 9 && last_suggestion) {
 			event.preventDefault();
-			$(".chat_message").val(message.substring(0, message.lastIndexOf(last_word)) + last_suggestion);
+			$(".chat_message").val(message.substring(0, message.lastIndexOf(last_word))	 + last_suggestion);
 			list.empty();
 			last_suggestion = false;
 		}
@@ -522,11 +526,10 @@ function initPlayerToggles() {
 			$('#chat').show().css('visibility','hidden');
 			$('#queue_list').height($('#chat').height()).width($('#chat').width());
 			$('#chat').hide().css('visibility', 'visible');
-		} else
-			return false;
+		}
+		
+		$('#chat-emojilist').height($('#chat').height() - 41);
 	});
-
-	$('.chat_emojisel').click(toggleEmojiList);
 
 	$('#room-queue').click(function() {
 		if(!room.queue.length) {
@@ -605,11 +608,10 @@ function toggleBoxes(exceptId) {
 }
 
 function toggleEmojiList() {
-	$('.chat-emojilist').toggle().empty();
-
-	var emojiList = emojiListString.replace(/_/g,'-').split(',');
-	for (var x in emojiList)
-		$('.chat-emojilist').append('<span title=":'+ emojiList[x] +':" class="twa twa-'+ emojiList[x] +'"></span>')
+	$('#chat-emojilist').fadeToggle(200).height($('#chat').height() - 41);
+	
+	if (!emoji.showedList)
+		emoji.showList();
 }
 
 var room_hash = window.location.hash.replace("#", "");
