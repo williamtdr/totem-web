@@ -608,7 +608,10 @@ function toggleBoxes(exceptId) {
 }
 
 function toggleEmojiList() {
-	$('#chat-emojilist').fadeToggle(200).height($('#chat').height() - 41);
+	if ($('#mobile_chat').css('display') == 'block')
+		$('#chat-emojilist').fadeToggle(200).height($('.chat-text').height());
+	else
+		$('#chat-emojilist').fadeToggle(200).height($('#chat').height() - 41);
 	
 	if (!emoji.showedList)
 		emoji.showList();

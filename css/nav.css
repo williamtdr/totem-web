@@ -93,6 +93,10 @@ nav > ul > li.active {
 	content: "\f05a";
 }
 
+#mobile_nav > .nav_myqueue:before {
+	content: "\f01e"
+}
+
 #logo_subheader {
 	color: #3498DB;
 	font-size: 0.6em;
@@ -122,12 +126,21 @@ nav > ul > li.active {
 }
 
 @media screen and (max-width: 500px) {
-	#desktop_nav {
-		display: none;
+	#desktop_nav, #my_queue {
+		display: none !important;
 	}
 
 	#mobile_nav {
 		display: block;
+	}
+	
+	#queue_view_container {
+		width: 100% !important;
+	}
+	
+	#queue_view {
+		width: 100% !important;	
+		overflow-x: hidden;
 	}
 
 	#logo {

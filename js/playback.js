@@ -76,7 +76,7 @@ function updateMyQueue() {
 }
 
 function initQueue() {
-	var my_queue = $("#my_queue"),
+	var my_queue = $("#my_queue, .nav_myqueue"),
 		container = $("#queue_view_container"),
 		view = $("#queue_view");
 		
