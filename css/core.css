@@ -148,13 +148,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
     color: #3498DB;
 }
 
-.room_settings_example {
-    margin: 5px 0 15px 15px;
-    color: #7F8C8D;
-    font-style: italic;
-    display: block;
-}
-
 .room_settings_instructions {
     display: block;
     color: #2C3E50;
@@ -254,12 +247,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 .room_settings_launcher:hover {
     color: white;
-}
-
-.room-name > .fa-lock {
-	font-size: 1em;
-	margin-left: 5px;
-	vertical-align: 0;
 }
 
 #invalid_room_password {

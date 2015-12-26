@@ -49,13 +49,6 @@ client = {
 
 		server.onclose = client.onDisconnect;
 
-		$("#skip_song").click(function() {
-			server.send(JSON.stringify({
-				event: "skip",
-				key: authkey
-			}));
-		});
-
 		server.onmessage = function(event) {
 			var event_data = JSON.parse(event.data);
 			var data = event_data.data;

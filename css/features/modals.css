@@ -13,3 +13,7 @@
 	bottom: 30px;
 	position: absolute;
 }
+
+.modal-body > input {
+	margin-top: 10px;
+}

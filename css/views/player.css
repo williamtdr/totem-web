@@ -1,13 +1,33 @@
-#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner {
+#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner, #room_settings_blacklist {
 	display: none;
 }
 
+/* Views */
 #player {
 	margin-left: 10%;
 	margin-right: 10%;
 	transition: .25s;
 }
 
+#main_content {
+	float: left;
+	transition: .25s;
+	width: calc(100% - 400px);
+}
+
+#now_playing_placeholder {
+	color: #1bc5a3;
+	font-size: 1.3em;
+	padding-left: 30px;
+}
+
+#no_video, #new_room_welcome {
+	font-family: 'Raleway', sans-serif;
+	float: left;
+	max-width: 600px;
+}
+
+/* Player */
 .title_display {
 	font-size: 2em;
 	color: #ECF0F1;
@@ -23,28 +43,33 @@
 	color: #BDC3C7;
 }
 
+#time_elapsed {
+	background-color: #34495E;
+	border-radius: 13px;
+	padding: 3px;
+	display: inline-block;
+	margin-top: 5px;
+	margin-right: 3px;
+}
+
+#time_elapsed > div {
+	background-color: #3498DB;
+	width: 0;
+	height: 10px;
+	border-radius: 10px;
+}
+
+#time_remaining {
+	display: inline-block;
+	color: #BDC3C7;
+	padding-left: 5px;
+	vertical-align: 5%;
+	font-family: 'Lato', sans-serif;
+	line-height: 1.4;
+}
+
 #youtube_player {
 	margin-top: 10px;
-}
-
-#vote_actions {
-	width: 200px;
-}
-
-.modal-body > input {
-	margin-top: 10px;
-}
-
-#now_playing_placeholder {
-	color: #1bc5a3;
-	font-size: 1.3em;
-	padding-left: 30px;
-}
-
-#no_video, #new_room_welcome {
-	font-family: 'Raleway', sans-serif;
-	float: left;
-	max-width: 600px;
 }
 
 .song-title-container {
@@ -114,117 +139,19 @@
 	color: #E74C3C;
 }
 
-.score-grabs-wrapper {
-	color: #9B59B6;
-	font-size: 0.8em;
-}
-
-.player-wrapper {
-	z-index: 9999;
+#vote_actions {
+	width: 200px;
 }
 
 .score {
 	display: inline-block;
 }
 
-#time_elapsed {
-	background-color: #34495E;
-	border-radius: 13px;
-	padding: 3px;
-	display: inline-block;
-	margin-top: 5px;
-	margin-right: 3px;
-}
-
-#time_elapsed > div {
-	background-color: #3498DB;
-	width: 0;
-	height: 10px;
-	border-radius: 10px;
-}
-
-#time-remaining {
-	display: inline-block;
-	color: #BDC3C7;
-	padding-left: 5px;
-	vertical-align: 5%;
-	font-family: 'Lato', sans-serif;
-	line-height: 1.4;
-}
-
-.emblem {
-	margin-right: 50px;
-	display: inline-block;
-	color: #c0c0c0;
-}
-
-.emblem > i {
-	font-size: 1.5em;
-}
-
-#main_content {
-	float: left;
-	transition: .25s;
-	width: calc(100% - 400px);
-}
-
-#sidebar_footer {
-	color: #BDC3C7;
-	font-size: 0.8em;
-	text-align: center;
-	margin-top: 10px;
-}
-
-.video-option {
-	background-color: rgba(73, 88, 105, 0.80);
-	height: 80px;
-}
-
-.video-option > .video-image {
-	float: left;
-}
-
-.video-option > .video-image > img {
-	height: 73px;
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-left: 3px;
-	margin-right: 7px;
-}
-
-.video-option > .video-title {
-	font-size: 0.9em;
-	color: #ECF0F1;
-	display: block;
-	line-height: 1.2;
-	padding-top: 10px;
-}
-
-.video-option > .video-subtitle {
-	font-size: 0.6em;
-	color: #BDC3C7;
-	display: block;
-}
-
-.emblem-active {
-	color: #f5f5f5;
-}
-
-.history-content > li {
-	background: transparent;
-	text-align: left;
-	border: 0;
-	border-bottom: 1px solid;
-	border-color: #808080;
-	color: #f5f5f5;
-}
-
 .sidebar-playlist > li {
 	background: transparent;
 	text-align: left;
-	border: 0;
+	border: 0 #808080;
 	border-bottom: 1px solid;
-	border-color: #808080;
 }
 
 #playlist_list, #playlist_items {
@@ -237,15 +164,16 @@
 
 .playlist-list-return {
 	margin-left: 10px;
-	color: darkgray;
+	color: #95A5A6;
+}
+
+.playlist-list-return:hover {
+	color: #ECF0F1;
 }
 
 .playlist-item-thumbnail {
 	width: 120px;
-	margin-left: 0;
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-right: 5px;
+	margin: 3px 5px 3px 0;
 }
 
 .queue-item-thumbnail {
@@ -304,7 +232,7 @@
 	height: 25px;
 	left: 5px;
 	cursor: pointer;
-	background: url('https://cdn.rawgit.com/Ranks/emojify.js/master/src/images/emoji/smiley.png') no-repeat 0px;
+	background: url('https://cdn.rawgit.com/Ranks/emojify.js/master/src/images/emoji/smiley.png') no-repeat 0;
 	background-size: contain;
 }
 
@@ -713,9 +641,8 @@
 #queue-container > ul > li {
 	background: transparent;
 	text-align: left;
-	border: 0;
+	border: 0 #808080;
 	border-bottom: 1px solid;
-	border-color: #808080;
 	height: 65px;
 }
 
@@ -812,19 +739,6 @@
 	color: #bdc3c7;
 	background-color: transparent;
 	border: none;
-}
-
-#skip_song {
-	color: #da7bff;
-}
-
-#skip_song > .fa {
-	font-size: 0.8em;
-}
-
-#auth_failed {
-	line-height: 3;
-	color: #E74C3C;
 }
 
 /* User List */
@@ -936,7 +850,7 @@ li.list-item-small {
 .room-informations {
     display: inline-block;
     width: 96%;
-    margin-top: 10px
+    margin-top: 10px;
 }
 
 /* Youtube Rate Button */

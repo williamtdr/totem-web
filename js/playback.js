@@ -130,5 +130,5 @@ setInterval(function() {
 	if(client.state == STATE_PLAYING) song.progress = yt_player.getCurrentTime();
 
 	var time_remaining = new Date((yt_player.getDuration() - yt_player.getCurrentTime()) * 1000);
-	$("#time-remaining").html(time_remaining.getMinutes() + ":" + zeroPad(time_remaining.getSeconds(), 2));
+	$("#time_remaining").html(time_remaining.getMinutes() + ":" + zeroPad(time_remaining.getSeconds(), 2));
 }, 200);

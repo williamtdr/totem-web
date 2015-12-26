@@ -93,11 +93,6 @@ nav > ul > li.active {
 	content: "\f05a";
 }
 
-#logo_subheader {
-	color: #3498DB;
-	font-size: 0.6em;
-}
-
 #playlist_list > .signInButton {
     margin-right: 0;
 }
