@@ -22,19 +22,20 @@
 	font-size: 1.5em;
 }
 
-#mobile_user_list {
+#mobile_user_list, #mobile_queue_list {
+	position: relative;
+	top: 10px;
 	width: 96%;
-	height: calc(100% - 155px);
-	top: 160px;
-	background-color: rgba(26, 205, 175, 0.4);
 	display: block;
+	height: calc(100% - 155px);
+}
+
+#mobile_user_list {
+	background-color: rgba(26, 205, 175, 0.4);
 }
 
 #mobile_queue_list {
-	background-color: rgba(88, 133, 195, 0.40);
-	width: 96%;
-	height: calc(100% - 155px);
-	top: 160px;
+	background-color: rgba(88, 133, 195, 0.4);
 }
 
 #mobile-chat-emojilist ul > li {
