@@ -1,0 +1,219 @@
+@media(max-width: 340px) {
+	#vote_actions {
+		float: left !important;
+	}
+
+	#score_wrapper > div {
+		margin-right: 20px;
+		margin-left: 0;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#queue_view {
+		width: 100% !important;
+		overflow-x: hidden;
+	}
+
+	#login_menu {
+		margin-top: 4px;
+		margin-right: 3px;
+	}
+
+	#time_elapsed {
+		width: calc(100% - 50px) !important;
+	}
+
+	.score_wrapper {
+		margin-right: 0;
+		clear: both;
+	}
+
+	.score_wrapper > div {
+		margin-right: 0;
+	}
+
+	#score-negative-wrapper {
+		padding-right: 0;
+	}
+
+	#player {
+		margin-left: 10px !important;
+		margin-right: 10px !important;
+	}
+
+	.title_display {
+		font-size: 1.4em !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.artist_display {
+		margin: 10px 0 10px 0 !important;
+		padding: 0 !important;
+		font-size: 1em !important;
+	}
+
+	.disconnected-triangle {
+		padding-left: 15px;
+	}
+
+	#disconnected {
+		top: 50px;
+	}
+
+	#youtube_rate {
+		display: none !important;
+	}
+
+	#player_actions > .toggle {
+		margin-left: 0;
+		margin-right: 12px;
+	}
+
+	#vote_actions {
+		width: auto !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#desktop_nav, #my_queue, .current-dj-wrapper, #spotify_importer, #manage_playlists_suffix, .playlist_item_artist, .queue_full, .queue_current_playlist, #logo, #login-full {
+		display: none !important;
+	}
+
+	nav {
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 9px;
+	}
+
+	.big-header {
+		margin-top: 0;
+		margin-bottom: 15px;
+		font-size: 1.6em;
+	}
+
+	.small-header {
+		font-size: 1.2em;
+	}
+
+	#mobile_nav {
+		display: block;
+	}
+
+	#login_menu {
+		margin-top: 3px;
+		margin-right: 15px;
+	}
+
+	#now_playing_placeholder {
+		padding-left: 10px;
+		font-size: 1em;
+	}
+
+	.playlist-item-title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 20px;
+		width: 100%;
+		white-space: nowrap;
+	}
+
+	.playlist-item-queue {
+		top: 35px;
+		left: 245px;
+	}
+
+	#create_room_form_content {
+		margin-left: 0;
+	}
+
+	#main_content {
+		width: 100%;
+	}
+
+	#basic_player_tutorial {
+		display: none !important;
+	}
+}
+
+@media (max-width: 991px) {
+	.room_option {
+		margin-top: 7px;
+		margin-bottom: 5px;
+	}
+
+	#time_elapsed {
+		width: calc(100% - 36%);
+	}
+
+	#main_content {
+		width: 100%;
+	}
+
+	#sidebar {
+		display: none !important;
+	}
+
+	#main_content {
+		width: 100% !important;
+	}
+
+	.chat, .chat_textbox, .chatbox-placeholder, .room-title, #room_description_wrapper, #room_description {
+		width: 100% !important;
+	}
+
+	.artist_display {
+		font-size: 1.5em;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+}
+
+@media (max-height: 580px) and (min-width: 991px) {
+	.chat {
+		height: 40%;
+	}
+}
+
+@media (max-height: 480px) and (min-width: 991px) {
+	.chat {
+		height: 60%;
+		display: block !important;
+		margin-top: 0;
+	}
+
+	#room_description_wrapper, #room_users_wrapper, .list_menu {
+		display: none !important;
+	}
+}
+
+@media (max-height: 400px) and (min-width: 991px) {
+	.chat {
+		height: 47%;
+	}
+}
+
+@media(max-height: 767px) {
+	#player, #create_form, #music_list {
+		margin-top: 70px !important;
+	}
+}
+
+@media(max-width: 1250px) {
+	#player {
+		margin-left: 100px;
+		margin-right: 30px;
+	}
+
+	#sidebar {
+		right: 30px;
+	}
+}
+
+@media(max-width: 1700px) {
+	#player {
+		margin-left: 5% !important;
+		margin-right: 5% !important;
+	}
+}

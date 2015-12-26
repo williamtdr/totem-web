@@ -12,10 +12,8 @@
 	<link href="dist/totem.min.css" rel="stylesheet">
 </head>
 <body>
-<div id="background_layer"></div>
-<div id="background_shader"></div>
 <nav class="no-sel">
-	<span id="logo">totem <span id="logo_subheader">beta</span></span>
+	<span id="logo">totem</span>
 	<ul id="desktop_nav">
 		<li class="nav_room_list active">Rooms</li>
 		<li class="nav_player">Now Playing</li>
@@ -47,11 +45,7 @@
 		<li id="logout">Logout</li>
 	</ul>
 </div>
-<div id="queue_view_container">
-	<div id="queue_view">
-
-	</div>
-</div>
+<div id="queue_view"></div>
 <div class="modal fade" id="room_description_modal" tabindex="-1" role="dialog" aria-labelledby="room_description_modal_label">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -189,7 +183,7 @@
 				</div>
 				<div id="room_settings_transfer_ownership" data-title="Transfer Ownership">
 					<span class="room_settings_instructions">
-						You will lose admin privledges in this room, and they will be transferred to the user whom you select.
+						You will lose admin privileges in this room, and they will be transferred to the user whom you select.
 					</span>
 					<div id="transfer_ownership_errors"></div>
 					<input class="dynamic_user_list_footer form-control" id="transfer_ownership_textbox" placeholder="Type a username..." maxlength="30">
@@ -421,7 +415,7 @@
 		<div id="room_list_content"></div>
 	</div>
 </div>
-<div id="player" class="animsition player_container">
+<div id="player" class="animsition">
 	<div id="now_playing_content">
 		<div id="waiting_for_server">
 			<div class="container">

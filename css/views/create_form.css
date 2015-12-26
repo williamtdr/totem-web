@@ -1,4 +1,4 @@
-#create_form {
+#create_form, #player, #room_list, #music_list {
 	z-index: 200;
 	margin-top: 90px;
 	color: #95A5A6;
@@ -103,18 +103,4 @@
 #room_form_back:before {
 	font-family: "FontAwesome";
 	content: "\f104";
-}
-
-@media screen and (max-width: 500px) {
-	#create_room_form_content {
-		margin-left: 0;
-	}
-
-	#room_form_header {
-		height: auto;
-	}
-
-	#create_form {
-		margin-top: 70px;
-	}
 }

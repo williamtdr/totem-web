@@ -5,7 +5,7 @@ function getRandomInt(min, max) {
 last_image_placed = 2;
 first_background = true;
 
-$("#background_layer").append('<div class="top"></div><div class="bottom"></div>');
+$("body").append('<div id="background_layer"><div class="top"></div><div class="bottom"></div></div><div id="background_shader"></div>');
 
 advanceBackgroundImage = function () {
     var top_img = $(".top");

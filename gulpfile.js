@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify');
 
 gulp.task('minify-css', function() {
-	return gulp.src('css/**/*.css')
+	return gulp.src(['css/core.css', 'css/nav.css', 'css/notification.css', 'css/user_menu.css', 'css/views/*.css', 'css/responsive.css', 'css/**/*.css'])
 		.pipe(minifyCss({compatibility: 'ie8'}))
 		.pipe(concat('totem.min.css'))
 		.pipe(gulp.dest('dist'));

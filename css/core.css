@@ -11,17 +11,6 @@ h1, h2, h3 {
 	transition: .25s;
 }
 
-h1 {
-	color: #ECF0F1;
-	font-size: 3em;
-	margin-top: 10px;
-}
-
-h3 {
-	color: #BDC3C7;
-	font-size: 30px;
-}
-
 a {
 	color: #1ABC9C;
     transition: .25s;
@@ -111,12 +100,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 .input-lg {
 	height: auto;
-}
-
-#music_list {
-	z-index: 200;
-	padding-top: 90px;
-	display: none;
 }
 
 #disconnected {

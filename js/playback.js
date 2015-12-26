@@ -59,14 +59,13 @@ function addToQueueById(id) {
 
 function updateMyQueue() {
 	var my_queue = $("#my_queue"),
-		container = $("#queue_view_container"),
 		view = $("#queue_view");
 
 	if(client.queue.length > 0) {
 		$("#my_queue").show();
 	} else {
 		$("#my_queue").hide();
-		if(container.is(":visible")) container.animate({height: "toggle"});
+		if(view.is(":visible")) view.animate({height: "toggle"});
 	}
 	view.empty();
 	for(var index in client.queue) {
@@ -77,7 +76,6 @@ function updateMyQueue() {
 
 function initQueue() {
 	var my_queue = $("#my_queue"),
-		container = $("#queue_view_container"),
 		view = $("#queue_view");
 		
 	if (client.queue.length > 0) {
@@ -86,12 +84,12 @@ function initQueue() {
 	}
 		
 	my_queue.click(function () {
-		if(container.css("display") == "block") {
+		if(view.css("display") == "block") {
 			my_queue.removeAttr("style").show();
 		} else {
 			my_queue.css("color", "#fff");
 		}
-		container.animate({height: "toggle"});
+		view.animate({height: "toggle"});
 	});
 }
 

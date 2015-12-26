@@ -1,26 +1,35 @@
+#player {
+	margin-left: 10%;
+	margin-right: 10%;
+	transition: .25s;
+}
+
 .title_display {
 	font-size: 2em;
+	color: #ECF0F1;
+	margin-top: 0;
+	margin-bottom: 15px;
 }
 
 .artist_display {
 	font-size: 1.2em;
+	font-weight: 300;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	color: #BDC3C7;
 }
 
-#queue_view_container {
+#queue_view {
 	display: none;
+	overflow-y: scroll;
 	position: fixed;
 	width: 400px;
 	height: 400px;
 	top: 55px;
 	right: 0;
 	z-index: 3000;
+	padding: 5px;
 	background-color: rgba(0,0,0,0.9);
-}
-
-#queue_view {
-	overflow-y: scroll;
-	padding: 5px 0px;
-	height: 400px;
 }
 
 #queue_view > .playlist  > .playlist-item-metadata-container{
@@ -39,13 +48,7 @@
 	padding: 0px 15px 5px 15px;
 }
 
-#player {
-	padding-top: 90px;
-	z-index: 100;
-	display: none;
-}
-
-#permission_failure, #queue_permission_failure, #requires_authentication {
+#permission_failure, #queue_permission_failure, #requires_authentication, #player {
 	display: none;
 }
 
@@ -87,13 +90,6 @@
 
 #manual {
 	display: none;
-}
-
-.player_container {
-	margin-left: 300px;
-	margin-right: 300px;
-	padding-top: 30px;
-	transition: .25s;
 }
 
 .modal-body > input {
@@ -546,10 +542,6 @@
 	width: 290px;
 }
 
-.artist_display {
-	font-weight: 300;
-}
-
 #top_info_panel {
 	top: 65px;
 	color: white;
@@ -986,259 +978,4 @@ li.list-item-small {
 
 #youtube_rate:hover {
 	color: #34bcff;
-}
-
-@media (max-width: 991px) {
-	.room_option {
-		margin-top: 7px;
-		margin-bottom: 5px;
-	}
-
-	#time_elapsed {
-		width: calc(100% - 36%);
-	}
-
-	#main_content {
-		width: 100%;
-	}
-
-	#sidebar {
-		display: none;
-	}
-
-	.chat, .chat_textbox, .chatbox-placeholder, .room-title, #room_description_wrapper, #room_description {
-		width: 100%;
-	}
-
-	h1 {
-		font-size: 2em;
-		margin-top: 0 !important;
-	}
-
-	h3 {
-		font-size: 1.5em;
-		margin-top: 15px;
-		margin-bottom: 15px;
-	}
-}
-
-@media (max-width: 768px) {
-	.logo {
-		display: none;
-	}
-
-	div[role="navigation"] {
-		padding-left: 0;
-	}
-
-	#login-full {
-		display: none;
-	}
-
-	#now_playing_placeholder {
-		padding-left: 10px;
-		font-size: 1em;
-	}
-
-	.playlist-item-title {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		height: 20px;
-		width: 100%;
-		white-space: nowrap;
-	}
-
-	#create_room_form_content {
-		margin-left: 0;
-	}
-
-	#main_content {
-		width: 100%;
-	}
-
-	#basic_player_tutorial {
-		display: none !important;
-	}
-}
-
-@media (max-width: 500px) {
-	.navigation {
-		padding-left: 10px;
-		padding-right: 20px;
-	}
-
-	.nav_option {
-		margin-left: 5px;
-		margin-right: 5px;
-	}
-
-	.playlist-item-queue {
-		top: 35px;
-		left: 245px;
-	}
-
-	.big-header {
-		margin-bottom: 0;
-		font-size: 1.6em;
-	}
-
-	.small-header {
-		font-size: 1.2em;
-	}
-}
-
-@media (max-height: 580px) and (min-width: 991px) {
-	.chat {
-		height: 40%;
-	}
-}
-
-@media (max-height: 480px) and (min-width: 991px) {
-	.chat {
-		height: 60%;
-		display: block !important;
-		margin-top: 0;
-	}
-
-	#room_description_wrapper, #room_users_wrapper, .list_menu {
-		display: none !important;
-	}
-}
-
-@media (max-height: 400px) and (min-width: 991px) {
-	.chat {
-		height: 47%;
-	}
-}
-
-@media screen and (max-width: 500px) {
-	.current-dj-wrapper {
-		display: none;
-	}
-
-	#time_elapsed {
-		width: calc(100% - 50px) !important;
-	}
-
-	.score_wrapper {
-		margin-right: 0;
-		clear: both;
-	}
-
-	.score_wrapper > div {
-		margin-right: 0;
-	}
-
-	#score-negative-wrapper {
-		padding-right: 0;
-	}
-
-	.player_container {
-		margin-left: 15px;
-		margin-right: 15px;
-	}
-
-	#player {
-		padding-top: 70px;
-	}
-
-	h1 {
-		font-size: 1.4em;
-		margin: 0 !important;
-		padding: 0 !important;
-	}
-
-	h3 {
-		margin: 10px 0 10px 0 !important;
-		padding: 0 !important;
-		font-size: 1.2em !important;
-	}
-}
-
-@media (max-width: 1700px) {
-	.player_container {
-		margin-left: 100px;
-		margin-right: 100px;
-	}
-}
-
-@media (max-width: 1250px) {
-	.player_container {
-		margin-left: 30px;
-		margin-right: 30px;
-	}
-
-	#sidebar {
-		right: 30px;
-	}
-}
-
-@media(max-height: 767px) {
-	#player {
-		padding-top: 70px;
-	}
-
-	h1 {
-		font-size: 2.6em;
-		margin-top: 0 !important;
-	}
-
-	h3 {
-		font-size: 1.5em;
-	}
-}
-
-@media(max-width: 500px) {
-	.disconnected-triangle {
-		padding-left: 15px;
-	}
-
-	#disconnected {
-		top: 50px;
-	}
-
-	#sidebar {
-		display: none !important;
-	}
-
-	#youtube_rate {
-		display: none !important;
-	}
-
-	#player_actions > .toggle {
-		margin-left: 0;
-		margin-right: 12px;
-	}
-
-	#vote_actions {
-		width: auto;
-	}
-
-	#music_list {
-		padding-top: 50px;
-	}
-
-	h1 {
-		font-size: 1.4em;
-	}
-
-	h3 {
-		font-size: 1em;
-	}
-
-	.player_container {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-}
-
-@media(max-width: 340px) {
-	#vote_actions {
-		float: left !important;
-	}
-
-	#score_wrapper > div {
-		margin-right: 20px;
-		margin-left: 0;
-	}
 }

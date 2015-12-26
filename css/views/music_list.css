@@ -69,29 +69,3 @@ span.playlist_item_artist_container {
     font-size: 0.8em;
 	padding-right: 3px;
 }
-
-@media screen and (max-width: 768px) {
-	#spotify_importer {
-		display: none;
-	}
-
-	#playlist_list {
-		padding-top: 10px;
-	}
-
-	#manage_playlists_suffix {
-		display: none;
-	}
-
-	.playlist_item_artist {
-		display: none;
-	}
-
-	.queue_full {
-		display: none;
-	}
-
-	.queue_current_playlist {
-		display: none;
-	}
-}
