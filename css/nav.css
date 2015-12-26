@@ -61,7 +61,6 @@ nav > ul > li.active {
 }
 
 #mobile_nav {
-	display: none;
 	margin-top: 5px;
 }
 
@@ -104,7 +103,6 @@ nav > ul > li.active {
 }
 
 #my_queue {
-	display: none;
 	float: left;
 	margin-right: 30px;
 	color: #BDC3C7;

@@ -1,3 +1,7 @@
+#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner {
+	display: none;
+}
+
 #player {
 	margin-left: 10%;
 	margin-right: 10%;
@@ -19,85 +23,16 @@
 	color: #BDC3C7;
 }
 
-#queue_view {
-	display: none;
-	overflow-y: scroll;
-	position: fixed;
-	width: 400px;
-	height: 400px;
-	top: 55px;
-	right: 0;
-	z-index: 3000;
-	padding: 5px;
-	background-color: rgba(0,0,0,0.9);
-}
-
-#queue_view > .playlist  > .playlist-item-metadata-container{
-	margin-top: 6px;
-}
-
-#queue_view > .playlist {
-	padding: 5px 15px;
-	display: inline-block;
-	line-height: 1.5;
-	list-style: none;
-	clear: both;
-}
-
-#queue_view > .playlist:first-child {
-	padding: 0px 15px 5px 15px;
-}
-
-#permission_failure, #queue_permission_failure, #requires_authentication, #player {
-	display: none;
-}
-
-#permission_failure > h2, #queue_permission_failure > h2 {
-	display: inline;
-	margin-left: 10px;
-}
-
-#permission_failure > .fa, #queue_permission_failure > h2 {
-	font-size: 1.5em;
-	vertical-align: 0;
-}
-
-#requires_authentication > h2 {
-	display: inline-block;
-	margin-left: 5px;
-}
-
-#requires_authentication > .fa {
-	vertical-align: baseline;
-}
-
-#requires_authentication > .input-group {
-	width: 300px;
-}
-
 #youtube_player {
 	margin-top: 10px;
-	width: 100%;
-}
-
-#now_playing_content {
-	display: none;
 }
 
 #vote_actions {
 	width: 200px;
 }
 
-#manual {
-	display: none;
-}
-
 .modal-body > input {
 	margin-top: 10px;
-}
-
-#sidebar {
-	display: none;
 }
 
 #now_playing_placeholder {
@@ -109,7 +44,6 @@
 #no_video, #new_room_welcome {
 	font-family: 'Raleway', sans-serif;
 	float: left;
-	display: none;
 	max-width: 600px;
 }
 
@@ -232,7 +166,6 @@
 	float: left;
 	transition: .25s;
 	width: calc(100% - 400px);
-	display: none;
 }
 
 #sidebar_footer {
@@ -377,7 +310,6 @@
 
 #chat-emojilist, #mobile-chat-emojilist {
 	font-family: "Raleway", sans-serif;
-	display: none;
 	position: absolute;
 	background: rgba(22, 160, 133, 0.9);
 	overflow-y: scroll;
@@ -421,7 +353,6 @@
 }
 
 #mobile_chat, #mobile_info {
-	display: none;
     position: absolute;
     opacity: 1;
     z-index: 50;
@@ -830,7 +761,6 @@
 #disconnected {
 	z-index: 10000;
 	margin: 0 auto;
-	display: none;
 	top: 30%;
 }
 
@@ -899,7 +829,6 @@
 
 /* User List */
 .list_menu {
-	display: none;
 	color: white;
 	width: 300px;
 	position: absolute;

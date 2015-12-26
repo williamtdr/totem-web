@@ -102,10 +102,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	height: auto;
 }
 
-#disconnected {
-	display: none;
-}
-
 #room_settings_modal {
     color: black;
 }
@@ -139,13 +135,8 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	left: 38px;
 }
 
-#room_settings_spinner {
-    display: none;
-}
-
 #room_settings_return {
     color: #2980B9;
-	display: none;
 }
 
 #room_settings_return > i {
@@ -155,10 +146,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 #room_settings_return:hover {
     color: #3498DB;
-}
-
-#room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership {
-    display: none;
 }
 
 .room_settings_example {
@@ -397,10 +384,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	color: #1ABC9C;
 }
 
-#share_room_well {
-	display: none;
-}
-
 #share_room_text {
 	color: white;
 	font-size: 1.4em;
@@ -496,7 +479,6 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 }
 
 #clear_search_history {
-	display: none;
 	color: #95A5A6;
 	font-size: 0.8em;
 	transition: .25s;

@@ -2,7 +2,6 @@
 	z-index: 200;
 	margin-top: 90px;
 	color: #95A5A6;
-	display: none;
 }
 
 #create_room_form_content > .form-group > label {
@@ -45,7 +44,6 @@
 #create_room_form_content {
 	margin-left: 18px;
 	max-width: 400px;
-    display: none;
 }
 
 #room_form_password_select {
@@ -73,7 +71,6 @@
 }
 
 #room_form_password_well {
-	display: none;
 	margin-bottom: 15px;
 	margin-top: 10px;
 }

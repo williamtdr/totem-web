@@ -11,14 +11,6 @@ img.playlist-item-thumbnail {
 	float: left;
 }
 
-#playlist_search {
-	display: none;
-}
-
-#playlist_items {
-	display: none;
-}
-
 .playlist-item-metadata-container {
 	float: left;
 	clear: none;

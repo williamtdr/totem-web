@@ -6,7 +6,6 @@
     top: 50px;
     background-color: rgba(0,0,0,0.9);
     color: #ECF0F1;
-    display: none;
     z-index: 3000;
     padding: 15px;
 }
@@ -59,10 +58,6 @@
 
 .dark-notification-other:hover {
     color: #3498DB;
-}
-
-#notification_request_dismiss, #basic_player_tutorial_advance {
-    display: none;
 }
 
 .progress-dots {
