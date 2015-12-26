@@ -174,7 +174,7 @@ function switchView(destination) {
 			mobile_info.show();
 			$('#mobile_user_list').show();
 			$('#mobile_queue_list').hide();
-			$('.room-informations .room-queue').hasClass('selected') {
+			if($('.room-informations .room-queue').hasClass('selected')) {
 				$('.room-informations .room-users').addClass('selected');
 				$('.room-informations .room-queue').removeClass('selected');
 			}
