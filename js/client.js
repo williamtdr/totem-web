@@ -360,7 +360,7 @@ client = {
 						var target = $(e.target);
 						addToQueueById(target.data('id'));
 					}).removeClass("playing-in-room");
-					$("[data-id='" + data.song.url_fragment + "']").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
+					$("[data-id='" + song.url_fragment + "']").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
 					break;
 				case "chat":
@@ -379,6 +379,11 @@ client = {
 							removeFromQueueById($(this).data('id'));
 						});
 					}
+					$(".playing-in-room").html("<i class=\"fa fa-plus\"></i> <span class='queue_full'>Add To </span>Queue").click(function(e) {
+						var target = $(e.target);
+						addToQueueById(target.data('id'));
+					}).removeClass("playing-in-room");
+					$("[data-id='" + song.url_fragment + "']").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 				break;
 				case "queue_change":
 					room.queue = data;

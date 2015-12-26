@@ -96,11 +96,7 @@ function search(more) {
 					by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
 					by_title = e.by.replace('"', '\"');
 				}
-				rowsContainer.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
-			});
-			$(".playlist_item_queue").click(function(e) {
-				var target = $(e.target);
-				addToQueueById(target.data('id'));
+				rowsContainer.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
 			});
 			$("[data-id='" + song.url_fragment + "']:not(.playing-in-room)").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
@@ -167,11 +163,7 @@ function loadPlaylistItems(el, more) {
 					by_title = e.by.replace('"', '\"');
 				}
 
-				container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
-			});
-			$(".playlist_item_queue").click(function(e) {
-				var target = $(e.target);
-				addToQueueById(target.data('id'));
+				container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
 			});
 
 			if(response.length == 0) {

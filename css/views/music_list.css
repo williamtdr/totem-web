@@ -109,6 +109,7 @@
 .playlist-list-return {
 	margin-left: 10px;
 	color: #95A5A6;
+	transition: .25s;
 }
 
 .playlist-list-return:hover {
