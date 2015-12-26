@@ -56,7 +56,7 @@ var emoji = {
 				<ul id="emojilist-Flags"><h2>Flags</h2></ul>');
 				
 		$('#chat-emojilist ul h2').click(function(a) {
-			$(a.target).parent().find('li').slideToggle(300);
+			$(a.target).parent().find('li').toggle();
 		});
 	
 		for(var a in emoji.emojilist) {

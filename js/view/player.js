@@ -111,51 +111,53 @@ function switchClientState(state) {
 }
 
 function refreshQueueList() {
-	var queue_list = $('#queue_list');
+	var queue_list_bigscreen = $('#queue_list'),
+		queue_list = $('.queue_list');
 
 	queue_list.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
-	queue_list.height($('#chat').height()).width($('#chat').width());
+	queue_list_bigscreen.height($('#chat').height()).width($('#chat').width());
 	if ($('#room_description_wrapper .room-description').height() == 0)
-		queue_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
+		queue_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
-		queue_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
+		queue_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
 	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
-		$('#queue_list').height($('#chat').height()).width($('#chat').width());
+		queue_list_bigscreen.height($('#chat').height()).width($('#chat').width());
 		$('#chat').hide().css('visibility', 'visible');
 	}
 
-	queue_list = $('#queue_list .list-row');
+	queue_list = $('.queue_list .list-row');
 	room.queue.forEach(function(q, index) {
 		queue_list.append('<li class="queue-list-item"><img src="' + q.song.picture_url + '"><span class="queue-list-name">' + q.song.name + '</span><span class="queue-list-artist">' + q.song.artist + '</span><span class="queue-item-preview" onclick="previewVideo(\'' + q.song.url_fragment + '\', \'' + q.song.name.replace(/(['"])/g, "&quot;") + '\', \'' + q.song.artist.replace(/(['"])/g, "&quot;") + '\')"><i class="fa fa-play"></i> Preview</span><a class="queue-item-share" target="_blank" href="http://www.youtube.com/watch?v=' + q.song.url_fragment + '"><i class="fa fa-share-alt"></i> Share</a></li>')
 	});
 }
 
 function refreshUserList() {
-	var user_list = $("#user_list"), temp;
+	var user_list_bigscreen = $("#user_list"),
+		user_list = $('.user_list'), temp;
 
-	user_list.html('<ul class="list-row list-title">Listeners</ul>');
-	user_list.height($('#chat').height()).width($('#chat').width());
+	user_list.html('<ul class="list-row"><li class="list-title">Listeners</li></ul>');
+	user_list_bigscreen.height($('#chat').height()).width($('#chat').width());
 	if ($('#room_description_wrapper .room-description').height() == 0)
-		user_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
+		user_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
-		user_list.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
+		user_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
 	
 	if($('#chat').css('display') !== 'block') {
 		$('#chat').show().css('visibility','hidden');
-		$('#user_list').height($('#chat').height()).width($('#chat').width());
+		user_list_bigscreen.height($('#chat').height()).width($('#chat').width());
 		$('#chat').hide().css('visibility', 'visible');
 	}
 
-	user_list = $('.list-row');
+	user_list = $('.user_list .list-row');
 	room.user_list.forEach(function(username, index) {
 		temp = username.toLowerCase(),
 			dname = display_name.toLowerCase();
 
 		if(temp == dname) {
 			user_list.append('<li class="list-item list-item-small"><span class="chat-you">' + username + '</span></li>');
-		} else if(temp == "dcv" || temp == "williamtdr") {
+		} else if(temp == "dcv" || temp == "williamtdr" || temp == "pogodaanton") {
 			user_list.append('<li class="list-item list-item-small"><span class="chat-dev">' + username + '</span></li>');
 		} else {
 			user_list.append('<li class="list-item list-item-small"><span>' + username + '</span></li>');
@@ -209,8 +211,8 @@ function vote(vote) {
 }
 
 function counterUpdate() {
-	$("#room-users").find('.number').html(room.user_counter);
-	$("#room-queue").find('.number').html(room.queue.length);
+	$(".room-users").find('.number').html(room.user_counter);
+	$(".room-queue").find('.number').html(room.queue.length);
 }
 
 function updateRoomMetadata() {
@@ -349,10 +351,10 @@ function addChatMessage(sender, text) {
 	}
 	var sendercheck = sender.toLowerCase().toString();
 	var senderclass = "";
-	if(sendercheck == "dcv" || sendercheck == "williamtdr") {
+	if(sendercheck == "dcv" || sendercheck == "williamtdr" || sendercheck == "pogodaanton") {
 		senderclass = senderclass + " chat-dev ";
 	}
-	if(sendercheck == "encadyma" || sendercheck == "tugaaa" || sendercheck == "xbytez" || sendercheck == "felicity" || sendercheck == "koolkidkenny" || sendercheck == "not trevor" || sendercheck == "pogodaanton" || sendercheck == "vitals") {
+	if(sendercheck == "encadyma" || sendercheck == "tugaaa" || sendercheck == "xbytez" || sendercheck == "felicity" || sendercheck == "koolkidkenny" || sendercheck == "not trevor" || sendercheck == "vitals") {
 		senderclass = senderclass + " chat-beta ";
 	}
 	if(sendercheck == display_name.toLowerCase()) {
@@ -530,7 +532,7 @@ function initPlayerToggles() {
 		$('#chat-emojilist').height($('#chat').height() - 41);
 	});
 
-	$('#room-queue').click(function() {
+	$('.room-queue').click(function() {
 		if(!room.queue.length) {
 			noty({
 				text: "No songs are in the queue.",
@@ -547,17 +549,36 @@ function initPlayerToggles() {
 			return false;
 		}
 
-		toggleBoxes('queue_list');
+		if ($('#mobile_info').css('display') == 'block') {
+			if ($('#mobile_queue_list').css('display') == 'block')
+				return false;
+			else {
+				toggleBoxes('mobile_queue_list');
+				$('.room-informations .room-users').removeClass('selected');
+				$('.room-informations .room-queue').addClass('selected');
+			}
+		}
+		else
+			toggleBoxes('queue_list');
 
 		refreshQueueList();
 	});
 
-	$('#room-users').click(function() {
+	$('.room-users').click(function() {
 		if(!room.user_list.length) {
 			return false;
 		}
 
-		toggleBoxes('user_list');
+		if ($('#mobile_info').css('display') == 'block') {
+			if ($('#mobile_user_list').css('display') == 'block')
+				return false;
+			else {
+				toggleBoxes('mobile_user_list');
+				$('.room-informations .room-users').addClass('selected');
+				$('.room-informations .room-queue').removeClass('selected');
+			}
+		} else
+			toggleBoxes('user_list');
 
 		refreshUserList();
 	});
@@ -591,7 +612,7 @@ function toggleBoxes(exceptId) {
 
 	if(isVisible) {
 		toShow.fadeOut('fast');
-		$('.chat').fadeIn('fast');
+		$('#chat').fadeIn('fast');
 		return false;
 	}
 

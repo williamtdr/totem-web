@@ -434,6 +434,7 @@
 }
 
 #mobile_info {
+	width: calc(100% - 15px);
 	margin-left: 15px;
 	margin-right: 15px;
 	font-family: "Raleway", sans-serif;
@@ -605,21 +606,21 @@
 	cursor: pointer;
 }
 
-#room-users {
+.room-users {
 	color: #1ac3a5;
 	transition: .25s;
 }
 
-#room-users:hover {
+.room-users:hover {
 	color: #1cf5d5;
 }
 
-#room-queue {
+.room-queue {
 	color: #5885c3;
 	transition: .25s;
 }
 
-#room-queue:hover {
+.room-queue:hover {
 	color: #69abf5;
 }
 
@@ -969,6 +970,54 @@ li.list-item-small {
 	margin-left: 15px;
 }
 
+#mobile_user_list {
+    width: 96%;
+    height: calc(100% - 155px);
+	top: 140px;
+    background-color: rgba(26, 205, 175, 0.4);
+    display: block;
+}
+
+#mobile_queue_list {
+    background-color: rgba(88, 133, 195, 0.40);
+    width: 96%;
+    height: calc(100% - 155px);
+	top: 140px;
+}
+
+.room-informations > .room-users {
+    float: left;
+    border: #1ac3a5 1px solid;
+    border-right: 0;
+    padding: 5px 15px;
+    font-size: 1.5em;
+    width: 50%;
+}
+
+.room-informations > .room-users.selected {
+    background: rgba(26, 195, 165, 0.77);
+    color: #fff;
+}
+
+.room-informations > .room-queue {
+    float: left;
+    border: #5885c3 1px solid;
+    border-left: 0;
+    padding: 5px 15px;
+    font-size: 1.5em;
+    width: 50%;
+}
+
+.room-informations > .room-queue.selected {
+    background: #5885c3;
+}
+
+.room-informations {
+    display: inline-block;
+    width: 96%;
+    margin-top: 10px
+}
+
 /* Youtube Rate Button */
 #youtube_rate {
 	color: #3498DB;
@@ -1002,9 +1051,7 @@ li.list-item-small {
 		width: 100%;
 	}
 
-	#sidebar {
-		display: none;
-	}
+	#sidebar {display: none;}
 
 	.chat, .chat_textbox, .chatbox-placeholder, .room-title, #room_description_wrapper, #room_description {
 		width: 100%;

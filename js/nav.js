@@ -118,6 +118,9 @@ function switchView(destination) {
 			refreshRoomList();
 			nav_room_list.addClass("active");
 			room_list.show();
+			$('#user_list').hide();
+			$('#queue_list').hide();
+			$('#chat').show();
 			current_view = VIEW_ROOM_LIST;
 		break;
 		case VIEW_PLAYER:
@@ -169,6 +172,12 @@ function switchView(destination) {
 		case VIEW_INFO:
 			nav_info.addClass("active");
 			mobile_info.show();
+			$('#mobile_user_list').show();
+			$('#mobile_queue_list').hide();
+			$('.room-informations .room-queue').hasClass('selected') {
+				$('.room-informations .room-users').addClass('selected');
+				$('.room-informations .room-queue').removeClass('selected');
+			}
 			current_view = VIEW_INFO;
 	}
 }
