@@ -45,11 +45,6 @@
 	color: #3498DB;
 }
 
-#room_users_wrapper {
-	right: -15px;
-	position: absolute;
-}
-
 .room_users_wrapper {
 	float: right;
 	margin-right: 37px;

@@ -20,3 +20,23 @@
 #requires_authentication > .input-group {
 	width: 300px;
 }
+
+#remember_room_password {
+	margin-right: 5px;
+	margin-top: 10px;
+	float: left;
+}
+
+#room_password_name_target {
+	color: white;
+}
+
+#requires_authentication > h2 {
+	color: #BDC3C7;
+}
+
+#invalid_room_password {
+	color: #E74C3C;
+	display: block;
+	margin-top: 10px;
+}

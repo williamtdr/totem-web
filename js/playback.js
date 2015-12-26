@@ -70,7 +70,7 @@ function updateMyQueue() {
 	view.empty();
 	for(var index in client.queue) {
 		var item = client.queue[index];
-		view.append('<li class="playlist"><img class="queue-item-thumbnail" src="' + item.thumbnail + '" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">'+ item.artist + ' - ' + item.name + '</span></div><span class="queue-item-preview" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-delete" onclick="removeFromQueueById(\'' + item.id + '\')"><i class="fa fa-trash-o"></i>Remove</span></li>');
+		view.append('<li class="playlist_item"><img src="' + item.thumbnail + '" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">'+ item.artist + ' - ' + item.name + '</span></div><span class="sidebar_queue_list_item_preview" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_delete" onclick="removeFromQueueById(\'' + item.id + '\')"><i class="fa fa-trash-o"></i>Remove</span></li>');
 	}
 }
 

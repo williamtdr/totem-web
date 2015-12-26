@@ -1,26 +1,98 @@
-.list-group-item {
-	float: left;
-	width: 100%;
-}
-
-.playlist-item-title {
-	color: #BDC3C7;
-}
-
-img.playlist-item-thumbnail {
-	float: left;
-}
-
-.playlist-item-metadata-container {
+/* Playlist Item Display */
+.playlist_item_title_container {
 	float: left;
 	clear: none;
 	width: calc(100% - 135px) !important;
 	margin-left: 10px;
-	position: static !important;
+	position: static;
+	display: block;
+	left: 145px;
+	top: 10px;
+	line-height: 1.3;
 }
 
-span.playlist_item_artist_container {
-	clear: left;
+.playlist_item > img {
+	width: 120px;
+	margin: 3px 5px 3px 0;
+	float: left;
+}
+
+.playlist_item_title {
+	color: #BDC3C7;
+	float: left;
+	display: block;
+}
+
+.playlist_item_artist {
+	font-size: 0.8em;
+	color: #b9b9b9;
+	display: block;
+	line-height: 2.0;
+	float: right;
+}
+
+.playlist_item_preview {
+	color: #2980B9;
+	transition: .25s;
+	position: absolute;
+	top: 35px;
+	left: 152px;
+	cursor: pointer;
+}
+
+.playlist_item_preview:hover {
+	color: #3498DB;
+}
+
+.playlist_item_preview > .fa {
+	font-size: 0.7em;
+}
+
+.playlist_item_queue {
+	color: #16A085;
+	transition: .25s;
+	position: absolute;
+	top: 35px;
+	left: 250px;
+	cursor: pointer;
+}
+
+.playlist_item_queue:hover {
+	color: #1ABC9C;
+}
+
+.playlist_item_queue > .fa {
+	font-size: 0.7em;
+}
+
+.playlist_item_delete {
+	color: #E74C3C;
+	transition: .25s;
+	cursor: pointer;
+}
+
+.playlist_item_delete:hover {
+	color: #C0392B;
+}
+
+.playlist_item_delete > .fa {
+	font-size: 0.8em;
+	padding-right: 3px;
+}
+
+.in-room-queue {
+	color: #E74C3C !important;
+	transition: .25s;
+}
+
+.in-room-queue:hover {
+	color: #C0392B !important;
+}
+
+/* Search */
+#search_textbox {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .searchResults ul.list-group li.list-group-item:hover {
@@ -31,6 +103,16 @@ span.playlist_item_artist_container {
     color: #BDC3C7;
     margin-right: 15px;
     text-decoration: none !important;
+}
+
+/* Playlist List */
+.playlist-list-return {
+	margin-left: 10px;
+	color: #95A5A6;
+}
+
+.playlist-list-return:hover {
+	color: #ECF0F1;
 }
 
 #playlist_list > a:hover {
@@ -47,17 +129,115 @@ span.playlist_item_artist_container {
 	vertical-align: -5% !important;
 }
 
-.playlist-item-delete {
-    color: #E74C3C;
-    transition: .25s;
-    cursor: pointer;
+.playlist-list-content > li {
+	background: transparent;
+	text-align: left;
+	border: 0 #808080;
+	border-bottom: 1px solid;
 }
 
-.playlist-item-delete:hover {
-	color: #C0392B;
+#playlist_list, #playlist_items {
+	color: #f5f5f5;
 }
 
-.playlist-item-delete > .fa {
-    font-size: 0.8em;
-	padding-right: 3px;
+#playlist_items > ul > li:last-child {
+	border: 0;
+}
+
+/* Manual Control */
+#add_to_queue {
+	display: block;
+	margin-bottom: 5px;
+}
+
+#add_to_queue > a {
+	color: #2980B9;
+}
+
+#add_to_queue > a:hover {
+	color: #3498DB;
+}
+
+.manual-option > a > i {
+	font-size: 0.9em;
+}
+
+/* Search */
+#search_text {
+	background-color: transparent;
+	color: #fff;
+	font-size: 1.4em;
+	border: 0;
+	margin-top: 10px;
+}
+
+#search_send {
+	height: 42px;
+	line-height: 40px;
+	color: #bdc3c7;
+	background-color: transparent;
+	border: none;
+}
+
+#search_suggestions {
+	font-family: "Raleway", sans-serif;
+	list-style-type: none;
+}
+
+#search_suggestions > li {
+	font-size: 1.2em;
+	color: #BDC3C7;
+	transition: .25s;
+	cursor: pointer;
+}
+
+#search_suggestions > li:hover {
+	color: white;
+}
+
+#clear_search_history {
+	color: #95A5A6;
+	font-size: 0.8em;
+	transition: .25s;
+	cursor: pointer;
+	-webkit-user-select: none;
+	margin-left: 40px;
+}
+
+#clear_search_history:hover {
+	color: #ECF0F1;
+}
+
+.playlist_header {
+	display: block;
+	color: white;
+	margin-bottom: 5px;
+}
+
+.queue_current_playlist {
+	transition: .25s;
+	color: #BDC3C7;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.queue_current_playlist:hover {
+	color: #ECF0F1;
+}
+
+.queue_current_playlist > .fa {
+	vertical-align: 0;
+	font-size: 1em;
+	margin-left: 15px;
+}
+
+.playlist_name {
+	margin-left: 15px;
+	font-size: 1.4em;
+	font-family: "Raleway", sans-serif;
+	display: inline-block;
+}
+
+#playlist_list > .signInButton {
+	margin-right: 0;
 }

@@ -93,10 +93,7 @@ nav > ul > li.active {
 	content: "\f05a";
 }
 
-#playlist_list > .signInButton {
-    margin-right: 0;
-}
-
+/* Queue View */
 #my_queue {
 	float: left;
 	margin-right: 30px;
@@ -113,4 +110,29 @@ nav > ul > li.active {
 	vertical-align: 0;
 	margin-right: 3px;
 	font-size: 1em;
+}
+
+#queue_view {
+	overflow-y: scroll;
+	position: fixed;
+	width: 400px;
+	height: 400px;
+	top: 55px;
+	right: 0;
+	z-index: 3000;
+	padding: 5px;
+	background-color: rgba(0,0,0,0.9);
+}
+
+#queue_view > .playlist_item {
+	padding: 5px 15px;
+	display: inline-block;
+	line-height: 1.5;
+	list-style: none;
+	clear: both;
+	margin-top: 6px;
+}
+
+#queue_view > .playlist_item:first-child {
+	padding: 0 15px 5px 15px;
 }

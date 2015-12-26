@@ -129,7 +129,7 @@ function refreshQueueList() {
 
 	queue_list = $('.queue_list .list-row');
 	room.queue.forEach(function(q, index) {
-		queue_list.append('<li class="queue-list-item"><img src="' + q.song.picture_url + '"><span class="queue-list-name">' + q.song.name + '</span><span class="queue-list-artist">' + q.song.artist + '</span><span class="queue-item-preview" onclick="previewVideo(\'' + q.song.url_fragment + '\', \'' + q.song.name.replace(/(['"])/g, "&quot;") + '\', \'' + q.song.artist.replace(/(['"])/g, "&quot;") + '\')"><i class="fa fa-play"></i> Preview</span><a class="queue-item-share" target="_blank" href="http://www.youtube.com/watch?v=' + q.song.url_fragment + '"><i class="fa fa-share-alt"></i> Share</a></li>')
+		queue_list.append('<li class="sidebar_queue_list_item"><img src="' + q.song.picture_url + '"><span class="sidebar_queue_list_item_title">' + q.song.name + '</span><span class="sidebar_queue_list_item_artist">' + q.song.artist + '</span><span class="sidebar_queue_list_item_preview" onclick="previewVideo(\'' + q.song.url_fragment + '\', \'' + q.song.name.replace(/(['"])/g, "&quot;") + '\', \'' + q.song.artist.replace(/(['"])/g, "&quot;") + '\')"><i class="fa fa-play"></i> Preview</span><a class="sidebar_queue_list_item_share" target="_blank" href="http://www.youtube.com/watch?v=' + q.song.url_fragment + '"><i class="fa fa-share-alt"></i> Share</a></li>')
 	});
 }
 
@@ -513,7 +513,7 @@ function initPlayerToggles() {
 		}
 	});
 
-	$("#add-to-queue").click(function() {
+	$("#add_to_queue").click(function() {
 		addCurrentSongToQueue();
 	});
 

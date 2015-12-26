@@ -15,6 +15,12 @@
 	margin-top: 15px;
 }
 
+#create_room_form_content > .form-group > span {
+	display: block;
+	margin-top: 10px;
+	font-size: 0.8em;
+}
+
 #room_form_name {
 	font-family: 'Raleway', sans-serif;
 	color: #ECF0F1;

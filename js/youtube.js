@@ -9,7 +9,7 @@ function loadYoutubePlaylists() {
 		dataType: "jsonp",
 		success: function(response) {
 			$("#playlist_list")
-				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage<span id="manage_playlists_suffix"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group sidebar-playlist"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
+				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage<span id="manage_playlists_suffix"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group playlist-list-content"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
 
 			$("#search_launcher").click(function() {
 				switchSubView(SUBVIEW_SEARCH);
@@ -73,7 +73,7 @@ function search(more) {
 	}
 
 	rowsContainer.empty();
-	rowsContainer.append('<li class="list-group-item playlist loading">Loading... </li>');
+	rowsContainer.append('<li class="list-group-item playlist_item loading">Loading... </li>');
 
 	container.show();
 	$.ajax({
@@ -96,18 +96,18 @@ function search(more) {
 					by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
 					by_title = e.by.replace('"', '\"');
 				}
-				rowsContainer.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+				rowsContainer.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
 			});
-			$(".playlist-item-queue").click(function(e) {
+			$(".playlist_item_queue").click(function(e) {
 				var target = $(e.target);
 				addToQueueById(target.data('id'));
 			});
 			$("[data-id='" + song.url_fragment + "']:not(.playing-in-room)").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
 			if(response.length == 0) {
-				container.append('<li class="list-group-item playlist finished">No results. Check your spelling and try again.</li>');
+				container.append('<li class="list-group-item playlist_item finished">No results. Check your spelling and try again.</li>');
 			} else if(response.length < 50) {
-				container.append('<li class="list-group-item playlist finished">-- end --</li>');
+				container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 			}
 		},
 		error: function(error) {
@@ -141,7 +141,7 @@ function loadPlaylistItems(el, more) {
 		$("#playlist_items").show();
 	}
 
-	container.append('<li class="list-group-item playlist loading"><i class="fa fa-circle-o-notch fa-spin"></i> Loading... </li>');
+	container.append('<li class="list-group-item playlist_item loading"><i class="fa fa-circle-o-notch fa-spin"></i> Loading... </li>');
 
 	$.ajax({
 		url: config.API + "/youtube/getPlaylistItems.php",
@@ -167,22 +167,22 @@ function loadPlaylistItems(el, more) {
 					by_title = e.by.replace('"', '\"');
 				}
 
-				container.append('<li class="list-group-item playlist"><img class="playlist-item-thumbnail" src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist-item-metadata-container"><span class="playlist-item-title">' + title + '</span>' + by_string + '</div><span class="playlist-item-preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist-item-queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+				container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
 			});
-			$(".playlist-item-queue").click(function(e) {
+			$(".playlist_item_queue").click(function(e) {
 				var target = $(e.target);
 				addToQueueById(target.data('id'));
 			});
 
 			if(response.length == 0) {
-				container.append('<li class="list-group-item playlist finished">This playlist is empty.</li>');
+				container.append('<li class="list-group-item playlist_item finished">This playlist is empty.</li>');
 			} else if(response.length < 50) {
-				container.append('<li class="list-group-item playlist finished">-- end --</li>');
+				container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 			}
 		},
 		error: function(error) {
 			container.find('.loading').remove();
-			container.append('<li class="list-group-item playlist finished">Error when trying to load playlist content - check that you have permission.</li>');
+			container.append('<li class="list-group-item playlist_item finished">Error when trying to load playlist content - check that you have permission.</li>');
 		}
 	});
 }
@@ -190,9 +190,9 @@ function loadPlaylistItems(el, more) {
 $(window).scroll(function() {
 	var docElement = $(document)[0].documentElement,
 		winElement = $(window)[0],
-		videoRows = $('li.list-group-item.playlist'),
-		rowsLoading = $('li.list-group-item.playlist.loading'),
-		rowsFinished = $('li.list-group-item.playlist.finished');
+		videoRows = $('li.list-group-item.playlist_item'),
+		rowsLoading = $('li.list-group-item.playlist_item.loading'),
+		rowsFinished = $('li.list-group-item.playlist_item.finished');
 
 	if(!videoRows.length || rowsLoading.length || rowsFinished.length) {
 		return false;

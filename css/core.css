@@ -58,8 +58,13 @@ textarea {
 	background-color: #3498db;
 }
 
-a, a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, #playlist_list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist-item-metadata-container, .playlist-list-return {
+a, a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, #playlist_list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist_item_title_container, .playlist-list-return {
 	cursor: pointer;
+}
+
+.list-group-item {
+	float: left;
+	width: 100%;
 }
 
 .no-pointer, div {
@@ -102,190 +107,8 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	height: auto;
 }
 
-#room_settings_modal {
-    color: black;
-}
-
-.form-group > .fa {
-    font-size: 1em;
-    vertical-align: baseline;
-    color: #2C3E50;
-}
-
-.modal-action > label {
-    position: absolute;
-    line-height: 0.9;
-    left: 43px;
-    cursor: pointer;
-}
-
-.modal-action {
-    cursor: pointer;
-}
-
-.room_settings_list > .form-group > span {
-    font-style: italic;
-    color: #7F8C8D;
-    display: block;
-    margin-top: 5px;
-    font-size: 0.8em;
-}
-
-#room_settings_danger > div > label {
-	left: 38px;
-}
-
-#room_settings_return {
-    color: #2980B9;
-}
-
-#room_settings_return > i {
-    vertical-align: -8%;
-    margin-right: 9px;
-}
-
-#room_settings_return:hover {
-    color: #3498DB;
-}
-
-.room_settings_instructions {
-    display: block;
-    color: #2C3E50;
-}
-
-.modal-body > div > textarea {
-    margin-top: 15px;
-}
-
-.dynamic_user_list {
-    width: 400px;
-}
-
-.dynamic_user_list > ul {
-    margin: 0;
-    padding: 0;
-}
-
-.dynamic_user_list > ul > li {
-    list-style-type: none;
-    border-bottom: 1px solid #95A5A6;
-    color: #000000;
-}
-
-.hover_x:hover:after {
-    content: "x";
-    font-family: sans-serif;
-    line-height: 1;
-    color: #C0392B;
-    font-size: 1.4em;
-    float: right;
-    cursor: pointer;
-    right: 0;
-    margin-right: 5px;
-    transition: .25s;
-}
-
-.hover_x:hover:after:hover {
-    color: #E74C3C;
-}
-
-.dynamic_user_list_footer {
-    border: 0;
-    padding-left: 0;
-    box-shadow: none;
-    padding-top: 3px;
-    width: calc(100% - 80px);
-    float: left;
-}
-
-.user_suggestion_wrapper > ul {
-    padding: 0;
-    margin: 0;
-}
-
-.user_suggestion_wrapper > ul > li {
-    list-style-type: none;
-    cursor: pointer;
-}
-
-.user_add {
-    float: right;
-    margin-top: 3px;
-}
-
-.dynamic_user_list > span {
-    padding-left: 15px;
-    color: #C0392B;
-    display: none;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.cancel_demotion {
-    color: #2980B9;
-}
-
-.cancel_demotion:hover {
-    color: #3498DB;
-}
-
-.do_demotion {
-    color: #C0392B;
-}
-
-.do_demotion:hover {
-    color: #E74C3C;
-}
-
-.room_settings_launcher {
-    color: #95A5A6;
-    margin-left: 10px;
-    font-size: 1em;
-    vertical-align: 0;
-	transition: .25s;
-}
-
-.room_settings_launcher:hover {
-    color: white;
-}
-
-#invalid_room_password {
-	color: #E74C3C;
-	display: block;
-	margin-top: 10px;
-}
-
 .input-group > input {
 	height: 41px;
-}
-
-#remember_room_password {
-	margin-right: 5px;
-	margin-top: 10px;
-	float: left;
-}
-
-#room_password_name_target {
-	color: white;
-}
-
-#requires_authentication > h2 {
-	color: #BDC3C7;
-}
-
-.background-image-preview {
-    width: 160px;
-    display: block;
-}
-
-.background-preview-container {
-    display: inline-block;
-    width: 189px;
-    height: 130px;
-}
-
-#files {
-    padding-bottom: 100px;
 }
 
 .danger {
@@ -297,207 +120,50 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	color: #E74C3C !important;
 }
 
-#set_password_errors {
-	margin-top: 10px;
+/* Disconnected */
+#disconnected {
+	z-index: 10000;
+	margin: 0 auto;
+	top: 30%;
 }
 
-#set_room_password_btn {
+#disconnected_triangle {
+	color: #f5f5f5;
+	font-size: 4em;
+	padding-top: 10px;
+}
+
+#disconnected_header {
+	color: #f5f5f5;
+	font-size: 1.5em;
+	font-weight: 700;
+}
+
+#disconnected_body {
+	color: #f5f5f5;
+	font-size: 0.7em;
+	font-weight: 500;
 	margin-top: 15px;
 }
 
-#delete_room_btn {
-	margin-top: 15px;
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 12px;
 }
 
-#delete_room_errors, #transfer_ownership_errors {
-	margin-top: 15px;
-	margin-bottom: 15px;
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
 }
 
-#remove_room_password_btn {
-	margin-top: 15px;
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: rgba(25, 48, 65, 0.8);
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-#transfer_ownership_textbox {
-	width: 300px;
-}
-
-#icon_preview {
-	width: 150px;
-	display: inline-block;
-	float: left;
-}
-
-#icon_preview > img {
-	width: 128px;
-	height: 128px;
-}
-
-#icon_upload_wrapper {
-	display: inline-block;
-	width: calc(100% - 150px);
-	float: left;
-}
-
-#icon_upload_wrapper > .room_settings_instructions {
-	margin-bottom: 15px;
-}
-
-.room_welcome_description {
-	display: block;
-	margin-top: 15px;
-}
-
-.social-share-links > i {
-	margin-right: 15px;
-	transition: .25s;
-}
-
-.social-share-links > i:hover {
-	cursor: pointer;
-	font-size: 1.8em;
-	vertical-align: 4%;
-}
-
-.social-share-links > .fa-twitter:hover {
-	color: #3498DB;
-}
-
-.social-share-links > .fa-facebook:hover {
-	color: #9B59B6;
-}
-
-.social-share-links > .fa-link:hover {
-	color: #1ABC9C;
-}
-
-#share_room_text {
-	color: white;
-	font-size: 1.4em;
-	display: block;
-	margin-bottom: 3px;
-}
-
-#share_room_well > span {
-	font-size: 0.8em;
-	color: #BDC3C7;
-	font-style: italic;
-}
-
-#share_room_text {
-	-webkit-user-select: initial;
-}
-
-#create_room_form_content > .form-group > span {
-	display: block;
-	margin-top: 10px;
-	font-size: 0.8em;
-}
-
-.playlist_header {
-	display: block;
-	color: white;
-	margin-bottom: 5px;
-}
-
-.queue_current_playlist {
-	transition: .25s;
-	color: #BDC3C7;
-	display: inline-block;
-	cursor: pointer;
-}
-
-.queue_current_playlist:hover {
-	color: #ECF0F1;
-}
-
-.queue_current_playlist > .fa {
-	vertical-align: 0;
-	font-size: 1em;
-	margin-left: 15px;
-}
-
-.playlist_name {
-	margin-left: 15px;
-	font-size: 1.4em;
-	font-family: "Raleway", sans-serif;
-	display: inline-block;
-}
-
-#user_mention {
-	position: absolute;
-	bottom: 40px;
-	left: 15px;
-}
-
-#user_mention ul {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-
-#user_mention ul li {
-	font-size: 0.8em;
-}
-
-.in-room-queue {
-	color: #E74C3C !important;
-	transition: .25s;
-}
-
-.in-room-queue:hover {
-	color: #C0392B !important;
-}
-
-#search_suggestions {
-	font-family: "Raleway", sans-serif;
-	list-style-type: none;
-}
-
-#search_suggestions > li {
-	font-size: 1.2em;
-	color: #BDC3C7;
-	transition: .25s;
-	cursor: pointer;
-}
-
-#search_suggestions > li:hover {
-	color: white;
-}
-
-#clear_search_history {
-	color: #95A5A6;
-	font-size: 0.8em;
-	transition: .25s;
-	cursor: pointer;
-	-webkit-user-select: none;
-	margin-left: 40px;
-}
-
-#clear_search_history:hover {
-	color: #ECF0F1;
-}
-
-#room_description_extend_content {
-	padding: 0 15px 0 15px;
-}
-
-#markdown_info {
-	font-style: normal;
-	color: black;
-}
-
-#markdown_info > a {
-	color: #2980B9;
-	transition: .25s;
-}
-
-#markdown_info > a:hover {
-	color: #3498DB;
-}
-
-#room_description_extend_content > h1, h2, h3, h4, h5, h6 {
-	color: black;
-	margin: 0;
-	padding: 0;
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(25, 38, 55, 0.4);
 }

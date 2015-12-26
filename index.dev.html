@@ -246,11 +246,11 @@
 	<table>
 		<tr>
 			<td width="100px">
-				<i class="fa fa-exclamation-triangle disconnected-triangle"></i>
+				<i class="fa fa-exclamation-triangle" id="disconnected_triangle"></i>
 			</td>
 			<td>
-				<div class="disconnected-header">Disconnected
-					<div class="disconnected-body">
+				<div id="disconnected_header">Disconnected
+					<div id="disconnected_body">
 						The server is probably restarting or being worked on. Refreshing in <span id="disconnected-countdown">3</span>...
 					</div>
 				</div>
@@ -283,8 +283,8 @@
 	</div>
 	<div id="playlist_items">
 		<span class="playlist-list-return">&laquo; Playlists</span>
-		<ul class="list-group sidebar-playlist playlist-list-content">
-			<li class="list-group-item playlist">
+		<ul class="list-group playlist-list-content">
+			<li class="list-group-item playlist_item">
 				Loading...
 			</li>
 		</ul>
@@ -301,7 +301,7 @@
 		<ul id="search_suggestions"></ul>
 
 		<div class="searchResults">
-			<ul class="list-group sidebar-playlist playlist-list-content"></ul>
+			<ul class="list-group playlist-list-content"></ul>
 		</div>
 	</div>
 </div>
@@ -410,8 +410,7 @@
 				</span>
 				</div>
 				<div id="manual">
-					<span id="playlist-title"></span>
-					<span id="add-to-queue" class="manual-option"><a><i class="fa fa-plus"></i> add song to queue</a></span>
+					<span id="add_to_queue" class="manual-option"><a><i class="fa fa-plus"></i> add song to queue</a></span>
 					<span id="manual-notice" class="manual-option"><a onclick="switchClientState(STATE_PLAYING)"><i class="fa fa-chevron-left"></i> back to <span class="room-title"></span></a></span>
 				</div>
 			</div>
