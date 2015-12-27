@@ -9,7 +9,7 @@ function loadYoutubePlaylists() {
 		dataType: "jsonp",
 		success: function(response) {
 			$("#playlist_list")
-				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage<span id="manage_playlists_suffix"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group playlist-list-content"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
+				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage<span id="manage_playlists_suffix"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
 
 			$("#search_launcher").click(function() {
 				switchSubView(SUBVIEW_SEARCH);
@@ -114,6 +114,7 @@ function search(more) {
 
 var currentPlaylistId;
 function loadPlaylistItems(el, more) {
+	switchSubView(SUBVIEW_PLAYLIST_ITEMS);
 	var playlistId = $(this).data('id'),
 		name = $(this).data('name'),
 		data,
@@ -145,31 +146,31 @@ function loadPlaylistItems(el, more) {
 		dataType: "jsonp",
 		data: $.param(data),
 		success: function(response) {
-			console.log(response);
 			var title, by_string, by_title;
 
-			container.find('.loading').remove();
+			if(current_subview == SUBVIEW_PLAYLIST_ITEMS) {
+				container.find('.loading').remove();
+				container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
+				$.each(response, function(index, e) {
+					title = e.title;
+					if(title.length > 60) {
+						title = $.trim(e.title.replace(/(["])/g, "&quot;").replace(/(['])/g, "&#39;")).substring(0, 60).split(" ").slice(0, -1).join(" ") + "...";
+					}
+					by_string = "";
+					by_title = "";
+					if(e.by != undefined) {
+						by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
+						by_title = e.by.replace('"', '\"');
+					}
 
-			container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
-			$.each(response, function(index, e) {
-				title = e.title;
-				if(title.length > 60) {
-					title = $.trim(e.title.replace(/(["])/g, "&quot;").replace(/(['])/g, "&#39;")).substring(0, 60).split(" ").slice(0, -1).join(" ") + "...";
+					container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+				});
+
+				if(response.length == 0) {
+					container.append('<li class="list-group-item playlist_item finished">This playlist is empty.</li>');
+				} else if(response.length < 50) {
+					container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 				}
-				by_string = "";
-				by_title = "";
-				if(e.by != undefined) {
-					by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
-					by_title = e.by.replace('"', '\"');
-				}
-
-				container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
-			});
-
-			if(response.length == 0) {
-				container.append('<li class="list-group-item playlist_item finished">This playlist is empty.</li>');
-			} else if(response.length < 50) {
-				container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 			}
 		},
 		error: function(error) {

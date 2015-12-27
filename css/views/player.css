@@ -27,6 +27,13 @@
 	max-width: 600px;
 }
 
+#playlist_list > ul > li {
+	background: transparent;
+	text-align: left;
+	border: 0 #808080;
+	border-bottom: 1px solid;
+}
+
 /* Player */
 .title_display {
 	font-size: 2em;

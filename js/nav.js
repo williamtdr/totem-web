@@ -8,10 +8,11 @@ const VIEW_DEFAULT = 0,
 	  VIEW_BANNED = 7,
 	  VIEW_REQUIRES_AUTHENTICATION = 8;
 
-const SUBVIEW_PLAYLIST_LIST = 0,
-	  SUBVIEW_SEARCH = 1,
-	  SUBVIEW_PLAYLIST_ITEMS = 2,
-	  SUBVIEW_QUEUE_BANNED = 3;
+const SUBVIEW_DEFAULT = 0,
+	  SUBVIEW_PLAYLIST_LIST = 1,
+	  SUBVIEW_SEARCH = 2,
+	  SUBVIEW_PLAYLIST_ITEMS = 3,
+	  SUBVIEW_QUEUE_BANNED = 4;
 
 const NAV_DEFAULT_SHADING = "rgba(0,0,0,0.3)",
 	  NAV_DARK_SHADING = "rgba(0,0,0,0.9)",
@@ -44,7 +45,8 @@ var playlist_items = $("#playlist_items"),
 var previous_playlist_scroll_pos = 0;
 
 var navbar_shown = false;
-current_view = VIEW_DEFAULT;
+current_view = VIEW_DEFAULT,
+current_subview = SUBVIEW_DEFAULT;
 set_initial_background = false;
 
 function shadeBackground(level) {
@@ -186,6 +188,7 @@ function switchSubView(destination) {
 	playlist_items.hide();
 	playlist_search.hide();
 	playlist_list.hide();
+	current_subview = destination;
 	switch(destination) {
 		case SUBVIEW_PLAYLIST_LIST:
 			if(client.queue_banned) {
@@ -213,6 +216,7 @@ function switchSubView(destination) {
 			}
 		break;
 		case SUBVIEW_PLAYLIST_ITEMS:
+			playlist_items.show();
 		break;
 		case SUBVIEW_QUEUE_BANNED:
 			playlist_banned.show();
