@@ -25,3 +25,9 @@ function lookupProfile(who, target) {
 		key: authkey
 	}));
 }
+
+function onProfileModalClicked() {
+	if(!file_upload_loaded) {
+		loadJavascript("http://static.origin.totem.fm/totem.fileupload.min.js");
+	}
+}

@@ -130,10 +130,6 @@
 	height: 130px;
 }
 
-#files {
-	padding-bottom: 100px;
-}
-
 .cancel_demotion {
 	color: #2980B9;
 }
@@ -302,4 +298,22 @@
 
 #after_group {
 	margin-left: 145px;
+}
+
+#profile_image_upload {
+	width: 128px;
+	float: left;
+	position: absolute;
+	top: 152px;
+}
+
+#file_upload_profile {
+	color: transparent;
+	outline: none;
+	margin-bottom: 10px;
+}
+
+#progress_profile {
+	display: none;
+	margin-bottom: 10px;
 }

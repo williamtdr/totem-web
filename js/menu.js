@@ -206,6 +206,7 @@ function initMenu() {
     });
 
 	$("#setting_my_profile").click(function() {
+		onProfileModalClicked();
 		$("#user_menu").animate({height:"toggle"});
 		$("#profile_modal").modal();
 	});
