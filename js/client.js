@@ -118,6 +118,7 @@ client = {
                     room.backgrounds = data.backgrounds;
 					setIcon(data.icon);
                     if(room.backgrounds && room.backgrounds.length > 0) {
+						set_initial_background = true;
                         advanceBackgroundImage();
                     } else {
                         if(!set_initial_background) {
