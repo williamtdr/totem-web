@@ -42,6 +42,7 @@
 		<li id="setting_quality_change" class="switch">Video Quality<span class="switch-indicator switch-720p">720p</span><div class="switch_selector big_selector"></div></li>
 		<li class="seperator"></li>
 		<li id="setting_change_username">Change Username</li>
+		<li id="setting_my_profile">My Profile</li>
 		<li id="logout">Logout</li>
 	</ul>
 </div>
@@ -55,6 +56,38 @@
 			<div class="modal-body" id="room_description_extend_content"></div>
 			<div class="modal-footer">
 				press esc to close
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="profile_modal" tabindex="-1" role="dialog" aria-labelledby="profile_modalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="profile_modalLabel">My Profile</h4>
+			</div>
+			<div class="modal-body" id="profile_modal_content">
+				<img src="http://static.totem.fm/user_profile/default.jpg" id="user_picture">
+				<span class="display_name"></span>
+				<div class="form-group">
+					<label for="user_bio">Bio</label>
+					<textarea class="form-control" id="user_bio" maxlength="255"></textarea>
+				</div>
+				<div id="after_group">
+					<label for="room_settings_desc">Twitter Account</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="twitter-name-prefix">@</span>
+						<input type="text" class="form-control" placeholder="Twitter Handle" aria-describedby="twitter-name-prefix" id="user_twitter" maxlength="20">
+					</div>
+					<label for="room_settings_desc">Steam Profile URL</label>
+					<input type="text" class="form-control" aria-describedby="twitter-name-prefix" id="user_steam" maxlength="255">
+					<label for="room_settings_desc">Website</label>
+					<input type="text" class="form-control" aria-describedby="twitter-name-prefix" id="user_website" maxlength="255">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save_profile">Save</button>
+				<span id="change_username_spinner"><i class="fa fa-circle-o-notch fa-spin"></i></span>
 			</div>
 		</div>
 	</div>

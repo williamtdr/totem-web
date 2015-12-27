@@ -368,6 +368,28 @@ client = {
 					addChatMessage(data.sender, data.message);
 
 					break;
+				case "profile_update":
+					$("#user_bio").html(data.bio.split("\n").join("<br>"));
+					$("#user_twitter").val(data.twitter);
+					$("#user_steam").val(data.steam);
+					$("#user_website").val(data.website);
+					$("#user_picture").val(data.profile_picture);
+				break;
+				case "profile":
+					$("#profile_overlay").remove();
+					if(data.failed) {
+						profile_target.append('<div id="profile_overlay"><span id="profile_overlay_name">' + data.display_name + '</span><span id="profile_overlay_close"><i class="fa fa-times"></i></span><div id="profile_right"><div id="profile_overlay_bio">I haven\'t set up my profile yet.</div></div></div>');
+					} else {
+						var links_str = "";
+						if(data.twitter && data.twitter.length > 0) links_str += '<a id="profile_overlay_twitter" target="_blank" href="https://twitter.com/' + data.twitter + '"><i class="fa fa-twitter"></i></a>';
+						if(data.steam && data.steam.length > 0) links_str += '<a id="profile_overlay_steam" target="_blank" href="' + data.steam + '"><i class="fa fa-steam"></i></a>';
+						if(data.website && data.website.length > 0) links_str += '<a id="profile_overlay_website" target="_blank" href="' + data.website + '"><i class="fa fa-link"></i></a>';
+						profile_target.append('<div id="profile_overlay"><div id="profile_header"><span id="profile_overlay_name">' + data.display_name + '</span><span id="profile_overlay_close"><i class="fa fa-times"></i></span></div><img src="' + data.profile_picture + '"><div id="profile_right"><div id="profile_overlay_bio">' + data.bio + '</div><div id="profile_overlay_links">' + links_str + '</div></div></div>');
+					}
+					$("#profile_overlay_close").click(function(e) {
+						$("#profile_overlay").remove();
+					});
+				break;
 				case "queue_update":
 					client.queue = data;
 					updateMyQueue();

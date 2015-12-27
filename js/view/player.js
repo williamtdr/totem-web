@@ -363,7 +363,10 @@ function addChatMessage(sender, text) {
 
 	if(chatmessage.length > 0) {
 		var chat_text = $(".chat-text");
-		chat_text.append('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(chatmessage) + '</span></span>');
+		var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(chatmessage) + '</span></span>').click(function(event) {
+			if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
+		});
+		chat_text.append(new_text);
 		$.each(chat_text, function(index, el) {
 			$(el).scrollTop(el.scrollHeight);
 		});

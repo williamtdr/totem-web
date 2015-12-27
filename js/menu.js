@@ -199,11 +199,16 @@ function saveSettings() {
 
 function initMenu() {
     $("#setting_change_username").click(function() {
-		$("#user_menu").animate({height: 0});
+		$("#user_menu").animate({height:"toggle"});
         $("#change_username_modalLabel").html("Change Username");
         $("#change_username_modal_text").html("Choose a new username:");
         showUsernameModal();
     });
+
+	$("#setting_my_profile").click(function() {
+		$("#user_menu").animate({height:"toggle"});
+		$("#profile_modal").modal();
+	});
 
 	$(".switch-indicator").click(function(e) {
 		$(e.target).parent().click();

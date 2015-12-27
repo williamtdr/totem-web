@@ -1,4 +1,4 @@
-#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner, #room_settings_blacklist {
+#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return, #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner {
 	display: none;
 }
 
@@ -429,6 +429,7 @@
 .chat-message-sender {
 	color: #5792cf;
 	margin-right: 2px;
+	cursor: pointer;
 }
 
 .chat_textbox {
@@ -600,4 +601,74 @@ li.list-item-small {
 
 #youtube_rate:hover {
 	color: #34bcff;
+}
+
+/* Profiles */
+#profile_overlay {
+	width: 280px;
+	height: auto;
+	position: absolute;
+	background: #2C3E50;
+	padding: 5px;
+	z-index: 3000;
+	color: white;
+	padding-bottom: 9px;
+}
+
+#profile_overlay_close {
+	float: right;
+	color: #E74C3C;
+	transition: .25s;
+	top: 3px;
+	right: 4px;
+	position: absolute;
+}
+
+#profile_overlay_close:hover {
+	color: #C0392B;
+}
+
+#profile_overlay_bio {
+	color: #BDC3C7;
+	margin-bottom: 3px;
+}
+
+#profile_overlay_name {
+	font-size: 1.2em;
+	line-height: 1.2;
+}
+
+#profile_overlay_links > a {
+	margin-right: 5px;
+}
+
+#profile_overlay > img {
+	margin-right: 7px;
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 2px;
+}
+
+#profile_header {
+	margin-bottom: 5px;
+	border-bottom: 1px solid #95A5A6;
+	padding-bottom: 3px;
+}
+
+#profile_right, #profile_header {
+	display: block;
+}
+
+#profile_overlay_twitter:hover {
+	color: #3498DB;
+}
+
+#profile_overlay_steam:hover {
+	color: #95A5A6;
+}
+
+#profile_overlay_website:hover {
+	color: #ECF0F1;
 }

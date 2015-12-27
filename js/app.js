@@ -61,6 +61,8 @@ function sessionComplete() {
 	if(room.enabled) {
 		client.sendLoginRequest();
 	}
+
+	if(display_name) $(".display_name").html(display_name);
 }
 
 $(document).ready(function() {
@@ -75,6 +77,7 @@ $(document).ready(function() {
     initMenu();
 	initRequiresAuthentication();
 	initQueue();
+	initProfile();
 
 	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
 		emoji.emojilist = data;

@@ -264,3 +264,42 @@
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+
+#profile_modal_content {
+	color: black;
+}
+
+#profile_modal_content > img {
+	width: 128px;
+	height: 128px;
+	display: inline-block;
+	margin-right: 15px;
+	float: left;
+}
+
+#profile_modal_content > .form-group > label {
+	display: block;
+}
+
+#profile_modal_content > #after_group > label {
+	display: block;
+	margin-top: 15px;
+}
+
+#profile_modal_content > .username {
+	font-family: "Raleway", sans-serif;
+}
+
+#profile_modal_content > .form-group > textarea {
+	display: inline-block;
+	width: 400px;
+	margin-top: 0;
+}
+
+#profile_modal_content > #after_group > input, #profile_modal_content > #after_group > .input-group {
+	width: 400px;
+}
+
+#after_group {
+	margin-left: 145px;
+}
