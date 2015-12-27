@@ -81,6 +81,15 @@ function loadVideoById(id, time) {
 		client.stateBefore = STATE_PLAYING;
 }
 
+function backToRoom() {
+	$(".current-dj-wrapper").show();
+	if(song.url_fragment) {
+		switchClientState(STATE_PLAYING);
+	} else {
+		switchClientState(STATE_NO_SONG);
+	}
+}
+
 function switchClientState(state) {
 	client.state = state;
 
@@ -92,6 +101,7 @@ function switchClientState(state) {
 			$("#no_video").show();
 			$("#main_content").hide();
 			$("title").html(room.name + " &middot; Totem");
+			song.url_fragment = false;
 			if(yt_player.pauseVideo) yt_player.pauseVideo();
 		} else {
 			$("#new_room_welcome").hide();
@@ -104,6 +114,7 @@ function switchClientState(state) {
 		$("#score_wrapper").show();
 		$("#room_info").show();
 	} else if(state == STATE_PREVIEWING) {
+		$(".current-dj-wrapper").hide();
 		$("#room_info").hide();
 		$("#manual").show();
 		$("#score_wrapper").hide();
