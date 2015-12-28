@@ -112,7 +112,7 @@ function search(more) {
 	});
 }
 
-var currentPlaylistId;
+var currentPlaylistId, queue_playlist_list = [];
 function loadPlaylistItems(el, more) {
 	switchSubView(SUBVIEW_PLAYLIST_ITEMS);
 	var playlistId = $(this).data('id'),
@@ -151,6 +151,7 @@ function loadPlaylistItems(el, more) {
 			if(current_subview == SUBVIEW_PLAYLIST_ITEMS) {
 				container.find('.loading').remove();
 				container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
+				queue_playlist_list = [];
 				$.each(response, function(index, e) {
 					title = e.title;
 					if(title.length > 60) {
@@ -162,8 +163,17 @@ function loadPlaylistItems(el, more) {
 						by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
 						by_title = e.by.replace('"', '\"');
 					}
+					queue_playlist_list.push(e.link);
 
 					container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+				});
+
+				$(".queue_current_playlist").click(function() {
+					server.send(JSON.stringify({
+						event: "queue_append_multiple",
+						data: queue_playlist_list,
+						key: authkey
+					}));
 				});
 
 				if(response.length == 0) {
