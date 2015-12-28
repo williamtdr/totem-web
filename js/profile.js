@@ -29,7 +29,7 @@ function lookupProfile(who, target) {
 	profile_target = target;
 	server.send(JSON.stringify({
 		event: "get_profile",
-		data: who,
+		data: who.toLowerCase(),
 		key: authkey
 	}));
 }
