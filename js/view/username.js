@@ -2,7 +2,6 @@ function showUsernameModal() {
 	var uchange = $("#username_change"),
 		changebtn = $("#save_username"),
 		spinner = $("#change_username_spinner");
-	uchange.focus();
 	uchange.keyup(function(event) {
 		if(event.keyCode == 13) {
 			changebtn.click();
@@ -42,6 +41,19 @@ function showUsernameModal() {
 		});
 	});
 
+	if(snippet.username) {
+		$("#change_username_modal").modal();
+	} else {
+		$.ajax({
+			url: 'snippet/username.html',
+			dataType: 'html',
+			success: function(data) {
+				snippet.username = true;
+				$("body").append(data);
+				$("#change_username_modal").modal();
+			}
+		});
+	}
 	$("#change_username_modal").modal({keyboard: false});
 	uchange.focus();
 }

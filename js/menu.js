@@ -126,66 +126,91 @@ function showBasicTutorial() {
         saveSettings();
         return false;
     }
-    $("#basic_player_tutorial").delay(3000).animate({height: "toggle"});
-    $("#basic_player_tutorial_accept").click(function() {
-        var advance = $("#basic_player_tutorial_advance"),
-            notification = $("#basic_player_tutorial"),
-            header = $("#basic_player_tutorial h4"),
-            text = $("#basic_player_tutorial p");
-        $("#basic_player_tutorial_actions span").hide();
-        client.settings.hide_hints = true;
-        saveSettings();
-        advance.show();
-        advance.click(function() {
-            tutorial_progress++;
-            var stop = tutorial_stops[tutorial_progress];
-            if(stop == undefined) {
-                $("#basic_player_tutorial").animate({height: "toggle"});
-            }
-            $("#dot" + tutorial_progress).addClass("dot-done");
-            header.html(stop.title);
-            text.html(stop.text);
-            notification.animate({right: stop.right,height: stop.height, top: stop.top, width: stop.width});
-            if(stop.oncomplete) stop.oncomplete();
-        });
-        advance.click();
-    });
-    $("#basic_player_tutorial_deny").click(function() {
-        client.settings.hide_hints = true;
-        window.localStorage.setItem("no_tutorial", true);
-        $("#basic_player_tutorial").animate({height: "toggle"});
-    });
-    $("#basic_player_tutorial_advance").click();
+	if(snippet.notification) {
+		$("#basic_player_tutorial").delay(3000).animate({height: "toggle"});
+	} else {
+		$.ajax({
+			url: 'snippet/notification.html',
+			dataType: 'html',
+			success: function (data) {
+				snippet.notification = true;
+				$("body").append(data);
+				$("#basic_player_tutorial_accept").click(function() {
+					var advance = $("#basic_player_tutorial_advance"),
+						notification = $("#basic_player_tutorial"),
+						header = $("#basic_player_tutorial h4"),
+						text = $("#basic_player_tutorial p");
+					$("#basic_player_tutorial_actions span").hide();
+					client.settings.hide_hints = true;
+					saveSettings();
+					advance.show();
+					advance.click(function() {
+						tutorial_progress++;
+						var stop = tutorial_stops[tutorial_progress];
+						if(stop == undefined) {
+							$("#basic_player_tutorial").animate({height: "toggle"});
+						}
+						$("#dot" + tutorial_progress).addClass("dot-done");
+						header.html(stop.title);
+						text.html(stop.text);
+						notification.animate({right: stop.right,height: stop.height, top: stop.top, width: stop.width});
+						if(stop.oncomplete) stop.oncomplete();
+					});
+					advance.click();
+				});
+				$("#basic_player_tutorial_deny").click(function() {
+					client.settings.hide_hints = true;
+					window.localStorage.setItem("no_tutorial", true);
+					$("#basic_player_tutorial").animate({height: "toggle"});
+				});
+				$("#basic_player_tutorial_advance").click();
+				$("#basic_player_tutorial").delay(3000).animate({height: "toggle"});
+			}
+		});
+	}
 }
 
 function showNotificationPrompt() {
     if(supress_notification_request) return false;
     if(Notification.permission !== "granted") {
-        if(!window.localStorage.getItem("no_notifications")) {
-            $("#notification_request").delay(5000).animate({height: "toggle"});
-        }
-    }
-    $("#notification_request_actions").click(function() {
-        $("#notification_request_actions").animate({height: "toggle"});
-    });
-    $("#notification_request_accept").click(function() {
-        $("#notification_request p").html("Your browser will now ask you if you want to see the notifications. Click \"Allow\", \"Accept\", etc.");
-        $("#notification_request").animate({height: "125px"});
-        Notification.requestPermission(function() {
-            $("#notification_request").animate({height: "185px"});
-            $("#notification_request p").html("You're all set! You can change which events you get notified in the settings menu (click your name in the upper right).");
-            $("#notification_request_actions").animate({height: "toggle"});
-            $("#notification_request_actions span").hide();
-            $("#notification_request_dismiss").show();
-        });
-    });
-    $("#notification_request_deny").click(function() {
-        window.localStorage.setItem("no_notifications", true);
-        $("#notification_request").animate({height: "toggle"});
-    });
-    $("#notification_request_dismiss").click(function() {
-        $("#notification_request").animate({height: "toggle"});
-    });
+		if (!window.localStorage.getItem("no_notifications")) {
+			if(snippet.notification) {
+				$("#notification_request").delay(5000).animate({height: "toggle"});
+			} else {
+				$.ajax({
+					url: 'snippet/notification.html',
+					dataType: 'html',
+					success: function (data) {
+						snippet.notification = true;
+						$("body").append(data);
+						$("#notification_request").delay(5000).animate({height: "toggle"});
+
+						$("#notification_request_actions").click(function() {
+							$("#notification_request_actions").animate({height: "toggle"});
+						});
+						$("#notification_request_accept").click(function() {
+							$("#notification_request p").html("Your browser will now ask you if you want to see the notifications. Click \"Allow\", \"Accept\", etc.");
+							$("#notification_request").animate({height: "125px"});
+							Notification.requestPermission(function() {
+								$("#notification_request").animate({height: "185px"});
+								$("#notification_request p").html("You're all set! You can change which events you get notified in the settings menu (click your name in the upper right).");
+								$("#notification_request_actions").animate({height: "toggle"});
+								$("#notification_request_actions span").hide();
+								$("#notification_request_dismiss").show();
+							});
+						});
+						$("#notification_request_deny").click(function() {
+							window.localStorage.setItem("no_notifications", true);
+							$("#notification_request").animate({height: "toggle"});
+						});
+						$("#notification_request_dismiss").click(function() {
+							$("#notification_request").animate({height: "toggle"});
+						});
+					}
+				});
+			}
+		}
+	}
 }
 
 function saveSettings() {
@@ -208,7 +233,20 @@ function initMenu() {
 	$("#setting_my_profile").click(function() {
 		onProfileModalClicked();
 		$("#user_menu").animate({height:"toggle"});
-		$("#profile_modal").modal();
+		if(snippet.profile) {
+			$("#profile_modal").modal();
+		} else {
+			$.ajax({
+				url: 'snippet/profile.html',
+				dataType: 'html',
+				success: function(data) {
+					$("body").append(data);
+					if(!snippet.profile) initProfile();
+					snippet.profile = true;
+					$("#profile_modal").modal();
+				}
+			});
+		}
 	});
 
 	$(".switch-indicator").click(function(e) {

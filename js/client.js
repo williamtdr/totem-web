@@ -7,6 +7,14 @@ const STATE_PLAYING = 1;
 const STATE_NO_SONG = 2;
 const STATE_PREVIEWING = 3;
 
+snippet = {
+	commands: false,
+	notification: false,
+	profile: false,
+	room_settings: false,
+	username: false
+}
+
 client = {
 	vote: VOTE_NEUTRAL,
 	player_shown: true,
@@ -15,6 +23,7 @@ client = {
 	connected: false,
 	disconnect_timer: 3,
 	disconnect_timer_id: 0,
+	profile: false,
 	logged_in: false,
 	muted: false,
 	queue_banned: false,
@@ -369,11 +378,7 @@ client = {
 
 					break;
 				case "profile_update":
-					$("#user_bio").html(data.bio.split("\n").join("<br>"));
-					$("#user_twitter").val(data.twitter);
-					$("#user_steam").val(data.steam);
-					$("#user_website").val(data.website);
-					$("#user_picture").val(data.profile_picture);
+					client.profile = data;
 				break;
 				case "profile":
 					$("#profile_overlay").remove();

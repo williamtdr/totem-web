@@ -134,6 +134,7 @@ function setIcon(url) {
 	$("#icon_preview img").attr('src', url);
 }
 
+added_existing_backgrounds = false;
 function fileUploadLoaded() {
     file_upload_loaded = true;
     'use strict';
@@ -301,21 +302,26 @@ function fileUploadLoaded() {
 	}).prop('disabled', !$.support.fileInput)
 		.parent().addClass($.support.fileInput ? undefined : 'disabled');
 
-    $.ajax({
-        url: config.API + '/room/info.php',
-        data: {
-            scope: room.id,
-			q: "backgrounds"
-        },
-        jsonp: 'callback',
-        dataType: 'jsonp',
-        success: function(data) {
-            $.each(data, function(index, url) {
-                $("#files_gallery").append('<div class="background-preview-container"><img src="' + url + '" class="background-image-preview"><a class="remove-background-image" data-url="' + url + '">remove</a></div>');
-            });
-            bindRemoveButtons();
-        }
-    });
+	if(!added_existing_backgrounds) {
+		$.ajax({
+			url: config.API + '/room/info.php',
+			data: {
+				scope: room.id,
+				q: "backgrounds"
+			},
+			jsonp: 'callback',
+			dataType: 'jsonp',
+			success: function(data) {
+				added_existing_backgrounds = true;
+				if(!added_existing_backgrounds) {
+					$.each(data, function(index, url) {
+						$("#files_gallery").append('<div class="background-preview-container"><img src="' + url + '" class="background-image-preview"><a class="remove-background-image" data-url="' + url + '">remove</a></div>');
+					});
+					bindRemoveButtons();
+				}
+			}
+		});
+	}
 	$('#file_upload_profile').fileupload({
 		url: 'http://origin.totem.fm/upload.php?authkey=' + authkey + '&scope=profile',
 		dataType: 'json',
@@ -403,6 +409,7 @@ function fileUploadLoaded() {
 }
 
 function initRoomSettings() {
+	$("#room_settings_desc").val(room.description);
     $(".modal-action").click(function(el) {
         var destination = $(el.target).data('destination') || $(el.target).parent().data('destination'),
             destination_el = $("#room_settings_" + destination),

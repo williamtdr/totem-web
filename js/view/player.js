@@ -248,7 +248,20 @@ function updateRoomMetadata() {
 	});
     $("#room_settings_desc").html(room.description);
     $(".room_settings_launcher").click(function() {
-        $("#room_settings_modal").modal();
+		if(snippet.room_settings) {
+			$("#room_settings_modal").modal();
+		} else {
+			$.ajax({
+				url: 'snippet/room_settings.html',
+				dataType: 'html',
+				success: function(data) {
+					$("body").append(data);
+					if(!snippet.room_settings) initRoomSettings();
+					snippet.room_settings = true;
+					$("#room_settings_modal").modal();
+				}
+			});
+		}
     })
 }
 
@@ -452,7 +465,19 @@ function playerOnLogin() {
 		$(".chat_message").each(function(index, e) {
 			var message = $(e).val();
 			if(message == "/help" || message == "!help" || message == "/?") {
-				$("#commands_modal").modal();
+				if(snippet.commands) {
+					$("#commands_modal").modal();
+				} else {
+					$.ajax({
+						url: 'snippet/commands.html',
+						dataType: 'html',
+						success: function(data) {
+							snippet.commands = true;
+							$("body").append(data);
+							$("#commands_modal").modal();
+						}
+					});
+				}
 			} else {
 				if(message.length > 0) {
 					last_chat_message = message;

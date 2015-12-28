@@ -607,7 +607,6 @@ li.list-item-small {
 #profile_overlay {
 	width: 280px;
 	height: auto;
-	position: absolute;
 	background: #2C3E50;
 	padding: 5px;
 	z-index: 3000;
@@ -619,9 +618,11 @@ li.list-item-small {
 	float: right;
 	color: #E74C3C;
 	transition: .25s;
-	top: 3px;
-	right: 4px;
-	position: absolute;
+}
+
+#profile_overlay_close > .fa {
+	line-height: 0.8;
+	cursor: pointer;
 }
 
 #profile_overlay_close:hover {

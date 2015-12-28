@@ -67,7 +67,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	width: 100%;
 }
 
-.files_gallery {
+#files_gallery {
 	overflow-y: visible;
 }
 

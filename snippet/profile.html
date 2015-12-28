@@ -1,0 +1,39 @@
+<div class="modal fade" id="profile_modal" tabindex="-1" role="dialog" aria-labelledby="profile_modalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="profile_modalLabel">My Profile</h4>
+			</div>
+			<div class="modal-body" id="profile_modal_content">
+				<img src="http://static.totem.fm/user_profile/default.jpg" id="user_picture">
+				<div id="profile_image_upload">
+					<input id="file_upload_profile" type="file" name="files">
+					<div id="progress_profile" class="progress">
+						<div class="progress-bar progress-bar-success"></div>
+					</div>
+					<div id="files_profile" class="files"></div>
+				</div>
+				<span class="display_name"></span>
+				<div class="form-group">
+					<label for="user_bio">Bio</label>
+					<textarea class="form-control" id="user_bio" maxlength="255"></textarea>
+				</div>
+				<div id="after_group">
+					<label for="room_settings_desc">Twitter Account</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="twitter-name-prefix">@</span>
+						<input type="text" class="form-control" placeholder="Twitter Handle" aria-describedby="twitter-name-prefix" id="user_twitter" maxlength="20">
+					</div>
+					<label for="room_settings_desc">Steam Profile URL</label>
+					<input type="text" class="form-control" aria-describedby="twitter-name-prefix" id="user_steam" maxlength="255">
+					<label for="room_settings_desc">Website</label>
+					<input type="text" class="form-control" aria-describedby="twitter-name-prefix" id="user_website" maxlength="255">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save_profile">Save</button>
+				<span id="change_username_spinner"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+			</div>
+		</div>
+	</div>
+</div>
