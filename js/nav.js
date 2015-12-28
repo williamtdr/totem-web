@@ -35,7 +35,7 @@ var room_list = $("#room_list"),
 	create_form = $("#create_form"),
 	banned = $("#permission_failure"),
 	requires_authentication = $("#requires_authentication"),
-	waiting_for_server = $("#waiting_for_server");
+	waiting_for_server = '<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>';
 
 var playlist_items = $("#playlist_items"),
 	playlist_search = $("#playlist_search"),
@@ -158,7 +158,7 @@ function switchView(destination) {
 		break;
 		case VIEW_REQUIRES_AUTHENTICATION:
 			nav_player.addClass("active");
-			waiting_for_server.hide();
+			$("#waiting_for_server").remove();
 			$("#now_playing").hide();
 			$("#no_video").hide();
 			player.show();

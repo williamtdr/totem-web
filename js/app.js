@@ -28,7 +28,7 @@ function joinRoom(destination) {
 	window.location.hash = destination;
 	room.enabled = true;
 	room.id = destination;
-	$("#waiting_for_server").show();
+	if($("#waiting_for_server").length == 0) $("#now_playing_content").append('<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>');
 	$("#main_content").hide();
 	$(".chat-text").empty();
 	if(client.connected) {

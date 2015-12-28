@@ -53,7 +53,7 @@ client = {
 	},
 	connect: function() {
 		server = new WebSocket(config.SERVER, 'echo-protocol');
-		$("#waiting_for_server").show();
+		if($("#waiting_for_server").length == 0) $("#now_playing_content").append('<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>');
 		client.connected = true;
 
 		server.onclose = client.onDisconnect;
@@ -117,7 +117,7 @@ client = {
 						room.password = false;
 					}
 					updateRoomSettings();
-					$("#waiting_for_server").hide();
+					$("#waiting_for_server").remove();
 					$("#main_content").show();
 					$("#sidebar").show();
 					room.name = data.display_name;
