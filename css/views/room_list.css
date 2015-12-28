@@ -67,6 +67,13 @@
 	padding-left: 15px;
 }
 
+.room-name > .fa-lock {
+	font-size: 1em;
+	margin-left: 4px;
+	color: #F1C40F;
+	vertical-align: baseline;
+}
+
 .no-song {
 	line-height: 2.4;
 	color: #808080;
