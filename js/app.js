@@ -79,7 +79,7 @@ $(document).ready(function() {
 	initQueue();
 	initProfile();
 
-	$.getJSON("http://static.totem.fm/emoji/emoji.json", function(data) {
+	$.getJSON("http://static.totem.fm/emoji/emoji2.json", function(data) {
 		emoji.emojilist = data;
 	});
 	

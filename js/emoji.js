@@ -23,9 +23,9 @@ var emoji = {
 						isEmoji = true;
 					} else {
 						for(var a in emoji.emojilist) {
-							for(var b in emoji.emojilist[a].short_names) {
-								if(emoji.emojilist[a].short_names[b] == emojiname) {
-									msg = msg.replace(':'+ emojiname +':', '<div title="'+ emojiname +'" class="emoji emoji-chat" style="background-position:-'+ (emoji.emojilist[a].sheet_x * 16) +'px -'+ (emoji.emojilist[a].sheet_y * 16) +'px"> </div>');
+							for(var b in emoji.emojilist[a].sns) {
+								if(emoji.emojilist[a].sns[b] == emojiname) {
+									msg = msg.replace(':'+ emojiname +':', '<div title="'+ emojiname +'" class="emoji emoji-chat" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div>');
 								}
 							}
 						}
@@ -44,7 +44,7 @@ var emoji = {
 	
 	showList: function() {
 		var list = $('#chat-emojilist, #mobile-chat-emojilist'),
-			short_names = "";
+			sns = "";
 		
 		list.html('<ul id="emojilist-People"><h2>People</h2></ul>\
 				<ul id="emojilist-Nature"><h2>Nature</h2></ul>\
@@ -60,19 +60,19 @@ var emoji = {
 		});
 	
 		for(var a in emoji.emojilist) {
-			for (var b in emoji.emojilist[a].short_names)
-				short_names = ", :" + emoji.emojilist[a].short_names[b] + ":";
+			for (var b in emoji.emojilist[a].sns)
+				sns = ", :" + emoji.emojilist[a].sns[b] + ":";
 		
-			if (emoji.emojilist[a].name != null)
-				list.find('#emojilist-'+ emoji.emojilist[a].category).append('<li><div title="'+ emoji.emojilist[a].name.toLowerCase() + '' + short_names +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].short_name +'" style="background-position:-'+ (emoji.emojilist[a].sheet_x * 16) +'px -'+ (emoji.emojilist[a].sheet_y * 16) +'px"> </div></li>');
+			if (emoji.emojilist[a].n != null)
+				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ emoji.emojilist[a].n.toLowerCase() + '' + sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0] +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
 			else
-				list.find('#emojilist-'+ emoji.emojilist[a].category).append('<li><div title="'+ short_names +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].short_name +'" style="background-position:-'+ (emoji.emojilist[a].sheet_x * 16) +'px -'+ (emoji.emojilist[a].sheet_y * 16) +'px"> </div></li>');
+				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0] +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
 				
-			$('.emojiname-'+ emoji.emojilist[a].short_name).click(function(a) {
+			$('.emojiname-'+ emoji.emojilist[a].sns[0]).click(function(a) {
 				$(".chat_message").val($(".chat_message").val() + ' :' + a.target.className.substr(27) + ':');
 			})
 			
-			short_names = "";
+			sns = "";
 		}
 		
 		emoji.showedList = true;
