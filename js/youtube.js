@@ -105,6 +105,7 @@ function search(more) {
 			} else if(response.length < 50) {
 				container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 			}
+			updatePlaylist();
 		},
 		error: function(error) {
 			console.log(error);
@@ -150,7 +151,10 @@ function loadPlaylistItems(el, more) {
 
 			if(current_subview == SUBVIEW_PLAYLIST_ITEMS) {
 				container.find('.loading').remove();
-				container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
+
+				if (!more)
+					container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
+
 				queue_playlist_list = [];
 				$.each(response, function(index, e) {
 					title = e.title;
@@ -182,6 +186,8 @@ function loadPlaylistItems(el, more) {
 					container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
 				}
 			}
+
+			updatePlaylist();
 		},
 		error: function(error) {
 			container.find('.loading').remove();
@@ -210,6 +216,7 @@ $(window).scroll(function() {
 
 		loadPlaylistItems(false, true);
 	}
+	updatePlaylist();
 });
 
 function getYoutubeRate(videoId) {

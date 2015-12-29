@@ -69,7 +69,6 @@ var emoji = {
 				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0].replace(/_/g, '-') +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
 				
 			$('.emojiname-'+ emoji.emojilist[a].sns[0].replace(/_/g, '-')).click(function(a) {
-				console.log(a.target.className.substr(27));
 				$(".chat_message").val($(".chat_message").val() + ' :' + a.target.className.substr(27) + ':');
 			})
 			

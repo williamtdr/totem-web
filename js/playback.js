@@ -49,12 +49,13 @@ function onPlayerStateChange(event) {
 	}
 }
 
-function addToQueueById(id) {
+function addToQueueById(id, dom) {
 	server.send(JSON.stringify({
 		event: "queue_append",
 		data: id,
 		key: authkey
 	}));
+	$("[data-id='" + id + "']:not(.in-room-queue)").addClass('click_disabled');
 }
 
 function updateMyQueue() {
@@ -99,6 +100,7 @@ function removeFromQueueById(id) {
 		data: id,
 		key: authkey
 	}));
+	$("[data-id='" + id + "']").addClass('click_disabled');
 }
 
 function addCurrentSongToQueue() {
@@ -115,6 +117,24 @@ function addCurrentSongToQueue() {
 
 	switchClientState(STATE_PLAYING);
 	switchView(VIEW_PLAYER);
+}
+
+function updatePlaylist(data) {
+	$(".in-room-queue").unbind().html("<i class=\"fa fa-plus\"></i> <span class='queue_full'>Add To </span>Queue").click(function(e) {
+		addToQueueById($(this).data('id'));
+	}).removeClass("in-room-queue");
+	for(var index in client.queue) {
+		var data = client.queue[index];
+		$("[data-id='" + data.id + "']:not(.in-room-queue)").html("<i class=\"fa fa-trash-o\"></i> <span class='queue_full'>Remove From </span>Queue").unbind().addClass("in-room-queue").click(function() {
+			removeFromQueueById($(this).data('id'));
+		});
+	}
+	$(".playing-in-room").html("<i class=\"fa fa-plus\"></i> <span class='queue_full'>Add To </span>Queue").click(function(e) {
+		var target = $(e.target);
+		addToQueueById(target.data('id'));
+	}).removeClass("playing-in-room");
+	$("[data-id='" + song.url_fragment + "']").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
+	$(".click_disabled").removeClass('click_disabled');
 }
 
 if(window.localStorage.getItem("hide_video") == "true") togglePlayerVisibility();

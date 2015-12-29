@@ -89,6 +89,12 @@
 	color: #C0392B !important;
 }
 
+.click_disabled {
+    opacity: .4;
+    cursor: default;
+    pointer-events: none;
+}
+
 /* Search */
 #search_textbox {
 	padding-left: 5px;
