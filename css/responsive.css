@@ -160,7 +160,6 @@
 	#desktop_nav, #my_queue, .current-dj-wrapper, #spotify_importer, #manage_playlists_suffix, .playlist_item_artist, .queue_full, .queue_current_playlist, #logo, #login-full {
 		display: none !important;
 	}
-
 	nav {
 		padding-left: 10px;
 		padding-right: 10px;

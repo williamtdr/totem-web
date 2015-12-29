@@ -268,6 +268,7 @@ function updateRoomMetadata() {
 function addChatMessage(sender, text) {
 	chatmessage = text.trim();
 	chatclass = " ";
+
 	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
 		audio.play();
@@ -315,6 +316,7 @@ function addChatMessage(sender, text) {
             setTimeout(notification.close.bind(notification), 5000);
         }
     }
+
 	if(chatmessage.indexOf("*") > -1) {
 		var asterisktally = 0;
 		var msplit = chatmessage.split("");

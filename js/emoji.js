@@ -24,7 +24,7 @@ var emoji = {
 					} else {
 						for(var a in emoji.emojilist) {
 							for(var b in emoji.emojilist[a].sns) {
-								if(emoji.emojilist[a].sns[b] == emojiname) {
+								if(emoji.emojilist[a].sns[b].replace(/_/g, '-') == emojiname) {
 									msg = msg.replace(':'+ emojiname +':', '<div title="'+ emojiname +'" class="emoji emoji-chat" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div>');
 								}
 							}
@@ -64,11 +64,12 @@ var emoji = {
 				sns = ", :" + emoji.emojilist[a].sns[b] + ":";
 		
 			if (emoji.emojilist[a].n != null)
-				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ emoji.emojilist[a].n.toLowerCase() + '' + sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0] +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
+				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ emoji.emojilist[a].n.toLowerCase() + '' + sns.replace(/_/g, '-') +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0].replace(/_/g, '-') +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
 			else
-				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0] +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
+				list.find('#emojilist-'+ emoji.emojilist[a].c).append('<li><div title="'+ sns +'" class="emoji emoji-list emojiname-'+ emoji.emojilist[a].sns[0].replace(/_/g, '-') +'" style="background-position:-'+ (emoji.emojilist[a].x * 16) +'px -'+ (emoji.emojilist[a].y * 16) +'px"> </div></li>');
 				
-			$('.emojiname-'+ emoji.emojilist[a].sns[0]).click(function(a) {
+			$('.emojiname-'+ emoji.emojilist[a].sns[0].replace(/_/g, '-')).click(function(a) {
+				console.log(a.target.className.substr(27));
 				$(".chat_message").val($(".chat_message").val() + ' :' + a.target.className.substr(27) + ':');
 			})
 			
