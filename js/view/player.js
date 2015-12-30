@@ -266,8 +266,9 @@ function updateRoomMetadata() {
 }
 
 function addChatMessage(sender, text) {
-	chatmessage = text.trim();
-	chatclass = " ";
+	var chatmessage = text.trim(),
+		chatclass = " ",
+		notified = false;
 
 	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
@@ -276,6 +277,7 @@ function addChatMessage(sender, text) {
 		var chatclass = " chat-tag ";
 
         if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+			notified = true;
             var notification = new Notification('Mentioned by ' + sender + ' in ' + room.display_name + ':', {
                 icon: room.icon,
                 body: text
@@ -301,21 +303,7 @@ function addChatMessage(sender, text) {
 			},
 			timeout: 5000
 		});
-	} else {
-        if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
-            var notification = new Notification(sender + ' in ' + room.name + ' said:', {
-                icon: room.icon,
-                body: text
-            });
-
-            notification.onclick = function() {
-                window.focus();
-                this.cancel();
-            };
-
-            setTimeout(notification.close.bind(notification), 5000);
-        }
-    }
+	}
 
 	if(chatmessage.indexOf("*") > -1) {
 		var asterisktally = 0;
@@ -388,6 +376,20 @@ function addChatMessage(sender, text) {
 	}
 
 	if(chatmessage.length > 0) {
+		if(!notified && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+			var notification = new Notification(sender + ' in ' + room.name + ' said:', {
+				icon: room.icon,
+				body: text
+			});
+
+			notification.onclick = function() {
+				window.focus();
+				this.cancel();
+			};
+
+			setTimeout(notification.close.bind(notification), 5000);
+		}
+
 		var chat_text = $(".chat-text");
 		var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(chatmessage) + '</span></span>').click(function(event) {
 			if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
