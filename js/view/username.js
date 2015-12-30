@@ -43,6 +43,7 @@ function showUsernameModal() {
 
 	if(snippet.username) {
 		$("#change_username_modal").modal();
+		uchange.focus();
 	} else {
 		$.ajax({
 			url: 'snippet/username.html',
@@ -51,9 +52,8 @@ function showUsernameModal() {
 				snippet.username = true;
 				$("body").append(data);
 				$("#change_username_modal").modal();
+				uchange.focus();
 			}
 		});
 	}
-	$("#change_username_modal").modal({keyboard: false});
-	uchange.focus();
 }

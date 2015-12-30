@@ -83,6 +83,10 @@
 	line-height: 1.2;
 }
 
+.embed-responsive {
+	width: 100%;
+}
+
 /* Toggles */
 #toggle_block {
 	margin-top: 15px;
