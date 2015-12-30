@@ -76,6 +76,7 @@ $(document).ready(function() {
     initMenu();
 	initRequiresAuthentication();
 	initQueue();
+	initModals();
 
 	$.getJSON("http://static.totem.fm/emoji/emoji2.json", function(data) {
 		emoji.emojilist = data;

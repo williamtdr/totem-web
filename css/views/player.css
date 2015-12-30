@@ -478,6 +478,21 @@
 	color: #1ABC9C !important;
 }
 
+#chat_footer {
+	text-align: center;
+	margin-top: 10px;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+#chat_footer > a {
+	color: #3498DB;
+	transition: .25s;
+}
+
+#chat_footer > a:hover {
+	color: #60c1ff;
+}
+
 /* Room Welcome */
 .room_welcome_description {
 	display: block;

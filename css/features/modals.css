@@ -317,3 +317,50 @@
 	display: none;
 	margin-bottom: 10px;
 }
+
+/* About */
+#about_modal_content > h1 {
+	color: #ECF0F1;
+	font-family: "Raleway", sans-serif;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#about_modal_content > a, #about_modal_content > p > a {
+	color: #3498DB;
+	transition: .25s;
+}
+
+#about_modal_content > a:hover {
+	color: #2980B9;
+}
+
+#about_modal_content > hr {
+	color: #7F8C8D;
+	margin: 0;
+}
+
+.version {
+	color: #BDC3C7;
+	padding: 0;
+	margin-bottom: 5px;
+}
+
+#about_modal_content > p > .fa-heart {
+	margin-left: 3px;
+	color: #E74C3C;
+	font-size: 1em;
+}
+
+#about_modal_content_close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+	color: #95A5A6;
+	transition: .25s;
+}
+
+#about_modal_content_close:hover {
+	color: white;
+}

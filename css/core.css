@@ -124,6 +124,11 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	color: #E74C3C !important;
 }
 
+.dark-modal {
+	background-color: rgba(0,0,0,0.8);
+	color: white;
+}
+
 /* Disconnected */
 #disconnected {
 	z-index: 10000;
