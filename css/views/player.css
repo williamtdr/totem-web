@@ -398,6 +398,7 @@
 }
 
 .chat_message {
+	font-family: "Lato", sans-serif;
 	border: 0;
 	background-color: transparent;
 	color: #ffffff;

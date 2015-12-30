@@ -142,7 +142,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 	padding-top: 10px;
 }
 
-#disconnected_header, #waiting_for_server {
+#disconnected_header {
 	color: #f5f5f5;
 	font-size: 1.5em;
 	font-weight: 700;
