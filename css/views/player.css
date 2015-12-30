@@ -294,7 +294,6 @@
 	transition: .25s;
 	cursor: pointer;
 	margin-right: 10px;
-	margin-left: 10px;
 }
 
 .sidebar_queue_list_item_preview:hover {
