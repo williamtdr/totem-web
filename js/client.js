@@ -12,7 +12,8 @@ snippet = {
 	notification: false,
 	profile: false,
 	room_settings: false,
-	username: false
+	username: false,
+	about: false
 }
 
 client = {
@@ -388,7 +389,11 @@ client = {
 						var links_str = "";
 						if(data.twitter && data.twitter.length > 0) links_str += '<a id="profile_overlay_twitter" target="_blank" href="https://twitter.com/' + data.twitter + '"><i class="fa fa-twitter"></i></a>';
 						if(data.steam && data.steam.length > 0) links_str += '<a id="profile_overlay_steam" target="_blank" href="' + data.steam + '"><i class="fa fa-steam"></i></a>';
-						if(data.website && data.website.length > 0) links_str += '<a id="profile_overlay_website" target="_blank" href="' + data.website + '"><i class="fa fa-link"></i></a>';
+						if(data.website && data.website.length > 0) {
+							var website = data.website;
+							if(website.substring(0, 7) != "http://") website = "http://" + data.website;
+							links_str += '<a id="profile_overlay_website" target="_blank" href="' + website + '"><i class="fa fa-link"></i></a>';
+						}
 						profile_target.append('<div id="profile_overlay"><div id="profile_header"><span id="profile_overlay_name">' + data.display_name + '</span><span id="profile_overlay_close"><i class="fa fa-times"></i></span></div><img src="' + data.profile_picture + '"><div id="profile_right"><div id="profile_overlay_bio">' + data.bio + '</div><div id="profile_overlay_links">' + links_str + '</div></div></div>');
 					}
 					$("#profile_overlay_close").click(function(e) {
