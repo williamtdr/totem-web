@@ -431,8 +431,11 @@ function playerOnLogin() {
 
 	$(".chat_message").keydown(function(event) {
 		var message = $(".chat_message").val(),
-			list = $("#user_mention ul"),
-			last_word = message.split(' ').pop();
+			list = $("#user_mention ul");
+
+		$.each($(".chat_message"), function(index, el) {
+			if($(el).val() != "") message = $(el).val();
+		});
 
 		if(event.keyCode == 13) {
 			$(".chat_send").click();
@@ -445,6 +448,8 @@ function playerOnLogin() {
 		if(event.keyCode == 40) {
 			$(".chat_message").val("");
 		}
+
+		var last_word = message.split(' ').pop();
 
 		list.empty();
 		if(message.length > 0) {
