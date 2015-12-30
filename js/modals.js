@@ -1,5 +1,5 @@
 function initModals() {
-	$(".show_about_modal").click(function() {
+	$(".show_about_modal").unbind().click(function() {
 		if(snippet.about) {
 			$("#about_modal").modal();
 		} else {
@@ -17,7 +17,26 @@ function initModals() {
 			});
 		}
 	});
-	$(".show_contact_modal").click(function() {
+	$(".show_help_modal").unbind().click(function() {
+		if(snippet.help) {
+			$("#help_modal").modal();
+		} else {
+			$.ajax({
+				url: 'snippet/help.html',
+				dataType: 'html',
+				success: function (data) {
+					snippet.help = true;
+					$("body").append(data);
+					$("#help_modal_content_close").click(function() {
+						$("#help_modal").modal("toggle");
+					});
+					$("#help_modal").modal();
+					initModals();
+				}
+			});
+		}
+	});
+	$(".show_contact_modal").unbind().click(function() {
 		if(snippet.contact) {
 			$("#contact_modal").modal();
 			$("#contact_subject").focus();
@@ -28,6 +47,7 @@ function initModals() {
 				success: function(data) {
 					$("body").append(data);
 					snippet.contact = true;
+					$("#help_modal").modal("hide");
 					$("#send_contact").click(function() {
 						var errors = $("#contact_errors"),
 							subject = $("#contact_subject"),

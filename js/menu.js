@@ -120,14 +120,20 @@ var tutorial_stops = [
     }
 ];
 
-function showBasicTutorial() {
-    if(window.localStorage.getItem("no_tutorial")) {
+function showBasicTutorial(force) {
+	force = force || false;
+	var delay = 3000;
+    if(window.localStorage.getItem("no_tutorial") && !force) {
         client.settings.hide_hints = true;
         saveSettings();
         return false;
     }
+	if(force) {
+		$("#help_modal").modal("toggle");
+		delay = 0;
+	}
 	if(snippet.notification) {
-		$("#basic_player_tutorial").delay(3000).animate({height: "toggle"});
+		$("#basic_player_tutorial").delay(delay).animate({height: "toggle"});
 	} else {
 		$.ajax({
 			url: 'snippet/notification.html',
@@ -164,7 +170,7 @@ function showBasicTutorial() {
 					$("#basic_player_tutorial").animate({height: "toggle"});
 				});
 				$("#basic_player_tutorial_advance").click();
-				$("#basic_player_tutorial").delay(3000).animate({height: "toggle"});
+				$("#basic_player_tutorial").delay(delay).animate({height: "toggle"});
 			}
 		});
 	}
