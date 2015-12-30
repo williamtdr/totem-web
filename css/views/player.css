@@ -484,6 +484,14 @@
 	color: rgba(255, 255, 255, 0.5);
 }
 
+.version_inner {
+	color: #ECF0F1;
+}
+
+#chat_footer > span {
+	color: #BDC3C7;
+}
+
 #chat_footer > a {
 	color: #3498DB;
 	transition: .25s;
