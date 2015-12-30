@@ -265,6 +265,10 @@ function updateRoomMetadata() {
     })
 }
 
+function htmlEncode(value){
+	return $('<div/>').text(value).html();
+}
+
 function addChatMessage(sender, text) {
 	var chatmessage = text.trim(),
 		chatclass = " ",
@@ -391,7 +395,7 @@ function addChatMessage(sender, text) {
 		}
 
 		var chat_text = $(".chat-text");
-		var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(chatmessage) + '</span></span>').click(function(event) {
+		var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(htmlEncode(chatmessage)) + '</span></span>').click(function(event) {
 			if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
 		});
 		chat_text.append(new_text);
