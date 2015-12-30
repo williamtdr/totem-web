@@ -269,10 +269,13 @@ function htmlEncode(value){
 	return $('<div/>').text(value).html();
 }
 
-function addChatMessage(sender, text) {
+function addChatMessage(sender, text, formatted) {
 	var chatmessage = text.trim(),
 		chatclass = " ",
-		notified = false;
+		notified = false,
+		formatted = formatted || false;
+
+	if(chatmessage.length == 0) return false;
 
 	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
@@ -309,66 +312,69 @@ function addChatMessage(sender, text) {
 		});
 	}
 
-	if(chatmessage.indexOf("*") > -1) {
-		var asterisktally = 0;
-		var msplit = chatmessage.split("");
-		var msplitl = msplit.length;
-		for (var i = 0; i < msplitl; i++) {
-			if(msplit[i] == "*") {
-				if(asterisktally == 0) {
-					cmp = chatmessage;
-					chatmessage = chatmessage.replace("*", "<b>");
-					asterisktally = 1;
-				} else {
-					cmp = chatmessage;
-					chatmessage = chatmessage.replace("*", "</b>");
-					asterisktally = 0;
+	if(!formatted) {
+		if(chatmessage.indexOf("*") > -1) {
+			var asterisktally = 0;
+			var msplit = chatmessage.split("");
+			var msplitl = msplit.length;
+			for (var i = 0; i < msplitl; i++) {
+				if(msplit[i] == "*") {
+					if(asterisktally == 0) {
+						cmp = chatmessage;
+						chatmessage = chatmessage.replace("*", "<b>");
+						asterisktally = 1;
+					} else {
+						cmp = chatmessage;
+						chatmessage = chatmessage.replace("*", "</b>");
+						asterisktally = 0;
+					}
+				}
+			}
+			if(asterisktally == 1) {
+				chatmessage = cmp;
+			}
+		}
+		if(chatmessage.indexOf("_") > -1) {
+			var uscoretally = 0;
+			var msplit = chatmessage.split("");
+			var msplitl = msplit.length;
+			for (var i = 0; i < msplitl; i++) {
+				if(msplit[i] == "_") {
+					if(uscoretally == 0) {
+						cmp = chatmessage;
+						chatmessage = chatmessage.replace("_", "<i>");
+						uscoretally = 1;
+					} else {
+						cmp = chatmessage;
+						chatmessage = chatmessage.replace("_", "</i>");
+						uscoretally = 0;
+					}
+				}
+			}
+			if(uscoretally == 1) {
+				chatmessage = cmp;
+			}
+		}
+		if(chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
+			var msplit = chatmessage.split(" ");
+			var msplitl = msplit.length;
+			for (var i = 0; i < msplitl; i++) {
+				if(msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
+					var omlink = msplit[i];
+					var mlink = msplit[i];
+					if(mlink.indexOf("<i>") > -1) {
+						mlink = mlink.replace(/<i>/g, "_");
+						mlink = mlink.replace(/<\/i>/g, "_");
+					}
+					mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
+					chatmessage = chatmessage.replace(omlink, mlink)
 				}
 			}
 		}
-		if(asterisktally == 1) {
-			chatmessage = cmp;
-		}
 	}
-	if(chatmessage.indexOf("_") > -1) {
-		var uscoretally = 0;
-		var msplit = chatmessage.split("");
-		var msplitl = msplit.length;
-		for (var i = 0; i < msplitl; i++) {
-			if(msplit[i] == "_") {
-				if(uscoretally == 0) {
-					cmp = chatmessage;
-					chatmessage = chatmessage.replace("_", "<i>");
-					uscoretally = 1;
-				} else {
-					cmp = chatmessage;
-					chatmessage = chatmessage.replace("_", "</i>");
-					uscoretally = 0;
-				}
-			}
-		}
-		if(uscoretally == 1) {
-			chatmessage = cmp;
-		}
-	}
-	if(chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
-		var msplit = chatmessage.split(" ");
-		var msplitl = msplit.length;
-		for (var i = 0; i < msplitl; i++) {
-			if(msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
-				var omlink = msplit[i];
-				var mlink = msplit[i];
-				if(mlink.indexOf("<i>") > -1) {
-					mlink = mlink.replace(/<i>/g, "_");
-					mlink = mlink.replace(/<\/i>/g, "_");
-				}
-				mlink = "<a href='" + mlink + "' target='_blank'>" + mlink + "</a>";
-				chatmessage = chatmessage.replace(omlink, mlink)
-			}
-		}
-	}
-	var sendercheck = sender.toLowerCase().toString();
-	var senderclass = "";
+
+	var sendercheck = sender.toLowerCase().toString(),
+		senderclass = "";
 	if(sendercheck == "dcv" || sendercheck == "williamtdr" || sendercheck == "pogodaanton") {
 		senderclass = senderclass + " chat-dev ";
 	}
@@ -379,32 +385,30 @@ function addChatMessage(sender, text) {
 		senderclass = senderclass + " chat-you ";
 	}
 
-	if(chatmessage.length > 0) {
-		if(!notified && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
-			var notification = new Notification(sender + ' in ' + room.name + ' said:', {
-				icon: room.icon,
-				body: text
-			});
-
-			notification.onclick = function() {
-				window.focus();
-				this.cancel();
-			};
-
-			setTimeout(notification.close.bind(notification), 5000);
-		}
-
-		var chat_text = $(".chat-text"),
-			message = chatmessage;
-		if(sender != ">" && sender != "") message = htmlEncode(chatmessage);
-		var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(message) + '</span></span>').click(function(event) {
-			if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
+	if(!notified && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+		var notification = new Notification(sender + ' in ' + room.name + ' said:', {
+			icon: room.icon,
+			body: text
 		});
-		chat_text.append(new_text);
-		$.each(chat_text, function(index, el) {
-			$(el).scrollTop(el.scrollHeight);
-		});
+
+		notification.onclick = function() {
+			window.focus();
+			this.cancel();
+		};
+
+		setTimeout(notification.close.bind(notification), 5000);
 	}
+
+	var chat_text = $(".chat-text"),
+		message = chatmessage;
+	if(sender != ">" && sender != "" && !formatted) message = htmlEncode(chatmessage);
+	var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(message) + '</span></span>').click(function(event) {
+		if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
+	});
+	chat_text.append(new_text);
+	$.each(chat_text, function(index, el) {
+		$(el).scrollTop(el.scrollHeight);
+	});
 }
 
 last_suggestion = false;

@@ -165,7 +165,7 @@ client = {
 					}
 
 					$.each(data.chat_history, function(index, chat_obj) {
-						addChatMessage(chat_obj.sender, chat_obj.message);
+						addChatMessage(chat_obj.sender, chat_obj.message, true);
 					});
 
 					if(client.new_room) {
@@ -376,7 +376,11 @@ client = {
 
 					break;
 				case "chat":
-					addChatMessage(data.sender, data.message);
+					if(data.formatted) {
+						addChatMessage(data.sender, data.message, true);
+					} else {
+						addChatMessage(data.sender, data.message);
+					}
 
 					break;
 				case "profile_update":
