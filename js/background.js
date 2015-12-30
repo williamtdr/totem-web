@@ -12,7 +12,7 @@ advanceBackgroundImage = function () {
     var bottom_img = $(".bottom");
 
     var new_background = 'http://static.totem.fm/bg/' + getRandomInt(1, 572) + '.jpg';
-    if(room.backgrounds) {
+    if(room.backgrounds && room.backgrounds.length > 0) {
         new_background = room.backgrounds[Math.floor(Math.random()*room.backgrounds.length)];
     }
 

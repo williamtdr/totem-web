@@ -364,3 +364,24 @@
 #about_modal_content_close:hover {
 	color: white;
 }
+
+#contact_modal_content > p {
+	margin: 0;
+}
+
+#contact_modal_content > input {
+	width: 100%;
+	display: block;
+}
+
+#contact_modal_content > textarea {
+	width: 100%;
+	height: auto;
+	min-height: 300px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#send_contact {
+	margin-right: 10px;
+}

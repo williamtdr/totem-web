@@ -1,7 +1,7 @@
 #create_form, #player, #room_list, #music_list {
 	z-index: 200;
 	margin-top: 90px;
-	color: #95A5A6;
+	color: white;
 }
 
 #create_room_form_content > .form-group > label {

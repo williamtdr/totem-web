@@ -13,7 +13,8 @@ snippet = {
 	profile: false,
 	room_settings: false,
 	username: false,
-	about: false
+	about: false,
+	contact: false
 }
 
 client = {
