@@ -222,7 +222,7 @@ function vote(vote) {
 }
 
 function counterUpdate() {
-	$(".room-users").find('.number').html(room.user_counter);
+	$(".room-users").find('.number').html(room.user_list.length + 1);
 	$(".room-queue").find('.number').html(room.queue.length);
 }
 
