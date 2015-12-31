@@ -214,6 +214,29 @@
 	#basic_player_tutorial {
 		display: none !important;
 	}
+
+	#profile_modal_content{
+		display: inline-block;
+	}
+
+	#profile_modal_content > div, #profile_modal_content > img {
+	    float: left;
+	    margin: 0;
+	    width:100%;
+	    display: block;
+	}
+
+	#profile_modal_content > #after_group > .input-group, #profile_modal_content > #after_group > input, #profile_modal_content > .form-group > textarea {
+	    width:100% !important;
+	}
+
+	#profile_modal_content .form-group {
+	    margin-top: 40px;
+	}
+
+	#profile_image_upload {
+		display:none !important;
+	}
 }
 
 @media (max-width: 991px) {
