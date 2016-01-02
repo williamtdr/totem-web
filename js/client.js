@@ -374,15 +374,14 @@ client = {
 					}).removeClass("playing-in-room");
 					$("[data-id='" + song.url_fragment + "']").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
-					break;
+				break;
 				case "chat":
-					if(data.formatted) {
-						addChatMessage(data.sender, data.message, true);
-					} else {
-						addChatMessage(data.sender, data.message);
-					}
+					var formatted = data.formatted || false,
+						color = data.color || false,
+						hover_color = data.hover_color || false;
 
-					break;
+					addChatMessage(data.sender, data.message, formatted, color, hover_color);
+				break;
 				case "profile_update":
 					client.profile = data;
 				break;

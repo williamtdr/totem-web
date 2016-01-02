@@ -470,18 +470,6 @@
 	background-color: rgba(52, 152, 219, 0.3);
 }
 
-.chat-dev {
-	color: #2ECC71 !important;
-}
-
-.chat-you {
-	color: #F1C40F;
-}
-
-.chat-beta {
-	color: #1ABC9C !important;
-}
-
 #chat_footer {
 	text-align: center;
 	margin-top: 10px;

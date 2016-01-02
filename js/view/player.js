@@ -269,19 +269,21 @@ function htmlEncode(value){
 	return $('<div/>').text(value).html();
 }
 
-function addChatMessage(sender, text, formatted) {
+function addChatMessage(sender, text, formatted, color, hover_color) {
 	var chatmessage = text.trim(),
-		chatclass = " ",
+		chatclass = "",
 		notified = false,
-		formatted = formatted || false;
+		formatted = formatted || false,
+		color = color || "#2ECC71",
+		hover_color = hover_color || "#27AE60";
 
 	if(chatmessage.length == 0) return false;
 
 	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
 		audio.play();
-		var chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
-		var chatclass = " chat-tag ";
+		chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
+		chatclass = " chat-tag";
 
         if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
 			notified = true;
@@ -314,10 +316,9 @@ function addChatMessage(sender, text, formatted) {
 
 	if(!formatted) {
 		if(chatmessage.indexOf("*") > -1) {
-			var asterisktally = 0;
-			var msplit = chatmessage.split("");
-			var msplitl = msplit.length;
-			for (var i = 0; i < msplitl; i++) {
+			var asterisktally = 0,
+				msplit = chatmessage.split("");
+			for (var i = 0; i < msplit.length; i++) {
 				if(msplit[i] == "*") {
 					if(asterisktally == 0) {
 						cmp = chatmessage;
@@ -330,15 +331,12 @@ function addChatMessage(sender, text, formatted) {
 					}
 				}
 			}
-			if(asterisktally == 1) {
-				chatmessage = cmp;
-			}
+			if(asterisktally == 1) chatmessage = cmp;
 		}
 		if(chatmessage.indexOf("_") > -1) {
-			var uscoretally = 0;
-			var msplit = chatmessage.split("");
-			var msplitl = msplit.length;
-			for (var i = 0; i < msplitl; i++) {
+			var uscoretally = 0,
+				msplit = chatmessage.split("");
+			for (var i = 0; i < msplit.length; i++) {
 				if(msplit[i] == "_") {
 					if(uscoretally == 0) {
 						cmp = chatmessage;
@@ -351,17 +349,14 @@ function addChatMessage(sender, text, formatted) {
 					}
 				}
 			}
-			if(uscoretally == 1) {
-				chatmessage = cmp;
-			}
+			if(uscoretally == 1) chatmessage = cmp;
 		}
 		if(chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
 			var msplit = chatmessage.split(" ");
-			var msplitl = msplit.length;
-			for (var i = 0; i < msplitl; i++) {
+			for (var i = 0; i < msplit.length; i++) {
 				if(msplit[i].startsWith("http://") || msplit[i].startsWith("https://")) {
-					var omlink = msplit[i];
-					var mlink = msplit[i];
+					var omlink = msplit[i],
+						mlink = msplit[i];
 					if(mlink.indexOf("<i>") > -1) {
 						mlink = mlink.replace(/<i>/g, "_");
 						mlink = mlink.replace(/<\/i>/g, "_");
@@ -373,19 +368,7 @@ function addChatMessage(sender, text, formatted) {
 		}
 	}
 
-	var sendercheck = sender.toLowerCase().toString(),
-		senderclass = "";
-	if(sendercheck == "dcv" || sendercheck == "williamtdr" || sendercheck == "pogodaanton") {
-		senderclass = senderclass + " chat-dev ";
-	}
-	if(sendercheck == "encadyma" || sendercheck == "tugaaa" || sendercheck == "xbytez" || sendercheck == "felicity" || sendercheck == "koolkidkenny" || sendercheck == "not trevor" || sendercheck == "vitals") {
-		senderclass = senderclass + " chat-beta ";
-	}
-	if(sendercheck == display_name.toLowerCase()) {
-		senderclass = senderclass + " chat-you ";
-	}
-
-	if(!notified && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+	if(!notified && !formatted && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
 		var notification = new Notification(sender + ' in ' + room.name + ' said:', {
 			icon: room.icon,
 			body: text
@@ -402,7 +385,7 @@ function addChatMessage(sender, text, formatted) {
 	var chat_text = $(".chat-text"),
 		message = chatmessage;
 	if(sender != ">" && sender != "" && !formatted) message = htmlEncode(chatmessage);
-	var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender' + senderclass + '">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(message) + '</span></span>').click(function(event) {
+	var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(message) + '</span></span>').click(function(event) {
 		if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
 	});
 	chat_text.append(new_text);
