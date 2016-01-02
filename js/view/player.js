@@ -385,10 +385,17 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 	var chat_text = $(".chat-text"),
 		message = chatmessage;
 	if(sender != ">" && sender != "" && !formatted) message = htmlEncode(chatmessage);
-	var new_text = $('<span class="chat-message-wrapper' + chatclass + '"><span class="chat-message-sender">' + sender + '</span> <span class="chat-message-text">' + emoji.parseMessage(message) + '</span></span>').click(function(event) {
+	var start_new_text = $('<span class="chat-message-wrapper' + chatclass + '"></span>'),
+		sender_text = $('<span class="chat-message-sender" style="color: ' + color + '">' + sender + '</span>'),
+		message_text = $(' <span class="chat-message-text">' + emoji.parseMessage(message) + '</span>');
+	sender_text.click(function(event) {
 		if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
+	}).mouseenter(function() {
+		$(this).css("color", hover_color);
+	}).mouseleave(function() {
+		$(this).css("color", color);
 	});
-	chat_text.append(new_text);
+	chat_text.append(start_new_text.append(sender_text).append(message_text));
 	$.each(chat_text, function(index, el) {
 		$(el).scrollTop(el.scrollHeight);
 	});

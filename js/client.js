@@ -165,7 +165,7 @@ client = {
 					}
 
 					$.each(data.chat_history, function(index, chat_obj) {
-						addChatMessage(chat_obj.sender, chat_obj.message, true);
+						addChatMessage(chat_obj.sender, chat_obj.message, true, chat_obj.color, chat_obj.hover_color);
 					});
 
 					if(client.new_room) {

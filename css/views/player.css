@@ -434,6 +434,7 @@
 	color: #5792cf;
 	margin-right: 2px;
 	cursor: pointer;
+	transition: .25s;
 }
 
 .chat_textbox {
@@ -474,7 +475,8 @@
 	font-size: 0.8em;
 	text-transform: uppercase;
 	font-family: "Raleway", sans-serif;
-	margin-left: 3px;
+	margin-left: 5px;
+	-webkit-user-select: none;
 }
 
 #chat_footer {
