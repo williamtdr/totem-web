@@ -470,6 +470,13 @@
 	background-color: rgba(52, 152, 219, 0.3);
 }
 
+.profile_tag {
+	font-size: 0.8em;
+	text-transform: uppercase;
+	font-family: "Raleway", sans-serif;
+	margin-left: 3px;
+}
+
 #chat_footer {
 	text-align: center;
 	margin-top: 10px;
