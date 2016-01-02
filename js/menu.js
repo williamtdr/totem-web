@@ -231,9 +231,7 @@ function saveSettings() {
 function initMenu() {
     $("#setting_change_username").click(function() {
 		$("#user_menu").animate({height:"toggle"});
-        $("#change_username_modalLabel").html("Change Username");
-        $("#change_username_modal_text").html("Choose a new username:");
-        showUsernameModal();
+        showUsernameModal(true);
     });
 
 	$("#setting_my_profile").click(function() {

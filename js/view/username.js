@@ -1,7 +1,8 @@
-function showUsernameModal() {
+function showUsernameModal(is_new) {
 	var uchange = $("#username_change"),
 		changebtn = $("#save_username"),
-		spinner = $("#change_username_spinner");
+		spinner = $("#change_username_spinner"),
+		is_new = is_new || false;
 
 	if(snippet.username) {
 		$("#change_username_modal").modal();
@@ -59,6 +60,24 @@ function showUsernameModal() {
 						}
 					});
 				});
+
+				if(is_new) {
+					$("#change_username_modalLabel").html("Change Username");
+					$("#change_username_modal_text").html("Loading...");
+					$.ajax({
+						url: config.API + "/user/remainingUsernameChanges.php",
+						jsonp: "callback",
+						dataType: "jsonp",
+						success: function(data) {
+							if(data.data == 0) {
+								$("#username_change").hide();
+								$("#change_username_modal_text").html("You have reached the maximum number of username changes on this account.");
+							} else {
+								$("#change_username_modal_text").html("You can change your username up to " + data.data + " more times. Type a new username:");
+							}
+						}
+					});
+				}
 			}
 		});
 	}
