@@ -4,6 +4,9 @@ Content for [totem.fm] (http://totem.fm)
 ## About Totem
 Totem is a music sharing platform. Users join rooms where they can take turns queueing songs for each other. Totem supports moderator tools and customization, with a focus on simplicity and accessible design.
 
+## Setting up your Own Installation
+All the code behind totem was published on February 1st, 2016. You can see the other repositories and their installation instructions: [totem-api](github.com/williamtdr/totem-api), [totem-server](github.com/williamtdr/totem-server), and [totem-static](github.com/williamtdr/totem-static).
+
 ## Current Developers
 [williamtdr] (http://github.com/williamtdr), [dcv] (http://github.com/dcvslab), and [pogodaanton] (http://github.com/pogodaanton)
 
