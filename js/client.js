@@ -310,6 +310,7 @@ client = {
 				break;
 				case "guest_key":
 					client.guest_key = data;
+					authkey = data;
 				break;
 				case "song_change":
 					if(client.banned) return false;
