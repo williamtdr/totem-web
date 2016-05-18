@@ -310,5 +310,6 @@ function bindSuggestionActions() {
 		$("#search_text").val($(this).text()).focus();
 		$("#search_suggestions").empty();
 		$("#clear_search_history").hide();
+		$("#search_send").click();
 	});
 }
