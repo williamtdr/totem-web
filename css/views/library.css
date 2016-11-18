@@ -6,9 +6,7 @@
 	margin-left: 10px;
 	position: static;
 	display: block;
-	left: 145px;
-	top: 10px;
-	line-height: 1.3;
+	line-height: 1.4;
 }
 
 .playlist_item > img {
@@ -69,10 +67,15 @@
 	color: #E74C3C;
 	transition: .25s;
 	cursor: pointer;
+	position: absolute;
+	margin-top: 2px;
+	margin-left: 11px;
+	float: left;
+	right: 9px;
 }
 
 .playlist_item_delete:hover {
-	color: #C0392B;
+	color: #f55a48;
 }
 
 .playlist_item_delete > .fa {

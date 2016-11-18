@@ -112,6 +112,7 @@ nav > ul > li.active {
 
 #queue_view {
 	overflow-y: scroll;
+	overflow-x: hidden;
 	position: fixed;
 	width: 400px;
 	height: 400px;
@@ -123,14 +124,10 @@ nav > ul > li.active {
 }
 
 #queue_view > .playlist_item {
-	padding: 5px 15px;
+	padding: 0 35px 5px 15px !important;
 	display: inline-block;
 	line-height: 1.5;
 	list-style: none;
 	clear: both;
 	margin-top: 6px;
-}
-
-#queue_view > .playlist_item:first-child {
-	padding: 0 15px 5px 15px;
 }

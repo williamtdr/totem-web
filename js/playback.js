@@ -66,7 +66,7 @@ function updateMyQueue() {
 	view.empty();
 	for(var index in client.queue) {
 		var item = client.queue[index];
-		view.append('<li class="playlist_item"><img src="' + item.thumbnail + '" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">'+ item.artist + ' - ' + item.name + '</span></div><span class="sidebar_queue_list_item_preview" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><span class="icon-play" style="vertical-align: 12%"></span> Preview</span><span class="playlist_item_delete" onclick="removeFromQueueById(\'' + item.id + '\')"><i class="fa fa-trash-o"></i>Remove</span></li>');
+		view.append('<li class="playlist_item"><img src="' + item.thumbnail + '" onclick="previewVideo(\'' + item.id + '\', \'' + item.name.replace(/(['"])/g, "&quot;") + '\', \'' + item.artist + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">'+ item.artist + ' - ' + item.name + '</span></div><span class="playlist_item_delete" onclick="removeFromQueueById(\'' + item.id + '\')"><span class="icon icon-trash"></span></span></li>');
 	}
 }
 
@@ -120,7 +120,7 @@ function updatePlaylist(data) {
 	}).removeClass("in-room-queue");
 	for(var index in client.queue) {
 		var data = client.queue[index];
-		$("[data-id='" + data.id + "']:not(.in-room-queue)").html("<i class=\"fa fa-trash-o\"></i> Remove").unbind().addClass("in-room-queue").click(function() {
+		$("[data-id='" + data.id + "']:not(.in-room-queue)").html('<span class="icon icon-trash" style="vertical-align: 12%"></span> Remove').unbind().addClass("in-room-queue").click(function() {
 			removeFromQueueById($(this).data('id'));
 		});
 	}

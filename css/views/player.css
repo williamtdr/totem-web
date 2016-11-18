@@ -293,14 +293,14 @@
 }
 
 .sidebar_queue_list_item_preview {
-	color: #2980B9;
+	color: #b6d5fa;
 	transition: .25s;
 	cursor: pointer;
 	margin-right: 10px;
 }
 
 .sidebar_queue_list_item_preview:hover {
-	color: #3498DB;
+	color: white;
 }
 
 .sidebar_queue_list_item_preview > .fa {
@@ -308,13 +308,13 @@
 }
 
 .sidebar_queue_list_item_share {
-	color: #16A085;
+	color: #d5fc80;
 	transition: .25s;
 	cursor: pointer;
 }
 
 .sidebar_queue_list_item_share:hover {
-	color: #1ABC9C;
+	color: white;
 }
 
 .sidebar_queue_list_item_share:focus {
