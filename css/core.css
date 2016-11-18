@@ -192,7 +192,7 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 ::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background: #94e3e0;
+	background: #33485D;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
