@@ -40,6 +40,15 @@ textarea {
 	color: white;
 }
 
+.dark-form-control {
+	color: #292f33 !important;
+}
+
+.dark-form-control:focus {
+	border-color: #2980b9 !important;
+	color: black !important;
+}
+
 .btn {
 	font-family: 'Josefin Sans', sans-serif;
 	padding: 10px 15px;

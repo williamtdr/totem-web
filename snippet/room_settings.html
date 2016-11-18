@@ -8,7 +8,7 @@
 				<div id="room_settings_home" data-title="Room Settings" class="room_settings_list">
 					<div class="form-group">
 						<label for="room_settings_desc">Description</label>
-						<textarea class="form-control" id="room_settings_desc"></textarea>
+						<textarea class="form-control dark-form-control" id="room_settings_desc"></textarea>
 						<span id="markdown_info">We support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> for full descriptions and <b>**bold text**</b> for the short description.</span>
 					</div>
 					<div class="form-group modal-action" data-destination="blacklist">
@@ -43,9 +43,9 @@
 					<div id="set_password_errors"></div>
 					<div id="set_password_well">
 						<label>Password</label>
-						<input class="form-control" type="password" placeholder="Password" id="set_room_password_1">
+						<input class="form-control dark-form-control" type="password" placeholder="Password" id="set_room_password_1">
 						<label>Confirm Password</label>
-						<input class="form-control" type="password" placeholder="Password" id="set_room_password_2">
+						<input class="form-control dark-form-control" type="password" placeholder="Password" id="set_room_password_2">
 						<button class="btn btn-info" id="set_room_password_btn">Go</button>
 					</div>
 					<div id="remove_password_well">
@@ -57,7 +57,7 @@
 						You will lose admin privileges in this room, and they will be transferred to the user whom you select.
 					</span>
 					<div id="transfer_ownership_errors"></div>
-					<input class="dynamic_user_list_footer form-control" id="transfer_ownership_textbox" placeholder="Type a username..." maxlength="30">
+					<input class="dynamic_user_list_footer form-control dark-form-control" id="transfer_ownership_textbox" placeholder="Type a username..." maxlength="30">
 					<button class="btn btn-info" id="transfer_ownership_btn">Go</button>
 					<div class="user_suggestion_wrapper" id="transfer_ownership_suggestion">
 						<ul></ul>
@@ -103,13 +103,13 @@
 					<span class="room_settings_instructions">
 						Type or paste the list of video blacklist terms, one per line. Matches channel and title, not case sensitive.
 					</span>
-					<textarea id="room_blacklist" class="form-control" rows="8"></textarea>
+					<textarea id="room_blacklist" class="form-control dark-form-control" rows="8"></textarea>
 				</div>
 				<div id="room_settings_whitelist" data-title="Song Whitelist">
 					<span class="room_settings_instructions">
 						Type or paste the list of video whitelist terms, one per line. Items on this list bypass the blacklist and will be allowed to queue. Matches channel and title, not case sensitive.
 					</span>
-					<textarea id="room_whitelist" class="form-control" rows="8"></textarea>
+					<textarea id="room_whitelist" class="form-control dark-form-control" rows="8"></textarea>
 				</div>
 				<div id="room_settings_delete_room" data-title="Delete Room">
 					<span class="room_settings_instructions">
@@ -123,7 +123,7 @@
 						<ul id="room_admin_list">
 							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" id="admin_textbox" placeholder="Type a username..." maxlength="30">
+						<input class="dynamic_user_list_footer form-control dark-form-control" id="admin_textbox" placeholder="Type a username..." maxlength="30">
 						<button class="btn btn-info user_add" id="user_add_admin">Add</button>
 						<span id="admin_error"></span>
 						<div class="user_suggestion_wrapper" id="admin_suggestion">
@@ -136,7 +136,7 @@
 						<ul id="room_host_list">
 							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" id="host_textbox" placeholder="Type a username..." maxlength="30">
+						<input class="dynamic_user_list_footer form-control dark-form-control" id="host_textbox" placeholder="Type a username..." maxlength="30">
 						<button class="btn btn-info user_add" id="user_add_host">Add</button>
 						<span id="host_error"></span>
 						<div class="user_suggestion_wrapper" id="host_suggestion">
@@ -149,7 +149,7 @@
 						<ul id="room_ban_list">
 							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" id="ban_textbox" placeholder="Type a username..." maxlength="30">
+						<input class="dynamic_user_list_footer form-control dark-form-control" id="ban_textbox" placeholder="Type a username..." maxlength="30">
 						<button class="btn btn-info user_add" id="user_add_ban">Add</button>
 						<span id="ban_error"></span>
 						<div class="user_suggestion_wrapper" id="ban_suggestion">
@@ -162,7 +162,7 @@
 						<ul id="room_mute_list">
 							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" id="mute_textbox" placeholder="Type a username..." maxlength="30">
+						<input class="dynamic_user_list_footer form-control dark-form-control" id="mute_textbox" placeholder="Type a username..." maxlength="30">
 						<button class="btn btn-info user_add" id="user_add_mute">Add</button>
 						<span id="mute_error"></span>
 						<div class="user_suggestion_wrapper" id="mute_suggestion">
@@ -175,7 +175,7 @@
 						<ul id="room_queue_ban_list">
 							<li>Loading...</li>
 						</ul>
-						<input class="dynamic_user_list_footer form-control" id="queue_ban_textbox" placeholder="Type a username..." maxlength="30">
+						<input class="dynamic_user_list_footer form-control dark-form-control" id="queue_ban_textbox" placeholder="Type a username..." maxlength="30">
 						<button class="btn btn-info user_add" id="user_add_queue_ban">Add</button>
 						<span id="queue_ban_error"></span>
 						<div class="user_suggestion_wrapper" id="queue_ban_suggestion">
