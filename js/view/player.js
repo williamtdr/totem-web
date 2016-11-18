@@ -450,7 +450,7 @@ function renderEmojiPicker() {
 			});
 
 			fakeTextArea.focusout(function() {
-				if(fakeTextArea.text() === "") {
+				if(fakeTextArea.html() === "") {
 					fakeTextArea.html("Say something nice");
 
 					fakeTextArea.css("color", "#bdc3c7");
