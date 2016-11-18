@@ -1,0 +1,109 @@
+.twemoji-wrap {
+	position: relative;
+	margin-top: 2px;
+	padding-top: 2px;
+	border-right: 1px solid #95a5a6;
+}
+
+.twemoji-wrap img {
+	margin: 0 .05em 0 .1em;
+	vertical-align: -0.1em;
+}
+
+.twemoji-textarea {
+	height: 100%;
+	border-radius: 3px;
+	padding: 6px 30px 6px 0;
+	margin-left: 12px;
+	text-align: left;
+	font-size: 0.8em;
+	cursor: pointer;
+	outline: none !important;
+	color: #bdc3c7;
+}
+
+.twemoji-textarea:focus {
+	outline: none;
+}
+
+.twemoji-icon-picker img {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+}
+
+.twemoji-picker {
+	z-index: 1;
+	position: absolute;
+	right: 0;
+	top: -181px;
+	background-color: #fff;
+	border: 1px solid #e7e7e7;
+	border-radius: 3px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.twemoji-icon-picker img, .twemoji-picker img {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+}
+
+.twemoji-picker-category {
+	background-color: #e7e7e7;
+}
+
+.twemoji-picker-category img {
+	padding: 5px;
+}
+
+.twemoji-picker-category .active, .twemoji-picker-category span:hover {
+	border-bottom: 2px solid #728691;
+}
+
+.twemoji-picker-category .close {
+	float: right;
+	margin-right: 3px;
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 0.7;
+	opacity: .5;
+	cursor: pointer;
+	color: black;
+}
+
+.twemoji-picker-category .close:hover {
+	opacity: .3
+}
+
+.twemoji-list {
+	overflow-y: scroll;
+}
+
+.twemoji-list img {
+	padding: 5px;
+	margin-top: 2px;
+	width: 25px !important;
+	height: 25px !important;
+}
+
+[contenteditable="true"].twemoji-textarea {
+	white-space: nowrap;
+	overflow: hidden;
+	width: 190px;
+}
+
+[contenteditable="true"].twemoji-textarea br {
+	display: none;
+}
+
+[contenteditable="true"].twemoji-textarea * {
+	display: inline;
+	white-space: nowrap;
+}
+
+.twemoji-list img:hover {
+	background-color: #e7e7e7;
+}

@@ -31,9 +31,9 @@ var volumeBeforeMute,
 	last_chat_message = "";
 
 function onYouTubeIframeAPIReady() {
-	yt_player = new YT.Player('youtube_player', {
-		height: '360',
-		width: '640',
+	yt_player = new YT.Player("youtube_player", {
+		height: 360,
+		width: 640,
 		playerVars: {
 			autoplay: 1,
 			border: 0,
@@ -52,21 +52,24 @@ function onYouTubeIframeAPIReady() {
 			showsearch: 0
 		},
 		events: {
-			'onReady': onPlayerReady,
-			'onStateChange': onPlayerStateChange
+			onReady: onPlayerReady,
+			onStateChange: onPlayerStateChange
 		}
 	});
+
 	youtube_ready = true;
 }
 
 function loadVideoById(id, time) {
-	if(id == "") return false;
+	if(id === "")
+		return false;
+
 	$("#no_video").hide();
 	$("#new_room_welcome").hide();
 	$("#main_content").show();
-	if(!(typeof yt_player.loadVideoById == "function")) {
+	if(!(typeof yt_player.loadVideoById === "function")) {
 		waiting_for_youtube_timer = setInterval(function() {
-			if(typeof yt_player.loadVideoById == "function") {
+			if(typeof yt_player.loadVideoById === "function") {
 				yt_player.loadVideoById({'videoId': song.url_fragment, 'suggestedQuality': getVideoQuality()});
 				yt_player.seekTo(Math.floor(Date.now() / 1000) - song.started_at);
 				clearInterval(waiting_for_youtube_timer);
@@ -77,7 +80,7 @@ function loadVideoById(id, time) {
 		yt_player.seekTo(time);
 	}
 
-	if (client.stateBefore == STATE_PREVIEWING || client.stateBefore == STATE_NO_SONG && client.state == STATE_PLAYING)
+	if(client.stateBefore === STATE_PREVIEWING || client.stateBefore === STATE_NO_SONG && client.state === STATE_PLAYING)
 		client.stateBefore = STATE_PLAYING;
 }
 
@@ -96,8 +99,8 @@ function switchClientState(state) {
 	$("#now_playing_content").show();
 	$("#now_playing_placeholder").hide();
 
-	if(state == STATE_PLAYING || state == STATE_NO_SONG) {
-		if(state == STATE_NO_SONG) {
+	if(state === STATE_PLAYING || state === STATE_NO_SONG) {
+		if(state === STATE_NO_SONG) {
 			$("#no_video").show();
 			$("#main_content").hide();
 			$("title").html(room.name + " &middot; Totem");
@@ -113,7 +116,7 @@ function switchClientState(state) {
 		$("#manual").hide();
 		$("#score_wrapper").show();
 		$("#room_info").show();
-	} else if(state == STATE_PREVIEWING) {
+	} else if(state === STATE_PREVIEWING) {
 		$(".current-dj-wrapper").hide();
 		$("#room_info").hide();
 		$("#manual").show();
@@ -127,7 +130,7 @@ function refreshQueueList() {
 
 	queue_list.html('<ul class="list-row"><li class="list-title">Queue List</li></ul>');
 	queue_list_bigscreen.height($('#chat').height()).width($('#chat').width());
-	if ($('#room_description_wrapper .room-description').height() == 0)
+	if($('#room_description_wrapper .room-description').height() === 0)
 		queue_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
 		queue_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
@@ -140,7 +143,7 @@ function refreshQueueList() {
 
 	queue_list = $('.queue_list .list-row');
 	room.queue.forEach(function(q, index) {
-		queue_list.append('<li class="sidebar_queue_list_item"><img src="' + q.song.picture_url + '"><span class="sidebar_queue_list_item_title">' + q.song.name + '</span><span class="sidebar_queue_list_item_artist">' + q.song.artist + '</span><span class="sidebar_queue_list_item_preview" onclick="previewVideo(\'' + q.song.url_fragment + '\', \'' + q.song.name.replace(/(['"])/g, "&quot;") + '\', \'' + q.song.artist.replace(/(['"])/g, "&quot;") + '\')"><i class="fa fa-play"></i> Preview</span><a class="sidebar_queue_list_item_share" target="_blank" href="http://www.youtube.com/watch?v=' + q.song.url_fragment + '"><i class="fa fa-share-alt"></i> Share</a></li>')
+		queue_list.append('<li class="sidebar_queue_list_item"><img src="' + q.song.picture_url + '"><span class="sidebar_queue_list_item_title">' + q.song.name + '</span><span class="sidebar_queue_list_item_artist">' + q.song.artist + '</span><span class="sidebar_queue_list_item_preview" onclick="previewVideo(\'' + q.song.url_fragment + '\', \'' + q.song.name.replace(/(['"])/g, "&quot;") + '\', \'' + q.song.artist.replace(/(['"])/g, "&quot;") + '\')"><span class="icon-play" style="vertical-align: 12%"></span> Preview</span><a class="sidebar_queue_list_item_share" target="_blank" href="http://www.youtube.com/watch?v=' + q.song.url_fragment + '"><i class="fa fa-share-alt"></i> Share</a></li>')
 	});
 }
 
@@ -150,7 +153,7 @@ function refreshUserList() {
 
 	user_list.html('<ul class="list-row"><li class="list-title">Listeners</li></ul>');
 	user_list_bigscreen.height($('#chat').height()).width($('#chat').width());
-	if ($('#room_description_wrapper .room-description').height() == 0)
+	if($('#room_description_wrapper .room-description').height() === 0)
 		user_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 60));
 	else
 		user_list_bigscreen.css('top', ($('#room_info .room-title').height() + $('#room_description_wrapper .room-description').height() + 70));
@@ -166,9 +169,9 @@ function refreshUserList() {
 		temp = username.toLowerCase(),
 			dname = display_name.toLowerCase();
 
-		if(temp == dname) {
+		if(temp === dname) {
 			user_list.append('<li class="list-item list-item-small"><span class="chat-you">' + username + '</span></li>');
-		} else if(temp == "dcv" || temp == "williamtdr" || temp == "pogodaanton") {
+		} else if(temp === "dcv" || temp === "williamtdr" || temp === "pogodaanton") {
 			user_list.append('<li class="list-item list-item-small"><span class="chat-dev">' + username + '</span></li>');
 		} else {
 			user_list.append('<li class="list-item list-item-small"><span>' + username + '</span></li>');
@@ -180,7 +183,7 @@ function setSongInfo(title, artist) {
 	if(title.length > 80) title = $.trim(title).substring(0, 80).split(" ").slice(0, -1).join(" ") + "…";
 	if(artist.length > 40) artist = $.trim(artist).substring(0, 40).split(" ").slice(0, -1).join(" ") + "…";
 
-	if(player.state == STATE_PLAYING) {
+	if(player.state === STATE_PLAYING) {
 		$("title").html(title + " · " + artist + " · " + room.name + " · Totem");
 	} else {
 		$("title").html(title + " · " + artist + " · Totem");
@@ -196,7 +199,7 @@ function setScore(positive, negative) {
 
 function vote(vote) {
 	$(".activated").removeClass("activated");
-	if(client.vote == vote) {
+	if(client.vote === vote) {
 		server.send(JSON.stringify({
 			event: "vote",
 			key: authkey,
@@ -229,15 +232,15 @@ function counterUpdate() {
 function updateRoomMetadata() {
     var room_title = $(".room-title"),
 		newlines = room.description.split("\n"),
-		short_desc = emoji.parseMessage(room.description.split("\n").splice(0, 4).join("<br>").substring(0, 200).replace(/\*\*[A-z0-9 ]+\*\*/gi, function(x) {
+		short_desc = twemoji.parse(room.description.split("\n").splice(0, 4).join("<br>").substring(0, 200).replace(/\*\*[A-z0-9 ]+\*\*/gi, function(x) {
 			return '<span style="font-weight: bold;">' + x.substring(2, x.length - 2) + '</span>';
 		})),
 		read_more = '<span class="room_description_extend">read more...</span>';
 	room_title.empty();
 	room_title.html(room.name);
-	if(client.is_admin) room_title.append('<i class="fa fa-cog room_settings_launcher"></i>');
+	if(client.is_admin) room_title.append('<span class="icon-cog room_settings_launcher"></span>');
 	if((newlines && newlines.length > 4) || room.description.length > 300) {
-		$(".room-description").html(emoji.parseMessage(short_desc + read_more));
+		$(".room-description").html(twemoji.parse(short_desc + read_more));
 	} else {
 		$(".room-description").html(newlines.join("<br>"));
 	}
@@ -266,7 +269,7 @@ function updateRoomMetadata() {
 }
 
 function htmlEncode(value){
-	return $('<div/>').text(value).html();
+	return $('<div/>').text(value).html().replace("&nbsp;", " ");
 }
 
 function addChatMessage(sender, text, formatted, color, hover_color) {
@@ -277,7 +280,7 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 		color = color || "#2ECC71",
 		hover_color = hover_color || "#27AE60";
 
-	if(chatmessage.length == 0) return false;
+	if(chatmessage.length === 0) return false;
 
 	if(chatmessage.toLowerCase().indexOf("@" + display_name.toLowerCase()) > -1) {
 		var audio = new Audio('https://rawgit.com/dcvslab/dcvslab.github.io/master/badoop.mp3');
@@ -285,7 +288,7 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 		chatmessage = chatmessage.replace("@" + display_name, "<b>@" + display_name + "</b>");
 		chatclass = " chat-tag";
 
-        if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat == "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+        if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat === "mention" && Notification.permission === "granted" && !document.hasFocus()) {
 			notified = true;
             var notification = new Notification('Mentioned by ' + sender + ' in ' + room.display_name + ':', {
                 icon: room.icon,
@@ -318,9 +321,10 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 		if(chatmessage.indexOf("*") > -1) {
 			var asterisktally = 0,
 				msplit = chatmessage.split("");
+
 			for (var i = 0; i < msplit.length; i++) {
-				if(msplit[i] == "*") {
-					if(asterisktally == 0) {
+				if(msplit[i] === "*") {
+					if(asterisktally === 0) {
 						cmp = chatmessage;
 						chatmessage = chatmessage.replace("*", "<b>");
 						asterisktally = 1;
@@ -331,14 +335,15 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 					}
 				}
 			}
-			if(asterisktally == 1) chatmessage = cmp;
+			if(asterisktally === 1) chatmessage = cmp;
 		}
+
 		if(chatmessage.indexOf("_") > -1) {
 			var uscoretally = 0,
 				msplit = chatmessage.split("");
 			for (var i = 0; i < msplit.length; i++) {
-				if(msplit[i] == "_") {
-					if(uscoretally == 0) {
+				if(msplit[i] === "_") {
+					if(uscoretally === 0) {
 						cmp = chatmessage;
 						chatmessage = chatmessage.replace("_", "<i>");
 						uscoretally = 1;
@@ -349,7 +354,7 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 					}
 				}
 			}
-			if(uscoretally == 1) chatmessage = cmp;
+			if(uscoretally === 1) chatmessage = cmp;
 		}
 		if(chatmessage.indexOf("http://") > -1 || chatmessage.indexOf("https://") > -1) {
 			var msplit = chatmessage.split(" ");
@@ -368,7 +373,7 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 		}
 	}
 
-	if(!notified && !formatted && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission == "granted" && !document.hasFocus()) {
+	if(!notified && !formatted && (room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_chat && client.settings.notif_chat != "mention" && Notification.permission === "granted" && !document.hasFocus()) {
 		var notification = new Notification(sender + ' in ' + room.name + ' said:', {
 			icon: room.icon,
 			body: text
@@ -384,10 +389,14 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 
 	var chat_text = $(".chat-text"),
 		message = chatmessage;
-	if(sender != ">" && sender != "" && !formatted) message = htmlEncode(chatmessage);
+
+	if(sender != ">" && sender != "" && !formatted)
+		message = chatmessage;
+
 	var start_new_text = $('<span class="chat-message-wrapper' + chatclass + '"></span>'),
 		sender_text = $('<span class="chat-message-sender" style="color: ' + color + '">' + sender + '</span>'),
-		message_text = $(' <span class="chat-message-text">' + emoji.parseMessage(message) + '</span>');
+		message_text = $(' <span class="chat-message-text">' + twemoji.parse(message) + '</span>');
+
 	sender_text.click(function(event) {
 		if($(event.target).is(".chat-message-sender")) lookupProfile(sender, $(event.target));
 	}).mouseenter(function() {
@@ -403,113 +412,173 @@ function addChatMessage(sender, text, formatted, color, hover_color) {
 
 last_suggestion = false;
 
-function playerOnLogin() {
-	if(authkey == 'unauthenticated') {
-		$(".chat_textbox").html('<div class="chatbox-placeholder"><a class="signInButton">Log in</a> to chat</div>');
+var emojiLoaded = false;
+function onEmojiLoaded() {
+	emojiLoaded = true;
 
-		$("#playlist_list")
-			.addClass("sidebar-no-login")
-			.append('<a class="signInButton">Log in</a> to see your playlists');
-	} else {
-		$("#chat .chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div><div id="chat-emojilist"></div>');
-		
-		$("#mobile_chat .chat_textbox").html('<span title="Open emoji List" class="chat_emojisel"></span><input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="mobile-user_mention"><ul></ul></div><div id="mobile-chat-emojilist"></div>');
-		
-		$('.chat_emojisel').click(toggleEmojiList);
-		loadYoutubePlaylists();
-	}
+	renderEmojiPicker();
+}
 
-	$(".chat_message").keydown(function(event) {
-		var message = $(".chat_message").val(),
-			list = $("#user_mention ul");
+function renderEmojiPicker() {
+	const chatMessageInputs = $(".chat_message");
 
-		$.each($(".chat_message"), function(index, el) {
-			if($(el).val() != "") message = $(el).val();
-		});
+	for(var index = 0; index <= chatMessageInputs.length; index++) {
+		const target = $(chatMessageInputs[index]);
 
-		if(event.keyCode == 13) {
-			$(".chat_send").click();
-		}
+		if(!target.parent().hasClass("twemoji-wrap")) {
+			if(!target[0])
+				continue;
 
-		if(event.keyCode == 38) {
-			$(".chat_message").val(last_chat_message);
-		}
+			$(target).twemojiPicker({
+				height: 40,
+				pickerHeight: 150,
+				icon: "grinning",
+				category: ["smile", "cherry-blossom", "video-game", "oncoming-automobile", "symbols"],
+				iconSize: 15,
+				categorySize: 25,
+				size: 12
+			});
 
-		if(event.keyCode == 40) {
-			$(".chat_message").val("");
-		}
+			var fakeTextArea = $(target).parent().find(".twemoji-textarea");
 
-		var last_word = message.split(' ').pop();
+			fakeTextArea.html("Say something nice");
+			fakeTextArea.focus(function() {
+				fakeTextArea.css("color", "#fff");
 
-		list.empty();
-		if(message.length > 0) {
-			$.each(room.user_list, function(index, potential_match) {
-				if (last_word.indexOf('@') == 0)
-					last_word = last_word.substr(1);
-			
-				if(potential_match.indexOf(last_word) == 0 && last_word.length >= 3 && potential_match != last_word) {
-					list.append('<li>' + potential_match + '</li>');
-					$('li:contains(' + potential_match + ')').click(function() {
-						var box = $(".chat_message"),
-							message = box.val();
-						box.val(message.substring(0, message.lastIndexOf(message.split(' ').pop())) + $(this).text());
-						$("#user_mention ul").empty();
-						box.focus();
-						last_suggestion = false;
-					});
-					last_suggestion = potential_match;
+				if(fakeTextArea.text() === "Say something nice")
+					fakeTextArea.html("");
+			});
+
+			fakeTextArea.focusout(function() {
+				if(fakeTextArea.text() === "") {
+					fakeTextArea.html("Say something nice");
+
+					fakeTextArea.css("color", "#bdc3c7");
 				}
 			});
-		}
 
-		if(event.keyCode == 9 && last_suggestion) {
-			event.preventDefault();
-			$(".chat_message").val(message.substring(0, message.lastIndexOf(last_word))	 + last_suggestion);
-			list.empty();
-			last_suggestion = false;
-		}
-	});
+			fakeTextArea.keydown(function(event) {
+				var message = $(event.target).html(),
+					list = $("#user_mention ul");
 
-	$(".chat_send").click(function() {
-		$(".chat_message").each(function(index, e) {
-			var message = $(e).val();
-			if(message == "/help" || message == "!help" || message == "/?") {
-				if(snippet.commands) {
-					$("#commands_modal").modal();
-				} else {
-					$.ajax({
-						url: 'snippet/commands.html',
-						dataType: 'html',
-						success: function(data) {
-							snippet.commands = true;
-							$("body").append(data);
-							$("#commands_modal").modal();
+				if(event.which === 13) {
+					$(".chat_send").click();
+
+					return false;
+				}
+
+				if(event.which === 38)
+					$(event.target).text(last_chat_message);
+
+				if(event.which === 40)
+					$(event.target).text("");
+
+				var last_word = message.split(" ").pop();
+
+				list.empty();
+				if(message.length > 0) {
+					$.each(room.user_list, function(index, potential_match) {
+						if(last_word.indexOf('@') === 0)
+							last_word = last_word.substr(1);
+
+						if(potential_match.indexOf(last_word) === 0 && last_word.length >= 3 && potential_match != last_word) {
+							list.append('<li>' + potential_match + '</li>');
+							$('li:contains(' + potential_match + ')').click(function() {
+								var box = $(event.target),
+									message = box.html();
+
+								box.html(message.substring(0, message.lastIndexOf(message.split(' ').pop())) + $(this).text());
+
+								$("#user_mention ul").empty();
+								box.focus();
+								last_suggestion = false;
+							});
+							last_suggestion = potential_match;
 						}
 					});
 				}
-			} else {
-				if(message.length > 0) {
-					last_chat_message = message;
+
+				if(event.keyCode === 9 && last_suggestion) {
+					event.preventDefault();
+					var newMessage = message.substring(0, message.lastIndexOf(last_word)) + last_suggestion;
+					$(event.target).html(newMessage);
+
+					list.empty();
 					last_suggestion = false;
-					server.send(JSON.stringify({
-						event: "chat",
-						data: message,
-						key: authkey
-					}));
+
+					var node = $(event.target)[0];
+					node.focus();
+
+					var textNode = node.firstChild;
+					var caret = newMessage.length;
+					var range = document.createRange();
+					range.setStart(textNode, caret);
+					range.setEnd(textNode, caret);
+					var sel = window.getSelection();
+					sel.removeAllRanges();
+					sel.addRange(range);
+
+					return false;
 				}
-			}
+			});
+		}
+	}
+}
+
+function playerOnLogin() {
+	if(authkey === "unauthenticated") {
+		$(".chat_textbox").html('<div class="chatbox-placeholder"><a class="signInButton">Log in</a> to chat</div>');
+		$("#playlist_list").addClass("sidebar-no-login").append('<a class="signInButton">Log in</a> to see your playlists');
+	} else {
+		$("#chat .chat_textbox").html('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="user_mention"><ul></ul></div>');
+		$("#mobile_chat .chat_textbox").html('<input type="text" class="form-control chat_message" placeholder="Say something nice"><span class="input-group-btn"><button class="btn btn-primary chat_send" type="button">Send</button></span><div id="mobile-user_mention"><ul></ul></div>');
+
+		if(emojiLoaded)
+			renderEmojiPicker();
+
+		loadYoutubePlaylists();
+	}
+
+	$(".chat_send").click(function() {
+		var message = "";
+
+		$.each($(".chat_message"), function(index, el) {
+			if($(el).text() != "")
+				message = el.innerText;
 		});
-		$(".chat_message").val("");
+
+		if(message === "/help" || message === "!help" || message === "/?")
+			if(snippet.commands)
+				$("#commands_modal").modal();
+			else
+				$.ajax({
+					url: "snippet/commands.html",
+					dataType: "html",
+					success: function(data) {
+						snippet.commands = true;
+						$("body").append(data);
+						$("#commands_modal").modal();
+					}
+				});
+		else
+			if(message.length > 0) {
+				last_chat_message = message;
+				last_suggestion = false;
+				server.send(JSON.stringify({
+					event: "chat",
+					data: message,
+					key: authkey
+				}));
+			}
+
+		$(".twemoji-textarea").text("");
 	});
 }
 
 function togglePlayerVisibility() {
 	var yt_player_el = $("#youtube_player");
-	var visible_emblem = $(".fa-eye");
-	var hidden_emblem = $(".fa-eye-slash");
 	if(client.player_shown) {
-		visible_emblem.toggleClass("fa-eye-slash");
-		visible_emblem.toggleClass("fa-eye");
+		$("#video-toggle").html('<i class="fa fa-eye-slash"></i>');
 
 		yt_player_el.animate({
 			opacity: 0,
@@ -520,8 +589,7 @@ function togglePlayerVisibility() {
 		client.player_shown = false;
 		window.localStorage.setItem("hide_video", true);
 	} else {
-		hidden_emblem.toggleClass("fa-eye");
-		hidden_emblem.toggleClass("fa-eye-slash");
+		$("#video-toggle").html('<span class="icon-eye" style="vertical-align: 35%;"></span>');
 
 		yt_player_el.show();
 		yt_player_el.animate({
@@ -566,18 +634,16 @@ function initPlayerToggles() {
 	});
 
 	//Roomlist height resize
-	$(window).on('resize', function() {
-		if($('#user_list').css('display') == 'block') {
+	$(window).on("resize", function() {
+		if($('#user_list').css('display') === 'block') {
 			$('#chat').show().css('visibility','hidden');
 			$('#user_list').height($('#chat').height()).width($('#chat').width());
 			$('#chat').hide().css('visibility', 'visible');
-		} else if($('#queue_list').css('display') == 'block') {
+		} else if($('#queue_list').css('display') === 'block') {
 			$('#chat').show().css('visibility','hidden');
 			$('#queue_list').height($('#chat').height()).width($('#chat').width());
 			$('#chat').hide().css('visibility', 'visible');
 		}
-		
-		$('#chat-emojilist').height($('#chat').height() - 41);
 	});
 
 	$('.room-queue').click(function() {
@@ -597,8 +663,8 @@ function initPlayerToggles() {
 			return false;
 		}
 
-		if ($('#mobile_info').css('display') == 'block') {
-			if ($('#mobile_queue_list').css('display') == 'block')
+		if($('#mobile_info').css('display') === 'block') {
+			if($('#mobile_queue_list').css('display') === 'block')
 				return false;
 			else {
 				toggleBoxes('mobile_queue_list');
@@ -617,8 +683,8 @@ function initPlayerToggles() {
 			return false;
 		}
 
-		if ($('#mobile_info').css('display') == 'block') {
-			if ($('#mobile_user_list').css('display') == 'block')
+		if($('#mobile_info').css('display') === 'block') {
+			if($('#mobile_user_list').css('display') === 'block')
 				return false;
 			else {
 				toggleBoxes('mobile_user_list');
@@ -634,7 +700,7 @@ function initPlayerToggles() {
 
 function initRequiresAuthentication() {
 	$("#room_password_prompt").keyup(function(event) {
-		if(event.keyCode == 13) {
+		if(event.keyCode === 13) {
 			$("#submit_room_password").click();
 		}
 	});
@@ -656,7 +722,7 @@ function initRequiresAuthentication() {
 function toggleBoxes(exceptId) {
 	var tempEl,
 		toShow = $('#' + exceptId),
-		isVisible = (toShow.css('display') == 'block');
+		isVisible = (toShow.css('display') === 'block');
 
 	if(isVisible) {
 		toShow.fadeOut('fast');
@@ -673,16 +739,6 @@ function toggleBoxes(exceptId) {
 
 		tempEl.fadeIn('fast');
 	});
-}
-
-function toggleEmojiList() {
-	if ($('#mobile_chat').css('display') == 'block')
-		$('#mobile-chat-emojilist').fadeToggle(200).height($('.chat-text').height());
-	else
-		$('#chat-emojilist').fadeToggle(200).height($('#chat').height() - 41);
-	
-	if (!emoji.showedList)
-		emoji.showList();
 }
 
 var room_hash = window.location.hash.replace("#", "");

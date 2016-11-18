@@ -30,7 +30,7 @@ function bindHoverHandler(destination) {
         if(relX > 360) {
             var target = $(this).html();
             $.each($("#room_" + destination + "_list").children(), function(index, el) {
-                if($(el).html() == target) {
+                if($(el).html() === target) {
                     $(el).addClass("demotion_target");
                     $(el).removeClass("hover_x");
 					var verb = "demote";
@@ -60,8 +60,8 @@ function bindHoverHandler(destination) {
 					type: "remove",
 					level: rank
 				},
-				jsonp: 'callback',
-				dataType: 'jsonp',
+				jsonp: "callback",
+				dataType: "jsonp",
 				success: function(data) {
 					if(data.success) {
 						$(".demotion_target").remove();
@@ -111,8 +111,8 @@ function bindRemoveButtons() {
 				action: "remove",
 				type: "background"
             },
-            jsonp: 'callback',
-            dataType: 'jsonp',
+            jsonp: "callback",
+            dataType: "jsonp",
             success: function (data) {
                 if(data.success) {
                     $(e.target).parent().remove();
@@ -171,7 +171,7 @@ function fileUploadLoaded() {
         data.context = $('<div class="background-preview-container"></div>').appendTo('#files_gallery');
         $.each(data.files, function (index, file) {
             var node = $('<span/>').text(file.name);
-            if (!index) {
+            if(!index) {
                 node
                     .append('<br>')
                     .append(uploadButton.clone(true).data(data));
@@ -182,17 +182,17 @@ function fileUploadLoaded() {
         var index = data.index,
             file = data.files[index],
             node = $(data.context.children()[index]);
-        if (file.preview) {
+        if(file.preview) {
             node
                 .prepend('<br>')
                 .prepend(file.preview);
         }
-        if (file.error) {
+        if(file.error) {
             node
                 .append('<br>')
                 .append($('<span class="text-danger"/>').text(file.error));
         }
-        if (index + 1 === data.files.length) {
+        if(index + 1 === data.files.length) {
             data.context.find('button')
                 .text('Upload')
                 .prop('disabled', !!data.files.error);
@@ -205,7 +205,7 @@ function fileUploadLoaded() {
         );
     }).on('fileuploaddone', function (e, data) {
         $.each(data.result.files, function (index, file) {
-            if (file.error) {
+            if(file.error) {
                 var error = $('<span class="text-danger"/>').text(file.error);
                 $(data.context.children()[index])
                     .append('<br>')
@@ -245,7 +245,7 @@ function fileUploadLoaded() {
 		data.context = $('<div class="icon-preview-container"></div>').appendTo('#files_icon');
 		$.each(data.files, function (index, file) {
 			var node = $('<span/>').text(file.name);
-			if (!index) {
+			if(!index) {
 				node
 					.append('<br>')
 					.append(uploadButton.clone(true).data(data));
@@ -256,17 +256,17 @@ function fileUploadLoaded() {
 		var index = data.index,
 			file = data.files[index],
 			node = $(data.context.children()[index]);
-		if (file.preview) {
+		if(file.preview) {
 			node
 				.prepend('<br>')
 				.prepend(file.preview);
 		}
-		if (file.error) {
+		if(file.error) {
 			node
 				.append('<br>')
 				.append($('<span class="text-danger"/>').text(file.error));
 		}
-		if (index + 1 === data.files.length) {
+		if(index + 1 === data.files.length) {
 			data.context.find('button')
 				.text('Upload')
 				.prop('disabled', !!data.files.error);
@@ -279,7 +279,7 @@ function fileUploadLoaded() {
 		);
 	}).on('fileuploaddone', function (e, data) {
 		$.each(data.result.files, function (index, file) {
-			if (file.error) {
+			if(file.error) {
 				var error = $('<span class="text-danger"/>').text(file.error);
 				$(data.context.children()[index])
 					.append('<br>')
@@ -309,8 +309,8 @@ function fileUploadLoaded() {
 				scope: room.id,
 				q: "backgrounds"
 			},
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			success: function(data) {
 				added_existing_backgrounds = true;
 				if(!added_existing_backgrounds) {
@@ -337,7 +337,7 @@ function fileUploadLoaded() {
 		$("#progress_profile").show();
 		$.each(data.files, function (index, file) {
 			var node = $('<span/>').text(file.name);
-			if (!index) {
+			if(!index) {
 				node
 					.append('<br>')
 					.append(uploadButton.clone(true).data(data));
@@ -348,17 +348,17 @@ function fileUploadLoaded() {
 		var index = data.index,
 			file = data.files[index],
 			node = $(data.context.children()[index]);
-		if (file.preview) {
+		if(file.preview) {
 			node
 				.prepend('<br>')
 				.prepend(file.preview);
 		}
-		if (file.error) {
+		if(file.error) {
 			node
 				.append('<br>')
 				.append($('<span class="text-danger"/>').text(file.error));
 		}
-		if (index + 1 === data.files.length) {
+		if(index + 1 === data.files.length) {
 			data.context.find('button')
 				.text('Upload')
 				.prop('disabled', !!data.files.error);
@@ -371,7 +371,7 @@ function fileUploadLoaded() {
 		);
 	}).on('fileuploaddone', function (e, data) {
 		$.each(data.result.files, function (index, file) {
-			if (file.error) {
+			if(file.error) {
 				var error = $('<span class="text-danger"/>').text(file.error);
 				$(data.context.children()[index])
 					.append('<br>')
@@ -397,8 +397,8 @@ function fileUploadLoaded() {
 			scope: room.id,
 			q: "backgrounds"
 		},
-		jsonp: 'callback',
-		dataType: 'jsonp',
+		jsonp: "callback",
+		dataType: "jsonp",
 		success: function(data) {
 			$.each(data, function(index, url) {
 				$("#files_gallery").append('<div class="background-preview-container"><img src="' + url + '" class="background-image-preview"><a class="remove-background-image" data-url="' + url + '">remove</a></div>');
@@ -447,8 +447,8 @@ function initRoomSettings() {
                         scope: room.id,
 						q: destination
                     },
-                    jsonp: 'callback',
-                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    dataType: "jsonp",
                     success: function(data) {
                         user_list.empty();
                         for(i = 0; i <= data.length; i++) {
@@ -467,13 +467,13 @@ function initRoomSettings() {
                 var content = $("#room_" + destination);
                 content.val("Loading...");
                 $.ajax({
-                    url: config.API + '/room/info.php',
+                    url: config.API + "/room/info.php",
                     data: {
                         scope: room.id,
 						q: destination
                     },
-                    jsonp: 'callback',
-                    dataType: 'jsonp',
+                    jsonp: "callback",
+                    dataType: "jsonp",
                     success: function(data) {
                         content.val(data.data);
                     }
@@ -481,9 +481,8 @@ function initRoomSettings() {
             break;
 			case "icon":
             case "gallery":
-                if(!file_upload_loaded) {
-                    loadJavascript("http://static.origin.totem.fm/totem.fileupload.min.js");
-                }
+                if(!file_upload_loaded)
+                    $.getScript("http://static.origin.totem.fm/totem.fileupload.min.js");
         }
         title.html(destination_el.data("title"));
     });
@@ -501,7 +500,7 @@ function initRoomSettings() {
     $(".dynamic_user_list_footer").each(function(index, el) {
 		$(el).keyup(function(event) {
 			var wrapper = $(this).attr("id").replace("_textbox", "");
-			if(event.keyCode == 13) {
+			if(event.keyCode === 13) {
 				$("#user_add_" + wrapper).click();
 				return true;
 			}
@@ -514,8 +513,8 @@ function initRoomSettings() {
 					data: {
 						q: content
 					},
-					jsonp: 'callback',
-					dataType: 'jsonp',
+					jsonp: "callback",
+					dataType: "jsonp",
 					success: function(data) {
 						suggestion_list.empty();
 						for(i = 0; i <= data.length; i++) {
@@ -552,8 +551,8 @@ function initRoomSettings() {
                 level: level,
 				type: "add"
             },
-            jsonp: 'callback',
-            dataType: 'jsonp',
+            jsonp: "callback",
+            dataType: "jsonp",
             success: function(data) {
                 if(data.success) {
                     $(".user_suggestion_wrapper").empty();
@@ -613,8 +612,8 @@ function initRoomSettings() {
                     content: $("#room_blacklist").val(),
 					action: "blacklist"
                 },
-                jsonp: 'callback',
-                dataType: 'jsonp',
+                jsonp: "callback",
+                dataType: "jsonp",
                 success: function(data) {
                     if(data.success) {
                         noty({
@@ -654,8 +653,8 @@ function initRoomSettings() {
                     content: $("#room_whitelist").val(),
 					action: "whitelist"
                 },
-                jsonp: 'callback',
-                dataType: 'jsonp',
+                jsonp: "callback",
+                dataType: "jsonp",
                 success: function(data) {
                     if(data.success) {
                         noty({
@@ -693,7 +692,7 @@ function initRoomSettings() {
     });
 
 	$("#set_room_password_2").keyup(function(e) {
-		if(e.keyCode == 13) {
+		if(e.keyCode === 13) {
 			$("#set_room_password_btn").click();
 		}
 	});
@@ -708,8 +707,8 @@ function initRoomSettings() {
 				scope: room.id,
 				action: "delete"
 			},
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			success: function (data) {
 				if(data.success) {
 					$('#room_settings_modal').modal('toggle');
@@ -732,8 +731,8 @@ function initRoomSettings() {
 				scope: room.id,
 				action: "remove_password"
 			},
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			success: function (data) {
 				if(data.success) {
 					$("#set_password_well").hide();
@@ -768,8 +767,8 @@ function initRoomSettings() {
 				password: password,
 				action: "set_password"
 			},
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			success: function (data) {
 				if(data.success) {
 					$('#room_settings_modal').modal('toggle');
@@ -794,8 +793,8 @@ function initRoomSettings() {
 				action: "transfer_ownership",
 				username: $("#transfer_ownership_textbox").val()
 			},
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			success: function (data) {
 				if(data.success) {
 					errors.empty();

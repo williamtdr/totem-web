@@ -10,7 +10,7 @@
 	width: calc(100% - 15px);
 	margin-left: 15px;
 	margin-right: 15px;
-	font-family: "Raleway", sans-serif;
+	font-family: "Josefin Sans", sans-serif;
 }
 
 #mobile_info > .room-description {
@@ -36,13 +36,6 @@
 
 #mobile_queue_list {
 	background-color: rgba(88, 133, 195, 0.4);
-}
-
-#mobile-chat-emojilist ul > li {
-	height: 20px;
-	float: left;
-	list-style: none;
-	padding: 2px;
 }
 
 .room-informations > .room-users {
@@ -157,7 +150,7 @@
 }
 
 @media screen and (max-width: 768px) {
-	#desktop_nav, #my_queue, .current-dj-wrapper, #spotify_importer, #manage_playlists_suffix, .playlist_item_artist, .queue_full, .queue_current_playlist, #logo, #login-full {
+	.playlist_item_artist, .queue_current_playlist, .hide-mobile {
 		display: none !important;
 	}
 	nav {

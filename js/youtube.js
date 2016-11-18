@@ -9,7 +9,7 @@ function loadYoutubePlaylists() {
 		dataType: "jsonp",
 		success: function(response) {
 			$("#playlist_list")
-				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank"><i class="fa fa-th-list"></i> Manage<span id="manage_playlists_suffix"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
+				.html('<a href="https://www.youtube.com/view_all_playlists" target="_blank" id="manage_playlists"><i class="fa fa-th-list"></i> Manage<span class="hide-mobile"> Playlists</span></a><a href="http://www.playlistbuddy.com/" target="_blank" id="spotify_importer" class="hide-mobile"><i class="fa fa-spotify"></i> Spotify Importer</a><a onclick="loadYoutubePlaylists()" id="refresh_playlists"><i class="fa fa-refresh"></i> Refresh</a><ul class="list-group"><li class="list-group-item" id="search_launcher">Search YouTube</li>');
 
 			$("#search_launcher").click(function() {
 				switchSubView(SUBVIEW_SEARCH);
@@ -54,7 +54,7 @@ function search(more) {
 		rowsContainer.html();
 		if(localStorage.getItem("search_history")) {
 			var history = JSON.parse(localStorage.getItem("search_history"));
-			if(history && history.indexOf(data.q) == -1) append_to_history = true;
+			if(history && history.indexOf(data.q) === -1) append_to_history = true;
 		} else {
 			localStorage.setItem("search_history", "[]");
 		}
@@ -96,11 +96,11 @@ function search(more) {
 					by_string = '<span class="playlist_item_artist">by ' + e.by + '</span>';
 					by_title = e.by.replace('"', '\"');
 				}
-				rowsContainer.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+				rowsContainer.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><span class="icon-play" style="vertical-align: 12%"></span> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> Queue</span></li>');
 			});
 			$("[data-id='" + song.url_fragment + "']:not(.playing-in-room)").html("<i class=\"fa fa-play\"></i> Playing").unbind().addClass("playing-in-room");
 
-			if(response.length == 0) {
+			if(response.length === 0) {
 				container.append('<li class="list-group-item playlist_item finished">No results. Check your spelling and try again.</li>');
 			} else if(response.length < 50) {
 				container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
@@ -149,10 +149,10 @@ function loadPlaylistItems(el, more) {
 		success: function(response) {
 			var title, by_string, by_title;
 
-			if(current_subview == SUBVIEW_PLAYLIST_ITEMS) {
+			if(current_subview === SUBVIEW_PLAYLIST_ITEMS) {
 				container.find('.loading').remove();
 
-				if (!more)
+				if(!more)
 					container.append('<div class="playlist_header"><div class="playlist_name">' + name + '</div><div class="queue_current_playlist no-sel"><i class="fa fa-plus"></i> Queue Playlist</div></div>');
 
 				queue_playlist_list = [];
@@ -169,7 +169,7 @@ function loadPlaylistItems(el, more) {
 					}
 					queue_playlist_list.push(e.link);
 
-					container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><i class="fa fa-play"></i> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> <span class="queue_full">Add to </span>Queue</span></li>');
+					container.append('<li class="list-group-item playlist_item"><img src="' + e.thumb + '" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><div class="playlist_item_title_container"><span class="playlist_item_title">' + title + '</span>' + by_string + '</div><span class="playlist_item_preview" onclick="previewVideo(\'' + e.link + '\', \'' + e.title.replace(/(['"])/g, "&quot;") + '\', \'' + by_title + '\')"><span class="icon-play" style="vertical-align: 12%"></span> Preview</span><span class="playlist_item_queue" onclick="addToQueueById(\'' + e.link + '\')" data-id="' + e.link + '"><i class="fa fa-plus"></i> Queue</span></li>');
 				});
 
 				$(".queue_current_playlist").click(function() {
@@ -180,7 +180,7 @@ function loadPlaylistItems(el, more) {
 					}));
 				});
 
-				if(response.length == 0) {
+				if(response.length === 0) {
 					container.append('<li class="list-group-item playlist_item finished">This playlist is empty.</li>');
 				} else if(response.length < 50) {
 					container.append('<li class="list-group-item playlist_item finished">-- end --</li>');
@@ -207,7 +207,7 @@ $(window).scroll(function() {
 		return false;
 	}
 
-	if((docElement.scrollHeight - winElement.innerHeight) == winElement.pageYOffset) {
+	if((docElement.scrollHeight - winElement.innerHeight) === winElement.pageYOffset) {
 		if(searching) {
 			search(true);
 
@@ -233,7 +233,7 @@ function getYoutubeRate(videoId) {
 		success: function(r) {
 			if(r.success) {
 				container.find('.rate')
-					.text((r.message == 'like') ? 'Unlike' : 'Like');
+					.text((r.message === 'like') ? 'Unlike' : 'Like');
 
 				container.attr('data-videoid', videoId);
 				container.show();
@@ -261,12 +261,12 @@ function initSearch() {
 
 	$("#search_text").keydown(function (event) {
 		var search_text = $("#search_text").val();
-		if(event.keyCode == 9) {
+		if(event.keyCode === 9) {
 			event.preventDefault();
 			$("#search_text").val($("#search_suggestions li").first().text());
 			$("#search_suggestions").empty();
 		} else {
-			if(search_text == "") {
+			if(search_text === "") {
 				last_search_text = "";
 				$("#search_suggestions").hide();
 			} else if(search_text != last_search_text) {
@@ -287,7 +287,7 @@ function initSearch() {
 	});
 
 	$("#search_text").keyup(function (event) {
-		if($("#search_text").val() == "") $("#search_suggestions").hide();
+		if($("#search_text").val() === "") $("#search_suggestions").hide();
 	});
 
 	$("#clear_search_history").click(function() {
@@ -297,7 +297,7 @@ function initSearch() {
 	});
 }
 
-suggestCallBack = function (data) {
+suggestCallBack = function(data) {
 	$("#search_suggestions").empty();
 	$.each(data[1], function(key, val) {
 		if(key <= 7) $("#search_suggestions").append("<li>" + val[0] + "</li>");

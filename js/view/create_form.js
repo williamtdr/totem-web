@@ -33,8 +33,8 @@ function initCreateForm() {
 
 		$.ajax({
 			url: config.API + '/room/create.php',
-			jsonp: 'callback',
-			dataType: 'jsonp',
+			jsonp: "callback",
+			dataType: "jsonp",
 			data: {
 				name: name,
 				description: description,
@@ -63,11 +63,11 @@ function selectText(element) {
 		, text = doc.getElementById(element)
 		, range, selection
 		;
-	if (doc.body.createTextRange) {
+	if(doc.body.createTextRange) {
 		range = document.body.createTextRange();
 		range.moveToElementText(text);
 		range.select();
-	} else if (window.getSelection) {
+	} else if(window.getSelection) {
 		selection = window.getSelection();
 		range = document.createRange();
 		range.selectNodeContents(text);

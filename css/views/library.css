@@ -106,6 +106,7 @@
 }
 
 #playlist_list > a {
+	font-family: "Josefin Sans", sans-serif;
     color: #BDC3C7;
     margin-right: 15px;
     text-decoration: none !important;
@@ -113,8 +114,9 @@
 
 /* Playlist List */
 .playlist-list-return {
+	font-family: "Josefin Sans", sans-serif;
 	margin-left: 10px;
-	color: #95A5A6;
+	color: #b5d9fb;
 	transition: .25s;
 }
 
@@ -123,7 +125,7 @@
 }
 
 #playlist_list > a:hover {
-    color: #ECF0F1;
+    color: #94e3e0;
 }
 
 #playlist_list > a > .fa {
@@ -139,8 +141,9 @@
 .playlist-list-content > li {
 	background: transparent;
 	text-align: left;
-	border: 0 #808080;
-	border-bottom: 1px solid;
+	border: 0;
+	border-radius: 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 #playlist_list, #playlist_items {
@@ -187,7 +190,7 @@
 }
 
 #search_suggestions {
-	font-family: "Raleway", sans-serif;
+	font-family: "Josefin Sans", sans-serif;
 	list-style-type: none;
 }
 
@@ -241,10 +244,34 @@
 .playlist_name {
 	margin-left: 15px;
 	font-size: 1.4em;
-	font-family: "Raleway", sans-serif;
+	font-family: "Josefin Sans", sans-serif;
 	display: inline-block;
 }
 
 #playlist_list > .signInButton {
 	margin-right: 0;
+}
+
+#spotify_importer {
+	color: #70fb5d !important;
+}
+
+#refresh_playlists {
+	color: #edb436 !important;
+}
+
+#manage_playlists {
+	color: #fca9fb !important;
+}
+
+#manage_playlists:hover {
+	color: #b5d9fb !important;
+}
+
+#refresh_playlists:hover {
+	color: #fbd06c !important;
+}
+
+#spotify_importer:hover {
+	color: #d5fc80 !important;
 }

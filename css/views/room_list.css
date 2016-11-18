@@ -3,35 +3,37 @@
 }
 
 #room_list_options {
+	font-family: "Josefin Sans", sans-serif;
 	list-style-type: none;
 	padding: 0;
 }
 
 #room_list_options > li {
 	transition: .25s;
-	padding: 0 0 15px 0;
+	padding: 0 0 12px 0;
 	cursor: pointer;
 }
 
 #room_list_options > li > .fa {
-	font-size: 0.9em;
-	margin-right: 10px;
+	font-size: .9em;
+	margin-right: 7px;
+	vertical-align: 2%;
 }
 
 #nav_create_room {
-	color: #16A085;
-}
-
-#nav_create_room:hover {
 	color: #1ABC9C;
 }
 
+#nav_create_room:hover {
+	color: #1ad7b6;
+}
+
 #nav_refresh_list {
-	color: #ff7f45;
+	color: #edb436;
 }
 
 #nav_refresh_list:hover {
-	color: #E69250;
+	color: #fbd06c;
 }
 
 .room_description_extend {
@@ -93,17 +95,17 @@
 }
 
 .panel {
-	background-color: rgba(52, 73, 94, 0.8);
+	background-color: rgba(42, 31, 42, 0.9);
 	color: #ECF0F1;
 }
 
 .panel-dark {
-	background-color: rgba(52, 73, 94, 1);
+	background-color: rgba(37, 27, 37, 1);
 	color: #ECF0F1;
 }
 
 .panel-footer {
-	background-color: rgba(52, 73, 94, 0.8);
+	background-color: rgba(37, 27, 37, 1);
 	color: #ECF0F1;
 	border: 0;
 	height: 60px;

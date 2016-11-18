@@ -35,7 +35,6 @@ function lookupProfile(who, target) {
 }
 
 function onProfileModalClicked() {
-	if(!file_upload_loaded) {
-		loadJavascript("http://static.origin.totem.fm/totem.fileupload.min.js");
-	}
+	if(!file_upload_loaded)
+		$.getScript("http://static.origin.totem.fm/totem.fileupload.min.js");
 }

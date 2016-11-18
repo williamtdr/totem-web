@@ -1,13 +1,14 @@
 .dark-notification {
     width: 350px;
-    height: 165px;
+    height: 190px;
     position: absolute;
     right: 30px;
-    top: 50px;
+    top: 65px;
     background-color: rgba(0,0,0,0.9);
     color: #ECF0F1;
     z-index: 3000;
-    padding: 15px;
+	padding: 13px 20px;
+	border-radius: 5px;
 }
 
 .dark-notification h4 {

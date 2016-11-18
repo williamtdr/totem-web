@@ -16,7 +16,7 @@ advanceBackgroundImage = function () {
         new_background = room.backgrounds[Math.floor(Math.random()*room.backgrounds.length)];
     }
 
-    if(last_image_placed == 2) {
+    if(last_image_placed === 2) {
         top_img.attr('style', 'background: url("' + new_background + '") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;');
         last_image_placed = 1;
     } else {

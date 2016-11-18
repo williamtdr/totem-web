@@ -16,7 +16,6 @@ function getVideoQuality() {
 		break;
 		case "1080p":
 			return "hd1080";
-		break;
 	}
 }
 
@@ -33,7 +32,7 @@ function updateClientSettings() {
     }
     if(client.settings.notif_chat) {
         have_notifs_to_show = true;
-        if(client.settings.notif_chat == "mention") {
+        if(client.settings.notif_chat === "mention") {
             $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-multiple").html("MENTION");
         } else {
             $(setting_chat_notifications.find(".switch-indicator")[0]).clearIndicator().addClass("switch-enabled").html("ALL");
@@ -45,7 +44,7 @@ function updateClientSettings() {
 		var video_quality_options = ['480p', '720p','1080p'];
 		for(var index in video_quality_options) {
 			var video_quality_option = video_quality_options[index];
-			if(client.settings.video_quality == video_quality_option) $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().html(video_quality_option).addClass("switch-" + video_quality_option);
+			if(client.settings.video_quality === video_quality_option) $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().html(video_quality_option).addClass("switch-" + video_quality_option);
 		}
     } else {
         $(setting_quality_change.find(".switch-indicator")[0]).clearIndicator().html("720p").addClass("switch-720p");
@@ -56,7 +55,7 @@ function updateClientSettings() {
         return false;
     }
     if(!have_notifs_to_show) return false;
-    if(current_view == VIEW_PLAYER) {
+    if(current_view === VIEW_PLAYER) {
         showNotificationPrompt();
     } else {
         delayed_notification_request = true;
@@ -87,7 +86,7 @@ var tutorial_stops = [
         right: "30px",
 		width: "350px"
     }, {
-        title: "My Music",
+        title: "Library",
         text: "From this screen you select music to play for everyone else in the room. You can use songs from your YouTube playlists or the search feature to find music.",
         height: "210px",
         top: "55px",
@@ -153,7 +152,7 @@ function showBasicTutorial(force) {
 					advance.click(function() {
 						tutorial_progress++;
 						var stop = tutorial_stops[tutorial_progress];
-						if(stop == undefined) {
+						if(stop === undefined) {
 							$("#basic_player_tutorial").animate({height: "toggle"});
 						}
 						$("#dot" + tutorial_progress).addClass("dot-done");
@@ -177,19 +176,21 @@ function showBasicTutorial(force) {
 }
 
 function showNotificationPrompt() {
-    if(supress_notification_request) return false;
+    if(supress_notification_request)
+    	return false;
+
     if(Notification.permission !== "granted") {
-		if (!window.localStorage.getItem("no_notifications")) {
+		if(!window.localStorage.getItem("no_notifications")) {
 			if(snippet.notification) {
-				$("#notification_request").delay(5000).animate({height: "toggle"});
+				$("#notification_request").delay(3000).animate({height: "toggle"});
 			} else {
 				$.ajax({
-					url: 'snippet/notification.html',
-					dataType: 'html',
+					url: "snippet/notification.html",
+					dataType: "html",
 					success: function (data) {
 						snippet.notification = true;
 						$("body").append(data);
-						$("#notification_request").delay(5000).animate({height: "toggle"});
+						$("#notification_request").delay(3000).animate({height: "toggle"});
 
 						$("#notification_request_actions").click(function() {
 							$("#notification_request_actions").animate({height: "toggle"});
@@ -222,8 +223,8 @@ function showNotificationPrompt() {
 function saveSettings() {
     $.ajax({
         url: config.API + '/user/set_settings.php',
-        jsonp: 'callback',
-        dataType: 'jsonp',
+        jsonp: "callback",
+        dataType: "jsonp",
         data: client.settings
     });
 }
@@ -285,10 +286,10 @@ function initMenu() {
 				}
 			}
 			$(".switch_selector span").click(function(e) {
-				var target = $(e.target);
-				var indicator = target.parent().parent().find(".switch-indicator");
+				var target = $(e.target),
+					indicator = target.parent().parent().find(".switch-indicator"),
+					video_quality_options = ["480p", "720p", "1080p"];
 
-				var video_quality_options = ['480p', '720p','1080p'];
 				for(var index in video_quality_options) {
 					var video_quality_option = video_quality_options[index];
 					if(target.hasClass("switch-" + video_quality_option)) {
@@ -313,37 +314,33 @@ function initMenu() {
 					}
 				}
 				
-				if(target.hasClass("switch-disabled")) {
+				if(target.hasClass("switch-disabled"))
 					indicator.clearIndicator().addClass("switch-disabled").html("OFF");
-				}
-				if(target.hasClass("switch-multiple")) {
+
+				if(target.hasClass("switch-multiple"))
 					indicator.clearIndicator().addClass("switch-multiple").html("MENTION");
-				}
+
 				target.parent().find(".switch-active").removeClass("switch-active");
 				target.addClass("switch-active");
+
                 if(target.parent().parent().is("#setting_chat_notifications")) {
                     switch(indicator.html()) {
                         case "ALL":
                             client.settings.notif_chat = true;
-                            break;
+						break;
                         case "MENTION":
                             client.settings.notif_chat = "mention";
-                            break;
+						break;
                         case "OFF":
                             client.settings.notif_chat = false;
-                            break;
                     }
+
                     saveSettings();
                 }
+
                 if(target.parent().parent().is("#setting_song_change")) {
-                    switch(indicator.html()) {
-                        case "ON":
-                            client.settings.notif_song_change = true;
-                            break;
-                        case "OFF":
-                            client.settings.notif_song_change = false;
-                            break;
-                    }
+					client.settings.notif_song_change = indicator.html() === "ON";
+
                     saveSettings();
                 }
 			});
@@ -352,16 +349,28 @@ function initMenu() {
 
     $.ajax({
         url: config.API + '/user/get_settings.php',
-        jsonp: 'callback',
-        dataType: 'jsonp',
+        jsonp: "callback",
+        dataType: "jsonp",
         success: function(data) {
             client.settings = data;
-            if(client.settings.notif_song_change === "0") client.settings.notif_song_change = false;
-            if(client.settings.notif_song_change === "1") client.settings.notif_song_change = true;
-            if(client.settings.hide_hints === "0") client.settings.hide_hints = false;
-            if(client.settings.hide_hints === "1") client.settings.hide_hints = true;
-            if(client.settings.notif_chat === "false") client.settings.notif_chat = false;
-			if(yt_player.setPlaybackQuality) yt_player.setPlaybackQuality(getVideoQuality());
+            if(client.settings.notif_song_change === "0")
+            	client.settings.notif_song_change = false;
+
+            if(client.settings.notif_song_change === "1")
+            	client.settings.notif_song_change = true;
+
+            if(client.settings.hide_hints === "0")
+            	client.settings.hide_hints = false;
+
+            if(client.settings.hide_hints === "1")
+            	client.settings.hide_hints = true;
+
+            if(client.settings.notif_chat === "false")
+            	client.settings.notif_chat = false;
+
+			if(yt_player.setPlaybackQuality)
+				yt_player.setPlaybackQuality(getVideoQuality());
+
             updateClientSettings();
         }
     });

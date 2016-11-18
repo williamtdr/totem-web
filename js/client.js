@@ -7,7 +7,7 @@ const STATE_PLAYING = 1;
 const STATE_NO_SONG = 2;
 const STATE_PREVIEWING = 3;
 
-snippet = {
+window.snippet = {
 	commands: false,
 	notification: false,
 	profile: false,
@@ -15,9 +15,9 @@ snippet = {
 	username: false,
 	about: false,
 	contact: false
-}
+};
 
-client = {
+window.client = {
 	vote: VOTE_NEUTRAL,
 	player_shown: true,
 	state: STATE_LOADING,
@@ -37,12 +37,12 @@ client = {
 	room_needs_auth: false,
 	new_room: false,
 	queue: [],
-    settings: {
-        notif_song_change: true,
-        notif_chat: "mention",
-        hide_hints: false,
+	settings: {
+		notif_song_change: true,
+		notif_chat: "mention",
+		hide_hints: false,
 		video_quality: "720p"
-    },
+	},
 	showRequiresAuthentication: function() {
 		switchClientState(STATE_NO_SONG);
 		if(yt_player.pauseVideo) yt_player.pauseVideo();
@@ -54,16 +54,17 @@ client = {
 		updateRoomSettings();
 	},
 	connect: function() {
-		server = new WebSocket(config.SERVER, 'echo-protocol');
-		if($("#waiting_for_server").length == 0) $("#now_playing_content").append('<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>');
+		window.server = new WebSocket(config.SERVER, 'echo-protocol');
+		if($("#waiting_for_server").length === 0) $("#now_playing_content").append('<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>');
 		client.connected = true;
 
 		server.onclose = client.onDisconnect;
 
 		server.onmessage = function(event) {
-			var event_data = JSON.parse(event.data);
-			var data = event_data.data;
-            console.log(event_data);
+			var event_data = JSON.parse(event.data),
+				data = event_data.data;
+
+			console.log(event_data);
 
 			switch (event_data.event) {
 				case "requires_authentication":
@@ -102,11 +103,11 @@ client = {
 				case "room_data": // called to initialize room
 					room.joined_at = Math.floor(Date.now() / 1000);
 					$("#requires_authentication").hide();
-                    if(data == false) {
-                        switchView(VIEW_ROOM_LIST);
-                        return false;
-                    }
-					if(room.password && $("#remember_room_password").attr("checked") == "checked") {
+					if(data === false) {
+						switchView(VIEW_ROOM_LIST);
+						return false;
+					}
+					if(room.password && $("#remember_room_password").attr("checked") === "checked") {
 						client.room_needs_auth = true;
 						updateRoomSettings();
 						if(window.localStorage.getItem("saved_room_passwords")) {
@@ -125,18 +126,18 @@ client = {
 					room.name = data.display_name;
 					room.description = data.description;
 					room.user_list = data.listeners_by_name;
-                    room.user_counter = data.listener_count;
-                    room.backgrounds = data.backgrounds;
+					room.user_counter = data.listener_count;
+					room.backgrounds = data.backgrounds;
 					setIcon(data.icon);
-                    if(room.backgrounds && room.backgrounds.length > 0) {
+					if(room.backgrounds && room.backgrounds.length > 0) {
 						set_initial_background = true;
-                        advanceBackgroundImage();
-                    } else {
-                        if(!set_initial_background) {
-                            set_initial_background = true;
-                            advanceBackgroundImage();
-                        }
-                    }
+						advanceBackgroundImage();
+					} else {
+						if(!set_initial_background) {
+							set_initial_background = true;
+							advanceBackgroundImage();
+						}
+					}
 					client.banned = false;
 					client.queue_banned = false;
 
@@ -149,7 +150,7 @@ client = {
 						song.started_at = data.song.started_at;
 						song.progress = now - song.started_at;
 						song.name = data.song.name;
-						$("#current-dj-wrapper").show();
+						$(".current-dj-wrapper").show();
 						$(".current-dj").html(data.current_dj);
 
 						song.name = data.song.name;
@@ -165,7 +166,7 @@ client = {
 					}
 
 					$.each(data.chat_history, function(index, chat_obj) {
-						addChatMessage(chat_obj.sender, chat_obj.message, true, chat_obj.color, chat_obj.hover_color);
+						addChatMessage(chat_obj.sender, chat_obj.message, false, chat_obj.color, chat_obj.hover_color);
 					});
 
 					if(client.new_room) {
@@ -206,30 +207,29 @@ client = {
 						},
 						timeout: 5000
 					});
-
 				break;
 				case "user_counter_update":
-                    room.user_counter = data;
-                    counterUpdate();
-                break;
+					room.user_counter = data;
+					counterUpdate();
+				break;
 				case "user_list_change":
 					room.user_list = data;
 					refreshUserList();
 				break;
-                case "desc_update":
-                    room.description = data;
-                    updateRoomMetadata();
-                break;
-                case "backgrounds":
-                    if(data.length > 0) {
-                        if(!room.backgrounds) {
-                            room.backgrounds = data;
-                            advanceBackgroundImage();
-                        } else {
-                            room.backgrounds = data;
-                        }
-                    }
-                break;
+				case "desc_update":
+					room.description = data;
+					updateRoomMetadata();
+				break;
+				case "backgrounds":
+					if(data.length > 0) {
+						if(!room.backgrounds) {
+							room.backgrounds = data;
+							advanceBackgroundImage();
+						} else {
+							room.backgrounds = data;
+						}
+					}
+				break;
 				case "room_deleted":
 					switchClientState(STATE_NO_SONG);
 					if(yt_player.pauseVideo) yt_player.pauseVideo();
@@ -259,12 +259,12 @@ client = {
 						});
 					}, textbox = $(".chat_textbox");
 					switch(data.type) {
-                        case "unbanned":
-                            window.location.reload();
-                        break;
-                        case "unmuted":
-                            playerOnLogin();
-                        break;
+						case "unbanned":
+							window.location.reload();
+						break;
+						case "unmuted":
+							playerOnLogin();
+						break;
 						case "banned_room":
 							banned_notification("You are banned from this room.");
 							switchClientState(STATE_NO_SONG);
@@ -303,9 +303,6 @@ client = {
 						case "room_admin":
 							client.is_admin = true;
 							updateRoomMetadata();
-						break;
-						case "room_host":
-						break;
 					}
 				break;
 				case "guest_key":
@@ -326,27 +323,27 @@ client = {
 					song.progress = 0;
 					song.duration = data.song.duration;
 
-                    if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_song_change && Notification.permission == "granted" && !document.hasFocus()) {
-                        var notification = new Notification(song.name, {
-                            icon: room.icon,
-                            body: song.artist
-                        });
+					if((room.joined_at < (Math.floor(Date.now() / 1000) - 10)) && client.settings.notif_song_change && Notification.permission === "granted" && !document.hasFocus()) {
+						var notification = new Notification(song.name, {
+							icon: room.icon,
+							body: song.artist
+						});
 
-                        notification.onclick = function() {
-                            window.focus();
-                            this.cancel();
-                        };
+						notification.onclick = function() {
+							window.focus();
+							this.cancel();
+						};
 
-                        setTimeout(notification.close.bind(notification), 5000);
-                    }
+						setTimeout(notification.close.bind(notification), 5000);
+					}
 
 					room.dj = data.dj;
-					if(client.state == STATE_NO_SONG) {
+					if(client.state === STATE_NO_SONG) {
 						switchClientState(STATE_PLAYING);
 					}
 
-					if(client.state == STATE_PLAYING) {
-						$("#current-dj-wrapper").show();
+					if(client.state === STATE_PLAYING) {
+						$(".current-dj-wrapper").show();
 						$(".current-dj").html(data.dj);
 						setSongInfo(song.name, song.artist);
 						loadVideoById(song.url_fragment, song.progress);
@@ -369,7 +366,7 @@ client = {
 
 					advanceBackgroundImage();
 
-					$(".playing-in-room").html("<i class=\"fa fa-plus\"></i> <span class='queue_full'>Add To </span>Queue").click(function(e) {
+					$(".playing-in-room").html("<i class=\"fa fa-plus\"></i> Queue").click(function(e) {
 						var target = $(e.target);
 						addToQueueById(target.data('id'));
 					}).removeClass("playing-in-room");
@@ -389,7 +386,7 @@ client = {
 				case "profile":
 					$("#profile_overlay").remove();
 					if(data.failed) {
-						profile_target.append('<div id="profile_overlay"><span id="profile_overlay_name">' + data.display_name + '</span><span id="profile_overlay_close"><i class="fa fa-times"></i></span><div id="profile_right"><div id="profile_overlay_bio">I haven\'t set up my profile yet.</div></div></div>');
+						profile_target.append('<div id="profile_overlay"><span id="profile_overlay_name">' + data.display_name + '</span><span id="profile_overlay_close" class="icon-cross"></i></span><div id="profile_right"><div id="profile_overlay_bio">I haven\'t set up my profile yet.</div></div></div>');
 					} else {
 						var links_str = '',
 							name_str = '<span id="profile_overlay_name">' + data.display_name + '</span>';
@@ -403,7 +400,7 @@ client = {
 
 						if(data.tag) name_str = '<span id="profile_overlay_name">' + data.display_name + '<span style="color: ' + data.tag_color + '" class="profile_tag">' + data.tag + '</span></span>';
 
-						profile_target.append('<div id="profile_overlay"><div id="profile_header">' + name_str + '<span id="profile_overlay_close"><i class="fa fa-times"></i></span></div><img src="' + data.profile_picture + '"><div id="profile_right"><div id="profile_overlay_bio">' + data.bio + '</div><div id="profile_overlay_links">' + links_str + '</div></div></div>');
+						profile_target.append('<div id="profile_overlay"><div id="profile_header">' + name_str + '<span id="profile_overlay_close" class="icon-cross"></span></div><img src="' + data.profile_picture + '"><div id="profile_right"><div id="profile_overlay_bio">' + data.bio + '</div><div id="profile_overlay_links">' + links_str + '</div></div></div>');
 					}
 					$("#profile_overlay_close").click(function(e) {
 						$("#profile_overlay").remove();
@@ -419,11 +416,9 @@ client = {
 					refreshQueueList();
 					counterUpdate();
 
-					break;
+				break;
 				default:
-					console.warn('Unhandled event: ' + event_data.event);
-
-					break;
+					console.warn("Unhandled event: " + event_data.event);
 			}
 		};
 
@@ -434,7 +429,7 @@ client = {
 	},
 	banFromQueue: function() {
 		client.queue_banned = true;
-		if(current_view == VIEW_MUSIC_LIST) {
+		if(current_view === VIEW_MUSIC_LIST) {
 			switchSubView(SUBVIEW_QUEUE_BANNED);
 		}
 	},
@@ -445,7 +440,7 @@ client = {
 		client.disconnect_timer_id = setInterval(function() {
 			client.disconnect_timer--;
 			$("#disconnected-countdown").html(client.disconnect_timer);
-			if(client.disconnect_timer == 0) {
+			if(client.disconnect_timer === 0) {
 				window.location.reload();
 				clearInterval(client.disconnect_timer_id);
 			}

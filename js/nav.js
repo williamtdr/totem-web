@@ -20,34 +20,33 @@ const NAV_DEFAULT_SHADING = "rgba(0,0,0,0.3)",
 	  BACKGROUND_MUSIC_LIST_SHADING = 1,
 	  BACKGROUND_DISCONNECTED_SHADING = 1;
 
-var nav = $("nav"),
-	nav_room_list = $(".nav_room_list"),
-	nav_player = $(".nav_player"),
-	nav_music_list = $(".nav_music_list"),
-	nav_chat = $(".nav_chat"),
-	nav_info = $(".nav_info");
+const nav = $("nav"),
+	  nav_room_list = $(".nav_room_list"),
+	  nav_player = $(".nav_player"),
+	  nav_library = $(".nav_library"),
+	  nav_chat = $(".nav_chat"),
+	  nav_info = $(".nav_info");
 
-var room_list = $("#room_list"),
-	player = $("#player"),
-	mobile_chat = $("#mobile_chat"),
-	mobile_info = $("#mobile_info"),
-	music_list = $("#music_list"),
-	create_form = $("#create_form"),
-	banned = $("#permission_failure"),
-	requires_authentication = $("#requires_authentication"),
-	waiting_for_server = '<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>';
+const room_list = $("#room_list"),
+	  player = $("#player"),
+	  mobile_chat = $("#mobile_chat"),
+	  mobile_info = $("#mobile_info"),
+	  music_list = $("#music_list"),
+	  create_form = $("#create_form"),
+	  banned = $("#permission_failure"),
+	  requires_authentication = $("#requires_authentication"),
+	  waiting_for_server = '<div id="waiting_for_server"><div class="container"><i class="fa fa-circle-o-notch fa-spin"></i> Joining the room...</div></div>';
 
-var playlist_items = $("#playlist_items"),
-	playlist_search = $("#playlist_search"),
-	playlist_list = $("#playlist_list"),
-	playlist_banned = $("#queue_permission_failure");
+const playlist_items = $("#playlist_items"),
+	  playlist_search = $("#playlist_search"),
+	  playlist_list = $("#playlist_list"),
+	  playlist_banned = $("#queue_permission_failure");
 
-var previous_playlist_scroll_pos = 0;
-
-var navbar_shown = false;
-current_view = VIEW_DEFAULT,
-current_subview = SUBVIEW_DEFAULT;
-set_initial_background = false;
+var navbar_shown = false,
+	current_view = VIEW_DEFAULT,
+	current_subview = SUBVIEW_DEFAULT,
+	set_initial_background = false,
+	previous_playlist_scroll_pos = 0;
 
 function shadeBackground(level) {
 	bg_shader.css("opacity", level);
@@ -84,7 +83,7 @@ function resetNavigation() {
 			player.addClass("zoom-in-sm");
 		break;
 		case VIEW_MUSIC_LIST:
-			if(previous_playlist_scroll_pos == 0) music_list.addClass("zoom-in-sm");
+			if(previous_playlist_scroll_pos === 0) music_list.addClass("zoom-in-sm");
 		break;
 		case VIEW_CHAT:
 			mobile_chat.addClass("zoom-in-sm");
@@ -99,7 +98,7 @@ function resetNavigation() {
 // tabs in the navigation bar, create form, and additional
 // views mobile users get as tabs.
 function switchView(destination) {
-	if(current_view == VIEW_MUSIC_LIST && destination != VIEW_MUSIC_LIST) {
+	if(current_view === VIEW_MUSIC_LIST && destination != VIEW_MUSIC_LIST) {
 		previous_playlist_scroll_pos = pageYOffset;
 	}
 
@@ -129,10 +128,11 @@ function switchView(destination) {
 			nav_player.addClass("active");
 			player.show();
 			current_view = VIEW_PLAYER;
-            if(delayed_notification_request) showNotificationPrompt();
+            if(delayed_notification_request)
+            	showNotificationPrompt();
 		break;
 		case VIEW_MUSIC_LIST:
-			nav_music_list.addClass("active");
+			nav_library.addClass("active");
 			music_list.show();
 			shadeBackground(BACKGROUND_MUSIC_LIST_SHADING);
 			current_view = VIEW_MUSIC_LIST;
@@ -143,6 +143,7 @@ function switchView(destination) {
 			}
 		break;
 		case VIEW_CREATE_FORM:
+			shadeBackground(BACKGROUND_MUSIC_LIST_SHADING);
 			nav_room_list.addClass("active");
 			create_form.show();
 			current_view = VIEW_CREATE_FORM;
@@ -231,7 +232,7 @@ function initNavigation() {
 	nav_player.click(function() {
 		return switchView(VIEW_PLAYER)
 	});
-	nav_music_list.click(function() {
+	nav_library.click(function() {
 		return switchView(VIEW_MUSIC_LIST)
 	});
 	nav_chat.click(function() {
@@ -244,9 +245,9 @@ function initNavigation() {
 
 function navOnLogin() {
 	var menu = $("#login_menu");
-	if(authkey == 'unauthenticated') {
+	if(authkey === 'unauthenticated') {
 		menu.addClass("signInButton");
-		menu.html('Log In<span id="login-full"> with Google');
+		menu.html('Log In<span class="hide-mobile"> with Google');
 	} else {
         menu.removeClass("signInButton");
         menu.unbind();
@@ -256,7 +257,7 @@ function navOnLogin() {
             user_menu.animate({height:"toggle"});
         });
         $("#logout").click(logout);
-		menu.html('<span id="login-full">Hi, </span>' + display_name);
+		menu.html(display_name);
 	}
 }
 

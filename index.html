@@ -1,33 +1,35 @@
 <html>
 <head>
+	<title>Totem</title>
 	<meta charset="UTF-8">
+
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="">
 	<meta name="description" content="Totem is a group music discovery service. Share your favorite tunes, or sit back and let new ones come to you.">
-	<title>Totem</title>
-	<link rel="shortcut icon" type="image/png" href="favicon.png">
+
 	<link href="http://static.totem.fm/totem.vendor.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300|Raleway:400,300,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,300|Josefin+Sans:400,300,500" rel="stylesheet">
 	<link href="dist/totem.min.css" rel="stylesheet">
 </head>
 <body>
 <nav class="no-sel">
-	<span id="logo">totem</span>
-	<ul id="desktop_nav">
+	<span id="logo" class="hide-mobile">totem</span>
+	<ul id="desktop_nav" class="hide-mobile">
 		<li class="nav_room_list active">Rooms</li>
 		<li class="nav_player">Now Playing</li>
-		<li class="nav_music_list">My Music</li>
+		<li class="nav_library">Library</li>
 	</ul>
 	<ul id="mobile_nav">
 		<li class="nav_room_list active"></li>
 		<li class="nav_player"></li>
-		<li class="nav_music_list"></li>
+		<li class="nav_library"></li>
 		<li class="nav_chat"></li>
 		<li class="nav_info"></li>
 	</ul>
 	<div class="pull-right">
-		<div id="my_queue">
+		<div id="my_queue" class="hide-mobile">
 			<i class="fa fa-repeat"></i>
 			<span>My Queue</span>
 		</div>
@@ -39,6 +41,7 @@
 		<li class="header">Notifications</li>
 		<li id="setting_song_change" class="switch">Song Change<span class="switch-indicator switch-enabled">ON</span><div class="switch_selector"></div></li>
 		<li id="setting_chat_notifications" class="switch">Chat<span class="switch-indicator switch-multiple">MENTION</span><div class="switch_selector big_selector"></div></li>
+		<li class="seperator"></li>
 		<li id="setting_quality_change" class="switch">Video Quality<span class="switch-indicator switch-720p">720p</span><div class="switch_selector big_selector"></div></li>
 		<li class="seperator"></li>
 		<li id="setting_change_username">Change Username</li>
@@ -108,12 +111,12 @@
 		</ul>
 	</div>
 	<div id="playlist_search" class="animsition">
-		<span class="playlist-list-return">&laquo; Search</span>
+		<span class="playlist-list-return">&laquo; Playlists</span>
 
 		<form id="searchYoutube" class="input-group">
 			<input type="text" class="form-control" id="search_text" placeholder="Search Youtube">
 			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit" id="search_send">Search</button>
+				<button class="btn btn-primary" type="submit" id="search_send"><span class="icon-search"></span></button>
 			</span>
 		</form>
 		<ul id="search_suggestions"></ul>
@@ -166,7 +169,7 @@
 			<div id="time_elapsed"><div></div></div>
 			<span id="time_remaining">0:00</span>
 
-			<div class="current-dj-wrapper">
+			<div class="current-dj-wrapper hide-mobile">
 				<span class="current-dj"></span>
 				<i class="fa fa-headphones"></i>
 			</div>
@@ -178,10 +181,10 @@
 			<div id="toggle_block" class="no-sel">
 				<div id="player_actions" class="pull-left">
 					<div id="video-toggle" class="toggle">
-						<i class="fa fa-eye"></i>
+						<span class="icon-eye" style="vertical-align: 35%;"></span>
 					</div>
 					<div id="volume-toggle" class="toggle">
-						<i class="fa fa-volume-down"></i>
+						<span class="icon-volume" style="vertical-align: 35%"></span>
 					</div>
 
 					<input type="range" value="50" min="0" max="100" id="volume-slider">
@@ -208,7 +211,7 @@
 		<div id="no_video" class="no-sel">
 			<span class="big-header">Awkward silence...</span>
 
-			<div class="small-header">No song is in the queue to play. You can add one from the <i>My Music</i> tab.
+			<div class="small-header">No song is in the queue to play. You can add one from the <i>Library</i> tab.
 			</div>
 		</div>
 		<div id="new_room_welcome" class="no-sel">
@@ -258,7 +261,7 @@
 				<div class="chat-text"></div>
 				<div class="chat_textbox input-group"></div>
 				<div id="chat_footer">
-					<a class="show_about_modal">about</a> &middot; <a class="show_contact_modal">contact</a> &middot; <a class="show_help_modal">help</a> &middot; <span>v<span class="version_inner">1.0rc3</span></span>
+					<a class="show_about_modal">about</a> &middot; <a class="show_contact_modal">contact</a> &middot; <a class="show_help_modal">help</a> &middot; <span>v<span class="version_inner">1.1</span></span>
 				</div>
 			</div>
 		</div>
@@ -301,8 +304,7 @@
 <script src="http://static.totem.fm/totem.vendor.min.js"></script>
 <script src="dist/totem.min.js"></script>
 <script src="https://apis.google.com/js/client:platform.js?onload=initAuth2" async defer></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://apis.google.com/js/client.js?onload=init"></script>
 <script src="http://www.youtube.com/iframe_api"></script>
+<script src="http://static.totem.fm/twemoji-picker.js" async defer></script>
 </body>
 </html>

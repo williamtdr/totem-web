@@ -5,14 +5,18 @@
 }
 
 #create_room_form_content > .form-group > label {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	margin-top: 15px;
 	font-weight: 300;
 	color: white;
 }
 
+#create_room_form_content > .form-group > span {
+	color: #bdc3c7;
+}
+
 #create_room_form_content > .form-group > .btn {
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 #create_room_form_content > .form-group > span {
@@ -22,7 +26,7 @@
 }
 
 #room_form_name {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	color: #ECF0F1;
 	font-size: 1.2em;
 }
@@ -67,7 +71,7 @@
 }
 
 .password_switcher_enabled {
-	color: white;
+	color: #b5d9fb;
 	font-weight: 500;
 }
 
@@ -84,7 +88,6 @@
 #new_room_name {
 	max-width: 300px;
 	width: 80%;
-	background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 #new_room_password {

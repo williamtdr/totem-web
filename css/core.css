@@ -16,14 +16,13 @@ a {
     transition: .25s;
 }
 
+a:active {
+	color: white;
+}
+
 a:hover {
 	text-decoration: none;
     color: #1ee2bd;
-}
-
-input {
-	font-family: 'Raleway', sans-serif;
-	font-size: 0.8em;
 }
 
 textarea {
@@ -35,13 +34,14 @@ textarea {
 }
 
 .form-control:focus {
-	border: none;
 	outline: none;
 	box-shadow: none;
+	border-color: #b5d9fb !important;
+	color: white;
 }
 
 .btn {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	padding: 10px 15px;
 	font-size: 15px;
 	font-weight: 400;
@@ -58,7 +58,7 @@ textarea {
 	background-color: #3498db;
 }
 
-a, a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, #playlist_list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist_item_title_container, .playlist-list-return {
+a, a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, #playlist_list ul.list-group li.list-group-item, .searchResults ul.list-group li.list-group-item, li.list-group-item .playlist_item_title_container, .playlist-list-return, #room_form_back {
 	cursor: pointer;
 }
 
@@ -126,7 +126,21 @@ a, a[href], input[type='submit'], input[type='image'], label[for], select, butto
 
 .dark-modal {
 	background-color: rgba(0,0,0,0.8);
-	color: white;
+	color: #ecf0f1 !important;
+}
+
+.modal-header {
+	border-color: #7f8c8d;
+}
+
+.form-control {
+	background-color: transparent !important;
+	border: none;
+	outline: 0;
+	box-shadow: none;
+	color: #ecf0f1;
+	border-bottom: 1px solid #bdc3c7;
+	border-radius: 0;
 }
 
 /* Disconnected */

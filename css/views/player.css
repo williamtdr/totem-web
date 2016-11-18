@@ -1,4 +1,4 @@
-#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return, #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #chat-emojilist, #mobile-chat-emojilist, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner, #contact_errors {
+#permission_failure, #queue_permission_failure, #requires_authentication, #player, #now_playing_content, #manual, #disconnected, #room_settings_spinner, #room_settings_return, #room_settings_blacklist, #room_settings_whitelist, #room_settings_admin, #room_settings_host, #room_settings_gallery, #room_settings_icon, #room_settings_danger , #room_settings_set_password, #room_settings_moderation, #room_settings_ban, #room_settings_queue_ban, #room_settings_mute, #room_settings_delete_room, #delete_room_errors, #room_settings_transfer_ownership, #share_room_well, #clear_search_history, #create_form, #player, #room_list, #music_list, #create_room_form_content, #room_form_password_well, #playlist_search, #playlist_items, #mobile_nav, #my_queue, .dark-notification, #notification_request_dismiss, #basic_player_tutorial_advance, #sidebar, #no_video, #new_room_welcome, #main_content, #mobile_chat, #mobile_info, .list_menu, #queue_view, #user_menu, #change_username_spinner, #contact_errors {
 	display: none;
 }
 
@@ -22,7 +22,7 @@
 }
 
 #no_video, #new_room_welcome {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	float: left;
 	max-width: 600px;
 }
@@ -30,8 +30,9 @@
 #playlist_list > ul > li {
 	background: transparent;
 	text-align: left;
-	border: 0 #808080;
-	border-bottom: 1px solid;
+	border: 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 0;
 }
 
 /* Player */
@@ -169,7 +170,7 @@
 }
 
 #room_info > .room-title {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	font-size: 1.5em;
 	font-weight: 500;
 	display: block;
@@ -213,6 +214,7 @@
 #room_users_wrapper {
 	right: -15px;
 	position: absolute;
+	font-family: "Josefin Sans", sans-serif;
 }
 
 #room_users_wrapper .focused {
@@ -245,6 +247,7 @@
 	font-size: 1em;
 	vertical-align: 0;
 	transition: .25s;
+	cursor: pointer;
 }
 
 .room_settings_launcher:hover {
@@ -328,59 +331,12 @@
 	margin-top: 60px;
 }
 
-.chat_textbox {
-	width: 298px;
-	text-align: center;
-}
-
-.chat_emojisel {
-	position: relative;
-	display: table-cell !important;
-	width: 20px;
-	height: 25px;
-	left: 5px;
-	cursor: pointer;
-	background: url('https://cdn.rawgit.com/Ranks/emojify.js/master/src/images/emoji/smiley.png') no-repeat 0;
-	background-size: contain;
-}
-
-#chat-emojilist, #mobile-chat-emojilist {
-	font-family: "Raleway", sans-serif;
-	position: absolute;
-	background: rgba(22, 160, 133, 0.9);
-	overflow-y: scroll;
-	width: 100%;
-	height: 432px;
-	bottom: 40px;
-	right: 0;
-}
-
-#chat-emojilist ul, #mobile-chat-emojilist ul {
-    padding: 0 5px;
-    margin: 0;
-    display: inline-block;
-	width: 100%;
-}
-
-#chat-emojilist ul h2 , #mobile-chat-emojilist ul h2{
-	margin: 5px 0 5px 5px;
-	padding: 0;
-	font-size: 1.3em;
-	text-align: left;
-	cursor: pointer;
-}
-
-#chat-emojilist ul > li {
-	height: 20px;
-    float: left;
-    list-style: none;
-    padding: 2px;
-}
-
 #user_mention {
 	position: absolute;
 	bottom: 40px;
 	left: 15px;
+	background-color: black;
+	padding: 0 5px;
 }
 
 #user_mention ul {
@@ -393,10 +349,6 @@
 	font-size: 0.8em;
 }
 
-#chat-emojilist ul > li , #chat-emojilist ul > li  .emoji, #mobile-chat-emojilist ul > li , #mobile-chat-emojilist ul > li  .emoji {
-	cursor: pointer;
-}
-
 .chat_message {
 	font-family: "Lato", sans-serif;
 	border: 0;
@@ -405,41 +357,49 @@
 	float: left;
 }
 
-.emoji {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    background: url('http://static.totem.fm/emoji/sheet_apple_16.png');
-	margin-bottom: -3px;
-}
-
 .chat_send {
 	background-color: transparent !important;
 	border: none !important;
 	float: right;
-	right: 10px;
+	right: 0;
+	padding-top: 12px;
+}
+
+.chat_send:focus {
+	outline: none !important;
 }
 
 .chat-text {
 	padding-left: 8px;
 	padding-right: 8px;
 	padding-top: 5px;
-	height: calc(100% - 45px);
+	height: calc(100% - 48px);
 	overflow-y: scroll;
 	font-size: 0.8em;
 	overflow-x: hidden;
+	line-height: 1.8;
 }
 
 .chat-message-sender {
 	color: #5792cf;
-	margin-right: 2px;
+	margin-right: 5px;
 	cursor: pointer;
 	transition: .25s;
 }
 
+.chat-message-text > .emoji {
+	width: 14px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
 .chat_textbox {
+	width: 298px;
+	text-align: center;
 	padding-left: 5px;
 	padding-right: 5px;
+	border-top: 1px solid #95a5a6;
+	margin-top: 5px;
 }
 
 .chat-message-wrapper {
@@ -451,6 +411,8 @@
 	color: #f5f5f5;
 	padding-bottom: 5px;
 	width: 290px;
+	font-family: "Josefin Sans", sans-serif;
+	padding-top: 5px;
 }
 
 .big-header {
@@ -474,14 +436,15 @@
 .profile_tag {
 	font-size: 0.8em;
 	text-transform: uppercase;
-	font-family: "Raleway", sans-serif;
+	font-family: "Josefin Sans", sans-serif;
 	margin-left: 5px;
 	-webkit-user-select: none;
 }
 
 #chat_footer {
+	font-family: "Josefin Sans", sans-serif;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 15px;
 	color: rgba(255, 255, 255, 0.5);
 }
 
@@ -575,6 +538,7 @@
 }
 
 .list-title {
+	font-family: "Josefin Sans", sans-serif;
 	float: left;
 	width: 100%;
 	color: #F1C40F;
@@ -631,21 +595,20 @@ li.list-item-small {
 #profile_overlay {
 	width: 280px;
 	height: auto;
-	background: #2C3E50;
-	padding: 5px;
+	padding: 5px 5px 9px;
 	z-index: 3000;
-	color: white;
-	padding-bottom: 9px;
+	color: #fff;
+	display: inline-block;
+	border: 1px solid #8888d4;
+	border-radius: 3px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #profile_overlay_close {
 	float: right;
 	color: #E74C3C;
 	transition: .25s;
-}
-
-#profile_overlay_close > .fa {
-	line-height: 0.8;
 	cursor: pointer;
 }
 

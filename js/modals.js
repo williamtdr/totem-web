@@ -53,7 +53,7 @@ function initModals() {
 							subject = $("#contact_subject"),
 							text = $("#contact_text");
 
-						if(subject.val().length == 0 || text.val().length == 0) {
+						if(subject.val().length === 0 || text.val().length === 0) {
 							errors.show().empty().append('<div class="alert">Please type a subject and body text.</div>');
 						} else {
 							errors.empty().hide();
@@ -61,8 +61,8 @@ function initModals() {
 
 						$.ajax({
 							url: config.API + '/user/contact.php',
-							jsonp: 'callback',
-							dataType: 'jsonp',
+							jsonp: "callback",
+							dataType: "jsonp",
 							data: {
 								subject: subject.val(),
 								text: text.val()

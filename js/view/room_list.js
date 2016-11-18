@@ -23,7 +23,7 @@ function refreshRoomList() {
 						'<span class="room_users_wrapper">' + room.user_counter + '<i class="fa fa-users"></i></span><br>' +
 						'<span class="no-song"><i>Password Protected Room</i></span></div>' +
 						'<div class="panel-footer">' +
-						'<button class="btn btn-info footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
+						'<button class="btn btn-primary footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
 						'</div></div></div>'
 					);
 				} else {
@@ -35,7 +35,7 @@ function refreshRoomList() {
 							'<img src="http://i.ytimg.com/vi/' + room.song.url_fragment + '/0.jpg"></div>' +
 							'<div class="panel-footer"><span class="song-name">' + room.song.name + '</span>' +
 							'<span class="song-artist">' + room.song.artist + '</span>' +
-							'<button class="btn btn-info footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
+							'<button class="btn btn-primary footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
 							'</div></div></div>'
 						);
 					} else {
@@ -43,9 +43,9 @@ function refreshRoomList() {
 							'<div class="col-sm-4 room-card"><div class="panel panel-default"><div class="panel-body">' +
 							'<span class="room-name">' + room.display_name + '</span>' +
 							'<span class="room_users_wrapper">' + room.user_counter + '<i class="fa fa-users"></i></span><br>' +
-							'<span class="no-song">No song playing</span></div>' +
+							'<span class="no-song" style="margin-bottom: 5px; display: block; font-style: italic">No song playing</span></div>' +
 							'<div class="panel-footer">' +
-							'<button class="btn btn-info footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
+							'<button class="btn btn-primary footer_option" onclick="joinRoom(\'' + room.id + '\')">join</button>' +
 							'</div></div></div>'
 						);
 					}
